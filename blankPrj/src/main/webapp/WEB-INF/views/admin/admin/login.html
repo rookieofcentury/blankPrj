@@ -1,0 +1,142 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>블랭크 관리자</title>
+<link rel="stylesheet" href="/blank/resources/css/admin/admin/login.css">
+</head>
+<style>
+  html{
+  background-color: rgba(241, 241, 241, 1);
+}
+
+.blank-logo{
+  width: 130px;
+  height: 100px;
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.admin-login-main{
+  border: 1px solid;
+  border-color: rgba(197, 197, 197, 1);
+  background-color: white;
+  width: 475px;
+  height: 295px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-login-header div:first-child {
+  color: rgba(119, 119, 119, 1);
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 6%;
+}
+
+.admin-login-header div:last-child {
+  color: rgba(119, 119, 119, 1);
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.admin-inputs-login img{
+  width: 21px;
+  height: 28px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.admin-login-id,
+.admin-login-pwd{
+  border: 1px solid;
+  border-color: rgba(197, 197, 197, 1);
+  border-radius: 5px;
+  width: 350px;
+  height: 40px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.admin-login-id .id-label,
+.admin-login-pwd .pwd-label{
+  border: none;
+  border-right: 1px solid rgba(197, 197, 197, 1);
+  border-radius: 5px 0px 0px 5px;
+
+}
+
+.admin-inputs-login input{
+  font-size: 15px;
+  width: 300px;
+  height: 38px;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+
+}
+
+.admin-login-submit input{
+  border: 1px solid;
+  border-color: rgba(197, 197, 197, 1);
+  border-radius: 5px;
+  font-size: 18px;
+  color: rgba(119, 119, 119, 1);
+  margin-top: 3%;
+  width: 136px;
+  height: 38px;
+}
+
+.cursor{
+  cursor: pointer;
+}
+</style>
+<body>
+
+  <main>
+    
+    <div><img src="../resources/images/blank.png" class="blank-logo"></div>
+
+    <div class="admin-login-main">
+
+      <header class="admin-login-header">
+        <div>BLANK</div>
+        <div>블랭크 운영을 위한 관리 페이지 입니다.</div>
+      </header>
+
+      <section class="admin-inputs-login">
+        <div class="admin-login-id center">
+          <div class="id-label"><img src="../resources/images/admin/login-id.png"></div><!--아이콘 들어감-->
+          <input type="text" name="id">
+        </div>
+        <div class="admin-login-pwd center">
+          <div class="pwd-label"><img src="../resources/images/admin/login-pwd.png"></div><!--아이콘 들어감-->
+          <input type="password" name="pwd">
+        </div>
+      </section>
+
+      <section class="admin-login-submit center">
+        <input type="submit" value="로그인" class="admin-login-btn cursor">
+      </section>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
