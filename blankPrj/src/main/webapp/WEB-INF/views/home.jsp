@@ -2,8 +2,8 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
-<link rel="stylesheet" href="/blank/resources/css/main.css">
+	<title>Blank</title>
+<link rel="stylesheet" href="/blank/resources/css/common/main.css">
 </head>
 <body>
 
