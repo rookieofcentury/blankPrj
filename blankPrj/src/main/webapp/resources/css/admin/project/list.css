@@ -1,0 +1,113 @@
+html{
+    --line-gray : rgba(197, 197, 197, 1)
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.project-board-content{
+    width: 1380px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+main .project-board-header{
+    width: 1625px;
+    height: 64px;
+    color: rgba(90, 90, 90, 1);
+    background-color: rgba(241, 241, 241, 1);
+    border: 1px solid var(--line-gray);
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.17fr 1fr;
+}
+
+.project-board-header div h1{
+    margin-left: 15px;
+    transform: translate(0, -20%)
+}
+
+.project-board{
+    width: 1625px;
+    height: 868px;
+    border: 1px solid var(--line-gray);
+    background-color: rgba(237, 236, 236, 1);
+}
+
+.project-search{
+    width: 115px;
+    height: 45px;
+    margin-left: 23px;
+    display: grid;
+    margin-top: 50px;
+    grid-template-columns: 1fr 3fr 2fr;
+}
+
+.project-search .category{
+    border: 1px solid var(--line-gray);
+    border-radius: 5px 0px 0px 5px;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(242, 242, 242, 1);
+    outline: none;
+}
+
+.project-search input{
+    width: 280px;
+    height: 40px;
+    border: none;
+    border-top: 1px solid var(--line-gray);
+    border-bottom: 1px solid var(--line-gray);
+    outline: none;
+}
+
+.project-search div{
+    width: 40px;
+    height: 41px;
+    border: 1px solid var(--line-gray);
+    border-radius: 0px 5px 5px 0px;
+}
+
+#project-search-form .project-search input[type="image"]{
+    width: 25px;
+    height: 25px;
+    border: none;
+    display: block;
+    margin: auto;
+    margin-top: 8px;
+}
+
+.project-list{
+    width: 1580px;
+    height: 695px;
+    border: 1px solid var(--line-gray);
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr 2fr 1fr 1fr;
+    grid-template-rows: repeat(13, 54px);
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 55px;
+    border-radius: 5px;
+}
+
+.project-list div{
+    border-bottom: 1px solid var(--line-gray);
+}
+
+.project-list div:last-child img{
+    width: 18px;
+    height: 18px;
+}
+
+.project-list .project-list-top{
+    grid-column: span 8;
+    text-align: left;
+    margin-left: 10px;
+    border: none;
+}
