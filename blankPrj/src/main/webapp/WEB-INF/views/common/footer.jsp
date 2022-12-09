@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/blank/resources/css/footer.css">
+<link rel="stylesheet" href="/blank/resources/css/common/footer.css">
 </head>
 <body>
 

@@ -5,7 +5,7 @@
 <meta charset="EUC-KR">
 <title>Blank</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="/blank/resources/css/header.css">
+<link rel="stylesheet" href="/blank/resources/css/common/header.css">
 </head>
 <body>
 
@@ -48,7 +48,7 @@
 					<a href="">공개예정</a>
 				</div>
 				<div>
-					<a href="">굿즈</a>
+					<a href="/blank/goods">굿즈</a>
 				</div>
 			</div>
 		</div>
