@@ -1,14 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
+
 #container{
     display: flex;
     flex-wrap: wrap;
+    margin : auto;
+    padding: 0 15% 0 15%;
+	width: 100vw;
 }
 .content-intro{
     width: 100%;
@@ -123,7 +119,6 @@
 }
 .buttons-like{
     border: 1px solid rgb(228, 228, 228);
-    border-radius: 4px;
     display: flex;
     flex-direction: column;
     font-size: 15px;
@@ -167,8 +162,8 @@ hr:last-of-type{
 }
 .content-navigation{
     width: 100%;
-    height: 56px;
-    padding: 0px 1rem;
+    height: 50px;
+    padding: 30px 1rem 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -214,15 +209,106 @@ hr:last-of-type{
     gap: 38px;
     margin: 0px auto;
 }
-.explanation-project{
-    border: 1px solid beige;
+.explanation-notify{
+    --padding-bottom: 160px;
+    padding: 16px 16px 64px;
+    color: rgba(0,0,0,.84);
+    margin-top: 28px;
+    margin-bottom: 56px;
+    width: 70%;
+}
+.notify-title{
+    border-bottom: 1px solid #44484b;
+    height: 42px;
     width: 100%;
+    float: left;
+    overflow: hidden;
+}
+.title-news{
+    line-height: 30px;
+    letter-spacing: -.6px;
+    font-size: 20px;
+    font-weight: 700;
+    font-style: normal;
+    float: left;
+}
+.news-issue{
+    line-height: 1.47;
+    font-size: 19px;
+    font-weight: 700;
+}
+.news-count{
+    margin-left: 4px;
+    line-height: 1.47;
+    color: #567ace;
+    font-size: 19px;
+    font-weight: 700;
+}
+.title-tap{
+    line-height: 20px;
+    letter-spacing: 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 5px;
+    float: right;
+}
+.tap-write{
+    cursor: pointer;
+    border-radius: 10px;
+    color: #567ace;
+    border: 1px solid #567ace;
+    margin-left: 16px;
+    text-align: center;
+    padding: 5px 10px;
+}
+.title-tap select{
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+}
+.tap-selectbox{
+    position: relative;
+    margin-left: 16px;
+    background-color: #fff;
+    width: 68px;
+    line-height: 1.33;
+    font-size: 15px;
+}
+.explanation-news{
+    box-shadow: 0 1px 0 0 rgb(0 0 0 / 10%);
+    --padding: 16px 0;
+    text-decoration: none;
+    width: 100%;
+    --border: 1px solid violet
+}
+.news-title{
+    line-height: 28px;
+    letter-spacing: -.3px;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 4px 0;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: normal;
+    color: #212529;
+    --border: 1px solid red;
+}
+.news-date{
+    line-height: 18px;
+    letter-spacing: 0;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    color: #495057;
+    padding-bottom: 5px;
 }
 .explanation-side{
     padding-top: 28px;
     margin-top: 5px;
     float: right;
-    width: 284px;
+    width: 30%;
     overflow: hidden;
 }
 .side-creator{
@@ -232,7 +318,7 @@ hr:last-of-type{
 }
 .container-img{
     display: inline-block;
-    /* background-image: */
+    /* background-image: url(https://tumblbug-upi.imgix.net/b11fa62e-8765-406d-8970-deb9ff14f457.png?auto=format%2Ccompress&ch=Save-Data&facepad=2.0&fit=facearea&h=200&mask=ellipse&w=200&s=4fbb3ce…); */
     background-size: cover;
     background-position: 50% 38%;
     width: 40px;
@@ -315,117 +401,3 @@ hr:last-of-type{
 .option-quantity{
     margin : 8px 0px 4px;
 }
-</style>
-</head>
-<body>
-	
-	 <div id="container">
-		<div class="content-intro">
-			<div class="intro-top">
-				<a href=#>
-					<span class="top-category">디자인 문구</span>
-				</a>
-				<h1 class="top-title">이제 키보드도 '터치'하세요 | 키보드+터치패드+거치대 = 퓨전키보드다.</h1>
-			</div>
-			<div class="content-introduction">
-				<div class="introduction-main">
-                    <div class="main-image">
-                        <button type="button"><<</button>
-					    <img src="" alt="프로젝트썸네일">
-                        <button type="button">>></button>
-                    </div>
-					<div class="main-summary">
-					아직도 키보드 마우스 스탠드 다 따로 들고 다니는 그대를 위해, 진정한 올인원 키보드가 왔습니다. 키보드 아래로 들어간다요오
-					</div>
-				</div>
-				<div class="introduction-sub">
-					<div class="sub-status">
-						<div class="status-price">
-							<div class="price-total"><strong>23,270,500</strong>원</div>
-							<div class="price-fundingrate">1760%</div>
-						</div>
-						<div class="status-period">
-							<div><strong>18</strong>일</div>
-							<div>남음</div>
-						</div>
-						<div class="status-supporter">
-							<div>후원자</div>
-							<div><strong>88</strong></div>
-							<div>명</div>
-						</div>
-					</div>
-                    <hr>
-					<div class="sub-info">
-						<div class="info-price">
-							<div class="price"><strong>목표금액</strong></div>
-							<div>500,000원</div>
-						</div>
-						<div class="info-period">
-							<div class="period"><strong>펀딩기간</strong></div>
-							<div>2022.11.24~2022.12.15</div>
-						</div>
-						<div class="info-payment">
-							<div class="payment"><strong>결제</strong></div>
-							<div>100% 이상 모이면 펀딩이 성공되며, 펀딩 마감일까지 목표 금액이 100% 모일 경우 펀딩이 끝난 다음 날 결제가 진행됩니다.</div>
-						</div>
-					</div>
-					<div class="sub-buttons">
-						<div class="buttons-like">
-                            <div class="like-lcon">★</div>
-                            <div class="like-count">110</div>
-                        </div>
-						<button class="buttons-funding">프로젝트 후원하기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-        <hr>
-        <div class="content-navigation">
-            <a href="#">프로젝트 계획</a>
-            <a href="#">새소식 4 </a>
-            <a href="#">후기 11</a>
-        </div>
-		<div class="content-explanation">
-            <div class="explanation-project">아아 이곳은 프로젝트 소개입니다</div>
-            <div class="explanation-side">
-                <div class="side-creator">
-                    <div class="creator-header">창작자 소개</div>
-                    <div class="creator-container">
-                        <a href=#>
-                            <span class="container-img"></span>
-                        </a>
-                        <div class="container-name">
-                            <div class="name-nick"><strong>
-                                <a href=#>청애름</a>
-                            </strong></div>
-                            <div class="name-follow">+ 팔로우</div>
-                        </div>
-                        <div>전통의상을 전공한 창작자가 차근차근 만들어가는 생활한복 브랜드입니다아나아</div>
-                    </div>
-                </div>
-                <div class="side-reward">
-                    <div class="reward-select">리워드 선택
-                    <div class="reward-card">
-                        <div class="card-option">
-                            <div class="option-title">
-                                <div class="title-price">29,000원</div>
-                                <div class="title-name">안경세트</div>
-                            </div>
-                            <ul>
-                                <li>안경</li>
-                                <li>고급가죽케이스</li>
-                                <li>안경닦이</li>
-                                <li>미니드라이브</li>
-                            </ul>
-                            <div class="option-quantity">제한수량 200개</div>
-                            <div class="option-sell">총 60개 펀딩완료</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-		</div>
-	</div>
-	
-</body>
-</html>
