@@ -12,6 +12,9 @@ import javax.servlet.ServletResponse;
  * Servlet Filter implementation class EncodingFilter
  */
 public class EncodingFilter implements Filter {
+	
+	private String encoding = "";
+	private String forceEncoding = "false";
 
     /**
      * Default constructor. 
@@ -31,18 +34,25 @@ public class EncodingFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
+		if (null != encoding && !"".equals(encoding)) {
+			System.out.println("Apply Request Encoding");
+			request.setCharacterEncoding(encoding);
+		}
 
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
+		if (null != encoding && "true".equalsIgnoreCase(forceEncoding)) {
+			System.out.println("Apply Response Encoding");
+			response.setCharacterEncoding(encoding);
+		}
 	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		encoding = fConfig.getInitParameter("encoding") == null ? "" : fConfig.getInitParameter("encoding");
+		forceEncoding = fConfig.getInitParameter("forceEncoding") == null ? "false" : fConfig.getInitParameter("forceEncoding");
 	}
 
 }
