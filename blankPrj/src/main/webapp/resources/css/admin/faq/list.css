@@ -7,34 +7,36 @@ body{
     padding: 0;
 }
 
-.member-board-content{
+.faq-board-content{
     width: 1380px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-main .member-board-header{
+main .faq-board-header{
     width: 1625px;
     height: 64px;
     color: rgba(90, 90, 90, 1);
     background-color: rgba(241, 241, 241, 1);
     border: 1px solid var(--line-gray);
     position: relative;
+    display: grid;
+    grid-template-columns: 0.17fr 1fr;
 }
 
-.member-board-header div h1{
+.faq-board-header div h1{
     margin-left: 15px;
     transform: translate(0, -20%)
 }
 
-.member-board{
+.faq-board{
     width: 1625px;
     height: 868px;
     border: 1px solid var(--line-gray);
     background-color: rgba(237, 236, 236, 1);
 }
 
-.member-search{
+.faq-search{
     width: 1580px;
     height: 45px;
     margin-left: 23px;
@@ -43,7 +45,7 @@ main .member-board-header{
     grid-template-columns: 1fr 2fr 1fr 10fr;
 }
 
-.member-search .category{
+.faq-search .category{
     border: 1px solid var(--line-gray);
     border-radius: 5px 0px 0px 5px;
     font-size: 16px;
@@ -52,7 +54,7 @@ main .member-board-header{
     outline: none;
 }
 
-.member-search input{
+.faq-search input{
     width: 280px;
     height: 40px;
     border: none;
@@ -61,14 +63,29 @@ main .member-board-header{
     outline: none;
 }
 
-.member-search .search-icon{
+.faq-search .search-icon{
     width: 40px;
     height: 42px;
     border: 1px solid var(--line-gray);
     border-radius: 0px 5px 5px 0px;
 }
 
-#member-search-form .member-search input[type="image"]{
+#faq-search-form div button{
+    width: 80px;
+    height: 45px;
+    font-size: 16px;
+    background-color: rgba(214, 214, 214, 1);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+}
+
+#faq-search-form{
+    display: grid;
+}
+
+#faq-search-form .faq-search input[type="image"]{
     width: 25px;
     height: 25px;
     border: none;
@@ -77,13 +94,13 @@ main .member-board-header{
     margin-top: 8px;
 }
 
-.member-list{
+.faq-list{
     width: 1580px;
     height: 710px;
     border: 1px solid var(--line-gray);
     background-color: white;
     display: grid;
-    grid-template-columns: 1fr 1fr 1.5fr 2fr 1fr 1fr 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 3fr 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(13, 54px);
     align-content: center;
     text-align: center;
@@ -94,17 +111,17 @@ main .member-board-header{
     border-radius: 5px;
 }
 
-.member-list div{
+.faq-list div{
     border-bottom: 1px solid var(--line-gray);
 }
 
-.member-list div:last-child img{
+.faq-list div:last-child img{
     width: 18px;
     height: 18px;
 }
 
-.member-list .member-list-top{
-    grid-column: span 10;
+.faq-list .faq-list-top{
+    grid-column: span 7;
     text-align: left;
     margin-left: 10px;
     border: none;

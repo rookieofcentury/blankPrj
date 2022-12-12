@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원관리</title>
 <link rel="stylesheet" href="/blank/resources/css/admin/member/list.css">
 </head>
 <body>
@@ -24,15 +24,19 @@
         <div class="member-board">
 
             <form action="" method="get" id="member-search-form">
+            
                 <div class="member-search">
+                
                     <select class="category">
                         <option value="id">닉네임</option>
                         <option value="phone">핸드폰 번호</option>
                         <option value="email">이메일</option>
                     </select
                     ><input type="text" name="keyword">
-                    <div><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
+                    <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
+                
                 </div>
+                
             </form>
     
             <div class="member-list">

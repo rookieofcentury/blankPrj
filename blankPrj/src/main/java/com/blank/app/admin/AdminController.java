@@ -26,5 +26,29 @@ public class AdminController {
 	public String projectList() {
 		return "admin/project/list";
 	}
+
+	//신고 프로젝트 관리 목록(화면)
+	@GetMapping("deProject")
+	public String deProjectList() {
+		return "admin/deProject/list";
+	}
+	
+	//공지사항 목록(화면)
+	@GetMapping("notice")
+	public String notice() {
+		return "admin/notice/list";
+	}
+	
+	//FAQ 목록(화면)
+	@GetMapping("faq")
+	public String faq() {
+		return "admin/faq/list";
+	}
+	
+	//고객센터 목록(화면)
+	@GetMapping("help")
+	public String help() {
+		return "admin/help/list";
+	}
 	
 }
