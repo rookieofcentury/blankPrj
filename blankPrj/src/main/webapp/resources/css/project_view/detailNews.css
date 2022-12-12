@@ -1,4 +1,3 @@
-
 #container{
     display: flex;
     flex-wrap: wrap;
@@ -274,6 +273,9 @@ hr:last-of-type{
     width: 68px;
     line-height: 1.33;
     font-size: 15px;
+}
+.explanation-box{
+    padding: 50px 0px 0px;
 }
 .explanation-news{
     box-shadow: 0 1px 0 0 rgb(0 0 0 / 10%);
