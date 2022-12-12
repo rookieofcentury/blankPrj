@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+    letter-spacing: -0.05em;
+	font-family: Pretendard-Regular;
+}
+
+.wrap {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    width: 70vw;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+}
+
+.basket {
+    width: 65%;
+	display: grid;
+	justify-content: center;
+    padding: 20px;
+	row-gap: 20px;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(3, minmax(30px, auto));
+}
+th {
+    color: #9D9D9D;
+    padding: 20px;
+}
+tr {
+    text-align: center;
+    border-top: 20px solid #ffffff;
+    border-bottom: 20px solid #ffffff;
+}
+td {
+    padding: 20px 0px;
+    background-color: #F5F5F5;
+}
+td>span {
+    display: flex;
+}
+td>img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.btn-area {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 16px;
+    color: #9D9D9D;
+}
+.btn-area>div {
+    cursor: pointer;
+}
+
+.receipt {
+    width: 23%;
+    display: flex;
+}
+
+.cart-info {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    width: 100%;
+    gap: 10px;
+}
+.cart-info>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.val {
+    display: flex;
+}
+.spot {
+    font-weight: bold;
+    font-size: 18px;
+}
+.price {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

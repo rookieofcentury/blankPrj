@@ -3,120 +3,13 @@
 <html>
 <head>
 <title>Blank</title>
-<style>
-
-* {
-	box-sizing: border-box;
-    letter-spacing: -0.05em;
-	font-family: Pretendard-Regular;
-}
-
-.wrap {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.container {
-	width: 70vw;
-	display: grid;
-	justify-content: center;
-	row-gap: 25px;
-	grid-template-columns: 1fr;
-	grid-template-rows: 50px minmax(auto, 0.3fr) 2fr;
-}
-
-.goods-info {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    gap: 15px;
-    flex-direction: column;
-    align-items: center;
-}
-.goods-info>div:nth-child(1) {
-    display: flex;
-    width: 100%;
-    height: 10%;
-}
-.goods-info>div:nth-child(2) {
-    display: flex;
-    width: 100%;
-    height: auto;
-    justify-content: space-around;
-}
-.goods-info>div:nth-child(2)>div:nth-child(2) {
-    display: flex;
-    width: 30%;
-    flex-direction: column;
-    justify-content: space-around;
-    font-size: 18px;
-    gap: 20px;
-}
-.option-block {
-    display: flex;
-    background-color: #F5F5F5;
-    border-radius: 15px;
-    flex-direction: column;
-    font-size: 14px;
-}
-.option-block>div {
-    display: flex;
-    padding: 20px;
-    justify-content: space-between;
-}
-.option-block>div>input {
-    width: 30%;
-    height: 100%;
-}
-.btn-block {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-top: 1px solid #343434;
-    padding-top: 20px;
-}
-
-#info {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 0.4fr 1fr;
-    grid-template-rows: repeat(4, 50px);
-}
-
-input, select {
-    background-color: none;
-    border: 1px solid #C5C5C5;
-    border-radius: 10px;
-    height: 40px;
-    width: 80%;
-    font-size: 16px;
-}
-input:focus, select:focus {
-    outline: none;
-}
-
-.image-box {
-	display: flex;
-    width: 500px;
-    height: 500px;
-}
-.image-box>img {
-	width: 100%;
-	height: 100%;
-}
-.image-box:after {
-	content: "";
-	display: block;
-	padding-bottom: 100%;
-}
-
-.btn-area {
-    display: flex;
-    justify-content: space-between;
-}
-
-</style>
+<link rel="stylesheet" href="/blank/resources/css/goods/detail.css">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        Kakao.init('4cca08bc633d6646753296f4efd16743');   <!--붙여넣기-->
+        Kakao.isInitialized();  
+    </script>
+<script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
 </head>
 <body>
 
@@ -139,20 +32,21 @@ input:focus, select:focus {
                             <div>옵션 선택</div>
                             <div>
                                 <select name="option">
+                                    <option value="none" selected>=== 옵션을 선택해 주세요 ===</option>
                                     <option value="1">블랭크 기본 패턴</option>
                                     <option value="2">긔엽긔 포켓몬 패턴</option>
                                 </select>
                             </div>
                             <div>수량</div>
-                            <div><input type="number" name="cnt"></div>
+                            <div><input type="number" name="cnt" value="1" disabled min="1" max="10"></div>
                         </div>
                         <div class="option-block">
                             <div>
                                 <div>옵션: 블랭크 기본 패턴</div>
-                                <div>X</div>
+                                <div class="x-button">X</div>
                             </div>
                             <div>
-                                <input type="number" name="goodsCnt">
+                                <input type="number" name="goodsCnt" value="1" min="1">
                                 <div>24,000 원</div>
                             </div>
                         </div>
@@ -162,7 +56,7 @@ input:focus, select:focus {
                                 <div>X</div>
                             </div>
                             <div>
-                                <input type="number" name="goodsCnt">
+                                <input type="number" name="goodsCnt" value="1" min="1">
                                 <div>24,000 원</div>
                             </div>
                         </div>
@@ -172,15 +66,44 @@ input:focus, select:focus {
                                 <span>72,000 원</span>
                             </div>
                             <div class="btn-area">
-                                <div>장바구니 담기</div>
-                                <div>바로 구매</div>
-                                <div><i class="fa-solid fa-share-nodes"></i></div>
+                                <div class="btn-white">장바구니 담기</div>
+                                <div class="btn-main">바로 구매</div>
+                                <div class="btn-white share-btn" id="share-btn" onclick="Kakao.Share.createScrapButton();"><i class="fa-solid fa-share-nodes"></i></div>
                             </div>
+                        </div>
+                        <div class="no-stock-info flex">현재 재고가 없어 주문할 수 없는 상품입니다.</div>
+                        <div class="btn-area">
+                            <div class="btn-white stock-alert flex" onclick="callAlert();"><i class="fa-sharp fa-solid fa-bell"></i>&nbsp;&nbsp;재입고 알림 받기</div>
+                            <div class="btn-white share-btn" id="share-btn" onclick="Kakao.Share.createScrapButton();"><i class="fa-solid fa-share-nodes"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="content"></div>
+            <div>
+                <div class="content-menu">
+                    <button>상품 소개</button>
+                    <button>반품 정책</button>
+                    <button>후기</button>
+                </div>
+            </div>
+            <div class="content">
+            	<div class="pd-intro"></div>
+            	<div class="pd-return"></div>
+            	<div class="pd-review">
+            		<div class="pd-review-info">
+            			<div>
+            				<span>전체 상품 후기 수</span>
+            				<div><i class="fa-solid fa-message-lines"></i></div>
+            				<span><span>3</span> 건</span>
+            			</div>
+            			<div>
+            				<span>총 평점</span>
+            				<span>★★★★★</span>
+            				<span><span>5.0</span> / 5.0 </span>
+            			</div>
+            		</div>
+            	</div>
+            </div>
         </div>
         
     </div>
@@ -188,4 +111,5 @@ input:focus, select:focus {
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 
 </body>
+<script src="/blank/resources/js/goods/detail.js"></script>
 </html>

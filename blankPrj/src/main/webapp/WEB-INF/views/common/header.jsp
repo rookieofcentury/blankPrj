@@ -14,7 +14,7 @@
 		<div class="header-home-container">
 			<div class="box"></div>
 			<div class="box">
-				<img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''">
+				<img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'">
 			</div>
 			<div class="member-area">
 				<div class="flex id-area">로그인 / 회원가입</div>
