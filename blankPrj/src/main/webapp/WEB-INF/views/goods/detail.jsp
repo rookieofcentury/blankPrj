@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/blank/resources/css/goods/detail.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
-        Kakao.init('4cca08bc633d6646753296f4efd16743');   <!--붙여넣기-->
+        Kakao.init('4cca08bc633d6646753296f4efd16743');   <!-- 붙여넣기 -->
         Kakao.isInitialized();  
     </script>
 <script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
