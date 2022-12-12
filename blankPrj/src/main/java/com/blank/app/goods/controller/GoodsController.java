@@ -20,5 +20,23 @@ public class GoodsController {
 	public String goodsDetail() {
 		return "goods/detail";
 	}
+	
+	// 굿즈 장바구니 화면 도출
+	@RequestMapping("/basket")
+	public String goodsBasket() {
+		return "goods/basket";
+	}
+	
+	// 굿즈 리뷰 작성 화면 도출
+	@GetMapping("/review/write")
+	public String reviewWrite() {
+		return "goods/review";
+	}
+	
+	// 굿즈 결제 화면 도출
+	@GetMapping("/payment")
+	public String payment() {
+		return "goods/payment";
+	}
 
 }
