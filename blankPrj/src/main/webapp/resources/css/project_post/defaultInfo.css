@@ -1,0 +1,318 @@
+/*헤더 fixed*/
+.navi-menu{
+    margin-bottom: 50px;
+    padding: 0 15% 0 15%;
+    width: 70vw;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    z-index: 100;
+    margin: 0px auto;
+    width: 70%;
+}
+.content-editor{
+    padding: 15px 0px 10px;
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.editor-logo{
+    display : flex;
+    align-items: center;
+}
+.editor-buttons{
+    display: flex;
+    align-items: center;
+}
+.logo-img{
+    cursor: pointer;
+    height : 80px;
+    padding : 15px 20px 10px 0;
+}
+.buttons-storage{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px 20px;
+    color: #567ace;
+    border: 1px solid #567ace;
+    background-color: #fff;
+    letter-spacing: 0.1em;
+}
+.buttons-request{
+    margin: 0px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px 20px;
+    color: #567ace;
+    border: 1px solid #567ace;
+    background-color: #fff;
+    letter-spacing: 0.1em;
+}
+.buttons-goout>img{
+    margin-top: 5px;
+    width: 27px;
+    height: 27px;
+    color: #567ace;
+}
+.content-menu{
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-evenly;
+    padding: 0px 16px;
+    overflow-x: auto;
+    margin: 0px auto;
+    height: 40px;
+    border-bottom :1px solid #AFAFAF;
+}
+.content-menu :nth-child(2){
+    color: #567ace;
+    padding-bottom: 12px;
+    border-bottom :5px solid #567ace;
+}
+.content-menu>div:not(.content-menu :nth-child(2)){
+    position: relative;
+    padding-bottom: 12px;
+}
+.content-menu>div:hover{
+    color: #567ace;
+} 
+/*여기까지 헤더 fixed*/
+
+li{
+    list-style: none;
+    /* position: relative;
+    padding: 0px 0px 38px 18px;
+    color: rgb(158, 158, 158); */
+}
+ol{
+    padding-left: 0;
+}
+#container{
+    display: flex;
+    padding-top: 56px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    padding: 100px 15% 0 15%;
+    width: 70vw;
+}
+.content{
+    padding: 84px 0px 0px;
+}
+div[class*=content-]:not(.content-editor,.content-menu, .content-stroy){
+    display: flex;
+    padding-bottom: 48px;
+    margin-bottom: 56px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+div[class*=-info]{
+    margin: 0px 0px 14px;
+    width: 350px;
+}
+div[class*=-info] div:first-child{
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 16px !important;
+    line-height: 24px !important;
+}
+div[class*=-info] div:last-child{
+    font-weight: 400;
+    color: rgb(109, 109, 109);
+    margin: 0px;
+    font-size: 14px !important;
+    line-height: 24px !important;
+}
+div[class*=-info]+div:not(.category-select, .price-box, .story-write){
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    margin-top: 3px;
+}
+.title-write div{
+    padding: 0px 10px;
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    width: 80%;
+}
+input{
+    outline: none;
+    border: none;
+    font-weight: 400;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    --text-align: inherit;
+    size: 600px;
+    width: 100%;
+}
+div[class*=-write] p:not(.calculate-notice>p){
+    width: 100%;
+    margin: 5px 0px 0px 3px;
+    font-size: 12px !important;
+    line-height: 20px !important;
+}
+.category-select{
+    display: flex;
+    justify-content: space-between;
+    width: 650px;
+    margin-top: 3px;
+} 
+select:not(.ui-datepicker-month, .ui-datepicker-year){
+    height: 30px;
+    margin-top: 20px;
+    padding-right: 300px;
+} 
+.price-box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.price-write, .url-text, .summary-text{
+    padding: 0px 10px;
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    height: 30px;
+    width: 550px;
+}
+/* .summary-write{
+    margin-right: 50px;
+} */
+.price-write+div{
+    margin: 5px 0 0 5px;
+    width: 80px;
+}
+.url-blank{
+    margin-left: 3px;
+}
+.date-write{
+    display: flex;
+    justify-content: space-between;
+    width: 630px;
+}
+.date-start, .date-end{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+.start-day, .start-time, .end-day, .date-calculate{
+    margin: 0px 8px;
+    width: 50%;
+    margin-bottom: 10px;
+}
+.start-day>p, .start-time>p{
+    margin-bottom: 4px;
+    margin-top: 0em;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: rgb(13, 13, 13);
+    display: flex;
+    font-size: 12px !important;
+    line-height: 20px !important;
+}
+.start-day>input{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    text-align: left;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    color: rgb(61, 61, 61);
+    padding: 0px 10px;
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.ui-datepicker-trigger {						
+    cursor:pointer;
+    height: 23px;
+    margin-left: 5px;
+    --margin-top: 15px;
+}
+.start-time select{
+    margin-top: 0;
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    box-sizing: inherit;
+    padding-right: 220px;
+    padding-left: 10px;
+    height: 28px;
+}
+.date-period{
+    padding: 46px 0 38px 18px;
+    font-weight: 400;
+    font-size: 14px !important;
+    line-height: 24px !important;
+}
+li:nth-child(1)::after{
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 100%;
+    border-left: 1px solid rgb(228, 228, 228);
+}
+.date-end{
+    position: relative;
+    width: 100%;
+}
+input[name='endDay'], input[name='deliver'], input[name='startDay']{
+    width: 80%;
+    height: 28px;
+    margin-top: 0;
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+input[name='deliver']{
+    width: 40%;
+}
+.calculate-notice{
+    display: flex;
+    align-items: center;
+}
+.calculate-notice+div{
+    color: rgb(109, 109, 109);
+    font-size: 12px !important;
+}
+.calculate-notice>p {
+    margin : 3px 0 3px 2px;
+    font-size: 12px !important;
+}
+.content-stroy{
+    flex-wrap: wrap;
+}
+.story-box{
+    display: flex;
+}
+.story-notice{
+    display: flex;
+
+}
+.story-write{
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.story-write p{
+    color: red;
+}
+.story-tip{
+    font-size: 14px !important;
+    line-height: 24px !important;
+    padding-left: 20px;
+}
+.story-notice>svg{
+    padding-top: 5px;
+}
+.story-editor{
+    width: 70%;
+    padding: 0 15% 0 15%;
+}
