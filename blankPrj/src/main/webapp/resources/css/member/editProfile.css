@@ -1,0 +1,42 @@
+.mypage-container{
+    margin: auto;
+    width: 70vw;
+    display: flex;
+}
+.content-container{
+    width: 50vw;
+    border: 1px solid pink;
+    padding: 40px;
+    display: grid;
+    grid-template-rows: 4fr 6fr;
+}
+.content-container div{
+    --border: 1px solid green;
+    height: 100%;
+}
+.container-up-content{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 3fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
+    place-items: center;
+}
+.container-up-content :first-child{
+    grid-column: span 3;
+}
+.container-up-content :last-child{
+    grid-column: span 3;
+    font-size: 10px;
+}
+.container-up-content img{
+    height: 100%;
+    width: 150px;
+    border: 1px solid black;
+}
+.margin-top{
+    margin-top: 10px;
+}
+.change-btn{
+    background-color: #fff;
+    color: ;
+}
