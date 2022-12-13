@@ -1,0 +1,166 @@
+@font-face {
+	font-family: 'Pretendard-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+		format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+* {
+	box-sizing: border-box;
+	letter-spacing: -0.05em;
+	font-family: Pretendard-Regular;
+    color: #343434;
+}
+
+.wrap {
+    width: 777px;
+    height: 936px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    background-color: #F1F1F1;
+}
+.container {
+	width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.info {
+    background-color: white;
+    border: 1px solid #A3A3A3;
+    width: 658px;
+    height: 296px;
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    padding: 25px 40px;
+}
+.inner>div, .inner>div>div {
+    display: flex;
+}
+
+.date-area {
+    justify-content: space-between;
+}
+.date-area img {
+    width: 24px;
+    height: 24px;
+}
+.date-area>div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+.date-area>div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.date-area>div:nth-child(2)>div:nth-child(1) {
+    background-color: black;
+    color: white;
+    padding: 3px 7px;
+    margin-right: 5px;
+}
+.today-date {
+    font-weight: bold;
+}
+
+.commonpoint-area {
+    position: relative;
+}
+.commonpoint-area>div {
+    display: flex;
+    flex-direction: column;
+    line-height: 200%;
+}
+.commonpoint-area>div:nth-child(1) {
+    padding-left: 34px;
+}
+#submit-btn {
+    position: absolute;
+    top: 9;
+    right: 0;
+    padding: 20px;
+    background-color: #F1F1F1;
+    border: 1px solid #A3A3A3;
+    font-weight: bold;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    cursor: pointer;
+}
+
+.client-area {
+    position: relative;
+}
+.client-area>div>div{
+    gap: 5px;
+}
+.client-profile {
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+}
+.client-info {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.client-info>div {
+    display: flex;
+    padding-left: 20px;
+}
+.client-name {
+    display: flex;
+    align-items: flex-end;
+}
+#name {
+    font-size: 20px;
+}
+.client-point>div, .client-attday>div {
+    display: flex;
+    align-items: center;
+}
+.client-point>div:nth-child(1) {
+    background-color: #567ace;
+    color: white;
+    padding: 3px;
+}
+.client-attday>div:nth-child(1) {
+    background-color: #99abd6;
+    color: white;
+    padding: 3px;
+}
+
+.point-area {
+    position: absolute;
+    right: 0;
+    justify-content: space-evenly;
+    background-color: #F1F1F1;
+    border: 1px solid #A3A3A3;
+    width: 312px;
+    height: 100%;
+}
+.point-area>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.bold, #attPoint, #point, #attday {
+    font-weight: bold;
+}

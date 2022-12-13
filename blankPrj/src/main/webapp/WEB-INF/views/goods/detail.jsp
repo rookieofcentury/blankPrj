@@ -6,11 +6,12 @@
 <link rel="stylesheet" href="/blank/resources/css/goods/detail.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
    <script>
-       Kakao.init('4cca08bc633d6646753296f4efd16743');   <!-- 붙여넣기 -->
+       Kakao.init('4cca08bc633d6646753296f4efd16743');
        Kakao.isInitialized();  
    </script>
 <script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
     <%@ include file = "/WEB-INF/views/common/header.jsp" %>
@@ -81,28 +82,35 @@
             </div>
             <div>
                 <div class="content-menu">
-                    <button>상품 소개</button>
-                    <button>반품 정책</button>
-                    <button>후기</button>
+                    <label for="info-btn">상품 소개</label><input type="radio" name="buttons" id="info-btn"></input>
+                    <label for="return-btn">반품 정책</label><input type="radio" name="buttons" id="return-btn"></input>
+                    <label for="review-btn">후기</label><input type="radio" name="buttons" id="review-btn"></input>
                 </div>
             </div>
-            <div class="content">
-            	<div class="pd-intro"></div>
-            	<div class="pd-return"></div>
-            	<div class="pd-review">
-            		<div class="pd-review-info">
-            			<div>
-            				<span>전체 상품 후기 수</span>
-            				<div><i class="fa-solid fa-message-lines"></i></div>
-            				<span><span>3</span> 건</span>
-            			</div>
-            			<div>
-            				<span>총 평점</span>
-            				<span>★★★★★</span>
-            				<span><span>5.0</span> / 5.0 </span>
-            			</div>
-            		</div>
-            	</div>
+            <div>
+                <div class="content">
+                    <div class="pd-intro">
+                        <img src="" alt="소개 이미지">
+                        소개 적을 거임 여기에다가 ㅡㅡ
+                    </div>
+                    <div class="pd-return">
+                        반품 정책 적을 거임 여기에다가 ㅡㅡ
+                    </div>
+                    <div class="pd-review">
+                        <div class="pd-review-info">
+                            <div>
+                                <span>전체 상품 후기 수</span>
+                                <div><i class="fa-solid fa-message-lines"></i></div>
+                                <span><span>3</span> 건</span>
+                            </div>
+                            <div>
+                                <span>총 평점</span>
+                                <div>★★★★★</div>
+                                <span><span>5.0</span> / 5.0 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -112,4 +120,10 @@
 
 </body>
 <script src="/blank/resources/js/goods/detail.js"></script>
+<script>
+    Kakao.Share.createScrapButton({
+	  container: '#share-btn',
+	  requestUrl: 'http://localhost:8888/blank/goods/detail',
+	});
+</script>
 </html>
