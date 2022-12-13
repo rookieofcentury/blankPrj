@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="/blank/resources/css/member/login.css">
 </head>
 <body>
-
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
 	<div id="wrap">

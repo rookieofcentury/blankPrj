@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="/blank/resources/css/member/join.css">
 </head>
 <body>
-
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
 	<div id="wrap">
@@ -54,7 +53,7 @@
                 </div>
             </form>
     </div>
-
+    
 <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
