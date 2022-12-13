@@ -43,17 +43,17 @@ public class ProjectController {
 		return "project/post/agree";
 	}
 	
-	@GetMapping("defaultInfo")
+	@GetMapping("post/defaultInfo")
 	public String postDefaultInfo() {
 		return "project/post/defaultInfo";
 	}
 	
-	@GetMapping("optionSet")
+	@GetMapping("post/optionSet")
 	public String postOptionSet() {
 		return "project/post/optionSet";
 	}
 	
-	@GetMapping("optionItem")
+	@GetMapping("post/optionItem")
 	public String postOptionItem() {
 		return "project/post/optionItem";
 	}
@@ -61,6 +61,11 @@ public class ProjectController {
 	@GetMapping("created")
 	public String createdStatus() {
 		return "project/created/status";
+	}
+	
+	@GetMapping("created/list")
+	public String createdList() {
+		return "project/created/list";
 	}
 	/*
 	@PostMapping("/fileupload.do")

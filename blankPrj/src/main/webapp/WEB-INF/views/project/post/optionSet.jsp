@@ -154,28 +154,28 @@
                                 <li>
                                     
                                 </li>
-                                <div>
-                                    <div>세트명</div>
+                                <div class="set-info">
+                                    <div class="info-name">세트명</div>
                                     <div><input type="text" placeholder="세트명을 입력해 주세요." name="setName"></div>
                                 </div>
-                                <div>
-                                    <div>수량 설정</div>
-                                    <div>
+                                <div class="set-info">
+                                    <div class="info-quantity">수량 설정</div>
+                                    <div class="text-price">
                                         <div><input type="number" name="setQuantity"></div>
                                         <div>개</div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div>
+                                <div class="set-info">
+                                    <div class="info-price">
                                         <div>금액 설정</div>
                                         <div>배송이 필요한 선물은 배송비를 포함해주세요.</div>
                                     </div>
-                                    <div>
+                                    <div class="text-quantity">
                                         <div><input type="number" name="setPrice"></div>
                                         <div>원</div>
                                     </div>
                                 </div>
-                                <div><input type="submit" value="저장" name="save"></div>
+                                <div class="button-submit"><input type="submit" value="저장" name="save"></div>
                             </ul>
                         </div>
                     </div>
