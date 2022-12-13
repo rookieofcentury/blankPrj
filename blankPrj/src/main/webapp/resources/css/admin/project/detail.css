@@ -3,19 +3,33 @@
     }
 
     /* 제목 부분 */
-    .edit-board-header h1{
-    	font-size: 30px;
-    	font-weight: bold;
-    	margin-top: 15px;
+    main .detail-board-header{
+		width: 1625px;
+	    height: 64px;
+	    color: rgba(90, 90, 90, 1);
+	    background-color: rgba(241, 241, 241, 1);
+	    border: 1px solid var(--line-gray);
+	    position: relative;
+	    display: grid;
+	    grid-template-columns: 0.17fr 1fr;
     }
     
-    .edit-board-content{
+    .detail-board-header div h1{
+	    margin-left: 15px;
+	    transform: translate(0, -20%)
+    }
+    
+     .detail-board-header div h2{
+        font-weight: normal;
+    }
+    
+    .detail-board-content{
         width: 1380px;
         display: grid;
         grid-template-columns: 1fr 1fr;
     }
 
-    main .edit-board-header{
+    main .detail-board-header{
         width: 1625px;
         height: 63px;
         color: rgba(90, 90, 90, 1);
@@ -24,13 +38,13 @@
         position: relative;
     }
 
-    .edit-board-header div h1{
+    .detail-board-header div h1{
         margin-left: 15px;
         transform: translate(0, -20%)
     }
 
     /* 창 닫기 */
-    .member-edit-close{
+    .member-detail-close{
         width: 150px;
         height: 30px;
         border: 1px solid rgba(197, 197, 197, 1);
@@ -43,27 +57,27 @@
         margin-top: 55px;
     }
     
-    .member-edit-close img{
+    .member-detail-close img{
     	width: 11px;
     	height: 11px;
     	cursor: pointer;
     }
 
     /* 리스트 부분 */
-    .edit-board{
+    .detail-board{
         width: 1625px;
         height: 868px;
         border: 1px solid var(--line-gray);
         background-color: rgba(237, 236, 236, 1);
     }
 
-    .edit-list{
+    .detail-list{
         width: 1580px;
         height: 710px;
         border: 1px solid var(--line-gray);
         background-color: white;
         display: grid;
-        grid-template-columns: 1fr 1fr 5fr;
+        grid-template-columns: 1fr 3fr 3fr;
         grid-template-rows: repeat(11, 54px);
         text-align: left;
         margin: 0 auto;
@@ -72,30 +86,31 @@
         border-radius: 0px 5px 5px 5px;
     }
 
-    .edit-title{
+    .detail-title{
         text-align: center;
     }
 
-    .edit-list div{
+    .detail-list div{
         border-bottom: 1px solid var(--line-gray);
     }
 
-    .edit-list div:last-child img{
+    .detail-list div:last-child img{
         width: 18px;
         height: 18px;
     }
 
-    .edit-list .edit-list-top{
+    .detail-list .edit-list-top{
         grid-column: span 10;
         text-align: left;
         margin-left: 10px;
         border: none;
     }
 
-    .edit-list input{
-        border: none;
+    .detail-list .detail-input-style input{
+        border: 1px solid red;
         outline: none;
-        font-size: 16px
+        font-size: 16px;
+        width: 490px;
     }
 
     .check-email-btn{
@@ -108,26 +123,28 @@
     }
 
     /* 밑줄 제거 */
-    .edit-list div:last-child,
-    .edit-list .phone-number,
-    .edit-list .bank-name,
-    .edit-list .account-number{
+    .detail-list div:last-child{
         border: none;
     }
 
-    #edit-submit{
-        grid-column: span 3;
-        height: 43px;
-        margin-left: 50%;
-    }
-
-    .edit-submit-btn{
+    .detail-submit-no-btn{
         width: 70px;
         height: 35px;
         color: white;
         font-size: 16px;
         border-radius: 7px;
         background-color: rgba(86, 122, 206, 1);
+        cursor: pointer;
+        margin-top: 5%;
+    }
+
+    .detail-submit-ok-btn{
+        width: 70px;
+        height: 35px;
+        color: white;
+        font-size: 16px;
+        border-radius: 7px;
+        background-color: rgba(255, 94, 94, 1);
         cursor: pointer;
         margin-top: 5%;
     }
