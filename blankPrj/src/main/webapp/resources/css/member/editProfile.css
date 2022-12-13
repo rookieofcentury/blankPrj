@@ -20,23 +20,35 @@
     grid-template-rows: 3fr 2fr 1fr;
     grid-template-columns: 1fr 2fr 1fr;
     place-items: center;
+    box-shadow: 0 4px 4px -4px var(--main-color);
 }
 .container-up-content :first-child{
     grid-column: span 3;
 }
 .container-up-content :last-child{
     grid-column: span 3;
-    font-size: 10px;
 }
 .container-up-content img{
     height: 100%;
     width: 150px;
-    border: 1px solid black;
 }
 .margin-top{
     margin-top: 10px;
 }
 .change-btn{
-    background-color: #fff;
-    color: ;
+    width: 100px;
+    height: 32px;
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+}
+.text{
+    width: 100px;
+    height: 32px;
+    color: #000000;
+    font-size: 14px;
+}
+p{
+    font-size: 12px;
 }
