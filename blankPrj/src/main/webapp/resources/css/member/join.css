@@ -3,22 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-#join-header{
-    width: 60vw;
-    height: 100px;
-    margin: 15px auto;
-    display: flex;
-    align-items: flex-end;
-    border-bottom: 1px solid #AFAFAF;
-    padding: 10px;
-}
-.logo-img{
-    cursor: pointer;
-    height : 80px;
-}
 #join-container{
     width: 70vw;
-    margin: 50px auto;
+    margin: auto;
     padding: 0px 15% 0px 20%;
 }
 #join-container-main > div{
@@ -26,7 +13,7 @@
 }
 .input{
     height: 40px;
-    width: 60%;
+    width: 70%;
     padding-left: 10px;
     border: 1px solid #999999;
     border-radius: 5px;

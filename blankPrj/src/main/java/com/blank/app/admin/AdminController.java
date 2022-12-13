@@ -51,4 +51,16 @@ public class AdminController {
 		return "admin/help/list";
 	}
 	
+	//회원 정보 수정(화면)
+	@GetMapping("edit")
+	public String edit() {
+		return "admin/member/edit";
+	}
+	
+	//프로젝트 상세정보(화면)
+	@GetMapping("prjDetail")
+	public String prjDetail() {
+		return "admin/project/detail";
+	}
+	
 }

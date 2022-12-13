@@ -1,0 +1,42 @@
+.wrap{
+    width: 70vw;
+    margin: auto;
+    height: 800px;
+    text-align: center;
+}
+.mypage-grid{
+    display: grid;
+}
+.mypage-container{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.mypage-ponit-project{
+    grid-template-columns: repeat(2, 1fr);
+}
+.mypage-ponit-project > div{
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+}
+.sidebar-container{
+    height: 100%;
+    border: 1px solid #567ace;
+    padding:10px;
+}
+.sidebar-contents{
+    --position: sticky;
+    --top: 0;
+}
+.user-info{
+    grid-template-rows: 5fr 2fr 1fr 5fr;
+    line-height: 30px;
+}
+.mypage-menu{
+    height: 300px;
+    grid-template-rows: repeat(7, 1fr);
+    place-items: center;
+}
+.mypage-menu>div>a{
+    text-decoration-line: none;
+}

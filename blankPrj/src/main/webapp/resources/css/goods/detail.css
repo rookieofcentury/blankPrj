@@ -222,6 +222,10 @@ option:hover {
     display: flex;
     justify-content: center;
 }
+.container>div:nth-child(4) {
+    display: flex;
+    justify-content: center;
+}
 
 .goods-category {
     color: #767675;
@@ -369,7 +373,7 @@ option:hover {
     height: 100%;
     border-bottom: 1px solid #343434;
 }
-.content-menu>button {
+.content-menu>label {
     display: flex;
     width: 33%;
     height: 100%;
@@ -379,9 +383,34 @@ option:hover {
     justify-content: space-around;
     font-size: 18px;
 }
-.content-menu>button:focus {
+.focus {
     border-bottom: 2px solid #000000;
     font-weight: bold;
+}
+input[name=buttons] {
+    display: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 79%;
+    align-items: center;
+    font-size: 16px;
+}
+.content>div {
+    display: none;
+}
+.pd-review-info {
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+}
+.pd-review-info>div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
 }
 
 .no-stock-info {

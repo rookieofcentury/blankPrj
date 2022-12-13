@@ -155,7 +155,7 @@
                 </div>
                 <div class="summary-write">
                     <div class="summary-text"><input type="text" placeholder="내용 입력" name="summery"></div>
-                    <p>50글자 남음</p>
+                    <p>100글자 남음</p>
                 </div>
             </div>
             <div class="content-stroy">

@@ -8,14 +8,9 @@
 <link rel="stylesheet" href="/blank/resources/css/member/login.css">
 </head>
 <body>
-
-
+<%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
 	<div id="wrap">
-        <div id="login-header">
-            <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''"></div>
-            <div><h1>로그인</h1></div>
-        </div>
         <div id="login-container">
             <form action="" class="login-form">
                 <div class="container-main-area">
