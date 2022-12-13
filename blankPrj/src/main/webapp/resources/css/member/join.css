@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#join-container{
+    width: 70vw;
+    margin: auto;
+    padding: 0px 15% 0px 20%;
+}
+#join-container-main > div{
+    margin: 10px 0px 5px 0px;
+}
+.input{
+    height: 40px;
+    width: 70%;
+    padding-left: 10px;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.submit{
+    width: 85%;
+    height: 40px;
+    font-size: 15px;
+    margin-top: 20px;
+}
+.join-info{
+    margin: 10px 0;
+    font-size: 15px;
+}
+.btn-check{
+    width: 15%;
+    height: 40px;
+}
+h2{
+    margin: 40px 0px;
+}
+.member-join-check >div{
+    margin: 5px;
+}
+
+.another-login>div{
+    font-size: 13px;
+    margin: 10px 40px 20px -20px;
+}
+hr{
+    width: 100%;
+}
+.hr-left{
+    width: 35%;
+    margin-right: 10px;
+}
+.hr-right{
+    width: 35%;
+    margin-left: 10px;
+}
+.another-join{
+    font-size: 13px;
+    padding-right: 30px;
+}
+.join-flex{
+    display: flex;
+    align-items: center;
+}
+.gender-check{
+    display: flex;
+}
+.gender-check>div{
+    margin: 0px 0px 30px 20%;
+}
