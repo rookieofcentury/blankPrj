@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/blank/resources/css/goods/payment.css">
 </head>
 <body>
 
@@ -15,10 +16,10 @@
         <div class="container">
 
             <div class="cart-info">
-                <div>주문서 작성</div>
+                <div class="area-title">주문서 작성</div>
                 <div>
                     <span>내 장바구니 내역</span>
-                    <div>
+                    <div class="cart-table">
                         <table>
                             <tr>
                                 <th>번호</th>
@@ -30,13 +31,13 @@
                             </tr>
                             <tr class="cart-product">
                                 <td>1</td>
-                                <td><img src="" alt=""></td>
+                                <td><img src="" alt="" class="product-img"></td>
                                 <td class="name-option">
                                     <span class="name">무릎담요</span>
                                     <span class="option">옵션: 블랭크 기본 패턴</span>
                                 </td>
                                 <td>
-                                    <span>24,000</span>
+                                    <span class="price">24,000</span>
                                     <span> 원</span>
                                 </td>
                                 <td>
@@ -44,19 +45,19 @@
                                     <span>개</span>
                                 </td>
                                 <td>
-                                    <span>24,000</span>
+                                    <span class="price">24,000</span>
                                     <span> 원</span>
                                 </td>
                             </tr>
                             <tr class="cart-product">
                                 <td>2</td>
-                                <td><img src="" alt=""></td>
+                                <td><img src="" alt="" class="product-img"></td>
                                 <td class="name-option">
                                     <span class="name">무릎담요</span>
                                     <span class="option">옵션: 긔엽긔 포켓몬 패턴</span>
                                 </td>
                                 <td>
-                                    <span>24,000</span>
+                                    <span class="price">24,000</span>
                                     <span> 원</span>
                                 </td>
                                 <td>
@@ -64,7 +65,7 @@
                                     <span>개</span>
                                 </td>
                                 <td>
-                                    <span>48,000</span>
+                                    <span class="price">48,000</span>
                                     <span> 원</span>
                                 </td>
                             </tr>
@@ -85,43 +86,37 @@
                 </div>
             </div>
             <div>
-                <span>배송 정보</span>
-                <div>
+                <span class="area-title">배송 정보</span>
+                <div class="delivery-info">
                     <div>받는 분</div>
-                    <div><input type="text" name="name" value="송혜은"></div>
+                    <div><input type="text" name="name"></div>
                     <div>휴대폰 번호</div>
                     <div><input type="tel" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13"></div>
-                    <div><input type="checkbox"> 내 정보에서 받아 오기</div>
-                    <div>주소</div>
-                    <div><input type="text" name="address"></div>
-                    <div><input type="text"></div>
-                    <div><input type="text"></div>
-                    <div><input type="checkbox"> 내 정보에서 받아 오기</div>
+                    <div class="client-checkbox"><input type="checkbox"> 내 정보에서 받아 오기</div>
+                    <div class="address-area">주소</div>
+                    <div class="address-search"><input type="text" name="address1"><div class="search-btn">검색</div></div>
+                    <div><input type="text" name="address2"></div>
+                    <div><input type="text" name="address3"></div>
+                    <div class="client-checkbox"><input type="checkbox"> 내 정보에서 받아 오기</div>
                     <div>배송 메시지</div>
                     <div><input type="text" placeholder="20자 내로 작성해 주세요."></div>
                 </div>
             </div>
             <div>
-                <span>포인트 사용</span>
-                <div>
-                    <div>
+                <span class="area-title">포인트 사용</span>
+                <div class="point-info">
                         <div>내가 보유한 포인트</div>
                         <div></div>
                         <div>P</div>
-                    </div>
-                    <div>
                         <div>사용할 포인트</div>
-                        <div><input type="number"></div>
+                        <div><input type="number" id="use-point"></div>
                         <div>P</div>
-                    </div>
-                    <div>
                         <div>최종 결제 금액</div>
-                        <div></div>
+                        <div>70000</div>
                         <div>원</div>
-                    </div>
                 </div>
-                <div><input type="checkbox"> 위 주문서 내용을 확인하였으며, <br>결제에 동의합니다.</div>
-                <div><input type="submit" value="결제하기"></div>
+                <div class="warning-ment"><input type="checkbox"> 위 주문서 내용을 확인하였으며, 결제에 동의합니다.</div>
+                <div id="pay-button">결제하기</div>
             </div>
 
         </div>
