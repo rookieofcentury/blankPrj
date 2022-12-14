@@ -60,11 +60,6 @@
                                     <button type="button">
                                         <div class="set-buttons">
                                             <strong>29,000원</strong>
-                                            <button type="button">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                                </svg>
-                                            </button>
                                         </div>
                                         <p class="set-name">과일 세트</p>
                                         <ul class="set-item">
@@ -80,6 +75,11 @@
                                             <div>개</div>
                                         </div>
                                     </button>
+                                    <button type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                        </svg>
+                                    </button>
                                 </li>
                             </ul>
                         <%}else{ %>
@@ -93,11 +93,11 @@
                             <div class="post-set">
                                 <div class="set-notice">
                                     <div>세트 아이템</div>
-                                    <div>세트는 후원자에게 프로젝트의 가치를 전달하는 수단입니다. 다양한 금액대로 여러 개의 선물을 만들어주세요.</div>
+                                    <div>세트는 후원자에게 프로젝트의 가치를 전달하는 수단입니다. <br>다양한 금액대로 여러 개의 선물을 만들어주세요.</div>
                                 </div>
                                 <div class="set-option">
                                     <span>
-                                        <input placeholder="아이템을 선택해 주세요">
+                                        <input placeholder="아이템을 선택해 주세요" readonly>
                                         <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                                             <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
                                         </div>
@@ -106,77 +106,75 @@
                                         <div>
                                             <ul>
                                                 <li>
-                                                    <label class="select-option">
-                                                        <span>
-                                                            <div></div>
-                                                        </span>
-                                                        <span class="item-name">사과(옵션2개)</span>
+                                                    <label for="option1" class="select-option">
+                                                        <input type="checkbox" id="option1">
+                                                        <span class="item-name">사과 (옵션2개)</span>
                                                     </label>
                                                 </li>
                                                 <li>
-                                                    <label class="select-option">
-                                                        <span>
-                                                            <div></div>
-                                                        </span>
-                                                        <span class="item-name">메론(옵션2개)</span>
+                                                    <label for="option2" class="select-option">
+                                                        <input type="checkbox" id="option2">
+                                                        <span class="item-name">메론 (옵션2개)</span>
                                                     </label>
                                                 </li>
                                             </ul>
-                                            <div>선택완료</div>
+                                            <div class="selete-submit">선택완료</div>
                                         </div> 
                                     </div>
                                 </div>
                             </div>
-                            <ul>
+                            <ul class="selected">
                                 <li>
-                                    <div></div>
                                     <div>
+                                        <div>사과</div>
                                         <div>
-                                            <button>
-                                                <img src="/blank/resources/images/project/minus.svg">
-                                            </button>
-                                            <input type="number" value="1">
-                                            <button>
-                                                <img src="/blank/resources/images/project/plus.svg">
+                                            <div class="quantity-box">
+                                                <button>
+                                                    <img src="/blank/resources/images/project/minus.svg">
+                                                </button>
+                                                <input type="number" value="1" name="optionQuantity">
+                                                <button>
+                                                    <img src="/blank/resources/images/project/plus.svg">
+                                                </button>
+                                            </div>
+                                            <button class="delete-button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                                </svg>
                                             </button>
                                         </div>
-                                        <button>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                            </svg>
-                                        </button>
                                     </div>
-                                    <ul>
+                                    <ol type="1">
                                         <li>민트</li>
                                         <li>레드</li>
-                                    </ul>
+                                    </ol>
                                 </li>
                                 <li>
-                                    
                                 </li>
-                                <div class="set-info">
-                                    <div class="info-name">세트명</div>
-                                    <div><input type="text" placeholder="세트명을 입력해 주세요." name="setName"></div>
-                                </div>
-                                <div class="set-info">
-                                    <div class="info-quantity">수량 설정</div>
-                                    <div class="text-price">
-                                        <div><input type="number" name="setQuantity"></div>
-                                        <div>개</div>
-                                    </div>
-                                </div>
-                                <div class="set-info">
-                                    <div class="info-price">
-                                        <div>금액 설정</div>
-                                        <div>배송이 필요한 선물은 배송비를 포함해주세요.</div>
-                                    </div>
-                                    <div class="text-quantity">
-                                        <div><input type="number" name="setPrice"></div>
-                                        <div>원</div>
-                                    </div>
-                                </div>
-                                <div class="button-submit"><input type="submit" value="저장" name="save"></div>
                             </ul>
+                            <div class="set-info">
+                                <div class="info-name">세트명</div>
+                                <div><input type="text" placeholder="세트명을 입력해 주세요." name="setName"></div>
+                            </div>
+                            <div class="set-info">
+                                <div class="info-quantity">수량 설정</div>
+                                <div class="text-price">
+                                    <div><input type="number" name="limitedQuantity"></div>
+                                    <div>개</div>
+                                </div>
+                            </div>
+                            <div class="set-info">
+                                <div class="info-price">
+                                    <div>금액 설정</div>
+                                    <div>배송이 필요한 선물은 배송비를 포함해주세요.</div>
+                                </div>
+                                <div class="text-quantity">
+                                    <div><input type="number" name="setPrice"></div>
+                                    <div>원</div>
+                                </div>
+                            </div>
+                            <div class="button-submit"><input type="submit" value="저장" name="save"></div>
+                            
                         </div>
                     </div>
                 </div>
