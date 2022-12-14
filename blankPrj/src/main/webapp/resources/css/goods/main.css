@@ -1,0 +1,134 @@
+* {
+	box-sizing: border-box;
+}
+
+.wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	width: 70vw;
+	display: grid;
+	justify-content: center;
+	row-gap: 25px;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 0.7fr 1.6fr 0.8fr 1.5fr;
+}
+
+#banner {
+	height: 346px;
+}
+
+.content {
+	display: flex;
+	gap: 20px;
+}
+
+.goods-list {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+}
+.goods-item {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+	gap: 10px;
+	width: 25%;
+    height: 50%;
+}
+.goods-item>div:nth-child(2) {
+	display: flex;
+	justify-content: space-between;
+}
+.goods-item>div:nth-child(2)>span:nth-child(1) {
+	color: var(--gray);
+}
+.goods-item>div:nth-child(2)>span:nth-child(2) {
+	color: var(--main-color);
+	font-weight: bold;
+}
+
+.image-box {
+	display: flex;
+}
+.image-box>img {
+	width: 100%;
+	height: 100%;
+}
+.image-box:after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+
+.editor-picks {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0px;
+    background-color: var(--sub-color);
+}
+.editor-picks>div {
+    display: flex;
+}
+.editor-picks>div:nth-child(1) {
+    width: 25%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 30px 0px 40px 70px;
+    color: white;
+}
+.editor-picks>div:nth-child(1)>div:nth-child(1) {
+    font-size: 28px;
+    font-weight: bold;
+}
+.editor-picks>div:nth-child(1)>div:nth-child(3) {
+    width: 50%;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    color: var(--sub-color);
+}
+
+.exhibition-area {
+    display: flex;
+}
+.exhibition-item {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px;
+    gap: 20px;
+    width: 50%;
+    height: 100%;
+}
+.exhibition-item>div:nth-child(1) {
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+.exhibition-item>div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    height: 30%;
+}
+.exhibition-item>div:nth-child(2)>div {
+    display: flex;
+    width: 30%;
+    height: 100%;
+}
+.exhibition-item>div:nth-child(3) {
+    font-size: 22px;
+    font-weight: bold;
+}
+.exhibition-item>div:nth-child(4) {
+    display: flex;
+    justify-content: space-between;
+}
+.exhibition-item>div:nth-child(4)>span:nth-child(2) {
+    color: var(--gray);
+}

@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Blank</title>
+<link rel="stylesheet" href="/blank/resources/css/goods/order.css">
 </head>
 <body>
 
@@ -12,41 +13,65 @@
 
         <div class="container">
 
-            <div>주문이 정상적으로 완료되었습니다!</div>
+            <div class="order-finish">주문이 정상적으로 완료되었습니다!</div>
             <div class="info">
                 <div>
-                    <div class="order-info"></div>
-                    <div class="payment-info"></div>
+                    <div class="info-box">
+                        <div class="title">주문 정보</div>
+                        <table>
+                            <tr>
+                                <th>주문 번호</th>
+                                <td>20221203-0000001</td>
+                            </tr>
+                            <tr>
+                                <th>주문 일자</th>
+                                <td>20221203-0000001</td>
+                            </tr>
+                            <tr>
+                                <th>처리 상태</th>
+                                <td>결제 완료</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-box">
+                        <div class="title">결제 정보</div>
+                        <table>
+                            <tr>
+                                <th>총 주문 금액</th>
+                                <td><span>72,000</span> 원</td>
+                            </tr>
+                            <tr>
+                                <th>포인트 사용</th>
+                                <td><span>2,000</span> P</td>
+                            </tr>
+                            <tr>
+                                <th>총 결제 금액</th>
+                                <td><span>70,000</span> 원</td>
+                            </tr>
+                            <tr>
+                                <th>결제 수단</th>
+                                <td><button>확인하러 가기</button></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="delivery-info">
                     <div>
-                        <span>배송 정보</span>
+                        <span class="title">배송 정보</span>
                         <button>변경</button>
                     </div>
-                    <table>
-                        <tr>
-                            <th>받는 분</th>
-                            <td>송혜은</td>
-                        </tr>
-                        <tr>
-                            <th>휴대폰 번호</th>
-                            <td>010-1234-5678</td>
-                        </tr>
-                        <tr>
-                            <th>주소</th>
-                            <td>06234</td>
-                        </tr>
-                        <tr>
-                            <td>서울특별시 강남구 테헤란로 130 호산빌딩</td>
-                        </tr>
-                        <tr>
-                            <td>5F, 6F</td>
-                        </tr>
-                        <tr>
-                            <th>배송메시지</th>
-                            <td>(없음)</td>
-                        </tr>
-                    </table>
+                    <div>받는 분</div>
+                    <div><input type="text" name="name"></div>
+                    <div>휴대폰 번호</div>
+                    <div><input type="tel" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13"></div>
+                    <div class="client-checkbox"><input type="checkbox"> 내 정보에서 받아 오기</div>
+                    <div class="address-area">주소</div>
+                    <div class="address-search"><input type="text" name="address1"><div class="search-btn">검색</div></div>
+                    <div><input type="text" name="address2"></div>
+                    <div><input type="text" name="address3"></div>
+                    <div class="client-checkbox"><input type="checkbox"> 내 정보에서 받아 오기</div>
+                    <div>배송 메시지</div>
+                    <div><input type="text" placeholder="20자 내로 작성해 주세요."></div>
                     <div>주문 상품 확인 및 결제 취소는 마이페이지에서 진행해 주세요.</div>
                     <div class="order-mypage" onclick="location.href=''">주문 배송 조회</div>
                 </div>

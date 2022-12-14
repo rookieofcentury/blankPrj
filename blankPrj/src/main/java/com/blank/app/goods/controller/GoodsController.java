@@ -39,4 +39,10 @@ public class GoodsController {
 		return "goods/payment";
 	}
 
+	// 굿즈 주문 완료 화면 도출
+	@GetMapping("/order")
+	public String order() {
+		return "goods/order";
+	}
+
 }
