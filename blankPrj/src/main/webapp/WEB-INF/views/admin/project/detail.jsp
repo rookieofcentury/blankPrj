@@ -39,37 +39,21 @@
 	                <div></div>
 	    
 	                <div class="detail-title">제목</div>
-	                <div class="detail-input-style">
-	                    <input
-	                        type="text"
-	                        value="노력은 누구나 하잖아요? 혼을 갈아 넣은 업그레이드 프리미엄 안경"
-	                        name="project-title"
-	                    />
+	                <div class="detail-content-style">
+	                	노력은 누구나 하잖아요? 혼을 갈아 넣은 업그레이드 프리미엄 안경
 	                </div>
 	                <div></div>
 	    
 	                <div class="detail-title">카테고리</div>
-	                <div>
-	                    <input
-	                        type="text"
-	                        value="패션/잡화"
-	                        name="category"
-	                    />
-	                </div>
+	                <div class="detail-content-style">패션/잡화</div>
 	                <div></div>
 	    
 	                <div class="detail-title">대표이미지</div>
-	                <div>
-	                    <input
-	                        type="text"
-	                        value="image.jpg"
-	                        name="img"
-	                    />
-	                </div>
+	                <div class="detail-content-style">image.jpg</div>
 	                <div></div>
 	    
 	                <div class="detail-title">목표금액</div>
-	                <div>
+	                <div class="detail-content-style">
 	                    <input
 	                        type="text"
 	                        value="500,000원"
@@ -79,7 +63,7 @@
 	                <div></div>
 	    
 	                <div class="detail-title">펀딩일정</div>
-	                <div>
+	                <div class="detail-content-style">
 	                    <input
 	                        type="text"
 	                        value="2022-11-24 ~ 2022-12-15"
@@ -89,7 +73,7 @@
 	                <div></div>
 	    
 	                <div class="detail-title">페이지 주소</div>
-	                <div class="detail-input-style">
+	                <div class="detail-content-style">
 	                    <input
 	                        type="text"
 	                        value="www.blank.com/og=glasses"
@@ -99,7 +83,7 @@
 	                <div></div>
 	    
 	                <div class="detail-title">프로젝트 요약</div>
-	                <div class="detail-input-style">
+	                <div class="detail-content-style">
 	                    <input
 	                        type="text"
 	                        value="누적 펀딩률 8,988%, 평점 4.5점! 노력을 넘어 안경을 위해 '혼' 을 담은 세미콜론의 와디즈 한정 두 번째 혼 프로젝트 서포터 의견을 듣고 업그레이드 되어 돌아왔습니다
@@ -110,7 +94,7 @@
 	                <div></div>
 	    
 	                <div class="detail-title">프로젝트 스토리</div>
-	                <div class="detail-input-style">
+	                <div class="detail-content-style">
 						<input
 						type="text"
 						value="제대로된 설계. 좋은 소재와 합리적인 가격 모두를 만족하는 안경은 없을까?"
