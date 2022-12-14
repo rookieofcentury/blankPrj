@@ -27,4 +27,12 @@ public class MemberController {
 		return "member/mypage/editProfile";
 	}
 	
+	//마이페이지 결제수단 / 배송지 화면
+	@GetMapping("payAddr")
+	public String pay() {
+		return "member/mypage/payAddr";
+	}
+	
+	
+	
 }

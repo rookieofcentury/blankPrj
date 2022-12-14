@@ -1,0 +1,49 @@
+.mypage-container{
+    margin: auto;
+    width: 70vw;
+    display: flex;
+}
+.content-container{
+    width: 720px;
+    height: 700px;
+    margin: 40px;
+    display: grid;
+    grid-template-rows: 3.5fr 6fr;
+}
+
+.span3{
+    grid-column: 1 / -1;
+}
+#nav > ul{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+#nav > ul > li{
+    list-style: none;
+    margin: 18px;
+    cursor: pointer; 
+}
+.line {
+    position: absolute;
+    height: 4px;
+    background-color: var(--main-color);
+    transition: .6s ease-out;
+  }
+
+
+  #contents {
+    overflow: hidden;
+  }
+  
+  #contents__list {
+    width: 400%;
+    display: flex;
+    transition: .6s ease-out;
+  }
+  
+  #contents__item {
+    width: 100%;
+    height: 400px;
+  }
