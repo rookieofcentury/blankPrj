@@ -8,12 +8,15 @@
 <link rel="stylesheet" href="/blank/resources/css/member/join.css">
 </head>
 <body>
-<%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
-	<div id="wrap">
-        
-        <div id="join-container">
-            <form action="" method="post">
+	    
+            <div id="join-header">
+                <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''"></div>
+                <div><h1>회원가입</h1></div>
+            </div>
+            <div id="join-container">
+                <form action="" method="post">
+
                 <div id="join-container-main">
                     <h2>이메일로 가입하기</h2>
                     <div >이메일</div>
@@ -52,8 +55,8 @@
                     </div>
                 </div>
             </form>
+        </div>
     </div>
-    
 <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

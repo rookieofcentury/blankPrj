@@ -11,9 +11,9 @@
 	<aside class="wrap">
         <div class="mypage-side-container">
             <div class="sidebar-container">
-                <div class="mypage-grid user-info">
+                <div class="user-info">
                     <div><img src="../resources/images/member/choi.png"></div>
-                    <div><h2>짱고심</h2></div>
+                    <div><strong>짱고심</strong></div>
                     <div>가입일자 : 2022/05/30</div>
                         <div class="mypage-grid mypage-ponit-project">
                             <div>
