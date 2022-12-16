@@ -69,12 +69,12 @@
     height: 40px;
     border-bottom :1px solid #AFAFAF;
 }
-.content-menu :nth-child(2){
+.content-menu :nth-child(4){
     color: #567ace;
     padding-bottom: 12px;
     border-bottom :5px solid #567ace;
 }
-.content-menu>div:not(.content-menu :nth-child(2)){
+.content-menu>div:not(.content-menu :nth-child(4)){
     position: relative;
     padding-bottom: 12px;
 }
@@ -83,21 +83,12 @@
 } 
 /*여기까지 헤더 fixed*/
 
-li{
-    list-style: none;
-    /* position: relative;
-    padding: 0px 0px 38px 18px;
-    color: rgb(158, 158, 158); */
-}
-ol{
-    padding-left: 0;
-}
 #container{
     display: flex;
     padding-top: 56px;
     flex-wrap: wrap;
     margin-bottom: 50px;
-    padding: 100px 15% 0 15%;
+    padding: 100px 23% 0 15%;
     width: 70vw;
     margin-left: 8%;
 }
@@ -106,6 +97,8 @@ ol{
     width: 100%;
     max-width: 1080px;
 }
+
+/**/
 div[class*=content-]:not(.content-editor,.content-menu, .content-stroy){
     display: flex;
     padding-bottom: 48px;
@@ -130,7 +123,7 @@ div[class*=-info] div:last-child{
     font-size: 14px !important;
     line-height: 24px !important;
 }
-div[class*=-info]+div:not(.category-select, .price-box, .story-write){
+div[class*=-info]+div:not(.email-box){
     display: flex;
     flex-direction: column;
     width: 450px;
@@ -152,16 +145,16 @@ input{
     size: 600px;
     width: 100%;
 }
-div[class*=-write] p:not(.calculate-notice>p){
+div[class*=-write] p{
     width: 100%;
-    margin: 5px 0px 0px 3px;
+    margin: 3px 0px 15px 3px;
     font-size: 12px !important;
     line-height: 20px !important;
 }
 .category-select{
     display: flex;
     justify-content: space-between;
-    width: 450px;
+    width: 650px;
     margin-top: 3px;
 } 
 select:not(.ui-datepicker-month, .ui-datepicker-year){
@@ -173,158 +166,122 @@ select:not(.ui-datepicker-month, .ui-datepicker-year){
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    width: 400px;
 }
-.price-write, .url-text, .summary-text{
+.email-write, .phone-write, .policy-agree, .calculate-write div{
     padding: 0px 10px;
     border: 1px solid #567ace;
     border-radius: 10px;
     height: 30px;
-    width: 380px;
+    width: 350px;
+    background-color: white;
+}
+.email-write{
+    width: 250px;
+}
+.calculate-write div:first-child{
+    margin-bottom: 5px;
 }
 .price-write+div{
     margin: 5px 0 0 5px;
-    --width: 80px;
+    width: 80px;
 }
-.url-blank{
-    margin-left: 3px;
-}
-.date-write{
+.content-email>div:last-child{
     display: flex;
-    justify-content: space-between;
-    width: 630px;
+    width: 390px;
+} 
+.content-email>div:last-child>input{
+    width: 15px;
+    height: 15px;
 }
-.date-start, .date-end{
+.email-box{
     display: flex;
-    justify-content: flex-start;
-    width: 400px;
-    align-items: center;
+    --flex-direction: row;
+    --justify-content: space-around;
+    width: 450px;
+    margin-top: 3px;
 }
-.start-day, .start-time, .end-day, .date-calculate{
-    margin: 0px 8px;
-    width: 40%;
-    margin-bottom: 10px;
+.email-area{
+    --flex-grow: 1;
+    padding-right: 8px;
 }
-/* .start-time>div:last-child{
-    width: 100px;
-}  */
-.start-day>p, .start-time>p{
-    margin-bottom: 4px;
-    margin-top: 0em;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: rgb(13, 13, 13);
-    display: flex;
-    font-size: 12px !important;
-    line-height: 20px !important;
-}
-.start-day>input{
-    position: relative;
-    display: inline-block;
+.email-write+div, .phone-write+div{
     width: 100%;
-    height: 30px;
-    text-align: left;
-    box-sizing: border-box;
-    background: rgb(255, 255, 255);
-    color: rgb(61, 61, 61);
-    padding: 0px 10px;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    cursor: pointer;
-}
-.ui-datepicker-trigger {						
-    cursor:pointer;
-    height: 23px;
-    margin-left: 5px;
-    --margin-top: 15px;
-}
-.start-time select{
-    margin-top: 0;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    box-sizing: inherit;
-    padding-right: 220px;
-    padding-left: 10px;
-    height: 28px;
-}
-.date-period{
-    padding: 46px 0 38px 18px;
     font-weight: 400;
-    font-size: 14px !important;
-    line-height: 24px !important;
+    margin: 8px 0px 0px;
+    font-size: 12px !important;
 }
-li:nth-child(1)::after{
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    height: 100%;
-    border-left: 1px solid rgb(228, 228, 228);
+.email-write+div>input, .phone-write+div>input{
+    width: 15px;
+    height: 10px;
+    margin-right: 0;
 }
-.date-end, .date-start{
+.email-box>div:last-child{
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    width: 70px;
+    height: 17px;
+    padding: 7px 15px;
+    text-align: center;
+}
+.phone-box>div:last-child{
+    width: 200px;
+}
+svg{
+    width: 15px;
+    height: 10px;
+}
+#show{
+    background-color: #fff;
+    border: none;
+}
+.policy-agree{
+    padding-top: 7px;
+    height: 25px;
+}
+
+
+/*정책 모달창*/
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    
+    /* 숨기기 */
+    z-index: -1;
+    opacity: 0;
+}
+.show {
+    opacity: 1;
+    z-index: 1000;
+    transition: all .5s;
+}
+.window {
     position: relative;
     width: 100%;
+    height: 100%;
 }
-input[name='deliver'], input[name='startDay']{
-    width: 80%;
-    height: 28px;
-    margin-top: 0;
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
     border: 1px solid #567ace;
-    border-radius: 10px;
-    padding-left: 10px;
-    cursor: pointer;
+    --box-shadow: 0 2px 7px #567ace(0, 0, 0, 0.3);
+    float: left;
+
+/* 임시 지정 */
+    width: 540px;
+    --height: 100px;
+
+/* 초기에 약간 아래에 배치 */
+    transform: translate(-50%, -40%);
 }
-input[name='endDay']{
-    width: 68%;
-    height: 28px;
-    margin-top: 0;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    padding-left: 10px;
-    cursor: pointer;
-}
-input[name='deliver']{
-    width: 40%;
-}
-.calculate-notice{
-    display: flex;
-    align-items: center;
-}
-.calculate-notice+div{
-    color: rgb(109, 109, 109);
-    font-size: 12px !important;
-}
-.calculate-notice>p {
-    margin : 3px 0 3px 2px;
-    font-size: 12px !important;
-}
-.content-stroy{
-    flex-wrap: wrap;
-}
-.story-box{
-    display: flex;
-}
-.story-notice{
-    display: flex;
-}
-.story-write{
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-.story-write p{
-    color: red;
-}
-.story-tip{
-    font-size: 14px !important;
-    line-height: 24px !important;
-    padding-left: 20px;
-}
-.story-notice>svg{
-    padding-top: 5px;
-}
-.story-editor{
-    width: 80%;
-    --padding: 0 15% 0 15%;
+.show .popup {
+    transform: translate(-50%, -50%);
+    transition: all .5s;
 }

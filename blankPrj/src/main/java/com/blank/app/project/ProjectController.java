@@ -58,6 +58,11 @@ public class ProjectController {
 		return "project/post/optionItem";
 	}
 	
+	@GetMapping("post/creatorInfo")
+	public String postCreatorInfo() {
+		return "project/post/creatorInfo";
+	}
+	
 	@GetMapping("created")
 	public String createdStatus() {
 		return "project/created/status";
@@ -67,6 +72,7 @@ public class ProjectController {
 	public String createdList() {
 		return "project/created/list";
 	}
+	
 	/*
 	@PostMapping("/fileupload.do")
 	@ResponseBody
