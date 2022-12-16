@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
             <div>
                 <table>
                     <tr>
-                        <th><input type="checkbox"></th>
+                        <th><label for="all-check"><div><input type="checkbox" id="all-check"></div></label></th>
                         <th>이미지</th>
                         <th>상품 정보</th>
                         <th>가격</th>
@@ -57,26 +57,32 @@
         <div class="receipt">
             <div class="cart-info">
                 <div>
-                    <span>상품 금액</span>
-                    <div class="price">
-                        <span class="val spot">72,000</span>
-                        <span class="unit">원</span>
+                    <div>
+                        <span class="bold">상품 금액</span>
+                        <div class="price">
+                            <span class="val">72,000</span>
+                            <span class="unit">원</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="bold">배송비</span>
+                        <div class="price">
+                            <span class="val">3,000</span>
+                            <span class="unit">원</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <span class="bold">총계</span>
+                        <div class="price">
+                            <span class="val spot" id="total-price">75,000</span>
+                            <span class="unit">원</span>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <span>배송비</span>
-                    <div class="price">
-                        <span class="val">3,000</span>
-                        <span class="unit">원</span>
-                    </div>
-                </div>
-                <hr>
-                <div>
-                    <span>총계</span>
-                    <div class="price">
-                        <span class="val spot">75,000</span>
-                        <span class="unit">원</span>
-                    </div>
+                <div class="order-btn-area">
+                    <div id="order-select">선택 상품 주문</div>
+                    <div id="order-all">전체 상품 주문</div>
                 </div>
             </div>
         </div>

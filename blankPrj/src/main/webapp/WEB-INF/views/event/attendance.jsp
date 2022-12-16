@@ -56,7 +56,7 @@
                                 <div class="bold">연간 개근</div>
                                 <div>
                                     <span>+</span>
-                                    <span>15,000</span>
+                                    <span>45,000</span>
                                     <span>P</span>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <div class="bold">월간 개근</div>
                                 <div>
                                     <span>+</span>
-                                    <span>2,000</span>
+                                    <span>3,000</span>
                                     <span>P</span>
                                 </div>
                             </div>
@@ -80,9 +80,35 @@
                     </div>
                 </div>
             </div>
-
-            <div></div>
-
+            <div class="content-bottom">
+                <table id="calendar">
+                  <thead>
+                    <tr class="btn-wrap clearfix">
+                      <td>
+                        <label id="prev" onclick="prev();">
+                            &#60;
+                        </label>
+                      </td>
+                      <td id="current-year-month" colspan="5"></td>
+                      <td>
+                        <label id="next" onclick="next();">
+                            &#62;
+                        </label>
+                      </td>
+                    </tr>
+                    <tr>
+                        <th class = "sun">Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                      </tr>
+                  </thead>
+                  <tbody id="calendar-body" class="calendar-body"></tbody>
+                </table>
+            </div>
         </div>
 
     </div>

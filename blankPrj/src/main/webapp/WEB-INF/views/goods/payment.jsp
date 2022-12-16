@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/payment.css">
 </head>
 <body>

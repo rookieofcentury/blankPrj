@@ -55,23 +55,23 @@
                         </table>
                     </div>
                 </div>
-                <div class="delivery-info">
+                <div>
                     <div>
                         <span class="title">배송 정보</span>
                         <button>변경</button>
                     </div>
-                    <div>받는 분</div>
-                    <div><input type="text" name="name"></div>
-                    <div>휴대폰 번호</div>
-                    <div><input type="tel" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13"></div>
-                    <div class="client-checkbox"><input type="checkbox"> 내 정보에서 받아 오기</div>
-                    <div class="address-area">주소</div>
-                    <div class="address-search"><input type="text" name="address1"><div class="search-btn">검색</div></div>
-                    <div><input type="text" name="address2"></div>
-                    <div><input type="text" name="address3"></div>
-                    <div class="client-checkbox"><input type="checkbox"> 내 정보에서 받아 오기</div>
-                    <div>배송 메시지</div>
-                    <div><input type="text" placeholder="20자 내로 작성해 주세요."></div>
+                    <div class="delivery-info">
+                        <div>받는 분</div>
+                        <div><input type="text" name="name"></div>
+                        <div>휴대폰 번호</div>
+                        <div><input type="tel" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13"></div>
+                        <div class="address-area">주소</div>
+                        <div class="address-search"><input type="text" name="address1"></div>
+                        <div><input type="text" name="address2"></div>
+                        <div><input type="text" name="address3"></div>
+                        <div>배송 메시지</div>
+                        <div><input type="text" placeholder="20자 내로 작성해 주세요."></div>
+                    </div>
                     <div>주문 상품 확인 및 결제 취소는 마이페이지에서 진행해 주세요.</div>
                     <div class="order-mypage" onclick="location.href=''">주문 배송 조회</div>
                 </div>
