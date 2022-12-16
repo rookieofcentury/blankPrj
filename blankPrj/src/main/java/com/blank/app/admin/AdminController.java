@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("admin")
 @Controller
+@RequestMapping("admin")
 public class AdminController {
 
 	//관리자 로그인(화면)
@@ -62,5 +62,31 @@ public class AdminController {
 	public String prjDetail() {
 		return "admin/project/detail";
 	}
+	
+	//신고프로젝트 접수(화면)
+	@GetMapping("projectCheck")
+	public String projectCheck() {
+		return "admin/deProject/check";
+	}
+	
+	//공지사항 등록(화면)
+	@GetMapping("noticeWrite")
+	public String noticeWrite() {
+		return "admin/notice/write";
+	}
+	
+	//자주 묻는 질문(FAQ) 답변 등록(화면)
+	@GetMapping("faqWrite")
+	public String faqWrite() {
+		return "admin/faq/write";
+	}
+	
+	//고객센터 답변 등록(화면)
+	@GetMapping("helpWrite")
+	public String helpWrite() {
+		return "admin/help/write";
+	}
+	
+
 	
 }

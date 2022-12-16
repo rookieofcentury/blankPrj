@@ -8,34 +8,40 @@
 </head>
 <style>
 
-    html{
+html{
         --line-gray : rgba(197, 197, 197, 1)
     }
 
     /* 제목 부분 */
-    .edit-board-content{
+    main .detail-board-header{
+		width: 1625px;
+	    height: 64px;
+	    color: rgba(90, 90, 90, 1);
+	    background-color: rgba(241, 241, 241, 1);
+	    border: 1px solid var(--line-gray);
+	    position: relative;
+	    display: grid;
+	    grid-template-columns: 0.17fr 1fr;
+    }
+    
+    .detail-board-header div h1{
+	    margin-left: 15px;
+	    transform: translate(0, -20%)
+    }
+    
+    .detail-board-header div h2{
+        font-weight: normal;
+    }
+    
+    .detail-board-content{
         width: 1380px;
+        height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        
-    }
-
-    main .edit-board-header{
-        width: 1625px;
-        height: 55px;
-        color: rgba(90, 90, 90, 1);
-        background-color: rgba(241, 241, 241, 1);
-        border: 1px solid var(--line-gray);
-        position: relative;
-    }
-
-    .edit-board-header div h1{
-        margin-left: 15px;
-        transform: translate(0, -20%)
     }
 
     /* 창 닫기 */
-    .member-edit-close{
+    .member-detail-close{
         width: 150px;
         height: 30px;
         border: 1px solid rgba(197, 197, 197, 1);
@@ -48,28 +54,28 @@
         margin-top: 55px;
     }
     
-    .member-edit-close img{
-    	width: 13px;
-    	height: 13px;
+    .member-detail-close img{
+    	width: 11px;
+    	height: 11px;
     	cursor: pointer;
     }
 
     /* 리스트 부분 */
-    .edit-board{
+    .detail-board{
         width: 1625px;
-        height: 875px;
+        height: 2550px;
         border: 1px solid var(--line-gray);
         background-color: rgba(237, 236, 236, 1);
     }
 
-    .edit-list{
+    .detail-list{
         width: 1580px;
-        height: 630px;
+        height: 2400px;
         border: 1px solid var(--line-gray);
         background-color: white;
         display: grid;
-        grid-template-columns: 1fr 1fr 5fr;
-        grid-template-rows: repeat(11, 54px);
+        grid-template-columns: 1fr 3fr 4fr;
+        grid-template-rows: repeat(7, 54px);
         text-align: left;
         margin: 0 auto;
         font-size: 16px;
@@ -77,179 +83,131 @@
         border-radius: 0px 5px 5px 5px;
     }
 
-    .edit-title{
+    .detail-title{
         text-align: center;
     }
 
-    .edit-list div{
+    .detail-list div{
         border-bottom: 1px solid var(--line-gray);
     }
 
-    .edit-list div:last-child img{
+    .detail-list div:last-child img{
         width: 18px;
         height: 18px;
     }
 
-    .edit-list .edit-list-top{
-        grid-column: span 10;
-        text-align: left;
-        margin-left: 10px;
-        border: none;
-    }
-
-    .edit-list input{
-        border: none;
+    .detail-list .detail-content-style{
         outline: none;
-        font-size: 16px
+        font-size: 16px;
     }
 
-    .check-email-btn{
-        width: 90px;
-        height: 29px;
-        border-radius: 10px;
-        font-size: 15px;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* 수정 버튼 부분 */
-    .edit-list div:last-child,
-    .edit-list .phone-number,
-    .edit-list .bank-name,
-    .edit-list .account-number{
+    /* 밑줄 제거 */
+    .detail-list div:last-child{
         border: none;
     }
 
-    .edit-submit{
-        width: 90px;
-        height: 43px;
+    .detail-submit-no-btn{
+        width: 70px;
+        height: 35px;
         color: white;
-        border: none;
         font-size: 16px;
         border-radius: 7px;
         background-color: rgba(86, 122, 206, 1);
         cursor: pointer;
+        margin-top: 5%;
+    }
+
+    .detail-submit-ok-btn{
+        width: 70px;
+        height: 35px;
+        color: white;
+        font-size: 16px;
+        border-radius: 7px;
+        background-color: rgba(255, 94, 94, 1);
+        cursor: pointer;
+        margin-top: 5%;
     }
 
 </style>
 
 <body>
 
-    <div class="edit-board-content">
-
-        <div><%@ include file = "/WEB-INF/views/admin/common/menu.jsp" %></div>
-        
-        <main>
-    
-            <div class="edit-board-header">
-                <div>
-                    <h1>회원 관리</h1>
-                </div>
-            </div>
-            
-            <div class="edit-board">
-                
-                <div class="member-edit-close">
-                    회원 정보 수정
-                    <img src="../resources/images/admin/close.png">
-                </div>
-                
-                <div class="edit-list">
-        
-                    <div class="edit-title">회원번호</div>
-                    <div>1</div>
-                    <div></div>
-        
-                    <div class="edit-title">닉네임</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="nick01"
-                            name="nick"
-                        />
-                    </div>
-                    <div></div>
-        
-                    <div class="edit-title">핸드폰 번호</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="010-0000-0000"
-                            name="phone"
-                        />
-                    </div>
-                    <div></div>
-        
-                    <div class="edit-title">이메일</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="user01@gmail.com"
-                            name="email"
-                        />
-                    </div>
-                    <div><button class="check-email-btn">중복확인</button></div>
-        
-                    <div class="edit-title">포인트</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="20,000p"
-                            name="point"
-                        />
-                    </div>
-                    <div></div>
-        
-                    <div class="edit-title">은행명</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="국민"
-                            name="bank"
-                        />
-                    </div>
-                    <div></div>
-        
-                    <div class="edit-title">계좌번호</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="668801-01-621564"
-                            name="account"
-                        />
-                    </div>
-                    <div></div>
-        
-                    <div class="edit-title">예금주</div>
-                    <div>
-                        <input
-                            type="text"
-                            value="홍현정"
-                            name="depositor"
-                        />
-                    </div>
-                    <div></div>
-        
-                    <div class="edit-title">계정상태</div>
-                    <div>가입</div>
-                    <div></div>
-        
-                    <div class="edit-title">가입일</div>
-                    <div>2022-12-12</div>
-                    <div></div>
-        
-                    <div>
-                        <input type="submit" value="수정" class="edit-submit"/>
-                    </div>
-        
-        
-                </div>
-    
-            </div>
-    
-        </main>
-    
-    </div>
+	<div class="detail-board-content">
+	
+	    <div><%@ include file = "/WEB-INF/views/admin/common/menu.jsp" %></div>
+	    
+	    <main>
+	
+	        <div class="detail-board-header">
+	            <div>
+	                <h1>프로젝트 관리</h1>
+	            </div>
+	            <div>
+	                <h2>프로젝트</h2>
+	            </div>
+	        </div>
+	        
+	        <div class="detail-board">
+	            
+	            <div class="member-detail-close">
+	                                프로젝트 정보
+	                <img src="../resources/images/admin/close.png">
+	            </div>
+	            
+	            <div class="detail-list">
+	    
+	                <div class="detail-title">프로젝트 번호</div>
+	                <div>1</div>
+	                <div></div>
+	    
+	                <div class="detail-title">제목</div>
+	                <div class="detail-content-style">
+	                	노력은 누구나 하잖아요? 혼을 갈아 넣은 업그레이드 프리미엄 안경
+	                </div>
+	                <div></div>
+	    
+	                <div class="detail-title">카테고리</div>
+	                <div class="detail-content-style">패션/잡화</div>
+	                <div></div>
+	    
+	                <div class="detail-title">대표이미지</div>
+	                <div class="detail-content-style">image.jpg</div>
+	                <div></div>
+	    
+	                <div class="detail-title">목표금액</div>
+	                <div class="detail-content-style">500,000원</div>
+	                <div></div>
+	    
+	                <div class="detail-title">펀딩일정</div>
+	                <div class="detail-content-style">2022-11-24 ~ 2022-12-15</div>
+	                <div></div>
+	    
+	                <div class="detail-title">페이지 주소</div>
+	                <div class="detail-content-style">www.blank.com/og=glasses</div>
+	                <div></div>
+	    
+	                <div class="detail-title project">프로젝트 요약</div>
+	                <div class="detail-content-style">
+						누적 펀딩률 8,988%, 평점 4.5점! 노력을 넘어 안경을 위해 '혼' 을 담은 세미콜론의 와디즈 한정 두 번째 혼 프로젝트 서포터 의견을 듣고 업그레이드 되어 돌아왔습니다
+	                </div>
+	                <div></div>
+	    
+	                <div class="detail-title">프로젝트 스토리</div>
+	                <div class="detail-content-style">제대로된 설계. 좋은 소재와 합리적인 가격 모두를 만족하는 안경은 없을까?</div>
+	                <div></div>
+	    
+	                <div id="detail-submit">
+	                    <input type="submit" value="반려" class="detail-submit-no-btn"/>
+	                    <input type="submit" value="승인" class="detail-submit-ok-btn"/>
+					</div>
+	    
+	            </div>
+	
+	        </div>
+	
+	    </main>
+	
+	</div>
     
 </body>
 </html>

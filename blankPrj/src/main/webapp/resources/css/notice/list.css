@@ -1,0 +1,50 @@
+.notice-header h1{
+    margin: 0;
+    margin-left: 530px;
+    font-weight: normal;
+}
+
+main{
+    width: 830px;
+    height: 900px;
+    display: grid;
+    grid-template-rows: repeat(10, 80px);
+    border-radius: 5px;
+    border: 1px solid rgb(172, 171, 171);
+    margin-left: 540px;
+    margin-top: 20px;
+}
+
+.notice-list div {
+    border-bottom: 1px solid white;
+    margin: 20px;
+    margin-left: 30px;
+}
+
+.notice-list .notice-list-contents{
+    border-bottom: 1px solid rgb(172, 171, 171);
+    margin: 0;
+    height: 70px;
+}
+
+.notice-list .notice-list-contents div:first-child{
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: rgb(71, 71, 71);
+}
+
+.notice-list .notice-list-contents div:last-child{
+    margin-top: 0;
+    font-size: 13px;
+    color: rgb(150, 148, 148);
+}
+
+.search{
+    margin: 15px;
+    margin-left: 45%;
+}
+
+.search input{
+    width: 290px;
+    height: 35px;
+}

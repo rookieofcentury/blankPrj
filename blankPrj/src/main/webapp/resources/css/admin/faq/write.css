@@ -1,0 +1,122 @@
+html{
+    --line-gray : rgba(197, 197, 197, 1)
+}
+
+/* 제목 부분 */
+main .write-board-header{
+    width: 1625px;
+    height: 64px;
+    color: rgba(90, 90, 90, 1);
+    background-color: rgba(241, 241, 241, 1);
+    border: 1px solid var(--line-gray);
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.17fr 1fr;
+}
+
+.write-board-header div h1{
+    margin-left: 15px;
+    transform: translate(0, -20%)
+}
+
+.write-board-header div h2{
+    font-weight: normal;
+}
+
+.write-board-content{
+    width: 1380px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* 창 닫기 */
+.faq-write-close{
+    width: 195px;
+    height: 30px;
+    border: 1px solid rgba(197, 197, 197, 1);
+    border-bottom: none;
+    border-radius: 5px 5px 0px 0px;
+    background-color: rgba(237, 237, 237, 1);
+    text-align: center;
+    padding-top: 10px;
+    margin-left: 21px;
+    margin-top: 55px;
+}
+
+.faq-write-close img{
+    width: 11px;
+    height: 11px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* 리스트 부분 */
+.write-board{
+    width: 1625px;
+    height: 868px;
+    border: 1px solid var(--line-gray);
+    background-color: rgba(237, 236, 236, 1);
+}
+
+.write-list{
+    width: 1580px;
+    height: 710px;
+    border: 1px solid var(--line-gray);
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr 1fr;
+    grid-template-rows: 54px 54px 54px auto;
+    text-align: left;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 55px;
+    border-radius: 0px 5px 5px 5px;
+}
+
+.write-title{
+    text-align: center;
+}
+
+.write-list div{
+    border-bottom: 1px solid var(--line-gray);
+}
+
+.write-list div:last-child img{
+    width: 18px;
+    height: 18px;
+}
+
+.write-list .write-list-top{
+    grid-column: span 10;
+    text-align: left;
+    margin-left: 10px;
+    border: none;
+}
+
+.write-list input{
+    border: none;
+    outline: none;
+    font-size: 16px
+}
+
+.write-list .content-style{
+    border: none;
+}
+
+#write-submit{
+    border: none;
+    grid-column: span 3;
+    height: 43px;
+    margin-left: 55%;
+}
+
+.write-submit-btn{
+    width: 70px;
+    height: 35px;
+    color: white;
+    font-size: 16px;
+    border-radius: 7px;
+    background-color: rgba(86, 122, 206, 1);
+    cursor: pointer;
+    margin-top: 25%;
+}
