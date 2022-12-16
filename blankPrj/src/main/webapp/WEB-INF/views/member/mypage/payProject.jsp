@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>후원한 프로젝트</title>
+<title>후원 프로젝트</title>
 <link rel="stylesheet" href="/blank/resources/css/member/payProject.css">
-<script src="https://ajax.googleapis.co m/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
@@ -17,39 +17,115 @@
 			<div class="content-container">
 				<nav id="nav">
 					<ul>
-						<li>결제대기</li>
-						<li>결제완료</li>
-						<li>결제실패</li>
+						<li>후원 예정 프로젝트</li>
+						<li>후원한 프로젝트</li>
+						<li>후원 취소된 프로젝트</li>
+						<div class="line"></div>
 					</ul>
-					<div class="line"></div>
 				</nav>	
 				<div id="contents">
 					<div id="contents__list">
-					  <div id="contents__item">
-						<ul>
-						  <li>강아지</li>
-						  <li>고양이</li>
-						  <li>토끼</li>
-						  <li>햄스터</li>
-						</ul>
-					  </div>
-					  <div id="contents__item">
-						<ul>
-						  <li>JavaScript 입문</li>
-						  <li>리액트를 다루는 기술</li>
-						  <li>시작하세요! 도커</li>
-						  <li>JavaScript 리팩토링</li>
-						</ul>
-					  </div>
+						<div id="contents__item" class="content-first">
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+						</div>
+						<div id="contents__item" class="content-second">
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+						</div>
+						<div id="contents__item" class="content-third">
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+							<div class="project-info">
+								<div>프로젝트사진</div>
+								<div>
+									<div>후원일</div>
+									<div>프로젝트명</div>
+									<div>후원내역</div>
+								</div>
+								<div>
+									<div>17,800원 결제예정</div>
+									<div>결제예정일</div>
+								</div>
+							</div>
+						</div>
 				
 				
 					</div>
-				  </div>
+				</div>
 			
 			</div>
 		</div>
 	</div>	
 <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
+
 </body>
-<script src="/blank/resources/js/member/payAddr.js"></script>
+<script src="/blank/resources/js/member/payProject.js"></script>
+
 </html>
