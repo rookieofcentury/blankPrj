@@ -44,5 +44,11 @@ public class GoodsController {
 	public String order() {
 		return "goods/order";
 	}
+	
+	// 굿즈 재고 알림 약관 동의 화면 도출
+	@GetMapping("/stockalert")
+	public String stockalert() {
+		return "goods/stockalert";
+	}
 
 }
