@@ -6,9 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/blank/resources/css/project_post/defaultInfo.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+
+<!-- 제이쿼리 -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<!-- 날짜위젯 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>;
+
 <<script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
 <!--<script src = "${path}/ckeditor/ckeditor.js"></script> -->
 <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
@@ -41,7 +46,7 @@
             <div class="content-title">
                 <div class="title-info">
                     <div>제목</div>
-                    <div>프로젝트의 주제, 창작물의 특징이 드러나는 멋진 제목을 붙여주세요.</div>
+                    <div>프로젝트의 주제, 특징이 드러나는 제목을 붙여주세요.</div>
                 </div>
                 <div class="title-write">
                     <div><input type="text" placeholder="내용 입력" name="title"></div>
@@ -98,6 +103,7 @@
                                         <option>12시</option>
                                         <option>13시</option>
                                     </select>
+                                    <!-- <div>dd</div> -->
                                 </div>
                             </div>
                             <div class="date-period">
@@ -140,7 +146,7 @@
             <div class="content-url">
                 <div class="url-info">
                     <div>프로젝트 페이지 주소</div>
-                    <div>프로젝트페이지로 접속하기 위한 웹페이지 주소(URL)을 설정해 주세요.</div>
+                    <div>프로젝트페이지로 접속하기 위한 URL을 설정해 주세요.</div>
                 </div>
                 <div class="url-write">
                     <div class="url-blank">www.blank.com/</div>
@@ -151,7 +157,7 @@
             <div class="content-summary">
                 <div class="summary-info">
                     <div>프로젝트 요약</div>
-                    <div>프로젝트를 빠르게 이해할 수 있도록 명확하게 간략하게 소개해 주세요.</div>
+                    <div>프로젝트를 빠르게 이해할 수 있도록 간략하게 소개해 주세요.</div>
                 </div>
                 <div class="summary-write">
                     <div class="summary-text"><input type="text" placeholder="내용 입력" name="summery"></div>

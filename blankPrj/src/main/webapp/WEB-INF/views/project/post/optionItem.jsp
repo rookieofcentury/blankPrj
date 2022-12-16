@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/blank/resources/css/project_post/optionItem.css">
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
 </head>
 <body>
 
@@ -49,6 +49,99 @@
             </div>
         </div>
     </div>
+    <div id="container">
+        <div id="content">
+            <div class="content-box">
+                <div class="preview-box">
+                    <div class="preview-set">
+                        <div>내가 만든 세트</div>
+                        <% if(1 < 2){%>
+                            <ul>
+                                <li class="set-list">
+                                    <button type="button">
+                                        <div class="set-buttons">
+                                            <strong>과일</strong>
+                                        </div>
+                                        <ol type="1" class="set-item">
+                                            <li>사과</li>
+                                            <li>바나나</li>
+                                        </ol>
+                                    </button>
+                                    <button type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        <%}else{ %>
+                            <div class="set-none">만든 아이템이 없습니다.</div>
+                        <%}%>
+                    </div>
+                </div>
+                <div class="making-box">
+                    <div class="making-set">
+                        <div>
+                            <div class="post-set">
+                                <div class="set-notice">
+                                    <strong>아이템명</strong>
+                                    <div>아이템은 선물에 포함되는 구성 품목을 말합니다. 세트를 구성할 아이템을 만들어 보세요.</div>
+                                </div>
+                                <div class="set-option">
+                                    <input placeholder="아이템을 입력해 주세요" name="itemName">
+                                    <span>10글자 남음</span>
+                                </div>
+                            </div>
+                            <div class="post-set">
+                                <div class="set-notice">
+                                    <strong>옵션 추가</strong>
+                                </div>
+                                <div class="add-option">
+                                    <p class="none" onclick='noneOption()'>없음</p>
+                                    <p class="add" onclick='selectOption()'>추가</p>
+                                </div>
+                            </div>
+                            <% if(1 < 2){%> <!--추가 클릭시 보이게-->
+                                <div class="textbox">
+                                    <textarea name="addOption" cols="77" rows="5" placeholder="콤마(,)로 구분해서 작성하시면 항목이 생성됩니다.&#13;&#10; ex) 블랙, 화이트, 레드"></textarea>
+                                </div>
+                            <% } %>
+                            <div class="button-submit"><input type="submit" value="저장" name="save"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // var count = 1;
+        // function selectOption() {
+        //     if(count % 2 === 0){
+        //     $('.textbox').css('visibility', 'visible');
+        //     $('.add').css("border-width", "5px");
+        //     $('.none').css("border-width", "1px");
+        //     clickCounter++;
+        //     }
+        //     return (count % 2 === 0)
+        // }
+
+        function noneOption() {
+            $('.textbox').css('visibility', 'hidden');
+            $('.none').css("border-width", "5px");
+            $('.add').css("border-width", "3px");
+        }
+
+        function selectOption(){
+            if($('.textbox').css('visibility', 'hidden')){
+                $('.textbox').css('visibility', 'visible');
+                $('.add').css("border-width", "5px");
+                $('.none').css("border-width", "1px");
+            }else if($('.textbox').css('visibility', 'visible')){
+                $('.textbox').css('visibility', 'hidden');
+                $('.add').css("border-width", "1px");
+            }
+        }
+    </script>
 </body>
 </html>
