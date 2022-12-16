@@ -22,17 +22,27 @@ public class MemberController {
 	
 	
 	//마이페이지 화면
-	@GetMapping("mypage")
-	public String mypage() {
+	@GetMapping("mypage/editProfile")
+	public String mypageEditProfile() {
 		return "member/mypage/editProfile";
 	}
 	
 	//마이페이지 결제수단 / 배송지 화면
-	@GetMapping("payAddr")
-	public String pay() {
+	@GetMapping("mypage/payAddr")
+	public String mypagePayAddr() {
 		return "member/mypage/payAddr";
 	}
 	
+	//마이페이지 결제수단 / 배송지 화면
+	@GetMapping("mypage/payProject")
+	public String mypagePayProject() {
+		return "member/mypage/payProject";
+	}
 	
+	//마이페이지 결제수단 / 배송지 화면
+		@GetMapping("mypage/likeProject")
+		public String mypageLikeProject() {
+			return "member/mypage/likeProject";
+		}
 	
 }

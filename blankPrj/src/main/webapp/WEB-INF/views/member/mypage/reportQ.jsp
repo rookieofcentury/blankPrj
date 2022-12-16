@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>결제 / 배송지</title>
-<link rel="stylesheet" href="/blank/resources/css/member/payAddr.css">
+<link rel="stylesheet" href="/blank/resources/css/member/reportQ.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
@@ -90,7 +90,7 @@
 	</div>
 </div>
 </body>
-<script src="/blank/resources/js/member/payAddr.js"></script>
+<script src="/blank/resources/js/member/reportQ.js"></script>
 <script>
 	const modalClick = $('.modal-notice');
 

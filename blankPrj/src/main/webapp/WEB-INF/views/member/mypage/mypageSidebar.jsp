@@ -12,17 +12,17 @@
         <div class="mypage-side-container">
             <div class="sidebar-container">
                 <div class="user-info">
-                    <div><img src="../resources/images/member/choi.png"></div>
+                    <div><img src="/blank/resources/images/member/choi.png"></div>
                     <div><strong>짱고심</strong></div>
                     <div>가입일자 : 2022/05/30</div>
                         <div class="mypage-grid mypage-ponit-project">
                             <div>
-                                <div><img src="../resources/images/member/p.png"></div>
+                                <div><img src="/blank/resources/images/member/p.png"></div>
                                 <div>포인트</div>
                                 <div>1004</div>
                             </div>
                             <div>
-                                <div><img src="../resources/images/member/project.png"></div>
+                                <div><img src="/blank/resources/images/member/project.png"></div>
                                 <div>후원한프로젝트</div>
                                 <div>1004개</div>
                             </div>
@@ -30,7 +30,7 @@
                 </div>
                     <div class="mypage-grid mypage-menu">
                         <div><a href="/blank/member/mypage/editProfile">회 원 정 보 수 정</a></div>
-                        <div><a href="/blank/member/mypage/pay-addr">결 제 수 단/배 송 지</a></div>
+                        <div><a href="/blank/member/mypage/payAddr">결 제 수 단/배 송 지</a></div>
                         <div><a href="/blank/member/mypage/payProject">후 원 프 로 젝 트</a></div>
                         <div><a href="/blank/member/mypage/likeProject">관 심 프 로 젝 트</a></div>
                         <div><a href="/blank/member/mypage/sub-question">신 고/문 의 내 역</a></div>

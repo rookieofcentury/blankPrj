@@ -17,7 +17,7 @@
 			<div class="content-container">
 				<div class="member-info-up">
 					<div>사진</div>
-					<div>진짜사진</div>
+					<div><img src="/blank/resources/images/member/choi.png"></div>
 					<div><button class="change-btn">사진 변경</button></div>
 				</div>
 				<div class="member-info-down">
