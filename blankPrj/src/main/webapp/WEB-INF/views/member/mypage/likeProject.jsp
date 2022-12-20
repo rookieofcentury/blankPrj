@@ -7,7 +7,7 @@
 <title>관심 프로젝트</title>
 <link rel="stylesheet" href="/blank/resources/css/member/likeProject.css">
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
@@ -15,12 +15,23 @@
 		<div class="mypage-container">
 			<div><%@ include file = "/WEB-INF/views/member/mypage/mypageSidebar.jsp" %></div>
 			<div class="content-container">
-				<div class="member-info-up">
-					<div>관심 프로젝트</div>
+				<div class="like-search">
+					<div><h2>관심 프로젝트</h2></div>
+					<div>
+						<form action="" method="get">
+							<select name="category">
+							   <option value="title"></option>
+							   <option value="content">내용</option>
+							</select>
+							<input type="text" name="keyword">
+							<input type="submit" value="검색"> 
+						 </form>
+					  
+					</div>
 				</div>
 				<div class="focus-content">
 					<div>
-						<span class="blank-title">짱고심님이 관심가지는 프로젝트</span>
+						<span class="number">1004개</span>
 					</div>
 					<div class="focus-project-list">
 						<div class="focus-project-item">
