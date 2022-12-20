@@ -210,6 +210,9 @@ option:hover {
     padding-left: 30px;
     cursor: pointer;
 }
+.fa-house {
+    color: #767675;
+}
 .goods-info {
     display: flex;
     width: 100%;

@@ -22,7 +22,6 @@
                         <span>24,000</span>
                         <span>리뷰 <span>3</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span>5.0</span></span>
                     </div>
-                    
                 </div>
                 <div class="review-modal-score">
                     <span>상품은 어떠셨나요?</span>
