@@ -65,7 +65,7 @@ main .write-board-header{
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr 1fr;
-    grid-template-rows: 54px 54px 54px auto;
+    grid-template-rows: 54px 54px 54px 54px auto;
     text-align: left;
     margin: 0 auto;
     font-size: 16px;
@@ -101,6 +101,14 @@ main .write-board-header{
 
 .write-list .content-style{
     border: none;
+}
+
+.category{
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid black;
+    outline: none;
 }
 
 #write-submit{

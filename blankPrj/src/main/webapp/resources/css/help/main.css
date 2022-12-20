@@ -1,0 +1,94 @@
+main{
+    width: 890px;
+    height: 750px;
+    /* border: 1px solid red; */
+    margin-left: 27%;
+}
+
+.help-header{
+    height: 130px;
+    text-align: center;
+    /* border: 1px solid red; */
+}
+
+.help-header .title{
+    font-size: 20px;
+    margin-top: 60px;
+}
+
+.search{
+    width: 260px;
+    height: 30px;
+    border: 1px solid rgba(112, 112, 112, 1);
+    border-radius: 1px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 36%;
+    margin-top: 10px;
+}
+
+.search input{
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.search input[type="image"]{
+    width: 20px;
+    margin-top: 3px;
+    margin-left: 20px;
+}
+
+.help-middle{
+    height: 260px;
+}
+
+.help-middle .title{
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.faq-contents{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+.faq-contents div{
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    border: 1px solid rgb(150, 150, 150);
+    border-radius: 5px;
+}
+
+.help-bottom{
+    height: 300px;
+    /* border: 1px solid red; */
+}
+
+.help-bottom .title{
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.inquiry-contents{
+    width: 760px;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr;
+    margin-left: 7%;
+}
+
+.inquiry-contents div{
+    margin: 5px;
+}
+
+.more{
+    text-align: right;
+    margin-right: 8%;
+    margin-top: 5px;
+}
