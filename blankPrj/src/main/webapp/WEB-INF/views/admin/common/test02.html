@@ -8,67 +8,202 @@
 </head>
 <style>
 
-.notice-header h1{
-    text-align: center;
+html{
+    --line-gray : rgba(197, 197, 197, 1)
 }
 
-.notice-list{
-    width: 760px;
-    height: auto;
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.faq-board-content{
+    width: 1380px;
     display: grid;
-    border: 1px solid blue;
-    margin-left: 20%;
+    grid-template-columns: 1fr 1fr;
 }
 
-.notice-list div{
-    border-bottom: 1px solid red;
+main .faq-board-header{
+    width: 1625px;
+    height: 64px;
+    color: rgba(90, 90, 90, 1);
+    background-color: rgba(241, 241, 241, 1);
+    border: 1px solid var(--line-gray);
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.17fr 1fr;
+}
+
+.faq-board-header div h1{
+    margin-left: 15px;
+    transform: translate(0, -20%)
+}
+
+.faq-board{
+    width: 1625px;
+    height: 868px;
+    border: 1px solid var(--line-gray);
+    background-color: rgba(237, 236, 236, 1);
+}
+
+.faq-search{
+    width: 1580px;
+    height: 45px;
+    margin-left: 23px;
+    display: grid;
+    margin-top: 50px;
+    grid-template-columns: 1fr 2fr 1fr 10fr;
+}
+
+.faq-search .category{
+    border: 1px solid var(--line-gray);
+    border-radius: 5px 0px 0px 5px;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(242, 242, 242, 1);
+    outline: none;
+}
+
+.faq-search input{
+    width: 280px;
+    height: 40px;
+    border: none;
+    border-top: 1px solid var(--line-gray);
+    border-bottom: 1px solid var(--line-gray);
+    outline: none;
+}
+
+.faq-search .search-icon{
+    width: 40px;
+    height: 42px;
+    border: 1px solid var(--line-gray);
+    border-radius: 0px 5px 5px 0px;
+}
+
+#faq-search-form div button{
+    width: 80px;
+    height: 45px;
+    font-size: 16px;
+    background-color: rgba(214, 214, 214, 1);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+}
+
+#faq-search-form{
+    display: grid;
+}
+
+#faq-search-form .faq-search input[type="image"]{
+    width: 25px;
+    height: 25px;
+    border: none;
+    display: block;
+    margin: auto;
+    margin-top: 8px;
+}
+
+.faq-list{
+    width: 1580px;
+    height: 710px;
+    border: 1px solid var(--line-gray);
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 3fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(13, 54px);
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 55px;
+    border-radius: 5px;
+}
+
+.faq-list div{
+    border-bottom: 1px solid var(--line-gray);
+}
+
+.faq-list div:last-child img{
+    width: 18px;
+    height: 18px;
+}
+
+.faq-list .faq-list-top{
+    grid-column: span 8;
+    text-align: left;
+    margin-left: 10px;
+    border: none;
 }
 
 </style>
 
 <body>
 
-    <%@ include file = "/WEB-INF/views/common/header.jsp" %>
-
-    <header class="notice-header">
-        <h1>공지사항</h1>
-    </header>
-	
-    <main class="notice-list">
-
-        <div>
-            블랭크 창작자 대모집(~23년 1월)
-            <br>
-            2022-12-04
-        </div>
-
-        <div>
-            블랭크 창작자 대모집(~23년 1월)
-            <br>
-            2022-12-04
-        </div>
-
-        <div>
-            블랭크 창작자 대모집(~23년 1월)
-            <br>
-            2022-12-04
-        </div>
-
-        <div>
-            블랭크 창작자 대모집(~23년 1월)
-            <br>
-            2022-12-04
-        </div>
-
-        <div>
-            블랭크 창작자 대모집(~23년 1월)
-            <br>
-            2022-12-04
-        </div>
-
-    </main>
-
-<%@ include file = "/WEB-INF/views/common/footer.jsp" %>
+    <div class="faq-board-content">
+    
+        <div><%@ include file = "/WEB-INF/views/admin/common/menu.jsp" %></div>
+        
+        <main>
+        
+                <div class="faq-board-header">
+                    <div>
+                        <h1>헬프센터 관리</h1>
+                    </div>
+                    <div>
+                        <h2>자주 묻는 질문(FAQ)</h2>
+                    </div>           
+                </div>
+                
+                <div class="faq-board">
+        
+                    <form action="" method="get" id="faq-search-form">
+        
+                        <div class="faq-search">
+        
+                            <select class="category">
+                                <option value="title">제목</option>
+                                <option value="name">작성자</option>
+                            </select
+                            ><input type="text" name="keyword">
+                            <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
+                            <a href=""><button>작성</button></a>
+                            
+                        </div>
+        
+        
+                    </form>
+            
+                    <div class="faq-list">
+            
+                        <div class="faq-list-top">전체 FAQ 64개</div>
+            
+                        <div>번호</div>
+                        <div>제목</div>
+                        <div>카테고리</div>
+                        <div>내용</div>
+                        <div>작성자</div>
+                        <div>작성날짜</div>
+                        <div>삭제 여부</div>
+                        <div>수정</div>
+                
+                        <div>1</div>
+                        <div>[FAQ] 블랭크(blank)는 무엇인가요?</div>
+                        <div>회원</div>
+                        <div>안녕하세요. 블랭크(blank)는 영어로는 빈 공간이...</div>
+                        <div>admin01</div>
+                        <div>2022-12-04</div>
+                        <div>N</div>
+                        <div><a href=""><img src="../resources/images/admin/edit.png"></a></div>
+            
+                    </div>
+        
+                </div>
+    
+        </main>
+    
+    </div>
     
 </body>
 </html>

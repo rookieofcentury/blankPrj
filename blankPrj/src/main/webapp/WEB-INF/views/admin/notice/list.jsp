@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,14 +55,17 @@
                 <div>작성날짜</div>
                 <div>삭제 여부</div>
                 <div>수정</div>
-        
-                <div>1</div>
-                <div>[이용 안내] 시스템 점검 일정 안내</div>
-                <div>안녕하세요. 블랭크 입니다. 언제나 블랭크를...</div>
-                <div>admin01</div>
-                <div>2022-12-04</div>
-                <div>N</div>
-                <div><a href=""><img src="../resources/images/admin/edit.png"></a></div>
+                
+        		<c:forEach items="${voList}" var="vo">
+	                <div>${vo.no}</div>
+	                <div>${vo.title}</div>
+	                <div>${vo.content}</div>
+	                <div>${vo.adminNo}</div>
+	                <div>${vo.writeDate}</div>
+	                <div>${vo.deleteYn}</div>
+	                <div><a href=""><img src="../resources/images/admin/edit.png"  class="edit-img"></a></div>
+        		</c:forEach>
+
     
             </div>
 

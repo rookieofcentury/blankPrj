@@ -11,7 +11,7 @@
         <div>BLANK</div>
         <div>
             <img src="../resources/images/admin/admin-profile.png">
-            <br>님, 안녕하세요.
+            <br>${loginAdmin.adminId} 님, 안녕하세요.
         </div>
     </header>
 
@@ -20,7 +20,7 @@
             <h1><img src="../resources/images/admin/member-admin.png">회원 관리</h1>
             <ul>
                 <li>
-                    <a href="">회원 관리</a>
+                    <a href="/blank/admin/member">회원 관리</a>
                 </li>
             </ul>
         </div>
@@ -28,10 +28,10 @@
             <h1><img src="../resources/images/admin/project-admin.png">프로젝트 관리</h1>
             <ul>
                 <li>
-                    <a href="">프로젝트</a>
+                    <a href="/blank/admin/project">프로젝트</a>
                 </li>
                 <li>
-                    <a href="">신고된 프로젝트</a>
+                    <a href="/blank/admin/deProject">신고된 프로젝트</a>
                 </li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
             <h1><img src="../resources/images/admin/notice-admin.png">공지사항 관리</h1>
             <ul>
                 <li>
-                    <a href="">공지사항</a>
+                    <a href="/blank/admin/notice">공지사항</a>
                 </li>
             </ul>
         </div>
@@ -47,10 +47,10 @@
             <h1><img src="../resources/images/admin/help-admin.png">헬프센터 관리</h1>
             <ul>
                 <li>
-                    <a href="">자주 묻는 질문(FAQ)</a>
+                    <a href="/blank/admin/faq">자주 묻는 질문(FAQ)</a>
                 </li>
                 <li>
-                    <a href="">고객센터</a>
+                    <a href="/blank/admin/help">고객센터</a>
                 </li>
             </ul>
         </div>

@@ -48,6 +48,18 @@
 	                <div></div>
                     <div></div>
 	    
+					<div class="write-title">카테고리</div>
+					<div>
+						<select class="category">
+							<option value="member">회원</option>
+							<option value="pay">결제</option>
+							<option value="deliver">배송</option>
+							<option value="etc">기타</option>
+						</select>
+					</div>
+					<div></div>
+					<div></div>
+
 	                <div class="write-title content-style">내용</div>
 	                <div class="content-style">안녕하세요. 블랭크 입니다.
                         블랭크(Blank)는 영어로는 빈 공간이라는 뜻으로 독일어로는 “빛나다”라는 뜻을 가지고 있습니다.

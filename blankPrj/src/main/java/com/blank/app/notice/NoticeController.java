@@ -14,4 +14,10 @@ public class NoticeController {
 		return "notice/list";
 	}
 	
+	//[회원] 공지사항 상세페이지(화면)
+	@GetMapping("detail")
+	public String detail() {
+		return "notice/detail";
+	}
+	
 }

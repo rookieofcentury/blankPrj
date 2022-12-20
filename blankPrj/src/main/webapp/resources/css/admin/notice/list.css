@@ -115,7 +115,7 @@ main .notice-board-header{
     border-bottom: 1px solid var(--line-gray);
 }
 
-.notice-list div:last-child img{
+.notice-list div img{
     width: 18px;
     height: 18px;
 }

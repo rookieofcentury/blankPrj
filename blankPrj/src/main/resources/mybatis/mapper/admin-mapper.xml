@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+
+	<select id="login" resultType="AdminVo">
+		SELECT ID AS ADMIN_ID, PWD AS ADMIN_PWD
+		FROM ADMIN
+		WHERE ID = #{adminId}
+		AND PWD = #{adminPwd}
+	</select>
+
+	<select id="selectList" resultType="NoticeVo">
+	SELECT N.NO, N.TITLE, CONCAT(SUBSTR(CONTENT, 1, 28),'...') AS CONTENT, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, N.DELETE_YN, A.ID AS ADMIN_NO
+	FROM NOTICE N
+	INNER JOIN ADMIN A
+	ON A.NO = N.ADMIN_NO
+	
+<!-- 		SELECT NO, ADMIN_NO, TITLE, CONCAT(SUBSTR(CONTENT, 1, 28),'...') AS CONTENT, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, DELETE_YN
+		FROM NOTICE -->
+	</select>
+
+</mapper>
