@@ -72,11 +72,11 @@
 			</div>
 		</div>
         <div class="content-navigation">
-            <a href="#">프로젝트 계획</a>
-            <a href="#">새소식 4 </a>
+            <a href="/blank/project/">프로젝트 계획</a>
+            <a href="/blank/project/news">새소식 4 </a>
             <a href="#">후기 11</a>
         </div>
-        <hr>
+        <!-- <hr> -->
 		<div class="content-explanation">
             <div class="explanation-review">
                 <div class="review-title">
@@ -105,8 +105,10 @@
                     <div class="comment-info">
                         <div class="info-box">
                             <span class="info-img"></span>
-                            <div class="info-nick">청애름</div>
-                            <div class="info-tap"> :: </div>
+                            <div class="info-menu">
+                                <div class="info-nick">청애름</div>
+                                <div class="info-tap"> :: </div>
+                            </div>
                         </div>
                     </div>
                     <div class="comment-content">넘 맛있었어요:) 굿</div>
@@ -116,8 +118,10 @@
                     <div class="comment-info">
                         <div class="info-box">
                             <span class="info-img"></span>
-                            <div class="info-nick">청애름</div>
-                            <div class="info-tap"> :: </div>
+                            <div class="info-menu">
+                                <div class="info-nick">청애름</div>
+                                <div class="info-tap"> :: </div>
+                            </div>
                         </div>
                     </div>
                     <div class="comment-content">사탕 특유의 끈적함? 뒷맛이 별로라 평소에 사탕 종류 잘 안 먹는데 이건 설명 보고 꽂혀서 바로 6개 구매했어요! 딸기우유는 조금 향이 딸기약?을 생각나게 했는데 막상 먹을땐 신경 1도 안쓰고 잘 먹었습니다ㅋㅋㅋㅋ 파인애플도 상큼하고 초콜릿도 생각보다 달달하고 고급진(?) 느낌이지만  

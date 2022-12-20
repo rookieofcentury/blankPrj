@@ -192,6 +192,7 @@
     </div>
 
     <script>
+
         const config = {
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
@@ -219,15 +220,60 @@
         
         /* <script>
         $(function () {
-        	CKEDITOR.replace('contents', {
-        		filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
-        	});
+            CKEDITOR.replace('contents', {
+                filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
+            });
         }); */
         
-        CKEDITOR.replace('editor4'
-                , {height: 500                                                  
-                 });
-        </script>
+        CKEDITOR.replace('editor4', {height: 500});
+
+        //온 서브밋을 위한 변수 선언;
+        let titleCheckReturn = false;
+        let priceCheckReturn = false;
+
+        //글자수 체크(제목)
+        $('input[name="title"]').keyup(function(e) {
+            let titleCheckReturn = false;
+            var content = $(this).val();
+            $('.title-write > p').text(40 - content.length + "글자 남음"); 
+            document.querySelector(".title-write > p").style.color = "red";
+            if (content.length > 40) {
+                alert("최대 40글자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 40));
+                $('.title-write > p').text("0글자 남음");
+            }
+        });
+        //유효성 체크(제목)
+        var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
+        $("input[name='title']").on("focusout", function() {
+        var x = $(this).val();
+            if (x.length > 0) {
+                if (x.match(replaceKorean)) {
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                $(this).val($(this).val().replace(replaceKorean, ""));
+        });
+
+        //글자수 체크(목표금액)
+        
+
+
+         //온서브밋
+        function checkAll(){
+        
+        if(!titleCheckReturn){ alert('제목이 입력되지않았습니다'); return false;}
+        if(!priceCheckReturn){ alert('목표금액이 입력되지않았습니다.'); return false;}
+        if(!bankCheckReturn){ alert('은행명이 입력되지않았습니다'); return false;}
+        if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
+        if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
+        if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
+        if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
+
+        return true;
+        }
+
     </script>
     
 </body>

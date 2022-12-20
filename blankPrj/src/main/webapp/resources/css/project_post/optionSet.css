@@ -70,7 +70,7 @@
     height: 40px;
     border-bottom :1px solid #AFAFAF;
 }
-.content-menu :nth-child(2){
+.content-menu :nth-child(3){
     color: #567ace;
     padding-bottom: 12px;
     border-bottom :5px solid #567ace;
@@ -126,7 +126,7 @@
     flex-wrap: wrap;
     margin-bottom: 50px;
     padding: 250px 15% 0 15%;
-    width: 100vw;
+    width: 70vw;
 }
 .content-box{
     display: flex;
@@ -271,12 +271,9 @@ strong+button{
 .set-option{
     width: 60%;
 }
-.set-option>span{
+.set-option>select{
     padding: 0px 18px;
     background: rgb(255, 255, 255);
-    color: rgb(201, 201, 201);
-    max-height: 44px;
-    min-width: 100px;
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -284,7 +281,18 @@ strong+button{
     letter-spacing: -0.015em;
     border: 1px solid #567ace;
     border-radius: 10px;
+    width: 300px;
+    height: 30%;
+    
 }
+/* select{
+    appearance: none;
+    -webkit-appearance: none; /* 사파리, 크롬 하위버전용 */
+    -moz-appearance: none; /* 사파리, 크롬 하위버전용 */
+    background-image: url(/blank/resources/images/project/select_icon.png);
+    background-repeat: no-repeat;
+    --background-position: center;
+} */
 .set-option>span>input{
     width: 100%;
     background: transparent;

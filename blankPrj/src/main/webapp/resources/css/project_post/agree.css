@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     margin-bottom: 50px;
     padding: 0 15% 0 15%;
-    width: 70vw;
+    --width: 70vw;
 }
 .navi-menu{
     position: fixed;
@@ -107,6 +107,7 @@ li{
     margin-top: 30px;
 }
 .content-buttons{
+    margin: 0 0 20px 40px;
     margin-bottom: 20px;
 }
 .buttons-back{
