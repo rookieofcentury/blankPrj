@@ -68,7 +68,7 @@
     height: 40px;
     border-bottom :1px solid #AFAFAF;
 }
-.content-menu :nth-child(2){
+.content-menu :nth-child(3){
     color: #567ace;
     padding-bottom: 12px;
     border-bottom :5px solid #567ace;
@@ -125,7 +125,7 @@
     flex-wrap: wrap;
     margin-bottom: 50px;
     padding: 250px 15% 0 15%;
-    width: 100vw;
+    width: 70vw;
 }
 .content-box{
     display: flex;
@@ -278,7 +278,7 @@ input[name=save]{
     display: flex;
     justify-content: center;
 }
-.add-option>p{
+.none{
     cursor: pointer;
     border-radius: 10px;
     color: rgb(61,61,61);
@@ -286,9 +286,43 @@ input[name=save]{
     width: 100px;
     height: 35px;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 6px;
     margin-right: 20px;
     font-size: 14px;
+}
+.add{
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgb(61,61,61);
+    border: 1px solid #567ace;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    padding-top: 6px;
+    margin-right: 20px;
+    font-size: 14px;
+}
+.add-option>input{
+    display: none;
+}
+input[type=radio]:checked + label > p{
+    cursor: pointer;
+    border-radius: 10px;
+    color: rgb(61,61,61);
+    border: 3px solid #567ace;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    padding-top: 4px;
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.block{
+    display: block;
+}
+.textbox{
+    display: none;
 }
 textarea[name=addOption]{
     resize: none;
@@ -298,6 +332,6 @@ textarea[name=addOption]{
     border-radius: 10px;
     border: 1px solid #567ace;
 }
-.textbox{
-    visibility: hidden;
+*{
+    outline: #567ace;
 }

@@ -38,7 +38,7 @@
                 </div>
                 <div class="title-write">
                     <div><input type="text" placeholder="내용 입력" name="title"></div>
-                    <p>40글자 남음</p>
+                    <p class="title-length">40글자 남음</p>
                 </div>
             </div>
             <div class="content-category">
@@ -55,8 +55,8 @@
                     <div>소개</div>
                     <div>창작자님의 이력과 간단한 소개를 써주세요.</div>
                 </div>
-                <div class="title-write">
-                    <div><input type="text" placeholder="내용 입력" name="title"></div>
+                <div class="creator-write">
+                    <div><input type="text" placeholder="내용 입력" name="introduce"></div>
                     <p>40글자 남음</p>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     <div class="background">
                         <div class="window">
                             <div class="popup">
-                            <button id="close">
+                            <div id="close">
                                 <div>
                                     <strong>이런 순서로 진행돼요</strong>
                                     <ul>
@@ -125,12 +125,11 @@
                                         <li>바로정산과 최종정산이 시작되면 정산 내역서와 함께 정산에 대한 안내가 메일로 발송됩니다.</li>
                                     </ul>
                                 </div>
-                                <label>정산 정책을 확인하였습니다.</label>
                                 <div>
-                                    <input type="checkbox" id="policy-check" name="">
-                                    <label for="policy-check"> 회원정보와 동일</label>
-                                    팝업닫기</div>
-                            </button>
+                                    <input type="checkbox" id="policy-check">
+                                    <label for="policy-check">정산 정책을 확인하였습니다.</label>
+                                    <!-- 팝업닫기--></div> 
+                            </div>
                             </div>
                         <div>
                             <div></div>
@@ -155,16 +154,152 @@
     </div>
 
     <script>
+
+        //모달창
         function show () {
             document.querySelector(".background").className = "background show";
         }
-
         function close () { 
             document.querySelector(".background").className = "background";
         }
-
         document.querySelector("#show").addEventListener('click', show);
         document.querySelector("#close").addEventListener('click', close);
+
+        //온 서브밋을 위한 변수 선언;
+        let nameCheckReturn = false;
+        let infoCheckReturn = false;
+        let bankCheckReturn = false;
+        let accountCheckReturn = false;
+        let depositorCheckReturn = false;
+
+        //글자수 체크(이름)
+        $('input[name="title"]').keyup(function(e) {
+            let nameCheckReturn = false;
+            var content = $(this).val();
+            $('.title-length').text(40 - content.length + "글자 남음"); 
+            document.querySelector(".title-length").style.color = "red";
+            if (content.length > 40) {
+                alert("최대 40글자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 40));
+                $('.title-length').text("0글자 남음");
+            }
+        });
+        //유효성 체크(이름)
+        //var replaceEmoji =  /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
+        //var replaceEmoji = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
+        var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
+        
+        $("input[name='title']").on("focusout", function() {
+        var x = $(this).val();
+            if (x.length > 0) {
+                if (/*x.match(replaceEmoji) || */  x.match(replaceKorean)) {
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                //$(this).val($(this).val().replace(replaceEmoji, ""));
+                $(this).val($(this).val().replace(replaceKorean, ""));
+        });
+    
+         //글자수 체크(소개)
+        $('input[name="introduce"]').keyup(function(e) {
+            let infoCheckReturn = false;
+            var content = $(this).val();
+            $('.creator-write > p').text(40 - content.length + "글자 남음"); 
+            document.querySelector(".creator-write > p").style.color = "red";
+            if (content.length > 40) {
+                alert("최대 40글자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 40));
+                $('.creator-write > p').text("0글자 남음");
+            }
+        });
+        //유효성 체크(소개)
+        var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
+        $("input[name='introduce']").on("focusout", function() {
+        var x = $(this).val();
+            if (x.length > 0) {
+                if (x.match(replaceKorean)) {
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                $(this).val($(this).val().replace(replaceKorean, ""));
+        });
+
+        //유효성 체크(은행명)
+        var check_num = /[0-9]/;    // 숫자 
+        var check_eng = /[a-zA-Z]/;    // 문자 
+        var check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+        $('input[name="bank"]').keyup(function(e) {
+            let bankCheckReturn = false;
+            var content = $(this).val();
+            if( check_kor.test(content) && !check_num.test(content) && !check_eng.test(content) && !check_spc.test(content) ) {
+                return true;
+            }else{
+                alert("한글만 입력 가능합니다. 다시 입력해주세요.");
+                return false;
+            }
+        });
+
+        //유효성 체크(계좌번호)
+        var regExp = /^[0-9]*$/;
+        $('input[name="accountNumber"]').keyup(function(e) {
+            let accountCheckReturn = false;
+            var content = $(this).val();
+            if(!regExp.test(content)){
+                alert("숫자만 입력 가능합니다. 다시 입력해주세요.");
+                return false;
+            }
+            return true;
+        });
+
+        //유효성 체크(예금주)
+        var check_num = /[0-9]/;    // 숫자 
+        var check_eng = /[a-zA-Z]/;    // 문자 
+        var check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+        $('input[name="depositor"]').keyup(function(e) {
+            let depositorCheckReturn = false;
+            var content = $(this).val();
+            if( check_kor.test(content) && !check_num.test(content) && !check_eng.test(content) && !check_spc.test(content) ) {
+                return true;
+            }else{
+                alert("한글만 입력 가능합니다. 다시 입력해주세요.");
+                return false;
+            }
+        });
+
+        //정책 체크박스
+        $(document).ready(function() {
+            $('input[id="policy-check"]').on('click', function() {
+                if ( $(this).prop('checked') ) {
+                    $('.policy-agree').text("동의 완료"); 
+                    $('.policy-agree').addClass("agree");
+                    console.log('dddd');
+                } else {
+                    $('.policy-agree').removeClass("agree");
+                    $('.policy-agree').text("확인하기"); 
+                    $('.policy-agree').off('click');
+                }
+                });
+            });
+
+        //온서브밋
+        function checkAll(){
+        
+        if(!nameCheckReturn){ alert('이름이 입력되지않았습니다'); return false;}
+        if(!infoCheckReturn){ alert('소개가 입력되지않았습니다.'); return false;}
+        if(!bankCheckReturn){ alert('은행명이 입력되지않았습니다'); return false;}
+        if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
+        if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
+        if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
+        if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
+
+        return true;
+
+        }
+
     </script>
 </body>
 </html>

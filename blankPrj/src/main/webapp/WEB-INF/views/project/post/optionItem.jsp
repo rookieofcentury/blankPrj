@@ -32,7 +32,7 @@
         </div>
         <div class="header-menubar">
             <div class="menu-button">
-                <button type="button">
+                <button type="button" onclick="location.href='/blank/project/post/optionSet'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
                         <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
                     </svg>
@@ -97,15 +97,17 @@
                                     <strong>옵션 추가</strong>
                                 </div>
                                 <div class="add-option">
-                                    <p class="none" onclick='noneOption()'>없음</p>
-                                    <p class="add" onclick='selectOption()'>추가</p>
+                                    <!-- <p class="none" onclick='noneOption()'>없음</p>
+                                    <p class="add">추가</p> -->
+                                    <input type="radio" id="option-none" name="radio" selected >
+                                    <label for="option-none" ><p class="none">없음</p></label>
+                                    <input type="radio" id="option-add" name="radio">
+                                    <label for="option-add" ><p class="add">추가</p></label>
                                 </div>
                             </div>
-                            <% if(1 < 2){%> <!--추가 클릭시 보이게-->
                                 <div class="textbox">
                                     <textarea name="addOption" cols="77" rows="5" placeholder="콤마(,)로 구분해서 작성하시면 항목이 생성됩니다.&#13;&#10; ex) 블랙, 화이트, 레드"></textarea>
                                 </div>
-                            <% } %>
                             <div class="button-submit"><input type="submit" value="저장" name="save"></div>
                         </div>
                     </div>
@@ -115,33 +117,26 @@
     </div>
 
     <script>
-        // var count = 1;
-        // function selectOption() {
-        //     if(count % 2 === 0){
-        //     $('.textbox').css('visibility', 'visible');
-        //     $('.add').css("border-width", "5px");
-        //     $('.none').css("border-width", "1px");
-        //     clickCounter++;
+
+        $("#option-add").click(function(){
+            //$(".textbox").toggleClass("block");
+            $(".textbox").show();
+        });
+        $("#option-none").click(function(){
+            $(".textbox").hide();
+        });
+
+        // $("input:radio[name=radio]").click(function(){
+ 
+        //     if($("input[id=option-add]:checked")){
+        //         $(".textbox").show();
+
+        //     }else if($("input[id=option-none]:checked")){
+        //         $(".textbox").hide();
         //     }
-        //     return (count % 2 === 0)
-        // }
+        //     });
 
-        function noneOption() {
-            $('.textbox').css('visibility', 'hidden');
-            $('.none').css("border-width", "5px");
-            $('.add').css("border-width", "3px");
-        }
-
-        function selectOption(){
-            if($('.textbox').css('visibility', 'hidden')){
-                $('.textbox').css('visibility', 'visible');
-                $('.add').css("border-width", "5px");
-                $('.none').css("border-width", "1px");
-            }else if($('.textbox').css('visibility', 'visible')){
-                $('.textbox').css('visibility', 'hidden');
-                $('.add').css("border-width", "1px");
-            }
-        }
     </script>
+
 </body>
 </html>

@@ -72,11 +72,11 @@
 			</div>
 		</div>
         <div class="content-navigation">
-            <a href="#">프로젝트 계획</a>
+            <a href="/blank/project">프로젝트 계획</a>
             <a href="#">새소식 4 </a>
-            <a href="#">후기 11</a>
+            <a href="/blank/project/review">후기 11</a>
         </div>
-        <hr>
+        <!-- <hr> -->
 		<div class="content-explanation">
             <div class="explanation-notify">
                 <div class="notify-title">

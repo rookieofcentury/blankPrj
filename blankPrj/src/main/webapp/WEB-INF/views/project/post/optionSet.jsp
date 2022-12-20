@@ -37,7 +37,7 @@
                     </svg>
                     세트
                 </button>
-                <button type="button">
+                <button type="button" onclick="location.href='/blank/project/post/optionItem'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
                         <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
@@ -96,6 +96,13 @@
                                     <div>세트는 후원자에게 프로젝트의 가치를 전달하는 수단입니다. <br>다양한 금액대로 여러 개의 선물을 만들어주세요.</div>
                                 </div>
                                 <div class="set-option">
+                                    <select class="">
+                                        <option>사과 (옵션 2개)</option>
+                                        <option>토마토 (옵션 1개)</option>
+                                        <option>가지 (옵션 3개)</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="set-option">
                                     <span>
                                         <input placeholder="아이템을 선택해 주세요" readonly>
                                         <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
@@ -121,7 +128,7 @@
                                             <div class="selete-submit">선택완료</div>
                                         </div> 
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <ul class="selected">
                                 <li>

@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/blank/resources/css/project_view/detailInfo.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">;
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -25,7 +27,7 @@
 				<div class="introduction-main">
                     <div class="main-image">
                         <button type="button"><<</button>
-					    <img src="" alt="프로젝트썸네일">
+						<img src="/blank/resources/images/blank.png" alt="프로젝트썸네일">
                         <button type="button">>></button>
                     </div>
 					<div class="main-summary">
@@ -76,8 +78,8 @@
         <hr>
         <div class="content-navigation">
             <a href="#">프로젝트 계획</a>
-            <a href="#">새소식 4 </a>
-            <a href="#">후기 11</a>
+            <a href="/blank/project/news">새소식 4 </a>
+            <a href="/blank/project/review">후기 11</a>
         </div>
 		<div class="content-explanation">
             <div class="explanation-project">아아 이곳은 프로젝트 소개입니다</div>
@@ -85,15 +87,17 @@
                 <div class="side-creator">
                     <div class="creator-header">창작자 소개</div>
                     <div class="creator-container">
-                        <a href=#>
-                            <span class="container-img"></span>
-                        </a>
-                        <div class="container-name">
-                            <div class="name-nick"><strong>
-                                <a href=#>청애름</a>
-                            </strong></div>
-                            <div class="name-follow">+ 팔로우</div>
-                        </div>
+						<div>
+							<a href=#>
+								<span class="container-img"></span>
+							</a>
+							<div class="container-name">
+								<div class="name-nick"><strong>
+									<a href=#>청애름</a>
+								</strong></div>
+								<div class="name-follow">+ 팔로우</div>
+							</div>
+						</div>
                         <div>전통의상을 전공한 창작자가 차근차근 만들어가는 생활한복 브랜드입니다아나아</div>
                     </div>
                 </div>
@@ -122,6 +126,21 @@
 	</div>
 	
 	<%@ include file = "/WEB-INF/views/common/footer.jsp" %>
-	
+
+	<script>
+
+        var i = 0;
+        $('i').on('click',function(){
+            if(i==0){
+                $(this).attr('class','bi-heart-fill');
+                i++;
+            }else if(i==1){
+                $(this).attr('class','bi-heart');
+                i--;
+            }
+
+        });
+
+    </script>
 </body>
 </html>

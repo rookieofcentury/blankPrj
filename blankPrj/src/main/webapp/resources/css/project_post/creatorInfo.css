@@ -1,4 +1,4 @@
-/*헤더 fixed*/
+/*헤더 fixed */
 .navi-menu{
     margin-bottom: 50px;
     padding: 0 15% 0 15%;
@@ -85,12 +85,10 @@
 
 #container{
     display: flex;
-    padding-top: 56px;
     flex-wrap: wrap;
-    margin-bottom: 50px;
-    padding: 100px 23% 0 15%;
+    padding-top: 100px;
     width: 70vw;
-    margin-left: 8%;
+    margin: 0 0 50px 400px;
 }
 .content{
     padding: 84px 0px 0px;
@@ -129,7 +127,7 @@ div[class*=-info]+div:not(.email-box){
     width: 450px;
     margin-top: 3px;
 }
-.title-write div{
+.title-write div, .creator-write div{
     padding: 0px 10px;
     border: 1px solid #567ace;
     border-radius: 10px;
@@ -233,12 +231,30 @@ svg{
 #show{
     background-color: #fff;
     border: none;
+    cursor: pointer;
 }
 .policy-agree{
     padding-top: 7px;
     height: 25px;
 }
-
+.agree{
+    border: 5px solid #567ace;
+    font-weight: 700;
+}
+input[id='policy-check']{
+    width: 20px;
+}
+input[id='policy-check']+label{
+    margin-right: 50px;
+    color: #567ace;
+    font-size: 16px;
+    font-weight: 400;
+}
+ul{
+    margin-top: 0px;
+    --padding-right: 45px;
+    --padding-left: 60px;
+}
 
 /*정책 모달창*/
 .background {
@@ -271,8 +287,10 @@ svg{
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     border: 1px solid #567ace;
-    --box-shadow: 0 2px 7px #567ace(0, 0, 0, 0.3);
-    float: left;
+    box-shadow: 0 2px 7px #567ace(0, 0, 0, 0.3);
+    border-radius: 10px;
+    --margin-top: -50px;
+    --margin-left: -100px;
 
 /* 임시 지정 */
     width: 540px;
@@ -284,4 +302,7 @@ svg{
 .show .popup {
     transform: translate(-50%, -50%);
     transition: all .5s;
+}
+#close{
+    padding: 20px;
 }

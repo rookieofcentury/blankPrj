@@ -94,12 +94,10 @@ ol{
 }
 #container{
     display: flex;
-    padding-top: 56px;
     flex-wrap: wrap;
-    margin-bottom: 50px;
-    padding: 100px 15% 0 15%;
+    padding-top: 100px;
     width: 70vw;
-    margin-left: 8%;
+    margin: 0 0 50px 400px;
 }
 .content{
     padding: 84px 0px 0px;

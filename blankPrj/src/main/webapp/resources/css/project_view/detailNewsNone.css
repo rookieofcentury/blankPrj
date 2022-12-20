@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     margin : auto;
     padding: 0 15% 0 15%;
-	width: 100vw;
+	--width: 100vw;
 }
 .content-intro{
     width: 100%;
