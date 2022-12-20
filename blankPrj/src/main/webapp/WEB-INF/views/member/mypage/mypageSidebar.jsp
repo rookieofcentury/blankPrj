@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지 사이드바</title>
 <link rel="stylesheet" href="/blank/resources/css/member/mypageSidebar.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<aside class="wrap">
@@ -33,9 +34,11 @@
                         <div><a href="/blank/member/mypage/payAddr">결 제 수 단/배 송 지</a></div>
                         <div><a href="/blank/member/mypage/payProject">후 원 프 로 젝 트</a></div>
                         <div><a href="/blank/member/mypage/likeProject">관 심 프 로 젝 트</a></div>
+                        <div><a href="/blank/member/mypage/myGoods">굿 즈 구 매 내 역</a></div>
                         <div><a href="/blank/member/mypage/sub-question">신 고/문 의 내 역</a></div>
                         <div><a href="/blank/member/mypage/likePeople">팔 로 잉/팔 로 워</a></div>
                         <div><a href="/blank/member/mypage/evant">이 벤 트/출 석 체 크</a></div>
+                        <div><a href="/blank/member/mypage/alarm">알 람 설 정 </a></div>
                     </div>
             </div>
          </div>

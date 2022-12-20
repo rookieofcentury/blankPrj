@@ -1,6 +1,6 @@
 // 각 버튼 누르면 밑에 변경하는 부분 생성
-
 $('#email-btn').click(function(){
+   console.log("클릭되나요");
    $('#email-hidden').toggle()
 })
 

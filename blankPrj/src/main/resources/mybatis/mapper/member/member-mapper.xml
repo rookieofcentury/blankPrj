@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="memberMapper">
+  <insert id="insertMember">
+  
+  	INSERT INTO MEMBER 
+  	( 	
+  		NO,
+  		EMAIL,
+  		PWD,
+        PHONE,
+  		GENDER,
+  		NICK
+  	)
+  	VALUES
+  	(
+        MEMBER_NO_SEQ.NEXTVAL,
+        #{email},
+        #{pwd},
+        #{phone},
+        #{gender},
+        #{nick}
+  	)
+  	
+  	
+  </insert>
+  
+  <!--  -->
+  <select id="selectOneMember" resultType="com.blank.app.member.vo.MemberVo"> 
+  	SELECT * 
+  	FROM MEMBER
+  	WHERE EMAIL = #{email}
+  </select>
+  
+</mapper>

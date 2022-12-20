@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 #login-header{
-    width: 50vw;
+    width: 60vw;
     height: 100px;
     margin: 15px auto;
     display: flex;
@@ -17,11 +17,10 @@
     height : 80px;
 }
 .login-form{
-    width: 50vw;
+    width: 60vw;
     margin: 50px auto auto auto;
     display: grid;
     place-items: center;
-    grid-template-rows: repeat(5, 1fr);
 }
 .input{
     height: 40px;
@@ -47,12 +46,36 @@ hr{
 .container-main-area{
     width: 70%;
     padding:0px 13%;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 .another-login{
    font-size: 10px;
 }
 .login-info{
     margin: 10px 0;
+    font-size: 17px;
+}
+#saveId{
+    float: left;
+}
+input[type="checkbox"]{
+    width: 18px; 
+    height: 18px; 
+    cursor: pointer;
+    margin: 0 10px;
+}
+label{
     font-size: 15px;
+}
+.right{
+   display: flex;
+   flex-direction: row-reverse;
+   
+}
+a{
+    margin: 0 5px;
+    font-size: 14px;
+}
+.find{
+    margin: -10px 0px 20px 0px;
 }

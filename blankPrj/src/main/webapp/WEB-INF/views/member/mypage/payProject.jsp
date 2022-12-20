@@ -7,7 +7,7 @@
 <title>후원 프로젝트</title>
 <link rel="stylesheet" href="/blank/resources/css/member/payProject.css">
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>개인정보수정</title>
 <link rel="stylesheet" href="/blank/resources/css/member/editProfile.css">
-<script src="https://ajax.googleapis.co m/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
