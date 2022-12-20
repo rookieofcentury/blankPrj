@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/blank/resources/css/admin/common/menu.css">
+<link rel="stylesheet" href="/blank/resources/css/admin/goods/add.css">
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
 	<div class="edit-board-content">
@@ -13,7 +17,7 @@
 	    <div><%@ include file = "/WEB-INF/views/admin/common/menu.jsp" %></div>
 	    
 	    <main>
-	
+
 	        <div class="edit-board-header">
 	            <div>
 	                <h1>굿즈 관리</h1>
@@ -23,97 +27,71 @@
 	        <div class="edit-board">
 	            
 	            <div class="member-edit-close">
-	                                회원 정보 수정
-	                <img src="../resources/images/admin/close.png">
+	                                굿즈 등록
+	                <img src="/blank/resources/images/admin/close.png">
 	            </div>
 	            
-	            <div class="edit-list">
-	    
-	                <div class="edit-title">회원번호</div>
-	                <div>1</div>
-	                <div></div>
-	    
-	                <div class="edit-title">닉네임</div>
+	            <form class="edit-list" action="/blank/admin/goods/add" method="post">
+
+	                <div class="edit-title">이름</div>
 	                <div>
-	                    <input
-	                        type="text"
-	                        value="nick01"
-	                        name="nick"
-	                    />
+	                    <input type="text" name="name">
 	                </div>
-	                <div></div>
 	    
-	                <div class="edit-title phone-number">핸드폰 번호</div>
-	                <div class="phone-number">
-	                    <input
-	                        type="text"
-	                        value="010-0000-0000"
-	                        name="phone"
-	                    />
-	                </div>
-	                <div class="phone-number"></div>
-	    
-	                <div class="edit-title">이메일</div>
+	                <div class="edit-title">카테고리</div>
 	                <div>
-	                    <input
-	                        type="text"
-	                        value="user01@gmail.com"
-	                        name="email"
-	                    />
+	                    <select name="category" id="goods-category">
+							<option value="1">생활용품</option>
+							<option value="2">가구/리빙</option>
+							<option value="3">어쩌구</option>
+							<option value="4">저쩌구</option>
+							<option value="5">웅앵</option>
+						</select>
 	                </div>
-	                <div><button class="check-email-btn">중복확인</button></div>
+
+	                <div class="edit-title">옵션</div>
+	                <div class="option-container">
+						<div class="option-area"></div>
+						<label id="option-added-btn">옵션 추가하기</label>
+	                </div>
 	    
-	                <div class="edit-title">포인트</div>
+	                <div class="edit-title">가격</div>
 	                <div>
-	                    <input
-	                        type="text"
-	                        value="20,000p"
-	                        name="point"
-	                    />
+	                    <input type="number" name="price"> <span> 원</span>
 	                </div>
-	                <div></div>
-	    
-	                <div class="edit-title bank-name">은행명</div>
-	                <div class="bank-name">
-	                    <input
-	                        type="text"
-	                        value="국민"
-	                        name="bank"
-	                    />
-	                </div>
-	                <div class="bank-name"></div>
-	    
-	                <div class="edit-title account-number">계좌번호</div>
-	                <div class="account-number">
-	                    <input
-	                        type="text"
-	                        value="668801-01-621564"
-	                        name="account"
-	                    />
-	                </div>
-	                <div class="account-number"></div>
-	    
-	                <div class="edit-title">예금주</div>
+
+	                <div class="edit-title">재고</div>
 	                <div>
-	                    <input
-	                        type="text"
-	                        value="홍현정"
-	                        name="depositor"
-	                    />
+	                    <input type="number" name="stock"> <span> 개</span>
 	                </div>
-	                <div></div>
+
+	                <div class="edit-title">대표 사진</div>
+	                <div>
+	                    <input multiple="multiple" type="file" name="thumbnail">
+					</div>
 	    
-	                <div class="edit-title">계정상태</div>
-	                <div>가입</div>
-	                <div></div>
+	                <div class="edit-title">굿즈 소개</div>
+	                <div class="editor-area">
+	                    <div id="editor"></div>
+						<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+						<textarea name="content" id="goods-content"></textarea>
+					</div>
 	    
-	                <div class="edit-title">가입일</div>
-	                <div>2022-12-12</div>
-	                <div></div>
+	                <div class="edit-title">기획전 부여</div>
+	                <div>
+	                    <select name="exhibition" id="goods-exhibition">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+	                </div>
 	    
 	                <div id="edit-submit">
-	                    <input type="submit" value="수정" class="edit-submit-btn"/>
+	                    <input type="submit" value="등록" id="edit-submit-btn" onclick="valueOn();"/>
 					</div>
-
+				</form>
 </body>
+<script src="/blank/resources/js/admin/goods/add.js"></script>
 </html>

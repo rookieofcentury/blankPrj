@@ -41,14 +41,3 @@ function callAlert() {
 	var option = "width = 100%, height = 100%, location = yes, top = 500, left = 400"
 	window.open(url, name, option);
 }
-
-function callReview() {
-	var url = "/blank/goods/review/write";
-	var name = "리뷰 작성";
-	var option = "width = 500, height = 200, location = yes, top = 500, left = 400"
-	window.open(url, name, option);
-}
-
-$('#review-write-btn').click(function() {
-	$('.modal').css("display", "flex");
-});

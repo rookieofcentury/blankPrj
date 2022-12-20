@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="goodsMapper">
+
+	<update id="add">
+
+		INSERT ALL
+		INTO GOODS
+		(
+			NO ,
+			CATEGORY ,
+			NAME ,
+			PRICE ,
+			CONTENT ,
+			ENROLL_DATE ,
+			DELETE_YN
+		)
+		VALUES
+		(
+			SEQ_GOODS_NO.NEXTVAL ,
+			#{category} ,
+			#{name} ,
+			#{price} ,
+			#{content} ,
+			SYSDATE ,
+			'N'
+		)
+		<foreach collection="option" item="option" separator=",">
+		<foreach collection="stock" item="stock" separator=",">
+		INTO GOODS_OPTION
+		(
+			NO ,
+			GOODS ,
+			OPTION ,
+			STOCK
+		)
+		VALUES
+		(
+			SEQ_GOODS_OPTION_NO.NEXTVAL ,
+			#{no} ,
+			#{option},
+			#{stock}
+		)
+		</foreach>
+		</foreach>
+
+	</update>
+	
+	<update id="addOption">
+		<foreach collection="array" item="" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
+		
+		</foreach>
+	</update>
+	
+	<insert id="write">
+	
+		INSERT INTO GOODS_REVIEW
+		(
+			NO ,
+			GOODS ,
+			WRITER ,
+			SCORE ,
+			CONTENT ,
+			ENROLL_DATE ,
+			DELETE_YN
+		)
+		VALUES
+		(
+			SEQ_GOODS_REVIEW_NO.NEXTVAL ,
+			#{goods} ,
+			#{writer} ,
+			#{score} ,
+			#{content} ,
+			SYSDATE ,
+			'N'
+		)
+	
+	</insert>
+	
+	<select id="detail">
+		SELECT
+		(
+			NO ,
+			CATEGORY ,
+			NAME ,
+			PRICE ,
+			OPTION ,
+			STOCK ,
+			CONTENT ,
+			ENROLL_DATE ,
+			DELETE_YN
+		)
+		FROM GOODS
+	</select>
+	
+</mapper>

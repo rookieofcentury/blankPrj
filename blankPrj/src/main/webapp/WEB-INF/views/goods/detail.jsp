@@ -19,7 +19,7 @@
     <div class="wrap">
         
         <div class="container">
-            <div class="goods-category">생활용품</div>
+            <div class="goods-category"><a href="/blank/goods"><i class="fa-solid fa-house"></i></a> 생활용품</div>
             <div class="goods-info">
                 <div>무릎담요</div>
                 <div>
