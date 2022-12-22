@@ -31,5 +31,9 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
       <property name="dataSource" ref="dbcpSource"></property>
     </bean>
+    <!-- 필터 -->
+	<bean id="encode" class="org.springframework.web.filter.CharacterEncodingFilter">
+		<constructor-arg name="encoding" value="UTF-8" />
+	</bean>
 	
 </beans>
