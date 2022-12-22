@@ -173,11 +173,25 @@ select:not(.ui-datepicker-month, .ui-datepicker-year){
     margin-top: 10px;
     width: 400px;
 }
-.price-write, .url-text, .summary-text{
+.price-write, .url-text {
     padding: 0px 10px;
     border: 1px solid #567ace;
     border-radius: 10px;
     height: 30px;
+    width: 380px;
+}
+.summary-text{
+    padding: 5px 10px 1px 10px;
+    border: 1px solid #567ace;
+    border-radius: 10px;
+    height: 75px;
+    width: 380px;
+}
+textarea{
+    resize: none;
+    border: none;
+    outline: none;
+    height: 72px;
     width: 380px;
 }
 .price-write+div{

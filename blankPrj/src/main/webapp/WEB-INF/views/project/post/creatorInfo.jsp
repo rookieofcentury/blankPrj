@@ -227,10 +227,10 @@
         });
 
         //유효성 체크(은행명)
-        var check_num = /[0-9]/;    // 숫자 
-        var check_eng = /[a-zA-Z]/;    // 문자 
-        var check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-        var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+        var checkNumber = /[0-9]/;    // 숫자 
+        var checkEnglish = /[a-zA-Z]/;    // 문자 
+        var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
         $('input[name="bank"]').keyup(function(e) {
             let bankCheckReturn = false;
             var content = $(this).val();
@@ -243,7 +243,7 @@
         });
 
         //유효성 체크(계좌번호)
-        var regExp = /^[0-9]*$/;
+        var checkNumber = /^[0-9]*$/;
         $('input[name="accountNumber"]').keyup(function(e) {
             let accountCheckReturn = false;
             var content = $(this).val();
@@ -255,14 +255,14 @@
         });
 
         //유효성 체크(예금주)
-        var check_num = /[0-9]/;    // 숫자 
-        var check_eng = /[a-zA-Z]/;    // 문자 
-        var check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-        var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+        var checkNumber = /[0-9]/;   
+        var checkEnglish = /[a-zA-Z]/;   
+        var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; 
+        var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
         $('input[name="depositor"]').keyup(function(e) {
             let depositorCheckReturn = false;
             var content = $(this).val();
-            if( check_kor.test(content) && !check_num.test(content) && !check_eng.test(content) && !check_spc.test(content) ) {
+            if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
                 return true;
             }else{
                 alert("한글만 입력 가능합니다. 다시 입력해주세요.");

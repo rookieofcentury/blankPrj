@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +21,9 @@
 		<div class="content-intro">
 			<div class="intro-top">
 				<a href=#>
-					<span class="top-category">디자인 문구</span>
+					<span class="top-category">${prj.categoryNo}</span>
 				</a>
-				<h1 class="top-title">이제 키보드도 '터치'하세요 | 키보드+터치패드+거치대 = 퓨전키보드다.</h1>
+				<h1 class="top-title">${prj.title}</h1>
 			</div>
 			<div class="content-introduction">
 				<div class="introduction-main">
@@ -54,11 +56,11 @@
 					<div class="sub-info">
 						<div class="info-price">
 							<div class="price"><strong>목표금액</strong></div>
-							<div>500,000원</div>
+							<div>${prj.price}원</div>
 						</div>
 						<div class="info-period">
 							<div class="period"><strong>펀딩기간</strong></div>
-							<div>2022.11.24~2022.12.15</div>
+							<div>${prj.startDay}~${prj.endDay}</div>
 						</div>
 						<div class="info-payment">
 							<div class="payment"><strong>결제</strong></div>

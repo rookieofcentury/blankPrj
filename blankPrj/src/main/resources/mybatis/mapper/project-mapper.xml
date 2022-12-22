@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projectMapper">
+
+	<resultMap type="HashMap" id="cateName">
+		<id column="name" property="name" />
+	</resultMap> 
+	
+	<select id="selectCategory" resultType="HashMap" resultMap="cateName">
+		SELECT NO,NAME
+		FROM CATEGORY
+	</select>
+	
+	<select id="selectPrj" resultType="ProjectVo">
+		SELECT *
+		FROM PROJECT
+		WHERE NO = #{p}
+		AND STATUS = 'C'
+	</select>
+</mapper>

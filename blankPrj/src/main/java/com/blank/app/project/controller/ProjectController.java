@@ -1,30 +1,45 @@
-package com.blank.app.project;
+package com.blank.app.project.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.blank.app.member.service.MemberService;
+import com.blank.app.project.service.ProjectService;
+import com.blank.app.project.vo.ProjectVo;
 
 @RequestMapping("project")
 @Controller
 public class ProjectController {
 
+	@Autowired
+	private ProjectService service;
+	
 	@GetMapping
-	public String project() {
+	public String project(ProjectVo vo, Model model,@RequestParam(name="p") int p) {
+		ProjectVo prjVo = service.selectProject(vo,p);
+		System.out.println(prjVo);
+		model.addAttribute("prj", prjVo);
 		return "project/detail/info";
 	}
 	
@@ -44,7 +59,11 @@ public class ProjectController {
 	}
 	
 	@GetMapping("post/defaultInfo")
-	public String postDefaultInfo() {
+	public String postDefaultInfo(@RequestParam HashMap<String, String> map, Model model) {
+		
+		List<HashMap<String, String>> category = service.selectCategory(map);
+		
+		model.addAttribute("category", category);
 		return "project/post/defaultInfo";
 	}
 	
