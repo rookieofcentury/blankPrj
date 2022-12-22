@@ -30,6 +30,7 @@
 		ORDER BY NO DESC
 	</select>
 	
+	<!-- 공지사항 작성 -->
 	<insert id="noticeWrite">
 		INSERT INTO NOTICE
 		(
