@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기본 정보</title>
 <link rel="stylesheet" href="/blank/resources/css/project_post/defaultInfo.css">
 
 <!-- 제이쿼리 -->
@@ -60,9 +61,11 @@
                 </div>
                 <div class="category-select">
                     <select name="category">
-                        <option>디자인 문구</option>
-                        <option>반려동물</option>
-                    </select>
+                        <option value="category">==카테고리 선택==</option>
+                        <c:forEach items="${category}" var="cate">
+                        <option>${cate.name}</option>
+						</c:forEach>
+                    	</select>
                     <div></div>
                 </div>
             </div>
@@ -79,7 +82,7 @@
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
                 <div class="price-box">
-                    <div class="price-write"><input type="text" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price"></div>
+                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price"></div>
                     <div>원</div>
                 </div>
             </div>
@@ -108,7 +111,7 @@
                             </div>
                             <div class="date-period">
                                 <p>펀딩기간</p>
-                                <p>20일</p>
+                                <p></p>
                             </div>
                         </li>
                         <li>
@@ -151,7 +154,7 @@
                 <div class="url-write">
                     <div class="url-blank">www.blank.com/</div>
                     <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url"></div>
-                    <p>최소 3자 이상 입력해 주세요</p>
+                    <p>영문으로 최소 3자 이상 입력해 주세요</p>
                 </div>
             </div>
             <div class="content-summary">
@@ -160,7 +163,10 @@
                     <div>프로젝트를 빠르게 이해할 수 있도록 간략하게 소개해 주세요.</div>
                 </div>
                 <div class="summary-write">
-                    <div class="summary-text"><input type="text" placeholder="내용 입력" name="summery"></div>
+                    <div class="summary-text">
+                        <!-- <input type="text" placeholder="내용 입력" name="summery"> -->
+                        <textarea placeholder="내용 입력" name="summery"></textarea>
+                    </div>
                     <p>100글자 남음</p>
                 </div>
             </div>
@@ -230,10 +236,12 @@
         //온 서브밋을 위한 변수 선언;
         let titleCheckReturn = false;
         let priceCheckReturn = false;
+        let urlCheckReturn = false;
+        let summaryCheckReturn = false;
 
         //글자수 체크(제목)
         $('input[name="title"]').keyup(function(e) {
-            let titleCheckReturn = false;
+            titleCheckReturn = false;
             var content = $(this).val();
             $('.title-write > p').text(40 - content.length + "글자 남음"); 
             document.querySelector(".title-write > p").style.color = "red";
@@ -241,12 +249,14 @@
                 alert("최대 40글자까지 입력 가능합니다.");
                 $(this).val(content.substring(0, 40));
                 $('.title-write > p').text("0글자 남음");
+            }else{
+                titleCheckReturn = true;
             }
         });
         //유효성 체크(제목)
         var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
         $("input[name='title']").on("focusout", function() {
-        var x = $(this).val();
+            var x = $(this).val();
             if (x.length > 0) {
                 if (x.match(replaceKorean)) {
                 }
@@ -257,16 +267,101 @@
         });
 
         //글자수 체크(목표금액)
-        
+        $("input[name='price']").on("focusout", function() {
+            priceCheckReturn = false;
+            var x = $(this).val();
+            if (x < 500000) {
+                alert('50만원 이상의 금액을 입력해 주세요')
+            }else{
+                priceCheckReturn = true;
+            }
+        });
 
+        //펀딩일수 계산
+        // $("input[name='endDay']").on("focusout", function() {
+            $(".summary-text").click(function() {
+                if ($("input[name='startDay']").length < 1) {
+                    console.log('시작일 입력해줘');
+                    console.log($("input[name='endDay']").length)
+                    alert("시작일을 입력해 주세요");
+                }
+            });
+            
+            $(".plan-write").click(function() {
+                console.log('dd');
+                var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
+                var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
+            if (date2 - date1 < 0){
+                console.log('시작일 종료일 확인');
+                console.log(date1);
+                console.log(date2);
+                alert("시작일이 종료일보다 늦어요ㅠ"); 
+            }
+            else if (1 < 2){
+                var today = new Date();
+                var year = today.getFullYear();
+                var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                var day = ('0' + today.getDate()).slice(-2);
+
+                var dateString = year + '-' + month  + '-' + day;
+
+                console.log(dateString);
+
+                if(date1 < dateString){
+                    console.log("시작일은 현재날짜보다 빠를 수 없습니다.");
+                
+                }
+            }
+        });
+
+        //글자수 체크(주소)
+        $("input[name='url']").on("focusout", function() {
+            var content = $(this).val();
+            if (content.length < 3) {
+                alert("3자 이상 입력해주세요.");
+            }
+        });
+        //유효성 체크(주소)
+        var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        var checkEnglish = /[a-zA-Z]/;   
+        var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; 
+        var checkBlank = /\s/g;
+        $('input[name="url"]').keyup(function(e) {
+            urlCheckReturn = false;
+            var content = $(this).val();
+            if( checkEnglish.test(content) && !checkKorean.test(content) && !checkEmoji.test(content) ) {
+                urlCheckReturn = true;
+            }
+        }).on("keyup", function() {
+                $(this).val($(this).val().replace(checkKorean, ""));
+                $(this).val($(this).val().replace(checkEmoji, ""));
+                $(this).val($(this).val().replace(checkBlank, ""));
+        });
+
+        //글자수 체크(요약)
+        $('.summary-text > textarea').keyup(function(e) {
+            summaryCheckReturn = false;
+            var content = $(this).val();
+            $('.summary-text + p').text(100 - content.length + "글자 남음"); 
+            document.querySelector(".summary-text + p").style.color = "red";
+            if(content.length > 0){
+                content.match(replaceKorean)
+                $(this).val($(this).val().replace(replaceKorean, ""));
+                if (content.length > 100) {
+                    alert("최대 100글자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('.summary-text + p').text("0글자 남음");
+                }
+            }   summaryCheckReturn = true;
+        });
 
          //온서브밋
         function checkAll(){
         
         if(!titleCheckReturn){ alert('제목이 입력되지않았습니다'); return false;}
         if(!priceCheckReturn){ alert('목표금액이 입력되지않았습니다.'); return false;}
-        if(!bankCheckReturn){ alert('은행명이 입력되지않았습니다'); return false;}
-        if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
+        if(!urlCheckReturn){ alert('url이 입력되지않았습니다'); return false;}
+        if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
         if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
         if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
         if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
