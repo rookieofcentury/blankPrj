@@ -13,6 +13,7 @@
       <typeAlias type="com.blank.app.admin.vo.AdminVo" alias="AdminVo"/>
       <typeAlias type="com.blank.app.admin.vo.NoticeVo" alias="NoticeVo"/>
       <typeAlias type="com.blank.app.member.vo.MemberVo" alias="MemberVo"/>
+      <typeAlias type="com.blank.app.project.vo.ProjectVo" alias="ProjectVo"/>
    </typeAliases>
 
 </configuration>
