@@ -18,7 +18,7 @@
 				<div class="member-info-up">
 					<div>사진</div>
 					<div><img src="/blank/resources/images/member/choi.png"></div>
-					<div><button class="change-btn">사진 변경</button></div>
+					<div><input type="file"></div>
 				</div>
 				<div class="member-info-down">
 					<div>이  메 일</div>
@@ -26,7 +26,7 @@
 					<div><button class="change-btn" id="email-btn">이메일 변경</button></div>
 					<div class="hidden span3" id="email-hidden">
 						<form>
-							여기는합친거
+							<input>
 						</form>
 					</div>
 					<div>닉 네 임</div>

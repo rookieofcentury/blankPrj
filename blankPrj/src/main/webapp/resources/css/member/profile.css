@@ -1,0 +1,8 @@
+.wrap{
+    margin: auto;
+    width: 70vw;
+    display: flex;
+}
+div{
+    border: 1px solid black;
+}

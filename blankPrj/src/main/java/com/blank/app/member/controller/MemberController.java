@@ -34,9 +34,9 @@ public class MemberController {
 		
 	}
 	
-	//진짜 회원가입!
+	//진짜 로그인!
 	@PostMapping("login")
-	public String login(MemberVo vo, HttpSession ss) {
+	public String login(MemberVo vo, HttpSession session) {
 		
 		MemberVo loginMember = service.login(vo);
 		
@@ -46,12 +46,16 @@ public class MemberController {
 		
 		//확인을위한 주석!
 		System.out.println(loginMember);
-		ss.setAttribute("loginMember", loginMember);
+		session.setAttribute("loginMember", loginMember);
 		
 		return "home";
 	}
-	
-	
+	//로그아웃 
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/home";
+	}
 	
 	//회원가입화면 
 	@GetMapping("join")
