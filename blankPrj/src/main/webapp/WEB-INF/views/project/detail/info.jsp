@@ -21,7 +21,7 @@
 		<div class="content-intro">
 			<div class="intro-top">
 				<a href=#>
-					<span class="top-category">${prj.categoryNo}</span>
+					<span class="top-category">${prj.category}</span>
 				</a>
 				<h1 class="top-title">${prj.title}</h1>
 			</div>
