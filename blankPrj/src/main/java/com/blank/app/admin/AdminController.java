@@ -121,6 +121,8 @@ public class AdminController {
 		
 	}
 	
+	//공지사항 수정
+	
 	//FAQ 목록(화면)
 	@GetMapping("faq")
 	public String faq() {
