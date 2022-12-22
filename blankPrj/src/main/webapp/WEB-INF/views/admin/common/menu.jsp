@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
-
+    
 <link rel="stylesheet" href="/blank/resources/css/admin/common/menu.css">
 
 <aside class="admin-menu">
@@ -91,12 +89,3 @@
     </div>
 
 </aside>
-
-<!-- <script>
-    window.addEventListener("resize", function () {
-      const menu = document.querySelector(".admin-menu-main");
-      menu.style.height = window.innerHeight - 110 + "px";
-    });
-    const menu = document.querySelector(".admin-menu-main");
-    menu.style.height = window.innerHeight - 110 + "px";
-</script> -->
