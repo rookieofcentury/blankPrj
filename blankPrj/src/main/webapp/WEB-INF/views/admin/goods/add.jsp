@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BLANK ADMIN</title>
 <link rel="stylesheet" href="/blank/resources/css/admin/common/menu.css">
 <link rel="stylesheet" href="/blank/resources/css/admin/goods/add.css">
 <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
@@ -27,7 +27,7 @@
 	        <div class="edit-board">
 	            
 	            <div class="member-edit-close">
-	                                굿즈 등록
+	                굿즈 등록
 	                <img src="/blank/resources/images/admin/close.png">
 	            </div>
 	            
@@ -47,12 +47,6 @@
 							<option value="4">저쩌구</option>
 							<option value="5">웅앵</option>
 						</select>
-	                </div>
-
-	                <div class="edit-title">옵션</div>
-	                <div class="option-container">
-						<div class="option-area"></div>
-						<label id="option-added-btn">옵션 추가하기</label>
 	                </div>
 	    
 	                <div class="edit-title">가격</div>
@@ -89,7 +83,7 @@
 	                </div>
 	    
 	                <div id="edit-submit">
-	                    <input type="submit" value="등록" id="edit-submit-btn" onclick="valueOn();"/>
+	                    <input type="submit" value="등록" id="edit-submit-btn"/>
 					</div>
 				</form>
 </body>

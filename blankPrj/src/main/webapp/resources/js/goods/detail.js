@@ -1,7 +1,9 @@
+// 문서 load 시 정보 챕터 먼저 보여 주기
 $(document).ready(function() {
 	$('#info-btn').prop("checked", true);
 });
 
+// 하단 content 변경 함수
 $('input:radio[name=buttons]').change(function() {
 	if($('#info-btn').is(':checked')) {
 		$('.pd-intro').css("display", "flex");
@@ -18,23 +20,32 @@ $('input:radio[name=buttons]').change(function() {
 	};
 })
 
-$('#goods-option').change(function() {
-	// select된 option text
-	var text = $('#goods-option option:selected').text();
-	// option-block 생성된 친구들 text
-	var optionText = $('.option-block-text').text();
-	// optionText 안에 select된 애 있어?
-	var isInclude = optionText.includes(text);
+// ,로 나뉘어진 숫자를 콤마 없이 출력하는 함수
+function stringNumberToInt(stringNumber){
+    return parseInt(stringNumber.replace(/,/g , ''));
+}
 
-	if(isInclude == false) {
-		$('.option-area').append('<div class="option-block"> <div> <div>옵션: <span class="option-block-text">'+ text + '</span></div> <div class="x-button">X</div> </div> <div> <input type="number" name="goodsCnt" value="1" min="1"> <div>24,000 원</div> </div> </div>')
+const goodsCntInput = $('input[name=cnt]');
+
+// cnt 값 달라질 때 개수 * 가격 해서 표시해 주는 함수
+goodsCntInput.keyup(function() {
+
+	// 0 이하로 내려가면 바로 1로 바뀌게 min 값 추가
+	if(goodsCntInput.val() == 0) {
+		alert("0 이하로는 입력할 수 없습니다!");
+		goodsCntInput.val(1);
 	}
+
+	$('.goods-cnt-box').text(goodsCntInput.val());
+
+	const goodsCnt = goodsCntInput.val();
+	const goodsPrice = stringNumberToInt($('#vo-price').text());
+
+	$('#final-pay').text(goodsCnt * goodsPrice);
+	
 })
 
-$('.x-button').click(function() {
-	$(this).unwrap();
-})
-
+// 재고 알림 팝업
 function callAlert() {
 	var url = "/blank/goods/stockalert";
 	var name = "재고 알림 받기";

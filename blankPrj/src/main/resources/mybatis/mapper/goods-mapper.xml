@@ -3,18 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="goodsMapper">
 
-	<update id="add">
+	<insert id="insertGoods">
 
-		INSERT ALL
+		INSERT
 		INTO GOODS
 		(
 			NO ,
 			CATEGORY ,
 			NAME ,
 			PRICE ,
+			STOCK ,
 			CONTENT ,
 			ENROLL_DATE ,
 			DELETE_YN
@@ -25,38 +25,15 @@
 			#{category} ,
 			#{name} ,
 			#{price} ,
+			#{stock} ,
 			#{content} ,
 			SYSDATE ,
 			'N'
 		)
-		<foreach collection="option" item="option" separator=",">
-		<foreach collection="stock" item="stock" separator=",">
-		INTO GOODS_OPTION
-		(
-			NO ,
-			GOODS ,
-			OPTION ,
-			STOCK
-		)
-		VALUES
-		(
-			SEQ_GOODS_OPTION_NO.NEXTVAL ,
-			#{no} ,
-			#{option},
-			#{stock}
-		)
-		</foreach>
-		</foreach>
 
-	</update>
+	</insert>
 	
-	<update id="addOption">
-		<foreach collection="array" item="" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
-		
-		</foreach>
-	</update>
-	
-	<insert id="write">
+	<insert id="insertReview">
 	
 		INSERT INTO GOODS_REVIEW
 		(
@@ -81,20 +58,36 @@
 	
 	</insert>
 	
-	<select id="detail">
+	<select id="selectAdminGoodsList" resultType="com.blank.app.goods.vo.GoodsVo">
+	
+		SELECT *
+		FROM GOODS
+		
+	</select>
+	
+	<select id="detail" resultType="com.blank.app.goods.vo.GoodsVo">
+	
 		SELECT
-		(
 			NO ,
 			CATEGORY ,
 			NAME ,
 			PRICE ,
-			OPTION ,
 			STOCK ,
 			CONTENT ,
 			ENROLL_DATE ,
 			DELETE_YN
-		)
 		FROM GOODS
+		WHERE NO = #{no}
+		
 	</select>
+	
+	<update id="deleteGoods">
+	
+		UPDATE GOODS
+		SET
+			DELETE_YN = 'Y'
+		WHERE NO = #{no}
+		
+	</update>
 	
 </mapper>
