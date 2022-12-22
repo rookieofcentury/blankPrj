@@ -126,3 +126,21 @@ main .notice-board-header{
     margin-left: 10px;
     border: none;
 }
+
+.notice-list .notice-list-top tr{
+	color : red;
+	font-size: 20px;
+}
+
+#page-area{
+    width: 150px;
+    height: 60px;
+    margin-left: 50%;
+	grid-column: span 7;
+    border-bottom: none;
+}
+
+#page-area a{
+    color: black;
+    text-decoration: none;
+}

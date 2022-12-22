@@ -30,10 +30,10 @@
             <form action="" method="get" id="notice-search-form">
 
                 <div class="notice-search">
-
-                    <select class="category">
+                
+                    <select class="category" name="category"><!-- name 확인! -->
                         <option value="title">제목</option>
-                        <option value="name">작성자</option>
+                        <option value="a.id">작성자</option>
                     </select
                     ><input type="text" name="keyword">
                     <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
@@ -41,12 +41,11 @@
                     
                 </div>
 
-
             </form>
     
             <div class="notice-list">
     
-                <div class="notice-list-top">전체 공지사항 64개</div>
+                <div class="notice-list-top">전체 공지사항 ${listCount} 개</div>
     
                 <div>번호</div>
                 <div>제목</div>
@@ -66,7 +65,22 @@
 	                <div><a href=""><img src="../resources/images/admin/edit.png"  class="edit-img"></a></div>
         		</c:forEach>
 
-    
+				<div id="page-area">
+				
+					<c:if test="${pageVo.startPage != 1}">
+						<a href="/blank/admin/notice?p=${pageVo.startPage - 1}"></a>
+					</c:if>
+
+					<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
+						<a href="/blank/admin/notice?p=${num}">${num}</a>
+					</c:forEach>
+
+					<c:if test="${pageVo.endPage != pageVo.maxPage}">
+						<a href="/blank/admin/notice?p=${pageVo.endPage + 1}"></a>
+					</c:if>
+
+				</div>
+
             </div>
 
         </div>
