@@ -24,6 +24,16 @@ public class GoodsVo {
 	private String enrollDate;
 	private char deleteYn;
 	private String exhibition;
-	private List<MultipartFile> profile;
+	private List<String> thumbnail;
+	private List<MultipartFile> thumbnailFile;
+	
+	public boolean isEmpty() {
+		if(thumbnailFile.get(0).isEmpty()) {return true;}
+		if(thumbnailFile == null){return true;}
+		if(thumbnailFile.size() == 0){return true;}
+		
+		return false;
+	}
+
 
 }

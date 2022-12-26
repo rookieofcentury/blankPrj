@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,26 +28,22 @@
                         <th>가격</th>
                         <th>수량</th>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox" name="chBox" class="chBox" data-cartNum="1"></td>
-                        <td><img src="" alt=""></td>
-                        <td>
-                            <span>무릎담요</span>
-                            <span>옵션: 블랭크 기본 패턴</span>
-                        </td>
-                        <td><fmt:formatNumber pattern="###,###,###" value="48000"/></td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="chBox" class="chBox" data-cartNum="2"></td>
-                        <td><img src="" alt=""></td>
-                        <td>
-                            <span>무릎담요</span>
-                            <span>옵션: 긔엽긔 포켓몬 패턴</span>
-                        </td>
-                        <td><fmt:formatNumber pattern="###,###,###" value="48000"/></td>
-                        <td>2</td>
-                    </tr>
+                    <c:if test="${cart == null}">
+                        <tr id="empty-box">
+                            <td rowspan="2" colspan="5" id="empty-box"><label>현재 장바구니가 비어 있습니다.</label><br>지금 바로 블랭크의 굿즈를 담아 보세요!</td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${cartList}" var="item">
+                        <tr>
+                            <td><input type="checkbox" name="chBox" class="chBox" data-cartNum="${item.no}"></td>
+                            <td><img src="" alt=""></td>
+                            <td>
+                                <span>${item.name}</span>
+                            </td>
+                            <td><fmt:formatNumber pattern="###,###,###" value="${item.price}"/></td>
+                            <td>${cart}</td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </div>
             <div class="btn-area">

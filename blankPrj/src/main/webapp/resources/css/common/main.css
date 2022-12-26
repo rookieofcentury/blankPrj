@@ -1,6 +1,5 @@
 * {
 	box-sizing: border-box;
-	/* border: 1px solid black; */
 }
 
 .wrap {
@@ -281,4 +280,31 @@
 	bottom: 0;
 	z-index: -1;
 	background-color: var(--sub-color);
+}
+
+/* 배너 및 스와이퍼 */
+#banner {
+	position: relative;
+	width: 70vw;
+}
+
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }

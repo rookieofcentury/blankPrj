@@ -44,7 +44,7 @@
                                 <span><span id="final-pay"><fmt:formatNumber pattern="###,###,###" value="${goods.price}"/></span> 원</span>
                             </div>
                             <div class="btn-area">
-                                <div class="btn-white">장바구니 담기</div>
+                                <div class="btn-white" onclick="addBasket();">장바구니 담기</div>
                                 <div class="btn-main">바로 구매</div>
                                 <div class="btn-white share-btn" id="share-btn" onclick="Kakao.Share.createScrapButton();"><i class="fa-solid fa-share-nodes"></i></div>
                             </div>
@@ -206,5 +206,22 @@
 	  container: '#share-btn',
 	  requestUrl: 'http://localhost:8888/blank/goods/detail',
 	});
+
+    function addBasket() {
+        $.ajax({
+            url: "/blank/goods/basket/add",
+            method: "POST",
+            data: {
+                no: '${goods.no}',
+                cnt: $('input[name=cnt]').val()
+            },
+            success: function(data) {
+                alert(data);
+            },
+            error: function() {
+                console.log('error');
+            }
+        })
+    }
 </script>
 </html>
