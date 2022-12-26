@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.blank.app.member.service.MemberService;
 import com.blank.app.project.service.ProjectService;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.project.vo.TimeVo;
 
 @RequestMapping("project")
 @Controller
@@ -36,10 +38,11 @@ public class ProjectController {
 	private ProjectService service;
 	
 	@GetMapping
-	public String project(ProjectVo vo, Model model,@RequestParam(name="p") int p) {
+	public String project(ProjectVo vo, Model model, @RequestParam(name="p") int p ) {
+		
 		ProjectVo prjVo = service.selectProject(vo,p);
-		System.out.println(prjVo);
 		model.addAttribute("prj", prjVo);
+		
 		return "project/detail/info";
 	}
 	
@@ -59,12 +62,30 @@ public class ProjectController {
 	}
 	
 	@GetMapping("post/defaultInfo")
-	public String postDefaultInfo(@RequestParam HashMap<String, String> map, Model model) {
+	public String postDefaultInfo(TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
 		
 		List<HashMap<String, String>> category = service.selectCategory(map);
-		
+		List<TimeVo> timeVo = service.selectStartime(timevo);
 		model.addAttribute("category", category);
+		model.addAttribute("time", timeVo);
 		return "project/post/defaultInfo";
+	}
+	
+	@PostMapping("post/defaultInfo")
+	public String postDefaultInfo(HttpSession session, ProjectVo vo, String postPrj){
+		session.setAttribute("postDefault", vo);
+		
+		switch (postPrj) {
+		case "약관정보":
+			return "project/post/agree";
+		case "기본정보":
+			return "project/post/defaultInfo";
+		case "옵션설계":
+			return "project/post/optionSet";
+		case "창작자정보":
+			return "project/post/creatorInfo";
+		}
+		return postPrj;
 	}
 	
 	@GetMapping("post/optionSet")
@@ -82,15 +103,41 @@ public class ProjectController {
 		return "project/post/creatorInfo";
 	}
 	
+//	@GetMapping("created")
+//	public String createdStatus() {
+//		return "project/created/status";
+//	}
+//	
 	@GetMapping("created")
-	public String createdStatus() {
+	public String creating(String myPrjAll, HttpSession session, ProjectVo vo, Model model) {	//myPrjAll을 MemberVo로 바꾸기
+		
+		List<ProjectVo> myPrj = service.selectMyPrj(vo);
+		List<ProjectVo> statusAll = service.selectStatusAll(vo);
+		//System.out.println(myPrj);
+		session.setAttribute("myPrj", myPrj);
+		model.addAttribute("statusAll", statusAll);
 		return "project/created/status";
+	}
+	
+	@GetMapping("created/delete")
+	public String deletePrj(ProjectVo vo) {	//MemberVo로 바꾸기 (no)
+		int result = service.deletePrj(vo);
+		return "redirect:/project/created";
 	}
 	
 	@GetMapping("created/list")
 	public String createdList() {
 		return "project/created/list";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	@PostMapping("/fileupload.do")

@@ -10,13 +10,55 @@
 	
 	<select id="selectCategory" resultType="HashMap" resultMap="cateName">
 		SELECT NO,NAME
-		FROM CATEGORY
+		FROM PRJ_CATEGORY
 	</select>
 	
 	<select id="selectPrj" resultType="ProjectVo">
-		SELECT *
-		FROM PROJECT
-		WHERE NO = #{p}
-		AND STATUS = 'C'
+		SELECT 
+        P.NO
+        ,P.TITLE
+        ,P.PRICE
+        ,P.START_DATE
+        ,P.END_DATE
+        ,P.TIME
+        ,P.URL
+        ,P.STATUS
+        ,M.NICK CREATOR
+         ,P.SUMMARY
+        ,C.NAME AS CATEGORY
+        ,(SELECT COUNT(R.NO) FROM REVIEW R INNER JOIN PROJECT P ON P.NO = R.PROJECT WHERE P.NO = 1) AS REVIEW
+        ,(SELECT COUNT(N.NO) FROM NEWS N INNER JOIN PROJECT P ON P.NO = N.PRJ WHERE P.NO = 1) AS NEWS
+		FROM PROJECT P
+		INNER JOIN MEMBER M ON P.CREATOR = M.NO
+		INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
+		WHERE P.NO = #{p}
+		GROUP BY P.NO ,P.TITLE ,P.PRICE ,P.START_DATE  ,P.END_DATE ,P.TIME ,P.URL ,P.STATUS, M.NICK, P.SUMMARY ,C.NAME
 	</select>
+	
+	<select id="selectTimeList" resultType="TimeVo">
+		SELECT *
+		FROM START_TIME
+	</select>
+	
+	<select id="selectMyPrj" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+		FROM PROJECT 
+		WHERE CREATOR = 1
+	</select>
+	
+	<select id="selectStatusAll" resultType="ProjectVo">
+		SELECT  
+		    COUNT(DISTINCT STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = 1
+	</select>
+	
+	<delete id="deletePrj">
+		DELETE FROM PROJECT WHERE P.NO = 1
+	</delete>
 </mapper>
