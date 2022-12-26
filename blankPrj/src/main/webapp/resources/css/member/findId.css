@@ -1,66 +1,44 @@
-.mypage-container{
-    margin: auto;
-    width: 70vw;
-    display: flex;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.member-info-up img{
-    width: 150px;
-    height: 150px;
-}
-.content-container{
-    width: 100%;
-    height: 900px;
-    margin: 40px;
-    display: grid;
-    grid-template-rows: 2.5fr 8fr;
-}
-.span3{
-    grid-column: 1 / -1;
-}
-.member-info-up{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    align-content:flex-end;
-    justify-items: center;
-    box-shadow: 0 4px 4px -4px var(--main-color);
-    padding-bottom: 10px;
-    margin: 10px;
-}
-.member-info-down{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    place-items: center;
-    margin: 10px;
-}
-.member-info-down > div{
-    margin-top: 10px;
-    height: 50px;
-}
-.hidden{
-    display: none;
-}
-.change-btn{
-    width: 90px;
-    height: 35px;
-}
-.member-info-input{
-    width: 250px;
-    height: 35px;
-}
-#quit{
-    --border-top: 1px solid var(--gray);
-    display: flex;
-    justify-content: flex-end;
-    color: var(--gray);
-    margin-right: 20px;
-    padding: 10px;
-    font-size: 15px;
 
+gin-form{
+    width: 60vw;
+    margin: 50px auto auto auto;
+    display: grid;
+    place-items: center;
 }
-input{
-    padding: 10px;
+.input{
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    border: 1px solid #999999;
+    border-radius: 5px;
 }
-/*  */
+.ace567{
+    background-color: #567ace;
+}
+hr{
+    width: 100%;
+}
+.container-main-area{
+    width: 70%;
+    padding:0px 13%;
+    margin-bottom: 15px;
+}
+.login-info{
+    margin: 10px 0;
+    font-size: 17px;
+}
+.btn-check{
+    width: 15%;
+    height: 40px;
+}
+.flex{
+    display: flex;
+}
 /*모달창*/
 #popup_layer {
     display: none;
@@ -82,4 +60,3 @@ input{
 .popup_box .popup_btn a.close_day:before, .popup_box .popup_btn a.close_day:after{display:none;}
 /*오버레이 뒷배경*/
 .popup_overlay{position:fixed;top:0px;right:0;left:0;bottom:0;z-index:1001;;background:rgba(0,0,0,0.5);}  
-

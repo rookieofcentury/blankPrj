@@ -91,10 +91,5 @@
 </div>
 </body>
 <script src="/blank/resources/js/member/payAddr.js"></script>
-<script>
-	const modalClick = $('.modal-notice');
 
-	modalClick.addEventListener("click", alert('바보'));
-
-  </script>
 </html>

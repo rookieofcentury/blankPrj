@@ -18,15 +18,15 @@
             <div><h1>로그인</h1></div>
         </div>
         <div id="login-container">
-            <form action="" method="post" class="login-form">
+            <form action="/blank/member/login" method="post" class="login-form">
                 <div class="container-main-area">
                     <div class="login-info">이메일</div>
-                    <div><input type="text" class="input" name="Email" placeholder="가입하신 이메일을 입력해주세요"></div>
+                    <div><input type="text" class="input" name="email" placeholder="가입하신 이메일을 입력해주세요"></div>
                 </div>
 
                 <div class="container-main-area">
                     <div class="login-info">비밀번호</div>
-                    <div><input type="password" class="input" name="Pwd" placeholder="비밀번호를 입력해주세요"></div>
+                    <div><input type="password" class="input" name="pwd" placeholder="비밀번호를 입력해주세요"></div>
                 </div>
                 <div class="container-main-area right">
                     <div><input type="checkbox" name="SaveId" id="saveId"><label for="saveId">아이디저장</label></div>

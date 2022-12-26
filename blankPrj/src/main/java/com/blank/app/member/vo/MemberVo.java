@@ -10,7 +10,7 @@ public class MemberVo {
 
 	private String no;
 	private String email;
-	private String pwd;
+	private String pwd1;
 	private String phone;
 	private String gender;
 	private String nick;
@@ -28,7 +28,7 @@ public class MemberVo {
 	private MultipartFile profile; 
 	
 	public void encode(BCryptPasswordEncoder enc) {
-		this.pwd = enc.encode(pwd);
+		this.pwd1 = enc.encode(pwd1);
 	}
 	
 }

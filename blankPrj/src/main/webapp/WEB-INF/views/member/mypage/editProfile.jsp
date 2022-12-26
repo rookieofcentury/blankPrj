@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>개인정보수정</title>
 <link rel="stylesheet" href="/blank/resources/css/member/editProfile.css">
+<link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -18,32 +19,38 @@
 				<div class="member-info-up">
 					<div>사진</div>
 					<div><img src="/blank/resources/images/member/choi.png"></div>
-					<div><input type="file"></div>
+					<div>
+						<input type="file">
+						<button class="delete-btn">회원탈퇴</button>
+					</div>
 				</div>
 				<div class="member-info-down">
 					<div>이  메 일</div>
-					<div><input type="text" name="memberEmail" value="멤버이메일" class="member-info-input"></div>
-					<div><button class="change-btn" id="email-btn">이메일 변경</button></div>
+					<div>${loginMember.email}</div>
+					<div><button class="change-btn" id="email-btn">변경</button></div>
 					<div class="hidden span3" id="email-hidden">
 						<form>
-							<input>
+							<div>
+								<input class="change-input">
+								<input type="button">
+							</div>
 						</form>
 					</div>
 					<div>닉 네 임</div>
-					<div><input type="text" name="memberNick" value="멤버닉네임" class="member-info-input"></div>
-					<div><button class="change-btn" id="nick-btn">닉네임 변경</button></div>
+					<div>${loginMember.nick}</div>
+					<div><button class="change-btn" id="nick-btn">변경</button></div>
 					<div class="hidden span3" id="nick-hidden">
 						여기는합친거
 					</div>
 					<div>휴대전화</div>
-					<div><input type="text" name="memberPhone" value="멤버핸드폰" class="member-info-input"></div>
-					<div><button class="change-btn" id="phone-btn">휴대전화 변경</button></div>
+					<div>${loginMember.phone}</div>
+					<div><button class="change-btn" id="phone-btn">변경</button></div>
 					<div class="hidden span3" id="phone-hidden">
 						여기는합친거
 					</div>
 					<div>비밀번호</div>
-					<div><input type="password" name="memberPwd" value="멤버비번" class="member-info-input"></div>
-					<div><button class="change-btn" id="pwd-btn">비밀번호 변경</button></div>
+					<div></div>
+					<div><button class="change-btn" id="pwd-btn">변경</button></div>
 					<div class="hidden span3" id="pwd-hidden">
 						여기는합친거
 					</div>
@@ -59,5 +66,32 @@
 	</div>	
 <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 </body>
+<div id="popup_layer">
+	<div class="popup_box">
+		<div class="popup_cont">
+			<img class="logo-img" src="/blank/resources/images/blank.png">
+			<p>
+				프로젝트를 삭제하시겠습니까?<br>
+				프로젝트를 삭제하시면,<br>
+				작성했던 모든 내용이 삭제됩니다.
+			</p>
+		</div>
+		<div class="popup_btn">
+			<a href="javascript:closePop();">Close</a>
+			<a id="chk_today" href="javascript:closeToday();" class="close_day">Do not open for a day</a> 
+		</div>
+	</div>
+</div>
+
+<script>
+
+/* 모달창 */
+$('.delete-btn').on('click', function() {
+	$('#popup_layer').css('display', 'block');
+});
+function closePop() { 
+	document.getElementById("popup_layer").style.display = "none";
+}
+</script>
 <script src="/blank/resources/js/member/editProfile.js"></script>
 </html>

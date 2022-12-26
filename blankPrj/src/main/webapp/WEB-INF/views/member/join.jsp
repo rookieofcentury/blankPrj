@@ -17,34 +17,33 @@
                 <div><h1>회원가입</h1></div>
             </div>
             <div class="join-container">
-                <form action="" method="post">
+                <form action="/blank/member/join" method="post" onsubmit="return checkAll();">
 
                 <div class="join-container-main">
                     
                     <div >이메일</div>
                     <div>
-                        <input type="text" name="email" class="email-input" id="email">
+                        <input type="text" name="email1" class="email-input" id="email1">
                         <select id="email2" class="email-input">
-                            <option >@naver.com</option>
-                            <option >@kakao.com</option>
-                            <option >@gmail.com</option>
+                            <option value="@naver.com" >@naver.com</option>
+                            <option value="@naver.com">@kakao.com</option>
+                            <option value="@naver.com">@gmail.com</option>
                         </select>
-                        <button class="btn-check" type="button" id="email-check">중복 검사</button>
+                        <button class="btn-check ace" type="button" id="email-check" onclick="emailDoubleCheck()">중복 검사</button>
                     </div>
-                    <div class="red">비밀번호 찾기에 이용되오니 수신가능한 이메일 작성을 요청드립니다.</div>
-                    <div class="result" id="email-result">이메일 유효성 검사 안맞아유~ </div>
+                    <div class="result" id="email-result"></div>
                     <div class="span-2">비밀번호</div>
-                    <div><input type="password" name="pwd" class="pwd-input"></div>
-                    <div class="result" id="pwd1-result">결과창</div>
+                    <div><input type="password" name="pwd1" class="pwd-input" ></div>
+                    <div class="result" id="pwd1-result"></div>
                     <div>비밀번호 확인</div>
                     <div><input type="password" name="pwd2" class="pwd-input"></div>
-                    <div class="result" id="pwd2-result">결과창</div>
+                    <div class="result" id="pwd2-result"></div>
                     <div>닉네임</div>
-                    <div><input type="text" name="nick" class="input"><button class="btn-check">중복체크</button></div>
-                    <div class="result" id="nick-result">결과창</div>
+                    <div><input type="text" name="nick" class="input"><button type ="button" class="btn-check ace" id="nick-check" onclick="nickDoubleCheck()">중복체크</button></div>
+                    <div class="result" id="nick-result"></div>
                     <div>핸드폰번호</div>
-                    <div><input type="text" name="phone" class="input"><button class="btn-check">중복체크</button></div>
-                    <div class="result" id="phone-result">결과창</div>
+                    <div><input type="text" name="phone" class="input" oninput="autoHyphen(this)"><button class="btn-check ace" type="button" id="phone-check" onclick="emailDoubleCheck()">중복체크</button></div>
+                    <div class="result" id="phone-result"></div>
                     <div>성별</div>
                     <div class="gender-check">
                         <div>남자 <input type="radio" name="gender" value="M"></div> 
