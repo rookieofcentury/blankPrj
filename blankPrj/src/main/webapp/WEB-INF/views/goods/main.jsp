@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/main.css">
+<link rel="stylesheet" href="/blank/resources/css/common/swiper.css">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
@@ -12,68 +17,33 @@
 <div class="wrap">
 
     <div class="container">
-        <div id="banner"></div>
+        <div id="banner">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div data-hash="slide1" class="swiper-slide">Slide 1</div>
+                  <div data-hash="slide2" class="swiper-slide">Slide 2</div>
+                  <div data-hash="slide3" class="swiper-slide">Slide 3</div>
+                  <div data-hash="slide4" class="swiper-slide">Slide 4</div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
         <div class="content">
             
         </div>
         <div class="content">
             <div class="goods-list">
-                <div class="goods-item" onclick="location.href='/blank/goods/detail';">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
+                <c:forEach items="${eightList}" var="item">
+                    <div class="goods-item" onclick="location.href='/blank/goods/detail?no=${item.no}';">
+                        <div class="image-box"><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt="item-pic"></div>
+                        <div>
+                            <span>${item.name}</span>
+                            <span><fmt:formatNumber pattern="###,###,###" value="${item.price}"/> 원</span>
+                        </div>
                     </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
-                <div class="goods-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>아이템명</span>
-                        <span>가격</span>
-                    </div>
-                </div>
+				</c:forEach>
             </div>
         </div>
         <div class="editor-picks">
@@ -119,5 +89,26 @@
 
 <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 
+<script>
+    $("document").ready(function () {
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            loop: true,
+            hashNavigation: {
+            watchState: true,
+            },
+            pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            },
+            navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+            },
+        });
+        swiper.autoplay.start();
+    });
+</script>
 </body>
 </html>

@@ -5,34 +5,64 @@
 
 <mapper namespace="goodsMapper">
 
-	<insert id="insertGoods">
-
-		INSERT
-		INTO GOODS
-		(
-			NO ,
-			CATEGORY ,
-			NAME ,
-			PRICE ,
-			STOCK ,
-			CONTENT ,
-			ENROLL_DATE ,
-			DELETE_YN
-		)
-		VALUES
-		(
-			SEQ_GOODS_NO.NEXTVAL ,
-			#{category} ,
-			#{name} ,
-			#{price} ,
-			#{stock} ,
-			#{content} ,
-			SYSDATE ,
-			'N'
-		)
-
-	</insert>
+	<!-- SELECT 카테고리 List -->
+	<select id="selectCategoryList" resultType="java.util.HashMap">
+		SELECT NO, NAME FROM GOODS_CATEGORY
+	</select>
 	
+	<!-- SELECT 기획전 List -->
+	<select id="selectExhibitionList" resultType="java.util.HashMap">
+		SELECT NO, TITLE FROM GOODS_EXHIBITION
+	</select>
+
+	<!-- INSERT GOODS 정보, GOODS 사진 -->
+	<update id="insertGoods">
+
+		INSERT ALL
+			INTO GOODS
+				(
+					NO ,
+					CATEGORY ,
+					NAME ,
+					PRICE ,
+					STOCK ,
+					CONTENT ,
+					ENROLL_DATE ,
+					EXHIBITION ,
+					DELETE_YN
+				)
+				VALUES
+				(
+					GET_SEQ_NO('SEQ_GOODS_NO') ,
+					#{goods.category} ,
+					#{goods.name} ,
+					#{goods.price} ,
+					#{goods.stock} ,
+					#{goods.content} ,
+					SYSDATE ,
+					#{goods.exhibition} ,
+					'N'
+				)
+			<foreach collection="thumbnail" item="item" close="SELECT * FROM DUAL" separator=" ">
+			INTO GOODS_ATTACHMENT
+				(
+					NO ,
+					GOODS ,
+					FILE_NAME ,
+					ENROLL_DATE
+				)
+			VALUES
+				(
+					GET_SEQ_NO('SEQ_GOODS_ATTACHMENT_NO') ,
+					GET_SEQ_CURR_NO('SEQ_GOODS_NO') ,
+					#{item} ,
+					SYSDATE
+				)
+			</foreach>
+
+	</update>
+	
+	<!-- INSERT GOODS 리뷰 -->
 	<insert id="insertReview">
 	
 		INSERT INTO GOODS_REVIEW
@@ -58,36 +88,136 @@
 	
 	</insert>
 	
-	<select id="selectAdminGoodsList" resultType="com.blank.app.goods.vo.GoodsVo">
+	<select id="goodsCnt" resultType="int">
+		SELECT COUNT(*) FROM GOODS
+		WHERE DELETE_YN = 'N'
+	</select>
 	
-		SELECT *
-		FROM GOODS
-		
+	<!-- SELECT ADMIN GOODS LIST -->
+	<select id="selectAdminGoodsList" resultType="com.blank.app.goods.vo.GoodsVo">
+		SELECT
+			G.NO ,
+			C.NAME AS CATEGORY ,
+			G.NAME ,
+			G.PRICE ,
+			G.STOCK ,
+			G.CONTENT ,
+			G.ENROLL_DATE ,
+			E.TITLE AS EXHIBITION ,
+			G.DELETE_YN
+		FROM GOODS G
+		INNER JOIN GOODS_CATEGORY C
+			ON C.NO = G.CATEGORY
+		LEFT OUTER JOIN GOODS_EXHIBITION E
+			ON E.NO = G.EXHIBITION
+		WHERE G.DELETE_YN = 'N'
+		<if test=" keyword != null and keyword != '' ">
+			AND ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+	
+	<select id="findThumbnail" resultType="String">
+		SELECT FILE_NAME
+        FROM GOODS_ATTACHMENT
+        WHERE GOODS = #{no}
 	</select>
 	
 	<select id="detail" resultType="com.blank.app.goods.vo.GoodsVo">
-	
 		SELECT
-			NO ,
-			CATEGORY ,
-			NAME ,
-			PRICE ,
-			STOCK ,
-			CONTENT ,
-			ENROLL_DATE ,
-			DELETE_YN
-		FROM GOODS
-		WHERE NO = #{no}
-		
+			G.NO ,
+			C.NAME AS CATEGORY ,
+			G.NAME ,
+			G.PRICE ,
+			G.STOCK ,
+			G.CONTENT ,
+			G.ENROLL_DATE ,
+			E.TITLE AS EXHIBITION ,
+			G.DELETE_YN
+		FROM GOODS G
+		INNER JOIN GOODS_CATEGORY C
+			ON C.NO = G.CATEGORY
+		LEFT OUTER JOIN GOODS_EXHIBITION E
+			ON E.NO = G.EXHIBITION
+		WHERE G.NO = #{no}
 	</select>
 	
 	<update id="deleteGoods">
-	
 		UPDATE GOODS
 		SET
 			DELETE_YN = 'Y'
 		WHERE NO = #{no}
-		
 	</update>
+	
+	<update id="editGoods">
+		UPDATE GOODS
+		SET 
+			CATEGORY = #{category},
+			NAME = #{name},
+			PRICE = #{price},
+			STOCK = #{stock},
+			CONTENT = #{content},
+			EXHIBITION = #{exhibition}
+		WHERE NO = #{no}
+	</update>
+	
+	<update id="insertThumbnail">
+		INSERT ALL
+		<foreach collection="thumbnail" item="item" close="SELECT * FROM DUAL" separator=" ">
+			INTO GOODS_ATTACHMENT
+				(
+					NO ,
+					GOODS ,
+					FILE_NAME ,
+					ENROLL_DATE
+				)
+			VALUES
+				(
+					GET_SEQ_NO('SEQ_GOODS_ATTACHMENT_NO') ,
+					#{no} ,
+					#{item} ,
+					SYSDATE
+				)
+		</foreach>
+	</update>
+	
+	<delete id="deleteThumbnail" parameterType="java.util.ArrayList">
+		DELETE FROM GOODS_ATTACHMENT
+		WHERE
+		<foreach collection="array" item="item" separator="or">
+			FILE_NAME = #{item}
+		</foreach>
+	</delete>
+	
+	<!-- 굿즈 메인 랜덤 8 개 출력 -->
+	<select id="mainGoodsList" resultType="com.blank.app.goods.vo.GoodsVo">
+		SELECT * FROM
+		(SELECT
+			G.NO ,
+			C.NAME AS CATEGORY ,
+			G.NAME ,
+			G.PRICE ,
+			G.STOCK ,
+			G.CONTENT ,
+			G.ENROLL_DATE ,
+			E.TITLE AS EXHIBITION ,
+			G.DELETE_YN
+		FROM GOODS G
+		INNER JOIN GOODS_CATEGORY C
+			ON C.NO = G.CATEGORY
+		LEFT OUTER JOIN GOODS_EXHIBITION E
+			ON E.NO = G.EXHIBITION
+		WHERE G.DELETE_YN = 'N'
+		ORDER BY DBMS_RANDOM.RANDOM())
+		<![CDATA[WHERE ROWNUM <= 8]]>
+	</select>
+	
+	<select id="getCartList" resultType="com.blank.app.goods.vo.CartVo">
+		SELECT NO, NAME, PRICE FROM GOODS
+		WHERE
+		<foreach collection="list" item="item" separator="or">
+			NO = #{item}
+		</foreach>
+	</select>
 	
 </mapper>
