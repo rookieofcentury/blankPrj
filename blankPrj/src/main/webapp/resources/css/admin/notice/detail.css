@@ -31,7 +31,7 @@ main .detail-board-header{
 
 /* 창 닫기 */
 .notice-detail-close{
-    width: 130px;
+    width: 160px;
     height: 30px;
     border: 1px solid rgba(197, 197, 197, 1);
     border-bottom: none;
@@ -80,13 +80,11 @@ main .detail-board-header{
 #title-input{
 	width: 800px;
 	height: 30px;
-	border: 1px solid red;
 }
 
 #content-input{
 	width: 800px;
 	height: 100%;
-	border: 1px solid red;
 	margin-top: 10px;
 }
 

@@ -6,7 +6,7 @@
 
 	<!-- 관리자 로그인 -->
 	<select id="login" resultType="AdminVo">
-		SELECT ID AS ADMIN_ID, PWD AS ADMIN_PWD
+		SELECT NO, ID AS ADMIN_ID, PWD AS ADMIN_PWD
 		FROM ADMIN
 		WHERE ID = #{adminId}
 		AND PWD = #{adminPwd}
@@ -34,17 +34,34 @@
 	<insert id="noticeWrite">
 		INSERT INTO NOTICE
 		(
+			NO,
+			ADMIN_NO,
 			TITLE,
 			CONTENT,
 			WRITE_DATE
 		)
 		VALUES
 		(
+			SEQ_NOTICE_NO.NEXTVAL,
+			#{adminNo},
 			#{title},
 			#{content},
 			SYSDATE
 		)
 	</insert>
+	
+	<!-- 공지사항 상세조회 -->
+	<select id="selectOne" resultType="NoticeVo">
+		SELECT N.NO, A.ID AS ADMIN_NO, N.TITLE, N.CONTENT, N.FIXE_YN, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, N.DELETE_YN
+		FROM NOTICE N
+		INNER JOIN ADMIN A
+		ON A.NO = N.ADMIN_NO
+		WHERE N.NO = #{no}
+	</select>
+	
+	<update id="updateNotice">
+		UPDATE NOTICE SET WRITE_DATE = SYSDATE, TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
+	</update>
 	
 </mapper>
 

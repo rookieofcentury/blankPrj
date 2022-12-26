@@ -37,7 +37,7 @@
                     </select
                     ><input type="text" name="keyword">
                     <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
-                    <a href=""><button>작성</button></a>
+                    <a href="/blank/admin/noticeWrite"><button type='button'>작성</button></a>
                     
                 </div>
 
@@ -62,13 +62,13 @@
 	                <div>${vo.adminNo}</div>
 	                <div>${vo.writeDate}</div>
 	                <div>${vo.deleteYn}</div>
-	                <div><a href=""><img src="../resources/images/admin/edit.png"  class="edit-img"></a></div>
+	                <div><a href="/blank/admin/noticeDetail?no=${vo.no}&deleteYn=${vo.deleteYn}" name="no"><img src="../resources/images/admin/edit.png"  class="edit-img"></a></div>
         		</c:forEach>
 
 				<div id="page-area">
 				
 					<c:if test="${pageVo.startPage != 1}">
-						<a href="/blank/admin/notice?p=${pageVo.startPage - 1}"></a>
+						<a href="/blank/admin/notice?p=${pageVo.startPage - 1}">&lt;</a>
 					</c:if>
 
 					<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
@@ -76,7 +76,7 @@
 					</c:forEach>
 
 					<c:if test="${pageVo.endPage != pageVo.maxPage}">
-						<a href="/blank/admin/notice?p=${pageVo.endPage + 1}"></a>
+						<a href="/blank/admin/notice?p=${pageVo.endPage + 1}">&gt;</a>
 					</c:if>
 
 				</div>

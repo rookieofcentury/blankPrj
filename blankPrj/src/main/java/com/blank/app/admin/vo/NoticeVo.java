@@ -1,10 +1,10 @@
 package com.blank.app.admin.vo;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
-@ToString
-@Getter
+@Data
 public class NoticeVo {
 
 	private String no;

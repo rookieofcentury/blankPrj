@@ -41,5 +41,15 @@ public class AdminService {
 	public int noticeWrite(NoticeVo noticeVo) {
 		return admindao.noticeWrite(sst, noticeVo);
 	}
+
+	//공지사항 상세조회
+	public NoticeVo selectOne(NoticeVo noticeVo) {
+		return admindao.selectOne(sst, noticeVo);
+	}
+
+	//공지사항 수정
+	public int updateOne(NoticeVo noticeVo) {
+		return admindao.updateNotice(sst, noticeVo);
+	}
 	
 }
