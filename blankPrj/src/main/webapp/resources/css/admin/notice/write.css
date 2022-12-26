@@ -80,14 +80,16 @@ main .write-board-header{
 #title-input{
 	width: 800px;
 	height: 30px;
-	border: 1px solid red;
 }
 
+/* !! text 위치 조정 필요 */
 #content-input{
 	width: 800px;
 	height: 100%;
-	border: 1px solid red;
 	margin-top: 10px;
+    vertical-align: top;
+    text-align: left; 
+    border: 1px solid red;
 }
 
 .write-list div{

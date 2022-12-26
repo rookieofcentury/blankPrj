@@ -34,8 +34,19 @@ public class AdminDao {
 		return sst.selectOne("adminMapper.listCount");
 	}
 
+	//공지사항 작성
 	public int noticeWrite(SqlSessionTemplate sst, NoticeVo noticeVo) {
-		return sst.insert("adminMapper.noticeWrite");
+		return sst.insert("adminMapper.noticeWrite", noticeVo);
+	}
+
+	//공지사항 상세조회
+	public NoticeVo selectOne(SqlSessionTemplate sst, NoticeVo noticeVo) {
+		return sst.selectOne("adminMapper.selectOne", noticeVo);
+	}
+
+	//공지사항 수정
+	public int updateNotice(SqlSessionTemplate sst, NoticeVo noticeVo) {
+		return sst.update("adminMapper.updateNotice", noticeVo);
 	}
 	
 }

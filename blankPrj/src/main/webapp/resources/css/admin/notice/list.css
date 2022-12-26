@@ -94,6 +94,12 @@ main .notice-board-header{
     margin-top: 8px;
 }
 
+
+.notice-search a{
+    width: 40px;
+    margin-left: 95%;
+}
+
 .notice-list{
     width: 1580px;
     height: 710px;
