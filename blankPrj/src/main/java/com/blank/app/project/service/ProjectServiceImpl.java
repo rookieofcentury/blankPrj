@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.project.dao.ProjectDao;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.project.vo.TimeVo;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -35,6 +36,31 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public ProjectVo selectProject(ProjectVo vo, int p) {
 		return dao.selectProject(sst,vo,p);
+	}
+
+	@Override
+	public List<TimeVo> selectStartime(TimeVo timevo) {
+		return (List<TimeVo>) dao.selectStartime(sst,timevo);
+	}
+
+	@Override
+	public List<ProjectVo> selectMyPrj(ProjectVo vo) {
+		return (List<ProjectVo>) dao.selectMyPrj(sst, vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectStatusAll(ProjectVo vo) {
+		return (List<ProjectVo>) dao.selectStatusAll(sst, vo);
+	}
+
+	@Override
+	public int deletePrj(ProjectVo vo) {
+		int result = dao.deletePrj(sst, vo);
+		if(result == 1) {
+			return result;
+		}else {
+			return (Integer) null;
+		}
 	}
 
 }

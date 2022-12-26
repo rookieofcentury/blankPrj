@@ -23,6 +23,7 @@
 </head>
 <body>
 
+<form action="/blank/post/defaultInfo" method="post">
     <div class="navi-menu">
         <div class="content-editor">
             <div class="editor-logo">
@@ -30,16 +31,19 @@
                 <div><h1>프로젝트 기획</h1></div>
             </div>
             <div class="editor-buttons">
-                <div class="buttons-storage">임시저장</div>
-                <div class="buttons-request">심사요청</div>
-                <div class="buttons-goout"><img src="/blank/resources/images/project/icon_goout.png"></div>
+                <button type="button" class="buttons-storage">임시저장</button>
+                <button type="button" class="buttons-request" onclick="saveBtn(); return false;">심사요청</button>
+                <div class="buttons-goout">
+                    <img src="/blank/resources/images/project/icon_goout.png">
+                    <a href="/blank/project/created/list"></a>
+                </div>
             </div>
         </div>
         <div class="content-menu">
-            <div>약관 정보</div>
-            <div>기본 정보</div>
-            <div>옵션 설계</div>
-            <div>창작자 정보</div>
+            <div><input type="submit" name="postPrj" value="약관정보"></div>
+            <div><input type="submit" name="postPrj" value="기본정보"></div> <!--*이 부분은 현재페이지니까 빼도되나..-->
+            <div><input type="submit" name="postPrj" value="옵션설계"></div>
+            <div><input type="submit" name="postPrj" value="창작자정보"></div>
         </div>
     </div>
     <div id="container">
@@ -65,7 +69,7 @@
                         <c:forEach items="${category}" var="cate">
                         <option>${cate.name}</option>
 						</c:forEach>
-                    	</select>
+                    </select>
                     <div></div>
                 </div>
             </div>
@@ -103,8 +107,10 @@
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select>
-                                        <option>12시</option>
-                                        <option>13시</option>
+                                        <option value="category">==시작시간 선택==</option>
+                                        <c:forEach items="${time}" var="time">
+                                        <option>${time.time}시</option>
+										</c:forEach>
                                     </select>
                                     <!-- <div>dd</div> -->
                                 </div>
@@ -193,9 +199,9 @@
                 </div>
                 <div class="story-editor"><textarea id="editor4" name="editor4"></textarea></div>
             </div>
-
         </div>
     </div>
+</form>
 
     <script>
 
@@ -280,39 +286,40 @@
         //펀딩일수 계산
         // $("input[name='endDay']").on("focusout", function() {
             $(".summary-text").click(function() {
+                console.log('시작일 입력해줘');
+
                 if ($("input[name='startDay']").length < 1) {
-                    console.log('시작일 입력해줘');
                     console.log($("input[name='endDay']").length)
                     alert("시작일을 입력해 주세요");
                 }
             });
             
-            $(".plan-write").click(function() {
-                console.log('dd');
-                var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
-                var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
-            if (date2 - date1 < 0){
-                console.log('시작일 종료일 확인');
-                console.log(date1);
-                console.log(date2);
-                alert("시작일이 종료일보다 늦어요ㅠ"); 
-            }
-            else if (1 < 2){
-                var today = new Date();
-                var year = today.getFullYear();
-                var month = ('0' + (today.getMonth() + 1)).slice(-2);
-                var day = ('0' + today.getDate()).slice(-2);
+        //     $(".plan-write").click(function() {
+        //         console.log('dd');
+        //         var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
+        //         var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
+        //     if (date2 - date1 < 0){
+        //         console.log('시작일 종료일 확인');
+        //         console.log(date1);
+        //         console.log(date2);
+        //         alert("시작일이 종료일보다 늦어요ㅠ"); 
+        //     }
+        //     else if (1 < 2){
+        //         var today = new Date();
+        //         var year = today.getFullYear();
+        //         var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        //         var day = ('0' + today.getDate()).slice(-2);
 
-                var dateString = year + '-' + month  + '-' + day;
+        //         var dateString = year + '-' + month  + '-' + day;
 
-                console.log(dateString);
+        //         console.log(dateString);
 
-                if(date1 < dateString){
-                    console.log("시작일은 현재날짜보다 빠를 수 없습니다.");
+        //         if(date1 < dateString){
+        //             console.log("시작일은 현재날짜보다 빠를 수 없습니다.");
                 
-                }
-            }
-        });
+        //         }
+        //     }
+        // });
 
         //글자수 체크(주소)
         $("input[name='url']").on("focusout", function() {
@@ -367,6 +374,11 @@
         if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
 
         return true;
+        }
+
+        /*심사요청 href*/
+        function saveBtn(){
+            location.href = "/blank/project/post/save";
         }
 
     </script>

@@ -228,12 +228,19 @@ hr:last-of-type{
     width: 70%;
 }
 .explanation-side{
-    padding-top: 28px;
+    --padding-top: 28px;
     margin-top: 5px;
     float: right;
     --width: 284px;
     width: 30%;
     overflow: hidden;
+}
+.explanation-side >div:first-child{
+	margin-bottom : 10px;
+	display : flex;
+	justify-content: flex-end;
+	font-size: 12px;
+    color: gray;
 }
 .side-creator{
     border: 1px solid pink;
@@ -291,6 +298,9 @@ hr:last-of-type{
 }
 .card-option{
     padding: 20px;
+}
+.option-select{
+    border: 3px solid var(--main-color);
 }
 .option-title{
     display: flex;

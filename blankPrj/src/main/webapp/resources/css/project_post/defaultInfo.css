@@ -54,10 +54,10 @@
     width: 27px;
     height: 27px;
     color: #567ace;
+    cursor: pointer;
 }
 .content-menu{
     width: 100%;
-    cursor: pointer;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -69,6 +69,10 @@
     height: 40px;
     border-bottom :1px solid #AFAFAF;
 }
+.content-menu :nth-child(1):hover{
+    color: #567ace;
+    cursor: pointer;
+}
 .content-menu :nth-child(2){
     color: #567ace;
     padding-bottom: 12px;
@@ -77,10 +81,15 @@
 .content-menu>div:not(.content-menu :nth-child(2)){
     position: relative;
     padding-bottom: 12px;
+    cursor: pointer;
 }
-.content-menu>div:hover{
-    color: #567ace;
+.content-menu>div>input{
+    background: transparent;
 } 
+/* .content-menu>div>input:hover:not(.content-menu>div>input:nth-child(2)){
+    color: #567ace;
+    cursor: pointer;
+}  */
 /*여기까지 헤더 fixed*/
 
 li{

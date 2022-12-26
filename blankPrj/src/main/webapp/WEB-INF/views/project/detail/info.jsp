@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 	
-	 <div id="container">
+	<div id="container">
 		<div class="content-intro">
 			<div class="intro-top">
 				<a href=#>
@@ -33,7 +34,7 @@
                         <button type="button">>></button>
                     </div>
 					<div class="main-summary">
-					아직도 키보드 마우스 스탠드 다 따로 들고 다니는 그대를 위해, 진정한 올인원 키보드가 왔습니다. 키보드 아래로 들어간다요오
+						${prj.summary}
 					</div>
 				</div>
 				<div class="introduction-sub">
@@ -56,12 +57,12 @@
 					<div class="sub-info">
 						<div class="info-price">
 							<div class="price"><strong>목표금액</strong></div>
-							<div>${prj.price}원</div>
+							<div><fmt:formatNumber value="${prj.price}" pattern="#,###"/>원</div>
 						</div>
 						<div class="info-period">
 							<div class="period"><strong>펀딩기간</strong></div>
-							<div>${prj.startDay}~${prj.endDay}</div>
-						</div>
+							<div><fmt:formatDate value="${prj.startDate}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${prj.endDate}" pattern="yyyy-MM-dd"/></div>
+								<!-- ${prj.startDate}~${prj.endDate}</div> -->
 						<div class="info-payment">
 							<div class="payment"><strong>결제</strong></div>
 							<div>100% 이상 모이면 펀딩이 성공되며, 펀딩 마감일까지 목표 금액이 100% 모일 경우 펀딩이 끝난 다음 날 결제가 진행됩니다.</div>
@@ -80,12 +81,13 @@
         <hr>
         <div class="content-navigation">
             <a href="#">프로젝트 계획</a>
-            <a href="/blank/project/news">새소식 4 </a>
-            <a href="/blank/project/review">후기 11</a>
+            <a href="/blank/project/news">새소식 ${prj.news} </a>
+            <a href="/blank/project/review">후기 ${prj.review}</a>
         </div>
 		<div class="content-explanation">
             <div class="explanation-project">아아 이곳은 프로젝트 소개입니다</div>
             <div class="explanation-side">
+				<div>프로젝트 신고하기</div>
                 <div class="side-creator">
                     <div class="creator-header">창작자 소개</div>
                     <div class="creator-container">
@@ -95,7 +97,7 @@
 							</a>
 							<div class="container-name">
 								<div class="name-nick"><strong>
-									<a href=#>청애름</a>
+									<a href=#>${prj.creator}</a>
 								</strong></div>
 								<div class="name-follow">+ 팔로우</div>
 							</div>
@@ -124,6 +126,7 @@
                     </div>
                 </div>
             </div>
+            
 		</div>
 	</div>
 	
@@ -131,6 +134,7 @@
 
 	<script>
 
+		/*찜하트 채우기*/
         var i = 0;
         $('i').on('click',function(){
             if(i==0){
@@ -140,9 +144,18 @@
                 $(this).attr('class','bi-heart');
                 i--;
             }
-
         });
 
+		/*옵션 선택*/
+		$('.card-option').click(function(){
+			$('.reward-card').css("border-width", "5px");
+			$('.reward-card').css("border-color", "#567ace");
+		});
+
+		/*금액 콤마찍기*/
+		var amount = '${ prj.price }'
+		wantPrice = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return wantPrice;
     </script>
 </body>
 </html>
