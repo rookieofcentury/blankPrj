@@ -20,7 +20,7 @@
   	(
         MEMBER_NO_SEQ.NEXTVAL,
         #{email},
-        #{pwd},
+        #{pwd1},
         #{phone},
         #{gender},
         #{nick}
@@ -30,7 +30,7 @@
   </insert>
   
   <!--  -->
-  <select id="selectOneMember" resultType="com.blank.app.member.vo.MemberVo"> 
+  <select id="selectOneMember" resultType="MemberVo"> 
   	SELECT * 
   	FROM MEMBER
   	WHERE EMAIL = #{email}

@@ -11,4 +11,8 @@ public interface MemberDao {
 	
 	public MemberVo selectMemberOneById(SqlSessionTemplate sst, MemberVo vo);
 
+	public int doubleCheckByEmail(SqlSessionTemplate sst, String email);
+
+	public int doubleCheckByNick(SqlSessionTemplate sst, String nick);
+
 }

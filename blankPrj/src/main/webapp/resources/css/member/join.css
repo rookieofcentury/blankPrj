@@ -82,14 +82,7 @@ hr{
 .result{
     font-size: 12px;
     display: none;
-}
-#email-result{
     margin: 10px;
-    
-}
-.red{
-    color: red;
-    font-size: 14px;
 }
 .pwd-input{
     height: 40px;
@@ -106,4 +99,19 @@ hr{
 .another-login>div, .another-join>div{
    margin: 20px 10px;
 }
-
+input[type=button], button{
+    background-color: #FFF;
+    border: 1px solid;
+}
+.red{
+    color: red;
+    border-color: red;
+}
+.green{
+    color: green;
+    border-color: green;
+}
+.ace{
+    color: #567ace;
+    border-color: #567ace;
+}

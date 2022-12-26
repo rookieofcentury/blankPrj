@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.MemberVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RequestMapping("member")
 @Controller
+@Slf4j
 public class MemberController {
 	
 	@Autowired
@@ -38,9 +41,15 @@ public class MemberController {
 	@PostMapping("login")
 	public String login(MemberVo vo, HttpSession session) {
 		
+		log.warn("화면에서 받은로그인 정보 "+vo);
+		
 		MemberVo loginMember = service.login(vo);
 		
+		log.warn("로그인멤버~ "+loginMember);
+		
 		if(loginMember == null) {
+			
+			log.warn("로그인 실패입니다.");
 			return "member/login";
 		}
 		
@@ -69,9 +78,25 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	
+	//아이디 찾기 화면
+	@GetMapping("findId")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	//비밀번호 찾기  화면 
+	@GetMapping("findPwd")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
 	//마이페이지 화면 / 개인정보 변경 
 	@GetMapping("mypage/editprofile")
-	public String mypageEditProfile() {
+	public String mypageEditProfile(HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		log.debug("넘어오나요?"+loginMember);
 		return "member/mypage/editProfile";
 	}
 	
@@ -98,5 +123,6 @@ public class MemberController {
 	public String mypageReportQ() {
 		return "member/mypage/reportQ";
 	}
+	
 	
 }
