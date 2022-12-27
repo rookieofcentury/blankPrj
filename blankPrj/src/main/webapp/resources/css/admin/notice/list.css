@@ -133,11 +133,6 @@ main .notice-board-header{
     border: none;
 }
 
-.notice-list .notice-list-top tr{
-	color : red;
-	font-size: 20px;
-}
-
 #page-area{
     width: 150px;
     height: 60px;

@@ -59,9 +59,71 @@
 		WHERE N.NO = #{no}
 	</select>
 	
+	<!-- 공지사항 수정 -->
 	<update id="updateNotice">
 		UPDATE NOTICE SET WRITE_DATE = SYSDATE, TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
 	</update>
+	
+	<!-- 전체 회원 수 카운드 -->
+	<select id="memberCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+	
+	<!-- 회원 목록 조회 -->
+	<select id="selectMemberList" resultType="MemberVo">
+		SELECT NO, NICK, SUBSTR(PHONE, 1, 3) || '-' || SUBSTR(PHONE, 4, 4) || '-' || SUBSTR(PHONE, 8) AS PHONE, EMAIL, TO_CHAR(POINT,'fm999,999,999,999') AS POINT, BANK, ACCOUNT, DEPOSITOR, STATUS
+		FROM MEMBER
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+	
+	<!-- 전체 프로젝트 수 카운드 -->
+	<select id="projectCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PROJECT
+	</select>
+	
+	<!-- 프로젝트 목록 조회 -->
+	<select id="selectProjectList" resultType="ProjectVo">
+		SELECT P.NO, M.NICK AS CREATOR, CONCAT(SUBSTR(TITLE, 1, 28),'...') AS TITLE, C.NAME AS CATEGORY, TO_CHAR(PRICE,'fm999,999,999,999') AS PRICE, P.START_DATE, P.END_DATE, P.STATUS
+		FROM PROJECT P, MEMBER M, PRJ_CATEGORY C
+		WHERE P.CREATOR = M.NO
+		AND P.CATEGORY = C.NO
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+	
+	<!-- !!!!!여기 해야 함 !!!!! 프로젝트 상세조회 -->
+	<select id="selectPrjOne" resultType="ProjectVo">
+		SELECT N.NO, A.ID AS ADMIN_NO, N.TITLE, N.CONTENT, N.FIXE_YN, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, N.DELETE_YN
+		FROM NOTICE N
+		INNER JOIN ADMIN A
+		ON A.NO = N.ADMIN_NO
+		WHERE N.NO = #{no}
+	</select>
+	
+	<!-- 전체 신고된 프로젝트 수 카운드 -->
+	<select id="deProjectCount" resultType="int">
+		SELECT COUNT(*)
+		FROM REPORT
+	</select>
+	
+	<!-- 신고된 프로젝트 목록 조회 -->
+	<select id="selectDeProjectList" resultType="ReportVo">
+		SELECT R.NO, M.NICK AS REPORTER, CONCAT(SUBSTR(TITLE, 1, 28),'...') AS TITLE, R.CONTENT, R.PRJ, SUBSTR(R.ENROLL_DATE, 1, 8) AS ENROLL_DATE, R.STATUS
+		FROM REPORT R
+		INNER JOIN MEMBER M
+		ON R.NO = M.NO
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
 	
 </mapper>
 
