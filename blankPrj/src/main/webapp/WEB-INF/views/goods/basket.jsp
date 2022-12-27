@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/basket.css">
+<script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
@@ -22,26 +23,35 @@
             <div>
                 <table>
                     <tr>
-                        <th><label for="all-check"><div><input type="checkbox" id="all-check"></div></label></th>
+                        <th><input type="checkbox" id="all-check"><label for="all-check"></label></th>
                         <th>이미지</th>
                         <th>상품 정보</th>
                         <th>가격</th>
                         <th>수량</th>
                     </tr>
-                    <c:if test="${cart == null}">
+
+                    <!-- 장바구니가 비어 있을 때 -->
+                    <c:if test="${empty cart}">
                         <tr id="empty-box">
                             <td rowspan="2" colspan="5" id="empty-box"><label>현재 장바구니가 비어 있습니다.</label><br>지금 바로 블랭크의 굿즈를 담아 보세요!</td>
                         </tr>
                     </c:if>
+
                     <c:forEach items="${cartList}" var="item">
                         <tr>
-                            <td><input type="checkbox" name="chBox" class="chBox" data-cartNum="${item.no}"></td>
+                            <td><input type="checkbox" name="chBox" class="chBox" id="${item.no}"><label for="${item.no}"></label></td>
                             <td><img src="" alt=""></td>
                             <td>
                                 <span>${item.name}</span>
                             </td>
                             <td><fmt:formatNumber pattern="###,###,###" value="${item.price}"/></td>
-                            <td>${cart}</td>
+                            <td class="cnt-area">
+                                <div class="cnt-item">
+                                    <div class="cnt-btn minus-btn"><i class="fa-solid fa-minus"></i></div>
+                                    <input type="text" name="cnt" value="${cart[item.no]}">
+                                    <div class="cnt-btn plus-btn"><i class="fa-solid fa-plus"></i></div>
+                                </div>
+                                </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -57,14 +67,14 @@
                     <div>
                         <span class="bold">상품 금액</span>
                         <div class="price">
-                            <span class="val">72,000</span>
+                            <input type="text" class="price-area val spot" id="product-price" readonly>
                             <span class="unit">원</span>
                         </div>
                     </div>
                     <div>
                         <span class="bold">배송비</span>
                         <div class="price">
-                            <span class="val">3,000</span>
+                            <input type="text" class="price-area" id="del-fee" readonly>
                             <span class="unit">원</span>
                         </div>
                     </div>
@@ -72,7 +82,7 @@
                     <div>
                         <span class="bold">총계</span>
                         <div class="price">
-                            <span class="val spot" id="total-price">75,000</span>
+                            <input type="text" class="price-area val spot" id="total-price" readonly>
                             <span class="unit">원</span>
                         </div>
                     </div>

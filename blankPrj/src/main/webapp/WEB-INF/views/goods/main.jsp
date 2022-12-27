@@ -31,7 +31,8 @@
             </div>
         </div>
         <div class="content">
-            
+            <div onclick="location.href='/blank/goods/basket'">장바구니 가기</div>
+            <div>검색창 혹은 카테고리 만들 자리임</div>
         </div>
         <div class="content">
             <div class="goods-list">
