@@ -15,6 +15,7 @@ public class PostController {
 
 	@GetMapping("post/save")
 	public String postSave(HttpSession session, ProjectVo vo) {
+		System.out.println("Dd");
 		return "redirect:/project/created";	//작성중 링크로 보내주기
 	}
 	

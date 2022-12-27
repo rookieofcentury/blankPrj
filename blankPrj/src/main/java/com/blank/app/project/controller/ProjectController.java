@@ -130,6 +130,11 @@ public class ProjectController {
 		return "project/created/list";
 	}
 	
+
+	@GetMapping("post")
+	public String post() {
+		return "project/post/post";
+	}
 	
 	
 	
