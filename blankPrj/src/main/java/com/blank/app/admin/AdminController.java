@@ -20,6 +20,9 @@ import com.blank.app.admin.common.Pagination;
 import com.blank.app.admin.service.AdminService;
 import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.NoticeVo;
+import com.blank.app.member.vo.MemberVo;
+import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.report.vo.ReportVo;
 
 @Controller
 @RequestMapping("admin")
@@ -34,6 +37,7 @@ public class AdminController {
 		return "admin/admin/login";
 	}
 
+	// 관리자 로그인
 	@PostMapping("login")
 	public String login(AdminVo vo, HttpSession session) {
 
@@ -49,19 +53,117 @@ public class AdminController {
 
 	// 회원 관리 목록(화면)
 	@GetMapping("member")
-	public String memberList() {
+	public String memberList(Model model, HttpServletRequest req, HttpSession session, String p) {
+
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+
+		if (p == null) {p = "1";}
+
+		int listCount = adminService.memberCount();
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 10;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+
+		List<MemberVo> voList = adminService.selectMemberList(map, pageVo);
+		
+		model.addAttribute("voList", voList);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+
+		session.setAttribute("voList", voList);
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
+
 		return "admin/member/list";
 	}
 
+	// 회원 정보 수정(화면)
+	@GetMapping("memberEdit")
+	public String edit() {
+		return "admin/member/edit";
+	}
+	
 	// 프로젝트 관리 목록(화면)
 	@GetMapping("project")
-	public String projectList() {
+	public String projectList(Model model, HttpServletRequest req, HttpSession session, String p) {
+		
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+
+		if (p == null) {p = "1";}
+
+		int listCount = adminService.projectCount();
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 10;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+
+		List<ProjectVo> voList = adminService.selectProjectList(map, pageVo);
+
+		model.addAttribute("voList", voList);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+
+		session.setAttribute("voList", voList);
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
+
 		return "admin/project/list";
 	}
 
+	// 프로젝트 상세정보(화면)
+	@GetMapping("prjDetail")
+	public String prjDetail(Model model, ProjectVo projectVo, HttpSession session) {
+
+		NoticeVo selectNotice = adminService.selectPrjOne(projectVo);
+
+		if (selectNotice == null) {return "error";}
+
+		session.setAttribute("selectNotice", selectNotice);
+		session.setAttribute("noticeVo", projectVo);
+		
+		return "admin/project/detail";
+	}
+	
 	// 신고 프로젝트 관리 목록(화면)
 	@GetMapping("deProject")
-	public String deProjectList() {
+	public String deProjectList(Model model, HttpServletRequest req, HttpSession session, String p) {
+		
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+
+		if (p == null) {p = "1";}
+
+		int listCount = adminService.deProjectCount();
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 10;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+
+		List<ReportVo> voList = adminService.selectDeProjectList(map, pageVo);
+
+		model.addAttribute("voList", voList);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+
+		session.setAttribute("voList", voList);
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
+		
 		return "admin/deProject/list";
 	}
 
@@ -164,18 +266,6 @@ public class AdminController {
 		return "admin/help/list";
 	}
 
-	// 회원 정보 수정(화면)
-	@GetMapping("edit")
-	public String edit() {
-		return "admin/member/edit";
-	}
-
-	// 프로젝트 상세정보(화면)
-	@GetMapping("prjDetail")
-	public String prjDetail() {
-		return "admin/project/detail";
-	}
-
 	// 신고프로젝트 접수(화면)
 	@GetMapping("projectCheck")
 	public String projectCheck() {
@@ -195,3 +285,5 @@ public class AdminController {
 	}
 
 }
+
+

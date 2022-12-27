@@ -15,6 +15,7 @@
       <typeAlias type="com.blank.app.member.vo.MemberVo" alias="MemberVo"/>
       <typeAlias type="com.blank.app.project.vo.ProjectVo" alias="ProjectVo"/>
       <typeAlias type="com.blank.app.project.vo.TimeVo" alias="TimeVo"/>
+      <typeAlias type="com.blank.app.report.vo.ReportVo" alias="ReportVo"/>
    </typeAliases>
 
 </configuration>

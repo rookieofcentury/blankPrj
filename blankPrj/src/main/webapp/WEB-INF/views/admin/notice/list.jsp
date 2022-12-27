@@ -36,7 +36,7 @@
                         <option value="a.id">작성자</option>
                     </select
                     ><input type="text" name="keyword">
-                    <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
+                    <div class="search-icon"><input type="image" src="/blank/resources/images/admin/search.png" alt="search.png"></div>
                     <a href="/blank/admin/noticeWrite"><button type='button'>작성</button></a>
                     
                 </div>
@@ -62,7 +62,7 @@
 	                <div>${vo.adminNo}</div>
 	                <div>${vo.writeDate}</div>
 	                <div>${vo.deleteYn}</div>
-	                <div><a href="/blank/admin/noticeDetail?no=${vo.no}&deleteYn=${vo.deleteYn}" name="no"><img src="../resources/images/admin/edit.png"  class="edit-img"></a></div>
+	                <div><a href="/blank/admin/noticeDetail?no=${vo.no}&deleteYn=${vo.deleteYn}" name="no"><img src="/blank/resources/images/admin/edit.png"  class="edit-img"></a></div>
         		</c:forEach>
 
 				<div id="page-area">

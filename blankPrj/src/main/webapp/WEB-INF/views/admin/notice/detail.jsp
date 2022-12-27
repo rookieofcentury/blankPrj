@@ -28,7 +28,7 @@
 	            
 	            <div class="notice-detail-close">
                 	공지사항 수정
-	                <img src="../resources/images/admin/close.png" onclick="goBack();">
+	                <img src="/blank/resources/images/admin/close.png" onclick="goBack();">
 	            </div>
 	            
    	            <script type="text/javascript">

@@ -28,7 +28,7 @@
 	            
 	            <div class="notice-write-close">
                 	공지사항
-	                <img src="../resources/images/admin/close.png" onclick="goBack();">
+	                <img src="/blank/resources/images/admin/close.png" onclick="goBack();">
 	            </div>
 	            
 	            <script type="text/javascript">
