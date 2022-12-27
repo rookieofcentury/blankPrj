@@ -86,7 +86,7 @@
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
                 <div class="price-box">
-                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price"></div>
+                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price" onkeyup="inputNumberFormat(this)"></div>
                     <div>원</div>
                 </div>
             </div>
@@ -276,51 +276,96 @@
         $("input[name='price']").on("focusout", function() {
             priceCheckReturn = false;
             var x = $(this).val();
-            if (x < 500000) {
+            if (x < 500,000) {
                 alert('50만원 이상의 금액을 입력해 주세요')
             }else{
                 priceCheckReturn = true;
             }
         });
+        //목표금액 콤마 
+        // $('input[name="price"]').filter(".comma").on("keyup", function(){
+        //     console.log("ss");
+        //     $(this).val($(this).val().replace(/[^0-9]/g, "").toLocaleString());
+        // });
+    //     $(document).ready(function(){
+    //         $("input[name='price']").bind('keyup keydown',function(){
+    //             inputNumberFormat(this);
+    //         });
+            
+//         //입력한 문자열 전달
+//         function inputNumberFormat(obj) {
+//             obj.value = comma(uncomma(obj.value));
+//         }
+//         //콤마찍기
+//         function comma(str) {
+//             console.log("ss");
+//             str = String(str);
+//         return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    //     }
+    // });
 
         //펀딩일수 계산
-        // $("input[name='endDay']").on("focusout", function() {
-            $(".summary-text").click(function() {
-                console.log('시작일 입력해줘');
+        $("input[name='endDay']").on("focusout", function() {
+            //var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
+            //var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
+            var date1 = $("input[name='startDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+            var date2 = $("input[name='endDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
 
-                if ($("input[name='startDay']").length < 1) {
-                    console.log($("input[name='endDay']").length)
-                    alert("시작일을 입력해 주세요");
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            var dateString = year + '-' + month  + '-' + day;
+
+            if (!$("input[name='startDay']").val()) {
+                alert("시작일을 입력해 주세요");
+            }
+            if (date2 < date1){ 
+                //console.log($("input[name='startDay']").val().length);
+                alert("시작일이 종료일보다 늦어요ㅠ"); 
+            }
+            if(date1 < dateString){
+                //console.log(date1);
+                alert("오늘 날짜 이후로 선택해 주세요"); 
                 }
-            });
-            
-        //     $(".plan-write").click(function() {
-        //         console.log('dd');
-        //         var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
-        //         var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
-        //     if (date2 - date1 < 0){
-        //         console.log('시작일 종료일 확인');
-        //         console.log(date1);
-        //         console.log(date2);
-        //         alert("시작일이 종료일보다 늦어요ㅠ"); 
-        //     }
-        //     else if (1 < 2){
-        //         var today = new Date();
-        //         var year = today.getFullYear();
-        //         var month = ('0' + (today.getMonth() + 1)).slice(-2);
-        //         var day = ('0' + today.getDate()).slice(-2);
+        });
 
-        //         var dateString = year + '-' + month  + '-' + day;
+        //주소 중복검사
+        function emailDoubleCheck(){
 
-        //         console.log(dateString);
+            $.ajax({
+                url : "/blank/member/doubleCheckByEmail",
+                type : "post",
+                data : {
+                    "email" : emailVal
+                },
+                success : function(result){
 
-        //         if(date1 < dateString){
-        //             console.log("시작일은 현재날짜보다 빠를 수 없습니다.");
-                
-        //         }
-        //     }
-        // });
+                    if(result ==0){
+                        
+                        $('#email-result').text('사용가능한 이메일 입니다.');
+                        $('#email-result').addClass('green');
+                        $('#email-result').removeClass('red');
 
+                        $('#email-check').addClass('green'); // 성공하면 중복체크 초록으로 바꾸세용~
+                        $('#email-check').removeClass('ace');
+                        $('#email-check').removeClass('red');
+                        emailCheckReturn = true;
+
+                    }else{
+                        
+                        $('#email-result').text('중복된 이메일 입니다.');   
+                        $('#email-check').addClass('red');
+                        $('#email-check').removeClass('ace');
+                        $('#email-check').removeClass('green');
+                    }
+                },
+                error : function(){
+                    alert('에이잭스 에러!!!!!!!!!');
+                }
+            }); //ajax    
+        };
+        
         //글자수 체크(주소)
         $("input[name='url']").on("focusout", function() {
             var content = $(this).val();
@@ -361,6 +406,7 @@
                 }
             }   summaryCheckReturn = true;
         });
+
 
          //온서브밋
         function checkAll(){
