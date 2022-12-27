@@ -25,7 +25,7 @@
             <div class="goods-info">
                 <div>${goods.name}</div>
                 <div>
-                    <div class="image-box"><img src="" alt=""></div>
+                    <div class="image-box"><img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt=""></div>
                     <div>
                         <div id="info">
                             <div>판매가</div>

@@ -45,7 +45,24 @@ public class GoodsController {
 			session.setAttribute("cart", cart);
 		}
 		
+		// 8 개 무작위로 받아와서 리스트 생성
 		List<GoodsVo> voList = gs.selectMainGoodsList();
+		
+		// 위 list에서 no(번호)만 담긴 리스트 생성
+		List<String> noList = new ArrayList<String>();
+		
+		// for문 돌려서 각각 이미지 List 생성해 주기
+		for(int i = 0; i < voList.size(); i++) {
+			String no = voList.get(i).getNo();
+			noList.add(no);
+
+			for(String n : noList) {
+				List<String> thumbnail = gs.findThumbnail(Integer.parseInt(n));
+				voList.get(i).setThumbnail(thumbnail);
+			}
+		}
+		
+		// jsp로 데이터 보내 주기
 		model.addAttribute("eightList", voList);
 		
 		return "goods/main";
@@ -56,7 +73,14 @@ public class GoodsController {
 	@RequestMapping("/detail")
 	public String goodsDetail(@RequestParam int no, Model model) {
 		
+		// detail 정보 받아 오기
 		GoodsVo vo = gs.detail(no);
+		
+		// no로 첨부파일 테이블 한 번 더 다녀오고 set 해 주기
+		List<String> thumbnail = gs.findThumbnail(no);
+		vo.setThumbnail(thumbnail);
+		
+		// jsp로 데이터 보내 주기
 		model.addAttribute("goods", vo);
 		
 		return "goods/detail";
@@ -74,7 +98,7 @@ public class GoodsController {
 		// key List 담아 줄 array 만들기
 		List<String> array = new ArrayList<String>();
 		
-		if(cart != null) {
+		if(cart != null && cart.size() > 0) {
 			// map에서 key 값만 뽑아서 list 추출
 			Iterator<String> keys = cart.keySet().iterator();
 			while (keys.hasNext()){
@@ -83,8 +107,7 @@ public class GoodsController {
 			}
 			
 			List<CartVo> cartList = gs.getCartList(array);
-			
-			session.setAttribute("cartList", cartList);			
+			session.setAttribute("cartList", cartList);
 		}
 		
 		return "goods/basket";
