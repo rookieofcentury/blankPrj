@@ -25,13 +25,23 @@
 					</div>
 				</div>
 				<div class="member-info-down">
-					<div>이  메 일</div>
+					<div>
+						<label>이메일</label>
+						<button class="change" id="email-change-check">변경</button>
+					</div>
+					<div>
+						<div>${loginMember.email}</div>
+					</div>
+					<div class="hidden">
+						<input type="text" name="email">
+						<button></button>
+					</div>
 					<div>${loginMember.email}</div>
 					<div><button class="change-btn" id="email-btn">변경</button></div>
 					<div class="hidden span3" id="email-hidden">
 						<form>
 							<div>
-								<input class="change-input">
+								<input class="change-input" name="email">
 								<input type="button">
 							</div>
 						</form>

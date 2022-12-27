@@ -11,7 +11,7 @@
   	( 	
   		NO,
   		EMAIL,
-  		PWD,
+  		PWD1,
         PHONE,
   		GENDER,
   		NICK
@@ -29,11 +29,16 @@
   	
   </insert>
   
-  <!--  -->
+  <!-- 로그인  -->
   <select id="selectOneMember" resultType="MemberVo"> 
   	SELECT * 
   	FROM MEMBER
   	WHERE EMAIL = #{email}
   </select>
   
+ 	<update id="updatePwd">
+ 		UPDATE MEMBER 
+ 		SET PWD1 = #{pwd1} 
+ 		WHERE EMAIL = #{email}
+ 	</update>
 </mapper>

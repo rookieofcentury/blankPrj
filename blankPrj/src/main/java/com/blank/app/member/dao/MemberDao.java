@@ -15,4 +15,8 @@ public interface MemberDao {
 
 	public int doubleCheckByNick(SqlSessionTemplate sst, String nick);
 
+	public int updatePwd(SqlSessionTemplate sst, MemberVo vo);
+
+	int doubleCheckByPhone(SqlSessionTemplate sst, String phone);
+
 }

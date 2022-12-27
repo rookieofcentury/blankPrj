@@ -37,4 +37,13 @@ public class DoubleCheckController {
 		return result+"";
 	}
 	
+	@PostMapping("doubleCheckByPhone")
+	public String doubleCheckbyPhone(String phone) {
+		
+		System.out.println(phone);
+		int result = service.doubleCheckByNick(phone);
+		
+		return result+"";
+	}
+	
 }

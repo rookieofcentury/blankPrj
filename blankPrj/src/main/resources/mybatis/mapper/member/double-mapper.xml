@@ -12,4 +12,8 @@
   <select id="selectCntByNick" resultType="int">
    	SELECT COUNT(*) FROM MEMBER WHERE NICK = #{nick}
   </select>
+  
+  <select id="selectCntByPhone" resultType="int">
+  	SELECT COUNT(*) FROM MEMBER WHERE NICK = #{nick}
+  </select>
 </mapper>
