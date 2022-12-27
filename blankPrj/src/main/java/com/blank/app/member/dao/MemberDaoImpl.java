@@ -40,6 +40,18 @@ public class MemberDaoImpl implements MemberDao {
 		int result = sst.selectOne("doubleCheckMapper.selectCntByNick" , nick);
 		return result; 
 	}
+
+	//휴대전화 중복체크 
+	@Override
+	public int doubleCheckByPhone(SqlSessionTemplate sst, String phone) {
+		int result = sst.selectOne("doubleCheckMapper.selectCntByPhone" , phone);
+		return result; 
+	}
+	
+	@Override
+	public int updatePwd(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("memberMapper.updatePwd", vo);
+	}
 	
 	
 

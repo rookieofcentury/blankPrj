@@ -36,6 +36,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		String inputPwd = vo.getPwd1();
 		String checkPwd = dbMember.getPwd1();
+		
+		System.out.println(inputPwd);
+	 	System.out.println(checkPwd);
 		boolean isMatch = enc.matches(inputPwd, checkPwd);
 		
 		log.warn("디비랑 화면이랑 비밀번호가 같나요?!?!"+isMatch);
@@ -57,6 +60,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int doubleCheckByNick(String nick) {
 		return dao.doubleCheckByNick(sst, nick);
+	}
+
+	@Override
+	public int updatePwd(MemberVo vo) {
+		vo.encode(enc);
+		return dao.updatePwd(sst, vo);
+	}
+
+	@Override
+	public int doubleCheckByPhone(String phone) {
+		
+		return dao.doubleCheckByNick(sst, phone);
 	}
 
 }

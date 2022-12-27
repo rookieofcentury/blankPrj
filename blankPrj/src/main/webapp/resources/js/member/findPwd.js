@@ -1,35 +1,33 @@
-$('input[name=email]').click(function(){
-  console.log('클릭');
-  $('#email-result').show();
-})
-
-
-$('#find-pwd').click(function(){
+function tempPwd(){
 
   let emailVal = $('input[name=email]').val();
+
   console.log(emailVal);
+
+  let url = "/blank"
   $.ajax({
-    url : "/blank/member/findPwd",
+    url : "/blank/member/tempPwd",
     type : "post",
     data : {
-        "email" : emailVal
+      "email" : emailVal
     },
     success : function(result){
-
-        if(result == 1){
-            
-          alert('임시비밀번호가 전송되었습니다.')
-          
-        }else{
-          
-          $('#email-result').text('이메일이 존재하지 않습니다.');
-          
+      
+      if(result == 1){
+        alert('임시비밀번호가 전송되었습니다.')
+        location.replace(url);
+        
+      }else{
+        
+        $('#email-result').show();
+        
         }
     },
-    error : function(){
+    error : function(result){
+        console.log("받아온 리절트"+result);
         alert('에이잭스 에러!!!!!!!!!');
     }
   }) //ajax    
-})
+}
 
  

@@ -28,7 +28,7 @@ $('input[name=phone]').click(function(){
 function emailDoubleCheck(){
   
   let emailVal = $('input[name=email1]').val() + $('#email2').val();
-  
+  console.log(emailVal);
   const emailjung = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
   
   if(!emailjung.test(emailVal)) {
@@ -43,7 +43,7 @@ function emailDoubleCheck(){
       },
       success : function(result){
 
-          if(result ==0){
+          if(result == 0){
               
               $('#email-result').text('사용가능한 이메일 입니다.');
               $('#email-result').addClass('green');
@@ -52,6 +52,7 @@ function emailDoubleCheck(){
               $('#email-check').addClass('green'); // 성공하면 중복체크 초록으로 바꾸세용~
               $('#email-check').removeClass('ace');
               $('#email-check').removeClass('red');
+              $('input[name=email]').val(emailVal);
               emailCheckReturn = true;
 
           }else{
@@ -101,6 +102,7 @@ $('input[name=pwd1]').keyup(function(){
         $('#pwd1-result').text('영문자 + 숫자 + 특수문자 8 ~ 16글자 부탁드립니다.');
     }else{
         $('#pwd1-result').text('');
+        pwd1CheckReturn = true;
     }
 })
 
@@ -210,21 +212,63 @@ $('input[name=phone]').keyup(function(){
   
     $('#phone-result').addClass('red');
     $('#phone-result').removeClass('green');
-  let phoneCheckReturn = false;
-  let phoneVal = $('input[name=phone]').val();
+    let phoneCheckReturn = false;
+    let phoneVal = $('input[name=phone]').val();
     
 
   if(phoneVal == ''){
-      $('#phone-result').text('휴대전화 번호 10자리 입력해주세요');
+      $('#phone-result').text('휴대전화 번호 11자리 입력해주세요');
   }else if(!(phoneVal.length == 13)){
-      $('#phone-result').text('휴대전화 번호 10자리 입력해주세요');
+      $('#phone-result').text('휴대전화 번호 11자리 입력해주세요');
   }else{
-     $('#phone-result').addClass('green');
-     $('#phone-result').removeClass('red');
       $('#phone-result').text('중복 체크 부탁드립니다.');   
+      console.log(phoneVal);
   }
 
 })
+
+//핸드폰 중복확인 > 핸드폰 인증 하면 인증문자로 바꿀꺼다.  
+function phoneDoubleCheck(){
+  
+  let phoneVal = $('input[name=phone]').val();
+  
+  if(phoneVal.length < 13 || phoneVal.length >= 14) {
+      alert('휴대폰 번호 11자리를 입력해주세요')
+      
+  }else{
+      $.ajax({
+      url : "/blank/member/doubleCheckByPhone",
+      type : "post",
+      data : {
+          "phone" : phoneVal
+      },
+      success : function(result){
+
+          if(result ==0){
+              
+            $('#phone-result').text('사용가능한 휴대전화 입니다.');
+            $('#phone-result').addClass('green');
+            $('#phone-result').removeClass('red');
+
+            $('#phone-check').addClass('green'); // 성공하면 중복체크 초록으로 바꾸세용~
+            $('#phone-check').removeClass('ace');
+            $('#phone-check').removeClass('red');
+            phoneCheckReturn = true;
+
+          }else{
+
+              $('#phone-result').text('중복된 휴대전화 입니다.');   
+              $('#phone-check').addClass('red');
+              $('#phone-check').removeClass('ace');
+              $('#phone-check').removeClass('green');
+          }
+      },
+      error : function(){
+          alert('에이잭스 에러!!!!!!!!!');
+      }
+    }) //ajax    
+   }
+  }
 
 //성별 체크했나요
 function checkGender() {

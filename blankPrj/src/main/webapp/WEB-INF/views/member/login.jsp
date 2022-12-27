@@ -26,7 +26,7 @@
 
                 <div class="container-main-area">
                     <div class="login-info">비밀번호</div>
-                    <div><input type="password" class="input" name="pwd" placeholder="비밀번호를 입력해주세요"></div>
+                    <div><input type="password" class="input" name="pwd1" placeholder="비밀번호를 입력해주세요"></div>
                 </div>
                 <div class="container-main-area right">
                     <div><input type="checkbox" name="SaveId" id="saveId"><label for="saveId">아이디저장</label></div>

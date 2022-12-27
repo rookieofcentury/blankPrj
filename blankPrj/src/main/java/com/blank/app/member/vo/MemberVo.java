@@ -30,5 +30,13 @@ public class MemberVo {
 	public void encode(BCryptPasswordEncoder enc) {
 		this.pwd1 = enc.encode(pwd1);
 	}
+
+	public MemberVo(String email, String pwd1) {
+		super();
+		this.email = email;
+		this.pwd1 = pwd1;
+	}
+	
+	
 	
 }

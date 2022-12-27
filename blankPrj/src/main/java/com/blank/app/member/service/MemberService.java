@@ -11,4 +11,8 @@ public interface MemberService {
 	public int doubleCheckByEmail(String email);
 
 	public int doubleCheckByNick(String nick);
+	
+	public int doubleCheckByPhone(String phone);
+	
+	public int updatePwd(MemberVo vo);
 }

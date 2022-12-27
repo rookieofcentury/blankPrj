@@ -22,7 +22,7 @@
             <div class="find-pwd-area">
 
                 <div class="container-main-area">
-                    <div class="login-info">이메일</div>
+                    <div class="email">이메일</div>
                     <div class="flex"><input type="text" class="input" name="email" placeholder="가입하신 이메일을 입력해주세요"></div>
                 </div >
                 <div class="result container-main-area" id="email-result">등록 된 이메일이 없습니다.</div>
@@ -30,7 +30,7 @@
                     <div class="pwd-info">블랭크 가입 시 사용하신 이메일을 입력하시면 임시 비밀번호를 보내드립니다.</div>
                 </div>
                 <div class="container-main-area">
-                    <div><input type="button" value="임시 비밀번호 받기" class="input ace" id="find-pwd"></div>
+                    <div><input type="button" value="임시 비밀번호 받기" class="input ace" id="find-pwd" onclick="tempPwd();"></div>
                 </div>
             
             </div>

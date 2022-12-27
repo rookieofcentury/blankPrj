@@ -26,12 +26,13 @@
                         <input type="text" name="email1" class="email-input" id="email1">
                         <select id="email2" class="email-input">
                             <option value="@naver.com" >@naver.com</option>
-                            <option value="@naver.com">@kakao.com</option>
-                            <option value="@naver.com">@gmail.com</option>
+                            <option value="@kakao.com">@kakao.com</option>
+                            <option value="@gmail.com">@gmail.com</option>
                         </select>
                         <button class="btn-check ace" type="button" id="email-check" onclick="emailDoubleCheck()">중복 검사</button>
                     </div>
                     <div class="result" id="email-result"></div>
+                    <input class="result" name="email">
                     <div class="span-2">비밀번호</div>
                     <div><input type="password" name="pwd1" class="pwd-input" ></div>
                     <div class="result" id="pwd1-result"></div>
@@ -42,7 +43,7 @@
                     <div><input type="text" name="nick" class="input"><button type ="button" class="btn-check ace" id="nick-check" onclick="nickDoubleCheck()">중복체크</button></div>
                     <div class="result" id="nick-result"></div>
                     <div>핸드폰번호</div>
-                    <div><input type="text" name="phone" class="input" oninput="autoHyphen(this)"><button class="btn-check ace" type="button" id="phone-check" onclick="emailDoubleCheck()">중복체크</button></div>
+                    <div><input type="text" name="phone" class="input" oninput="autoHyphen(this)"><button class="btn-check ace" type="button" id="phone-check" onclick="phoneDoubleCheck()">중복체크</button></div>
                     <div class="result" id="phone-result"></div>
                     <div>성별</div>
                     <div class="gender-check">

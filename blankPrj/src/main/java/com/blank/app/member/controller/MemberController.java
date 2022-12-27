@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.blank.app.member.service.MailSendService;
 import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.MemberVo;
 
@@ -20,6 +22,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private MailSendService mailService;
 	
 	//진짜 회원가입!
 	@PostMapping("join")
@@ -59,6 +64,7 @@ public class MemberController {
 		
 		return "home";
 	}
+	
 	//로그아웃 
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
@@ -89,6 +95,32 @@ public class MemberController {
 	@GetMapping("findPwd")
 	public String findPwd() {
 		return "member/findPwd";
+	}
+	
+	//임시비밀번호 전송 
+	@ResponseBody
+	@PostMapping("tempPwd")
+	public String tempPwd(String email) {
+		
+		System.out.println(email);
+		
+		int result = service.doubleCheckByEmail(email);
+		//이메일이 있으면 1 없으면 0 
+		
+		System.out.println("받은 데이터~ "+result);
+		
+		if(result != 1) {
+			return result + ""; //없는 이메일 이라고 결과가 나옴 
+		}
+		
+		String num = mailService.joinEmail(email); // 임시비밀번호 메일로 보냄 
+		
+		MemberVo vo = new MemberVo(email, num);
+		
+		int updateResult = service.updatePwd(vo);
+		
+		return updateResult+""; // ddltkdgka 
+		
 	}
 	
 	//마이페이지 화면 / 개인정보 변경 
