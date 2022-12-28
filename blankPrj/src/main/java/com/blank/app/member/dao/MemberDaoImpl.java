@@ -20,7 +20,7 @@ public class MemberDaoImpl implements MemberDao {
 	public MemberVo selectMemberOneById(SqlSessionTemplate sst, MemberVo vo) {
 		
 		MemberVo dbMember = sst.selectOne("memberMapper.selectOneMember", vo);
-		log.warn("디비에서 받앙온 로그인ㄴㅇ " + dbMember );
+		log.warn("디비에서 받앙온 로그인 " + dbMember );
 		return dbMember;
 				
 	}
@@ -52,6 +52,14 @@ public class MemberDaoImpl implements MemberDao {
 	public int updatePwd(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("memberMapper.updatePwd", vo);
 	}
+
+	@Override
+	public int updateEmailByNo(SqlSessionTemplate sst, MemberVo vo) {
+		
+		return sst.update("memberMapper.updateEmail", vo);
+	}
+
+	
 	
 	
 

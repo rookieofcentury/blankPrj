@@ -41,4 +41,10 @@
  		SET PWD1 = #{pwd1} 
  		WHERE EMAIL = #{email}
  	</update>
+ 	
+ 	<update id="updateEmail">
+ 		UPDATE MEMBER
+ 		SET EMAIL = #{email}
+ 		WHERE NO = ${no}
+ 	</update>
 </mapper>

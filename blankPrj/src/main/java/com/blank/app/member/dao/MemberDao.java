@@ -19,4 +19,7 @@ public interface MemberDao {
 
 	int doubleCheckByPhone(SqlSessionTemplate sst, String phone);
 
+	public int updateEmailByNo(SqlSessionTemplate sst, MemberVo vo);
+
+
 }

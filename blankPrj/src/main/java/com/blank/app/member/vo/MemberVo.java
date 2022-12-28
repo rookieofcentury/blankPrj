@@ -37,6 +37,9 @@ public class MemberVo {
 		this.pwd1 = pwd1;
 	}
 	
+	public MemberVo() {
+		
+	}
 	
 	
 }
