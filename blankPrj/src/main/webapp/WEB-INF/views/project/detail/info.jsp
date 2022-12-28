@@ -154,8 +154,8 @@
 
 		/*금액 콤마찍기*/
 		var amount = '${ prj.price }'
-		wantPrice = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		return wantPrice;
+		var wantPrice = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		
     </script>
 </body>
 </html>

@@ -53,7 +53,7 @@
 	
 	<select id="selectStatusAll" resultType="ProjectVo">
 		SELECT  
-		    COUNT(DISTINCT STATUS)
+		    COUNT(DISTINCT STATUS) AS cnt
 		FROM PROJECT 
 		WHERE CREATOR = 1
 	</select>

@@ -18,7 +18,7 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
-	public ProjectVo selectProject(SqlSessionTemplate sst, ProjectVo vo, int p) {
+	public ProjectVo selectProject(SqlSessionTemplate sst, int p) {
 		return sst.selectOne("projectMapper.selectPrj", p);
 	}
 
@@ -34,8 +34,8 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
-	public List<ProjectVo> selectStatusAll(SqlSessionTemplate sst, ProjectVo vo) {
-		return sst.selectList("projectMapper.selectStatusAll");
+	public ProjectVo selectStatusAll(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.selectStatusAll");
 	}
 
 	@Override

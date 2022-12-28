@@ -42,9 +42,9 @@ public class ProjectController {
 	private ProjectService service;
 	
 	@GetMapping
-	public String project(ProjectVo vo, Model model, @RequestParam(name="p") int p ) {
+	public String project(Model model, @RequestParam(name="p") int p ) {
 		
-		ProjectVo prjVo = service.selectProject(vo,p);
+		ProjectVo prjVo = service.selectProject(p);
 		model.addAttribute("prj", prjVo);
 		
 		return "project/detail/info";
@@ -116,10 +116,13 @@ public class ProjectController {
 	public String creating(String myPrjAll, HttpSession session, ProjectVo vo, Model model) {	//myPrjAll을 MemberVo로 바꾸기
 		
 		List<ProjectVo> myPrj = service.selectMyPrj(vo);
-		List<ProjectVo> statusAll = service.selectStatusAll(vo);
+		ProjectVo statusAll = service.selectStatusAll(vo);
+		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
 		//System.out.println(myPrj);
+		
 		session.setAttribute("myPrj", myPrj);
 		model.addAttribute("statusAll", statusAll);
+		System.out.println(statusAll);
 		return "project/created/status";
 	}
 	

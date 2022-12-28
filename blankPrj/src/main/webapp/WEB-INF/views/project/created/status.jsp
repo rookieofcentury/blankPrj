@@ -14,28 +14,31 @@
 <body>
 <script>
  $(document).ready(function() { 
-	 alert('dd')
+	 //alert('dd')
          	<c:forEach items="${myPrj}" var="myPrj">
-	        var statusAll = '';
+         		<c:forEach items="${statusAll}" var="statusCount">
+	        //var statusAll = '';
 	        var list = '';
 	
+	        var cnt = '${ statusCount.cnt }';
+	        console.log(cnt);
 	        var title2 = '${ myPrj.title }';
+	        var no = '${ myPrj.no }';
 	        var status = '${ myPrj.status }';
 	        var summary = '${ myPrj.summary }';
 	        //var img = '${ myPrj.title }';
 	        
-        	console.log(title2);
-        	list +=	'<div class="myprj-status">' + title2 + '</div>' + '<div class="list-box">'
+        	list +=	'<div class="myprj-status">' + cnt + '</div>' + '<div class="list-box">'
 	        list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
             list += '<div class="prj-info">'+'<div class="prj-content">';
             list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
-            list += '<div>'+'<div class="management-button">'+'<a href="/blank/project/created/list?p='+title2+'">관리</a>'
-                +'</div>'+'<div class="delete-button">'+'<a href="/blank/project/created/delete?p='+title2+'">삭제</>'+'</div>'+'</div>';  
+            list += '<div>'+'<div class="management-button">'+'<a href="/blank/project/created/list?p='+no+'">관리</a>'
+                +'</div>'+'<div class="delete-button">'+'<a href="/blank/project/created/delete?p='+no+'">삭제</>'+'</div>'+'</div>';  
             list += '</div>'+'</div>'+'</div>'+'</div>'; 
 	        
             $(".list-content").append(list);
 /*  			list += '<div>' + title2 + '</div>';  */
-        
+        	</c:forEach> 
         </c:forEach> 
 
     }); 
