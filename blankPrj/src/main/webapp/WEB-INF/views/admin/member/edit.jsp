@@ -26,30 +26,43 @@
 	            
 	            <div class="member-edit-close">
 	                                회원 정보 수정
-	                <img src="../resources/images/admin/close.png">
+	                <img src="../resources/images/admin/close.png" onclick="goBack();">
 	            </div>
 	            
-	            <div class="edit-list">
+   	            <script type="text/javascript">
+	            	
+	            	function goBack(){
+	            		window.history.back();
+	            	}
+	            
+	            </script>
+	            
+            <form action="/blank/admin/memberEdit" method="post">
+            	<div class="edit-list">
 	    
 	                <div class="edit-title">회원번호</div>
-	                <div>1</div>
-	                <div></div>
+	                <div>${selectMember.no}</div>
+	                <div><input type="hidden" value="${selectMember.no}" name="no"></div>
 	    
 	                <div class="edit-title">닉네임</div>
 	                <div>
 	                    <input
 	                        type="text"
-	                        value="nick01"
+	                        value="${selectMember.nick}"
 	                        name="nick"
 	                    />
 	                </div>
+	                <div><button class="check-btn">중복확인</button></div>
+	                
+	                <div class="edit-title">성별</div>
+	                <div name="gender">${selectMember.gender}</div>
 	                <div></div>
 	    
 	                <div class="edit-title phone-number">핸드폰 번호</div>
 	                <div class="phone-number">
 	                    <input
 	                        type="text"
-	                        value="010-0000-0000"
+	                        value="${selectMember.phone}"
 	                        name="phone"
 	                    />
 	                </div>
@@ -59,17 +72,17 @@
 	                <div>
 	                    <input
 	                        type="text"
-	                        value="user01@gmail.com"
+	                        value="${selectMember.email}"
 	                        name="email"
 	                    />
 	                </div>
-	                <div><button class="check-email-btn">중복확인</button></div>
+	                <div><button class="check-btn">중복확인</button></div>
 	    
 	                <div class="edit-title">포인트</div>
 	                <div>
 	                    <input
 	                        type="text"
-	                        value="20,000p"
+	                        value="${selectMember.point}"
 	                        name="point"
 	                    />
 	                </div>
@@ -79,7 +92,7 @@
 	                <div class="bank-name">
 	                    <input
 	                        type="text"
-	                        value="국민"
+	                        value="${selectMember.bank}"
 	                        name="bank"
 	                    />
 	                </div>
@@ -89,7 +102,7 @@
 	                <div class="account-number">
 	                    <input
 	                        type="text"
-	                        value="668801-01-621564"
+	                        value="${selectMember.account}"
 	                        name="account"
 	                    />
 	                </div>
@@ -99,18 +112,18 @@
 	                <div>
 	                    <input
 	                        type="text"
-	                        value="홍현정"
+	                        value="${selectMember.depositor}"
 	                        name="depositor"
 	                    />
 	                </div>
 	                <div></div>
 	    
 	                <div class="edit-title">계정상태</div>
-	                <div>가입</div>
+	                <div name="status">${selectMember.status}</div>
 	                <div></div>
 	    
 	                <div class="edit-title">가입일</div>
-	                <div>2022-12-12</div>
+	                <div name="enrollDate">${selectMember.enrollDate}</div>
 	                <div></div>
 	    
 	                <div id="edit-submit">
@@ -118,6 +131,8 @@
 					</div>
 	    
 	            </div>
+            </form>
+	            
 	
 	        </div>
 	

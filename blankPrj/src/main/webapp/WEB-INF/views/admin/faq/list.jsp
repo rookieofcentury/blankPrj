@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +31,9 @@
         
                         <div class="faq-search">
         
-                            <select class="category">
+                            <select class="category" name="category">
                                 <option value="title">제목</option>
-                                <option value="name">작성자</option>
+                                <option value="a.id">작성자</option>
                             </select
                             ><input type="text" name="keyword">
                             <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
@@ -45,7 +46,7 @@
             
                     <div class="faq-list">
             
-                        <div class="faq-list-top">전체 FAQ 64개</div>
+                        <div class="faq-list-top">전체 FAQ ${listCount} 개</div>
             
                         <div>번호</div>
                         <div>제목</div>
@@ -56,14 +57,32 @@
                         <div>삭제 여부</div>
                         <div>수정</div>
                 
-                        <div>1</div>
-                        <div>[FAQ] 블랭크(blank)는 무엇인가요?</div>
-                        <div>회원</div>
-                        <div>안녕하세요. 블랭크(blank)는 영어로는 빈 공간이...</div>
-                        <div>admin01</div>
-                        <div>2022-12-04</div>
-                        <div>N</div>
-                        <div><a href=""><img src="../resources/images/admin/edit.png"></a></div>
+                		<c:forEach items="${voList}" var="vo">
+	                        <div>${vo.no}</div>
+	                        <div>${vo.title}</div>
+	                        <div>${vo.category}</div>
+	                        <div>${vo.content}</div>
+	                        <div>${vo.adminNo}</div>
+	                        <div>${vo.writeDate}</div>
+	                        <div>${vo.deleteYn}</div>
+	                        <div><a href="/blank/admin/faqEdit?no=${vo.no}&deleteYn=${vo.deleteYn}" name="no"><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
+                		</c:forEach>
+
+						<div id="page-area">
+						
+							<c:if test="${pageVo.startPage != 1}">
+								<a href="/blank/admin/faq?p=${pageVo.startPage - 1}">&lt;</a>
+							</c:if>
+		
+							<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
+								<a href="/blank/admin/faq?p=${num}">${num}</a>
+							</c:forEach>
+		
+							<c:if test="${pageVo.endPage != pageVo.maxPage}">
+								<a href="/blank/admin/faq?p=${pageVo.endPage + 1}">&gt;</a>
+							</c:if>
+		
+						</div>
             
                     </div>
         

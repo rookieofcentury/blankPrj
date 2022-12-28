@@ -19,6 +19,8 @@ import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.common.Pagination;
 import com.blank.app.admin.service.AdminService;
 import com.blank.app.admin.vo.AdminVo;
+import com.blank.app.admin.vo.FaqVo;
+import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -83,10 +85,33 @@ public class AdminController {
 		return "admin/member/list";
 	}
 
-	// 회원 정보 수정(화면)
+	// 회원 상세 정보(화면)
 	@GetMapping("memberEdit")
-	public String edit() {
+	public String edit(Model model, MemberVo memberVo, HttpSession session) {
+		
+		MemberVo selectMember = adminService.selectMember(memberVo);
+
+		if (selectMember == null) {return "error";}
+
+		session.setAttribute("selectMember", selectMember);
+		session.setAttribute("memberVo", memberVo);
+
 		return "admin/member/edit";
+	}
+	
+	// 회원 정보 수정(화면)
+	@PostMapping("memberEdit")
+	public String edit(MemberVo memberVo, HttpSession session) {
+		
+		MemberVo selectMember = (MemberVo) session.getAttribute("selectMember");
+
+		int updateMember = adminService.updateMember(memberVo);
+
+		session.setAttribute("memberVo", memberVo);
+		
+		if(updateMember != 1) { return "error"; }
+		
+		return "redirect:member";
 	}
 	
 	// 프로젝트 관리 목록(화면)
@@ -120,17 +145,17 @@ public class AdminController {
 
 		return "admin/project/list";
 	}
-
+	
 	// 프로젝트 상세정보(화면)
 	@GetMapping("prjDetail")
 	public String prjDetail(Model model, ProjectVo projectVo, HttpSession session) {
+		
+		ProjectVo selectProject = adminService.selectPrj(projectVo);
 
-		NoticeVo selectNotice = adminService.selectPrjOne(projectVo);
+		if (selectProject == null) {return "error";}
 
-		if (selectNotice == null) {return "error";}
-
-		session.setAttribute("selectNotice", selectNotice);
-		session.setAttribute("noticeVo", projectVo);
+		session.setAttribute("selectProject", selectProject);
+		session.setAttribute("projectVo", projectVo);
 		
 		return "admin/project/detail";
 	}
@@ -167,9 +192,15 @@ public class AdminController {
 		return "admin/deProject/list";
 	}
 
+	// 신고프로젝트 접수(화면)
+	@GetMapping("projectCheck")
+	public String projectCheck() {
+		return "admin/deProject/check";
+	}
+	
 	// 공지사항 목록 조회
 	@GetMapping("notice")
-	public String notice(Model model, HttpServletRequest req, HttpSession s, String p) {
+	public String notice(Model model, HttpServletRequest req, HttpSession session, String p) {
 
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -192,9 +223,9 @@ public class AdminController {
 		model.addAttribute("listCount", listCount);
 		model.addAttribute("pageVo", pageVo);
 
-		s.setAttribute("voList", voList);
-		s.setAttribute("listCount", listCount);
-		s.setAttribute("pageVo", pageVo);
+		session.setAttribute("voList", voList);
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
 
 		return "admin/notice/list";
 	}
@@ -256,26 +287,72 @@ public class AdminController {
 
 	// FAQ 목록(화면)
 	@GetMapping("faq")
-	public String faq() {
+	public String faq(Model model, HttpServletRequest req, HttpSession session, String p) {
+		
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+
+		if (p == null) {p = "1";}
+
+		int listCount = adminService.faqCount();
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 10;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+
+		List<FaqVo> voList = adminService.selectFaq(map, pageVo);
+
+		model.addAttribute("voList", voList);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+
+		session.setAttribute("voList", voList);
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
+		
 		return "admin/faq/list";
-	}
-
-	// 고객센터 목록(화면)
-	@GetMapping("help")
-	public String help() {
-		return "admin/help/list";
-	}
-
-	// 신고프로젝트 접수(화면)
-	@GetMapping("projectCheck")
-	public String projectCheck() {
-		return "admin/deProject/check";
 	}
 
 	// 자주 묻는 질문(FAQ) 답변 등록(화면)
 	@GetMapping("faqWrite")
 	public String faqWrite() {
 		return "admin/faq/write";
+	}
+	
+	// 고객센터 목록(화면)
+	@GetMapping("help")
+	public String help(Model model, HttpServletRequest req, HttpSession session, String p) {
+		
+		String category = req.getParameter("category");
+		String keyword = req.getParameter("keyword");
+
+		if (p == null) {p = "1";}
+
+		int listCount = adminService.helpCount();
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 10;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+
+		List<HelpVo> voList = adminService.selectHelp(map, pageVo);
+
+		model.addAttribute("voList", voList);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+
+		session.setAttribute("voList", voList);
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
+		
+		return "admin/help/list";
 	}
 
 	// 고객센터 답변 등록(화면)

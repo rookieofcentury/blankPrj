@@ -64,7 +64,7 @@
         background-color: white;
         display: grid;
         grid-template-columns: 1fr 1fr 5fr;
-        grid-template-rows: repeat(11, 54px);
+        grid-template-rows: repeat(12, 54px);
         text-align: left;
         margin: 0 auto;
         font-size: 16px;
@@ -98,7 +98,7 @@
         font-size: 16px
     }
 
-    .check-email-btn{
+    .check-btn{
         width: 90px;
         height: 29px;
         border-radius: 10px;
