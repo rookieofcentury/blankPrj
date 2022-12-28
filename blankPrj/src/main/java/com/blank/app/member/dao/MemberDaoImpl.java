@@ -59,6 +59,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.update("memberMapper.updateEmail", vo);
 	}
 
+	@Override
+	public int updateNickByNo(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("memberMapper.updateNick", vo);
+	}
+
 	
 	
 	

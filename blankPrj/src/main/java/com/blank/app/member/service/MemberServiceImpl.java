@@ -75,11 +75,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
-
 	@Override
 	public int updateEmailByNo(MemberVo vo) {
 		
 		return dao.updateEmailByNo(sst, vo);
+	}
+
+	@Override
+	public int updateNickByNo(MemberVo vo) {
+		return dao.updateNickByNo(sst, vo);
 	}
 
 
