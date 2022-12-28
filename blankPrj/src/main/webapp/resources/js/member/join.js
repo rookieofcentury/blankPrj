@@ -69,6 +69,7 @@ function emailDoubleCheck(){
     }) //ajax    
    }
   }
+  
 //이메일 키업하면 
 $('input[name=email1]').keyup(function(){
 

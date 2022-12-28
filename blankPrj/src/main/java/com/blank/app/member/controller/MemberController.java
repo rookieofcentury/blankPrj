@@ -132,6 +132,15 @@ public class MemberController {
 		return "member/mypage/editProfile";
 	}
 	
+	//마이페이지 화면 / 개인정보 변경 
+	@GetMapping("mypage/editInfo")
+	public String mypageEditInfo(HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		log.debug("넘어오나요?"+loginMember);
+		return "member/mypage/editInfo";
+	}
+	
 	//마이페이지 결제수단 / 배송지 화면
 	@GetMapping("mypage/payAddr")
 	public String mypagePayAddr() {

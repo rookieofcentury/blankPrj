@@ -74,4 +74,13 @@ public class MemberServiceImpl implements MemberService{
 		return dao.doubleCheckByNick(sst, phone);
 	}
 
+
+
+	@Override
+	public int updateEmailByNo(MemberVo vo) {
+		
+		return dao.updateEmailByNo(sst, vo);
+	}
+
+
 }
