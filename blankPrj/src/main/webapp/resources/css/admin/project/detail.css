@@ -86,7 +86,7 @@
     }
 
     .detail-list .detail-content-style{
-        border: 1px solid red;
+        /* border: 1px solid red; */
         outline: none;
         font-size: 16px;
     }
