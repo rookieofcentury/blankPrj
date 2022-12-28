@@ -34,8 +34,8 @@ public class ProjectServiceImpl implements ProjectService{
 
 	//플젝 상세페이지
 	@Override
-	public ProjectVo selectProject(ProjectVo vo, int p) {
-		return dao.selectProject(sst,vo,p);
+	public ProjectVo selectProject(int p) {
+		return dao.selectProject(sst,p);
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public List<ProjectVo> selectStatusAll(ProjectVo vo) {
-		return (List<ProjectVo>) dao.selectStatusAll(sst, vo);
+	public ProjectVo selectStatusAll(ProjectVo vo) {
+		return (ProjectVo) dao.selectStatusAll(sst, vo);
 	}
 
 	@Override
@@ -65,6 +65,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public int tempPrj(ProjectVo vo) {
+		System.out.println("vovo");
 		return dao.tempPrj(sst,vo);
 	}
 

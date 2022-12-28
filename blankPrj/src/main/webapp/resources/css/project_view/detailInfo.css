@@ -332,7 +332,7 @@ hr:last-of-type{
     list-style: none;
 }
 .card-option li:before{
-    content: "��";
+    content: '\00B7';
     font-weight: bold;
     /* �� �ȸ���?? left: 0.6em; */
 }

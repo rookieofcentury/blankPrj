@@ -12,13 +12,13 @@ public interface ProjectDao {
 
 	List<HashMap<String, String>> selectCategory(SqlSessionTemplate sst, HashMap<String, String> map);
 
-	ProjectVo selectProject(SqlSessionTemplate sst, ProjectVo vo, int p);
+	ProjectVo selectProject(SqlSessionTemplate sst, int p);
 
 	List<TimeVo> selectStartime(SqlSessionTemplate sst, TimeVo timevo);
 
 	List<ProjectVo> selectMyPrj(SqlSessionTemplate sst, ProjectVo vo);
 
-	List<ProjectVo> selectStatusAll(SqlSessionTemplate sst, ProjectVo vo);
+	ProjectVo selectStatusAll(SqlSessionTemplate sst, ProjectVo vo);
 
 	int deletePrj(SqlSessionTemplate sst, ProjectVo vo);
 
