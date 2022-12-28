@@ -20,4 +20,6 @@ public interface ProjectService {
 
 	int deletePrj(ProjectVo vo);
 
+	int tempPrj(ProjectVo vo);
+
 }

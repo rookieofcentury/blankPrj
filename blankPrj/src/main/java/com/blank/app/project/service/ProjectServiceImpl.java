@@ -63,4 +63,9 @@ public class ProjectServiceImpl implements ProjectService{
 		}
 	}
 
+	@Override
+	public int tempPrj(ProjectVo vo) {
+		return dao.tempPrj(sst,vo);
+	}
+
 }

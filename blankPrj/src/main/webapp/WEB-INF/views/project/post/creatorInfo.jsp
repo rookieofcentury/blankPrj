@@ -67,7 +67,7 @@
                 </div>
                 <div class="email-box">
                     <div class="email-area">
-                        <div class="email-write"><input type="text" placeholder="이메일 입력" name="price"></div>
+                        <div class="email-write"><input type="text" placeholder="이메일 입력" name="email"></div>
                         <div>
                             <input type="checkbox" id="info-check" name="">
                             <label for="info-check">회원정보와 동일</label>
@@ -82,7 +82,7 @@
                     <div>창작자 본인 명의의 휴대폰 번호를 입력해주세요.</div>
                 </div>
                 <div class="phone-box">
-                    <div class="phone-write"><input type="text" placeholder="내용 입력" name="price"></div>
+                    <div class="phone-write"><input type="text" placeholder="내용 입력" name="phone"></div>
                     <div>
                         <input type="checkbox" id="email-check" name="">
                         <label for="email-check"> 회원정보와 동일</label>
@@ -173,7 +173,7 @@
         let depositorCheckReturn = false;
 
         //글자수 체크(이름)
-        $('input[name="title"]').keyup(function(e) {
+        $('input[name="name"]').keyup(function(e) {
             let nameCheckReturn = false;
             var content = $(this).val();
             $('.title-length').text(40 - content.length + "글자 남음"); 
@@ -189,7 +189,7 @@
         //var replaceEmoji = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
         var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
         
-        $("input[name='title']").on("focusout", function() {
+        $("input[name='name']").on("focusout", function() {
         var x = $(this).val();
             if (x.length > 0) {
                 if (/*x.match(replaceEmoji) || */  x.match(replaceKorean)) {

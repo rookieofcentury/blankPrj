@@ -61,4 +61,20 @@
 	<delete id="deletePrj">
 		DELETE FROM PROJECT WHERE P.NO = 1
 	</delete>
+	
+	<insert id="insertTempPrj">
+	  	INSERT INTO PROJECT(
+			NO
+			, TITLE
+			, CREATOR
+			, PRICE)
+			VALUES
+			  	(
+	        SEQ_PROJECT_NO.NEXTVAL,
+	        #{title},
+	        <!-- #{nick} --> 1,
+	        #{price}
+	  	)
+  </insert>
+  
 </mapper>

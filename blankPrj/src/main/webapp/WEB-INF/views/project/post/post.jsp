@@ -1,461 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로젝트 등록</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="/blank/resources/css/project_post/post.css">
+
 </head>
-<style>
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
-    }
-    #mem-full{
-    	margin-top: 3%;
-        --width: 100vw;
-        height: 780px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 1fr 10fr;
-        justify-content: center;
-        align-items: center;
-        --margin: 0 auto;
-        box-sizing: border-box;
-        gap: 0;
 
-    }
-   
-    #mem-header{
-    	height : 80px
-    }
+<!-- 제이쿼리 -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
+<!-- 날짜위젯 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>;
 
-    input[type="radio"]{
-        display: none;    
-    } 
- 
-    input[type="radio"] + label{
+<<script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
+<!--<script src = "${path}/ckeditor/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script>
 
-        padding: 20px;
-        cursor: pointer;
-        border-bottom: 1px solid black;
-       
-    }
-    input[type="radio"]:checked + label{
-      
-        color: #fdb930;  
-        border-bottom: none;
-        border-right: 1px solid black;
-        border-left: 1px solid black;
-    } 
-
-    .main{
-        width: 100%;
-        height: 100%;
-        grid-column: span 5;
-        display: none;
-        
-    }
-    input[id="edit-mypage"]:checked ~ .mp-main1{display: block; }
-    input[id="like-group"]:checked ~ .mp-main2{ display: block;}
-    input[id="mem-group"]:checked ~ .mp-main3{display: block;}
-    input[id="mem-manner"]:checked ~ .mp-main4{display: block;}
-    input[id="mem-liked-place"]:checked ~ .mp-main5{display: block;}
-
-    label {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-   
-    }
-    .input{
-      
-      border: 1px solid #dddddd;
-      color: black;
-      background-color: #dddddd;
-      border-radius: 5px;
-      width: 60%;
-      height: 35px;
-      text-align: center;
-  
-    }
-    .span2{
-        grid-column: span 2;
-    }
-    .label{
-
-    color: #fdb930;
-    border: 1px solid #fdb930;
-    background-color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-
-    }
-    .doublecheck{
-        padding: 1px 3px 3px 1px;
-        margin-left: 15px;
-        font-size: 15px;
-        width: 100px;
-    }
-    
-    /*헤더 fixed*/
-.navi-menu{
-    margin-bottom: 50px;
-    padding: 0 15% 0 15%;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    background-color: #fff;
-    z-index: 100;
-    margin: 0px auto;
-}
-.content-editor{
-    padding: 15px 0px 10px;
-    height: 80px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-}
-.editor-logo{
-    display : flex;
-    align-items: center;
-}
-.editor-buttons{
-    display: flex;
-    align-items: center;
-}
-.logo-img{
-    cursor: pointer;
-    height : 80px;
-    padding : 15px 20px 10px 0;
-}
-.buttons-storage{
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 5px 20px;
-    color: #567ace;
-    border: 1px solid #567ace;
-    background-color: #fff;
-    letter-spacing: 0.1em;
-}
-.buttons-request{
-    margin: 0px 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 5px 20px;
-    color: #567ace;
-    border: 1px solid #567ace;
-    background-color: #fff;
-    letter-spacing: 0.1em;
-}
-.buttons-goout>img{
-    margin-top: 5px;
-    width: 27px;
-    height: 27px;
-    color: #567ace;
-    cursor: pointer;
-}
-.content-menu{
-    width: 100%;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    justify-content: space-evenly;
-    padding: 0px 16px;
-    overflow-x: auto;
-    margin: 0px auto;
-    height: 40px;
-    border-bottom :1px solid #AFAFAF;
-}
-.content-menu :nth-child(1):hover{
-    color: #567ace;
-    cursor: pointer;
-}
-.content-menu :nth-child(2){
-    color: #567ace;
-    padding-bottom: 12px;
-    border-bottom :5px solid #567ace;
-}
-.content-menu>div:not(.content-menu :nth-child(2)){
-    position: relative;
-    padding-bottom: 12px;
-    cursor: pointer;
-}
-.content-menu>div>input{
-    background: transparent;
-} 
-/* .content-menu>div>input:hover:not(.content-menu>div>input:nth-child(2)){
-    color: #567ace;
-    cursor: pointer;
-}  */
-/*여기까지 헤더 fixed*/
-
-
-li{
-    list-style: none;
-    /* position: relative;
-    padding: 0px 0px 38px 18px;
-    color: rgb(158, 158, 158); */
-}
-ol{
-    padding-left: 0;
-}
-#container{
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 100px;
-    width: 70vw;
-    margin: 0 0 50px 400px;
-}
-.content{
-    padding: 84px 0px 0px;
-    width: 100%;
-    max-width: 1080px;
-}
-div[class*=content-]:not(.content-editor,.content-menu, .content-stroy){
-    display: flex;
-    padding-bottom: 48px;
-    margin-bottom: 56px;
-    justify-content: flex-start;
-    border-bottom: 1px solid rgb(240, 240, 240);
-}
-div[class*=-info]{
-    margin: 0px 0px 14px;
-    width: 350px;
-}
-div[class*=-info] div:first-child{
-    font-weight: 700;
-    margin-bottom: 12px;
-    font-size: 16px !important;
-    line-height: 24px !important;
-}
-div[class*=-info] div:last-child{
-    font-weight: 400;
-    color: rgb(109, 109, 109);
-    margin: 0px;
-    font-size: 14px !important;
-    line-height: 24px !important;
-}
-div[class*=-info]+div:not(.category-select, .price-box, .story-write){
-    display: flex;
-    flex-direction: column;
-    width: 450px;
-    margin-top: 3px;
-}
-.title-write div{
-    padding: 0px 10px;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    width: 80%;
-}
-input{
-    outline: none;
-    border: none;
-    font-weight: 400;
-    font-size: 14px !important;
-    line-height: 24px !important;
-    --text-align: inherit;
-    size: 600px;
-    width: 100%;
-}
-div[class*=-write] p:not(.calculate-notice>p){
-    width: 100%;
-    margin: 5px 0px 0px 3px;
-    font-size: 12px !important;
-    line-height: 20px !important;
-}
-.category-select{
-    display: flex;
-    justify-content: space-between;
-    width: 450px;
-    margin-top: 3px;
-} 
-select:not(.ui-datepicker-month, .ui-datepicker-year){
-    height: 30px;
-    margin-top: 20px;
-    padding-right: 300px;
-} 
-.price-box{
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-    width: 400px;
-}
-.price-write, .url-text {
-    padding: 0px 10px;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    height: 30px;
-    width: 380px;
-}
-.summary-text{
-    padding: 5px 10px 1px 10px;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    height: 75px;
-    width: 380px;
-}
-textarea{
-    resize: none;
-    border: none;
-    outline: none;
-    height: 72px;
-    width: 380px;
-}
-.price-write+div{
-    margin: 5px 0 0 5px;
-    --width: 80px;
-}
-.url-blank{
-    margin-left: 3px;
-}
-.date-write{
-    display: flex;
-    justify-content: space-between;
-    width: 630px;
-}
-.date-start, .date-end{
-    display: flex;
-    justify-content: flex-start;
-    width: 400px;
-    align-items: center;
-}
-.start-day, .start-time, .end-day, .date-calculate{
-    margin: 0px 8px;
-    width: 40%;
-    margin-bottom: 10px;
-}
-/* .start-time>div:last-child{
-    width: 100px;
-}  */
-.start-day>p, .start-time>p{
-    margin-bottom: 4px;
-    margin-top: 0em;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: rgb(13, 13, 13);
-    display: flex;
-    font-size: 12px !important;
-    line-height: 20px !important;
-}
-.start-day>input{
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    height: 30px;
-    text-align: left;
-    box-sizing: border-box;
-    background: rgb(255, 255, 255);
-    color: rgb(61, 61, 61);
-    padding: 0px 10px;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    cursor: pointer;
-}
-.ui-datepicker-trigger {						
-    cursor:pointer;
-    height: 23px;
-    margin-left: 5px;
-    --margin-top: 15px;
-}
-.start-time select{
-    margin-top: 0;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    box-sizing: inherit;
-    padding-right: 220px;
-    padding-left: 10px;
-    height: 28px;
-}
-.date-period{
-    padding: 46px 0 38px 18px;
-    font-weight: 400;
-    font-size: 14px !important;
-    line-height: 24px !important;
-}
-li:nth-child(1)::after{
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    height: 100%;
-    border-left: 1px solid rgb(228, 228, 228);
-}
-.date-end, .date-start{
-    position: relative;
-    width: 100%;
-}
-input[name='deliver'], input[name='startDay']{
-    width: 80%;
-    height: 28px;
-    margin-top: 0;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    padding-left: 10px;
-    cursor: pointer;
-}
-input[name='endDay']{
-    width: 68%;
-    height: 28px;
-    margin-top: 0;
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    padding-left: 10px;
-    cursor: pointer;
-}
-input[name='deliver']{
-    width: 40%;
-}
-.calculate-notice{
-    display: flex;
-    align-items: center;
-}
-.calculate-notice+div{
-    color: rgb(109, 109, 109);
-    font-size: 12px !important;
-}
-.calculate-notice>p {
-    margin : 3px 0 3px 2px;
-    font-size: 12px !important;
-}
-.content-stroy{
-    flex-wrap: wrap;
-}
-.story-box{
-    display: flex;
-}
-.story-notice{
-    display: flex;
-}
-.story-write{
-    border: 1px solid #567ace;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-.story-write p{
-    color: red;
-}
-.story-tip{
-    font-size: 14px !important;
-    line-height: 24px !important;
-    padding-left: 20px;
-}
-.story-notice>svg{
-    padding-top: 5px;
-}
-.story-editor{
-    width: 80%;
-    --padding: 0 15% 0 15%;
-}
-
-</style>
 <body>
+<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();">
 <div class="navi-menu">
         <div class="content-editor">
             <div class="editor-logo">
@@ -464,7 +35,7 @@ input[name='deliver']{
             </div>
             <div class="editor-buttons">
                 <button type="button" class="buttons-storage">임시저장</button>
-                <button type="button" class="buttons-request" onclick="saveBtn(); return false;">심사요청</button>
+                <button type="submit" class="buttons-request" >심사요청</button>
                 <div class="buttons-goout">
                     <img src="/blank/resources/images/project/icon_goout.png">
                     <a href="/blank/project/created/list"></a>
@@ -472,39 +43,31 @@ input[name='deliver']{
             </div>
         </div>
 </div>
-        <!-- <div class="content-menu">
-            <div><input type="submit" name="postPrj" value="약관정보"></div>
-            <div><input type="submit" name="postPrj" value="기본정보"></div> *이 부분은 현재페이지니까 빼도되나..
-            <div><input type="submit" name="postPrj" value="옵션설계"></div>
-            <div><input type="submit" name="postPrj" value="창작자정보"></div>
-        </div> -->
-</div>
+
 <div id="mem-header"></div>
     <div id="mem-full">
         
-            <input type="radio" id="edit-mypage" name="mem-navi" selected >
-            <label for="edit-mypage" ><span id="icon1" class="material-symbols-outlined">약관정보</span>&nbsp;</label>
-            <input type="radio" id="like-group" name="mem-navi">
-            <label for="like-group" ><span class="material-symbols-outlined md-24">기본정보</span></label>
-            <input type="radio" id="mem-group" name="mem-navi">
-            <label for="mem-group" ><span class="material-symbols-outlined">옵션설계</span></label>
-            <input type="radio" id="mem-manner" name="mem-navi">
-            <label for="mem-manner" ><span class="material-symbols-outlined">창작자정보</span></label>
-            
-
-
-            <%-- div id="container">
+            <input type="radio" id="default-info" name="mem-navi" selected >
+            <label for="default-info" ><span id="icon1" class="material-symbols-outlined">기본정보</span>&nbsp;</label>
+            <input type="radio" id="option-create" name="mem-navi">
+            <label for="option-create" ><span class="material-symbols-outlined md-24">옵션설계</span></label>
+            <input type="radio" id="creator-info" name="mem-navi">
+            <label for="creator-info" ><span class="material-symbols-outlined">창작자정보</span></label>
+          
+		<div id="mem-mp-main" class="mp-main1 main" >
+		<div id="container">
         <div class="content">
-            <div class="content-title">
-                <div class="title-info">
-                    <div>제목</div>
-                    <div>프로젝트의 주제, 특징이 드러나는 제목을 붙여주세요.</div>
-                </div>
-                <div class="title-write">
-                    <div><input type="text" placeholder="내용 입력" name="title"></div>
-                    <p>40글자 남음</p>
-                </div>
-            </div>
+                        <div id="mem-mp1-content">
+							<div class="content-title">
+				              <div class="title-info">
+				                  <div>제목</div>
+				                  <div>프로젝트의 주제, 특징이 드러나는 제목을 붙여주세요.</div>
+				              </div>
+				              <div class="title-write">
+				                  <div><input type="text" placeholder="내용 입력" name="title"></div>
+				                  <p>40글자 남음</p>
+				              </div>
+				          </div>
             <div class="content-category">
                 <div class="category-info">
                     <div>카테고리</div>
@@ -533,7 +96,7 @@ input[name='deliver']{
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
                 <div class="price-box">
-                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price" onkeyup="inputNumberFormat(this)"></div>
+                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price"> <!-- onkeyup="inputNumberFormat(this)" --></div>
                     <div>원</div>
                 </div>
             </div>
@@ -554,10 +117,10 @@ input[name='deliver']{
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select>
-                                        <option value="category">==시작시간 선택==</option>
-                                        <c:forEach items="${time}" var="time">
-                                        <option>${time.time}시</option>
-										</c:forEach>
+                                        <option value="">==시작시간 선택==</option>
+                                         <c:forEach items="${time}" var="tt">
+                                        <option>${tt.time}시</option>
+										</c:forEach> 
                                     </select>
                                     <!-- <div>dd</div> -->
                                 </div>
@@ -645,31 +208,190 @@ input[name='deliver']{
                     </div>
                 </div>
                 <div class="story-editor"><textarea id="editor4" name="editor4"></textarea></div>
+            </div>    
+                            
+                        </div>
+                </div>
+            </div>   
+		</div>
+
+             <!-- 컨텐츠 2 -->
+	<div class="mp-main2 main">
+	<div class="header-menubar">
+            <div class="menu-button">
+                <button type="button" onclick="location.href='/blank/project/post/optionSet'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
+                        <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
+                    </svg>
+                    세트
+                </button>
+                <button type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                        <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                        <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+                    </svg>
+                    아이템
+                </button>
+            </div>
+        </div>
+	<div id="container">
+        <div class="content">
+        <div id="mem-mp2-content">
+            <div class="content-box">
+                <div class="preview-box">
+                    <div class="preview-set">
+                        <div>내가 만든 세트</div>
+                        <% if(1 < 2){%>
+                            <ul>
+                                <li class="set-list">
+                                    <button type="button">
+                                        <div class="set-buttons">
+                                            <strong>29,000원</strong>
+                                        </div>
+                                        <p class="set-name">과일 세트</p>
+                                        <ul class="set-item">
+                                            <li>사과 x 1</li>
+                                            <li>바나나 x 1</li>
+                                        </ul>
+                                        <div class="set-quantity">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                            </svg>
+                                            <div>제한 수량</div>
+                                            <div>200</div>
+                                            <div>개</div>
+                                        </div>
+                                    </button>
+                                    <button type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        <%}else{ %>
+                            <div class="set-none">만든 세트가 없습니다.</div>
+                        <%}%>
+                    </div>
+                </div>
+                <div class="making-box">
+                    <div class="making-set">
+                        <div>
+                            <div class="post-set">
+                                <div class="set-notice">
+                                    <div>세트 아이템</div>
+                                    <div>세트는 후원자에게 프로젝트의 가치를 전달하는 수단입니다. <br>다양한 금액대로 여러 개의 선물을 만들어주세요.</div>
+                                </div>
+                                <div class="set-option">
+                                    <select class="">
+                                        <option>사과 (옵션 2개)</option>
+                                        <option>토마토 (옵션 1개)</option>
+                                        <option>가지 (옵션 3개)</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="set-option">
+                                    <span>
+                                        <input placeholder="아이템을 선택해 주세요" readonly>
+                                        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+                                        </div>
+                                    </span>
+                                    <div class="set-select">
+                                        <div>
+                                            <ul>
+                                                <li>
+                                                    <label for="option1" class="select-option">
+                                                        <input type="checkbox" id="option1">
+                                                        <span class="item-name">사과 (옵션2개)</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label for="option2" class="select-option">
+                                                        <input type="checkbox" id="option2">
+                                                        <span class="item-name">메론 (옵션2개)</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <div class="selete-submit">선택완료</div>
+                                        </div> 
+                                    </div>
+                                </div> -->
+                            </div>
+                            <ul class="selected">
+                                <li>
+                                    <div>
+                                        <div>사과</div>
+                                        <div>
+                                            <div class="quantity-box">
+                                                <button>
+                                                    <img src="/blank/resources/images/project/minus.svg">
+                                                </button>
+                                                <input type="number" value="1" name="optionQuantity">
+                                                <button>
+                                                    <img src="/blank/resources/images/project/plus.svg">
+                                                </button>
+                                            </div>
+                                            <button class="delete-button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <ol type="1">
+                                        <li>민트</li>
+                                        <li>레드</li>
+                                    </ol>
+                                </li>
+                                <li>
+                                </li>
+                            </ul>
+                            <div class="set-info">
+                                <div class="info-name">세트명</div>
+                                <div><input type="text" placeholder="세트명을 입력해 주세요." name="setName"></div>
+                            </div>
+                            <div class="set-info">
+                                <div class="info-quantity">수량 설정</div>
+                                <div class="text-price">
+                                    <div><input type="number" name="limitedQuantity"></div>
+                                    <div>개</div>
+                                </div>
+                            </div>
+                            <div class="set-info">
+                                <div class="info-price">
+                                    <div>금액 설정</div>
+                                    <div>배송이 필요한 선물은 배송비를 포함해주세요.</div>
+                                </div>
+                                <div class="text-quantity">
+                                    <div><input type="number" name="setPrice"></div>
+                                    <div>원</div>
+                                </div>
+                            </div>
+                            <div class="button-submit"><input type="submit" value="저장" name="save"></div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-           
+            </div>   
+		</div>
 
-             <!-- 컨텐츠 2 -->
-
-
-
-
-
-             <!-- 컨텐츠 내용 3 -->
-             
-             
              
              <!-- 컨텐츠 내용 3 -->
+             <div class="mp-main3 main">
 	<div id="container">
         <div class="content">
+        <div id="mem-mp3-content">
             <div class="content-title">
                 <div class="title-info">
                     <div>이름</div>
                     <div>창작자 개인이나 팀을 대표할 수 있는 이름을 써주세요.</div>
                 </div>
                 <div class="title-write">
-                    <div><input type="text" placeholder="내용 입력" name="title"></div>
+                    <div><input type="text" placeholder="내용 입력" name="name"></div>
                     <p class="title-length">40글자 남음</p>
                 </div>
             </div>
@@ -699,7 +421,7 @@ input[name='deliver']{
                 </div>
                 <div class="email-box">
                     <div class="email-area">
-                        <div class="email-write"><input type="text" placeholder="이메일 입력" name="price"></div>
+                        <div class="email-write"><input type="text" placeholder="이메일 입력" name="email"></div>
                         <div>
                             <input type="checkbox" id="info-check" name="">
                             <label for="info-check">회원정보와 동일</label>
@@ -714,7 +436,7 @@ input[name='deliver']{
                     <div>창작자 본인 명의의 휴대폰 번호를 입력해주세요.</div>
                 </div>
                 <div class="phone-box">
-                    <div class="phone-write"><input type="text" placeholder="내용 입력" name="price"></div>
+                    <div class="phone-write"><input type="text" placeholder="내용 입력" name="phone"></div>
                     <div>
                         <input type="checkbox" id="email-check" name="">
                         <label for="email-check"> 회원정보와 동일</label>
@@ -727,7 +449,7 @@ input[name='deliver']{
                     <div>블랭크의 정산 정책을 반드시 확인해 주세요.</div>
                 </div>
                 <div class="policy-box">
-                    <button id="show">
+                    <button type="button" id="show">
                         <div class="policy-agree"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                         </svg>확인하기</div></button>
@@ -760,7 +482,7 @@ input[name='deliver']{
                                 <div>
                                     <input type="checkbox" id="policy-check">
                                     <label for="policy-check">정산 정책을 확인하였습니다.</label>
-                                    <!-- 팝업닫기--></div> 
+                                    팝업닫기</div> 
                             </div>
                             </div>
                         <div>
@@ -782,8 +504,391 @@ input[name='deliver']{
                     <div><input type="text" placeholder="예금주명 입력" name="depositor"></div>
                 </div>
             </div>
-        </div>
-    </div> --%>
+            </div>
+            </div>
+            </div>
+            </form>
             
+   <script>
+
+   const config = {
+           dateFormat: 'yy-mm-dd',
+           changeMonth: true,
+           changeYear: true,
+           showOn: "both",
+           buttonImageOnly: true,
+           buttonImage: "/blank/resources/images/project/calendar2-date.svg",
+           buttonText: "Calendar",
+           
+       }
+
+       $(function() {
+           $( "input[name='startDay']" ).datepicker(config);
+       });
+       $(function() {
+           $( "input[name='endDay']" ).datepicker(config);
+       });
+       $(function() {
+           $( "input[name='deliver']" ).datepicker(config);
+       });
+
+       $(document).ready(function() {
+           CKEDITOR.replace('[editor4]');
+       });
+       
+       /* <script>
+       $(function () {
+           CKEDITOR.replace('contents', {
+               filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
+           });
+       }); */
+       
+       CKEDITOR.replace('editor4', {height: 500});
+
+       //온 서브밋을 위한 변수 선언;
+       let titleCheckReturn = false;
+       let priceCheckReturn = false;
+       let urlCheckReturn = false;
+       let summaryCheckReturn = false;
+
+       //글자수 체크(제목)
+       $('input[name="title"]').keyup(function(e) {
+           titleCheckReturn = false;
+           var content = $(this).val();
+           $('.title-write > p').text(40 - content.length + "글자 남음"); 
+           document.querySelector(".title-write > p").style.color = "red";
+           if (content.length > 40) {
+               alert("최대 40글자까지 입력 가능합니다.");
+               $(this).val(content.substring(0, 40));
+               $('.title-write > p').text("0글자 남음");
+           }else{
+               titleCheckReturn = true;
+           }
+       });
+       //유효성 체크(제목)
+       var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
+       $("input[name='title']").on("focusout", function() {
+           var x = $(this).val();
+           if (x.length > 0) {
+               if (x.match(replaceKorean)) {
+               }
+               $(this).val(x);
+           }
+           }).on("keyup", function() {
+               $(this).val($(this).val().replace(replaceKorean, ""));
+       });
+
+       //글자수 체크(목표금액)
+       $("input[name='price']").on("focusout", function() {
+           priceCheckReturn = false;
+           var x = $(this).val();
+           if (x < 500000) {
+               alert('50만원 이상의 금액을 입력해 주세요')
+           }else{
+               priceCheckReturn = true;
+           }
+       });
+       //목표금액 콤마 
+       // $('input[name="price"]').filter(".comma").on("keyup", function(){
+       //     console.log("ss");
+       //     $(this).val($(this).val().replace(/[^0-9]/g, "").toLocaleString());
+       // });
+   //     $(document).ready(function(){
+   //         $("input[name='price']").bind('keyup keydown',function(){
+   //             inputNumberFormat(this);
+   //         });
+           
+//        //입력한 문자열 전달
+//        function inputNumberFormat(obj) {
+//            obj.value = comma(uncomma(obj.value));
+//        }
+//        //콤마찍기
+//        function comma(str) {
+//            console.log("ss");
+//            str = String(str);
+//        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+   //     }
+   // });
+
+       //펀딩일수 계산
+       $("input[name='endDay']").on("focusout", function() {
+           //var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
+           //var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
+           var date1 = $("input[name='startDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+           var date2 = $("input[name='endDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+
+           var today = new Date();
+           var year = today.getFullYear();
+           var month = ('0' + (today.getMonth() + 1)).slice(-2);
+           var day = ('0' + today.getDate()).slice(-2);
+           var dateString = year + '-' + month  + '-' + day;
+
+           if (!$("input[name='startDay']").val()) {
+               alert("시작일을 입력해 주세요");
+           }
+           if (date2 < date1){ 
+               //console.log($("input[name='startDay']").val().length);
+               alert("시작일이 종료일보다 늦어요ㅠ"); 
+           }
+           if(date1 < dateString){
+               //console.log(date1);
+               alert("오늘 날짜 이후로 선택해 주세요"); 
+               }
+       });
+
+       //주소 중복검사
+       function emailDoubleCheck(){
+
+           $.ajax({
+               url : "/blank/member/doubleCheckByEmail",
+               type : "post",
+               data : {
+                   "email" : emailVal
+               },
+               success : function(result){
+
+                   if(result ==0){
+                       
+                       $('#email-result').text('사용가능한 이메일 입니다.');
+                       $('#email-result').addClass('green');
+                       $('#email-result').removeClass('red');
+
+                       $('#email-check').addClass('green'); // 성공하면 중복체크 초록으로 바꾸세용~
+                       $('#email-check').removeClass('ace');
+                       $('#email-check').removeClass('red');
+                       emailCheckReturn = true;
+
+                   }else{
+                       
+                       $('#email-result').text('중복된 이메일 입니다.');   
+                       $('#email-check').addClass('red');
+                       $('#email-check').removeClass('ace');
+                       $('#email-check').removeClass('green');
+                   }
+               },
+               error : function(){
+                   alert('에이잭스 에러!!!!!!!!!');
+               }
+           }); //ajax    
+       };
+       
+       //글자수 체크(주소)
+       $("input[name='url']").on("focusout", function() {
+           var content = $(this).val();
+           if (content.length < 3) {
+               alert("3자 이상 입력해주세요.");
+           }
+       });
+       //유효성 체크(주소)
+       var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+       var checkEnglish = /[a-zA-Z]/;   
+       var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; 
+       var checkBlank = /\s/g;
+       $('input[name="url"]').keyup(function(e) {
+           urlCheckReturn = false;
+           var content = $(this).val();
+           if( checkEnglish.test(content) && !checkKorean.test(content) && !checkEmoji.test(content) ) {
+               urlCheckReturn = true;
+           }
+       }).on("keyup", function() {
+               $(this).val($(this).val().replace(checkKorean, ""));
+               $(this).val($(this).val().replace(checkEmoji, ""));
+               $(this).val($(this).val().replace(checkBlank, ""));
+       });
+
+       //글자수 체크(요약)
+       $('.summary-text > textarea').keyup(function(e) {
+           summaryCheckReturn = false;
+           var content = $(this).val();
+           $('.summary-text + p').text(100 - content.length + "글자 남음"); 
+           document.querySelector(".summary-text + p").style.color = "red";
+           if(content.length > 0){
+               content.match(replaceKorean)
+               $(this).val($(this).val().replace(replaceKorean, ""));
+               if (content.length > 100) {
+                   alert("최대 100글자까지 입력 가능합니다.");
+                   $(this).val(content.substring(0, 100));
+                   $('.summary-text + p').text("0글자 남음");
+               }
+           }   summaryCheckReturn = true;
+       });
+       
+       //창작자 정보
+       //모달창
+        function show () {
+            document.querySelector(".background").className = "background show";
+        }
+        function close () { 
+            document.querySelector(".background").className = "background";
+        }
+        document.querySelector("#show").addEventListener('click', show);
+        document.querySelector("#close").addEventListener('click', close);
+
+        //온 서브밋을 위한 변수 선언;
+        let nameCheckReturn = false;
+        let infoCheckReturn = false;
+        let bankCheckReturn = false;
+        let accountCheckReturn = false;
+        let depositorCheckReturn = false;
+
+        //글자수 체크(이름)
+        $('input[name="name"]').keyup(function(e) {
+            let nameCheckReturn = false;
+            var content = $(this).val();
+            $('.title-length').text(40 - content.length + "글자 남음"); 
+            document.querySelector(".title-length").style.color = "red";
+            if (content.length > 40) {
+                alert("최대 40글자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 40));
+                $('.title-length').text("0글자 남음");
+            }
+        });
+        //유효성 체크(이름)
+        //var replaceEmoji =  /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
+        //var replaceEmoji = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
+        var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
+        
+        $("input[name='name']").on("focusout", function() {
+        var x = $(this).val();
+            if (x.length > 0) {
+                if (/*x.match(replaceEmoji) || */  x.match(replaceKorean)) {
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                //$(this).val($(this).val().replace(replaceEmoji, ""));
+                $(this).val($(this).val().replace(replaceKorean, ""));
+        });
+    
+         //글자수 체크(소개)
+        $('input[name="introduce"]').keyup(function(e) {
+            let infoCheckReturn = false;
+            var content = $(this).val();
+            $('.creator-write > p').text(40 - content.length + "글자 남음"); 
+            document.querySelector(".creator-write > p").style.color = "red";
+            if (content.length > 40) {
+                alert("최대 40글자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 40));
+                $('.creator-write > p').text("0글자 남음");
+            }
+        });
+        //유효성 체크(소개)
+        var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
+        $("input[name='introduce']").on("focusout", function() {
+        var x = $(this).val();
+            if (x.length > 0) {
+                if (x.match(replaceKorean)) {
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                $(this).val($(this).val().replace(replaceKorean, ""));
+        });
+
+        //유효성 체크(은행명)
+        var checkNumber = /[0-9]/;    // 숫자 
+        var checkEnglish = /[a-zA-Z]/;    // 문자 
+        var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+        $('input[name="bank"]').keyup(function(e) {
+            let bankCheckReturn = false;
+            var content = $(this).val();
+            if( check_kor.test(content) && !check_num.test(content) && !check_eng.test(content) && !check_spc.test(content) ) {
+                return true;
+            }else{
+                alert("한글만 입력 가능합니다. 다시 입력해주세요.");
+                return false;
+            }
+        });
+
+        //유효성 체크(계좌번호)
+        var checkNumber = /^[0-9]*$/;
+        $('input[name="accountNumber"]').keyup(function(e) {
+            let accountCheckReturn = false;
+            var content = $(this).val();
+            if(!regExp.test(content)){
+                alert("숫자만 입력 가능합니다. 다시 입력해주세요.");
+                return false;
+            }
+            return true;
+        });
+
+        //유효성 체크(예금주)
+        var checkNumber = /[0-9]/;   
+        var checkEnglish = /[a-zA-Z]/;   
+        var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; 
+        var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
+        $('input[name="depositor"]').keyup(function(e) {
+            let depositorCheckReturn = false;
+            var content = $(this).val();
+            if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
+                return true;
+            }else{
+                alert("한글만 입력 가능합니다. 다시 입력해주세요.");
+                return false;
+            }
+        });
+
+        //정책 체크박스
+        $(document).ready(function() {
+            $('input[id="policy-check"]').on('click', function() {
+                if ( $(this).prop('checked') ) {
+                    $('.policy-agree').text("동의 완료"); 
+                    $('.policy-agree').addClass("agree");
+                    console.log('dddd');
+                } else {
+                    $('.policy-agree').removeClass("agree");
+                    $('.policy-agree').text("확인하기"); 
+                    $('.policy-agree').off('click');
+                }
+                });
+            });
+       
+       
+       //임시저장
+       $('.buttons-storage').click(function() {
+	       $.ajax({
+	    	   type: "",
+	    	   url  : "/blank/project/savePrj",
+	    	   type : "POST",
+	    	   data : $("#postPrj").serialize(),
+	    	   dataType: "json",
+	    	   success : function(x){
+	    		   if(x == 1){
+    		        alert('임시비밀번호가 전송되었습니다.')
+	    	   		}
+	    	 }
+	      /*  ,
+	    	    error : function(x){
+	    	        console.log("받아온 리절트"+x);
+	    	        alert('에이잭스 에러!!!!!!!!!');
+	    	    } */
+	       })
+       })
+        //온서브밋
+       function checkAll(){
+    	   console.log("성공?!");
+       if(!titleCheckReturn){ alert('제목이 입력되지않았습니다'); return false;}
+       if(!priceCheckReturn){ alert('목표금액이 입력되지않았습니다.'); return false;}
+       if(!urlCheckReturn){ alert('url이 입력되지않았습니다'); return false;}
+       if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
+       
+       if(!nameCheckReturn){ alert('이름이 입력되지않았습니다'); return false;}
+       if(!infoCheckReturn){ alert('소개가 입력되지않았습니다.'); return false;}
+       if(!bankCheckReturn){ alert('은행명이 입력되지않았습니다'); return false;}
+       if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
+       if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
+       if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
+       if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
+
+       return true;
+       }
+
+       /*심사요청 href*/
+       /* function requestBtn(){
+           location.href = "/blank/project/post/save";
+       } */
+       
+  </script>
 </body>
 </html>

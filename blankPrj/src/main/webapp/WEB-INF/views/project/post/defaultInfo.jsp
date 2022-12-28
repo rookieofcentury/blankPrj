@@ -67,7 +67,7 @@
                     <select name="category">
                         <option value="category">==카테고리 선택==</option>
                         <c:forEach items="${category}" var="cate">
-                        <option>${cate.name}</option>
+                        <option value="${cate.no}">${cate.name}</option>
 						</c:forEach>
                     </select>
                     <div></div>
@@ -107,7 +107,7 @@
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select>
-                                        <option value="category">==시작시간 선택==</option>
+                                        <option value="time">==시작시간 선택==</option>
                                         <c:forEach items="${time}" var="time">
                                         <option>${time.time}시</option>
 										</c:forEach>
