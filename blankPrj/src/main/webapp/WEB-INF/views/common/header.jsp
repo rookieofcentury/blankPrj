@@ -19,11 +19,11 @@
 				<img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'">
 			</div>
 			<div class="member-area">
-				<c:if test="${loginMember != null}">
+				<c:if test="${loginMember != NULL}">
 					<div onclick="location.href='/blank/project/agree'">프로젝트 올리기</div>
 					<div id="mypage-btn" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
 				</c:if>
-				<c:if test="${loginMember == null}">
+				<c:if test="${loginMember == NULL}">
 					<div class="flex id-area" onclick="location.href='/blank/member/login'">로그인</div>
 				</c:if>
 				<div class="search-area">

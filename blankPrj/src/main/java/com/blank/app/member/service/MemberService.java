@@ -18,4 +18,6 @@ public interface MemberService {
 
 	public int updateEmailByNo(MemberVo vo);
 
+	public int updateNickByNo(MemberVo vo);
+
 }

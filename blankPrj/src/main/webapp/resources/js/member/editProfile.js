@@ -112,30 +112,49 @@ pwdBtn.click(function(){
    console.log(nickVal);
 
    if(nickVal == loginNick){
-      $('#email-result').text("기존의 닉네임과 동일한 닉네임입니다.");
-
+      $('#nick-result').text("기존의 닉네임과 동일한 닉네임입니다.");
    }else if(!nickjung.test(nickVal)){
-
-      $('#email-result').text("닉네임 형식이 맞지 않습니다.");
-
+      $('#nick-result').text("닉네임 형식이 맞지 않습니다.");
    }else if(nickVal == ''){
-      $('#email-result').text("값을 입력해주세요");
+      $('#nick-result').text("값을 입력해주세요");
    }
-
    else{
-      $('#email-result').addClass('red');
-      $('#email-result').removeClass('green');
-      $('#email-result').text("저장버튼을 누르시면 변경이 완료됩니다.");
-      
-      emailCheck = true;
-
+      $('#nick-result').text("저장버튼을 누르시면 변경이 완료됩니다.");
+      nickCheck = true;
    }
 
  
  })
 
+ let phoneCheck = false;
+ let inputPhone = $('input[name=phone]');
  
+ //휴대전화 바꾸는 곳에  키업하면 
+ inputPhone.keyup(function(){
 
+   let loginPhone = $('#loginPhone').text(); 
+   const nickjung = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/; // 한글 숫자 영어 2-10
+    //버튼 저장버튼 안되게! 
+    emailCheck = false;
+    
+    let nickVal = inputNick.val();
+
+   console.log(nickVal);
+
+   if(nickVal == loginNick){
+      $('#nick-result').text("기존의 닉네임과 동일한 닉네임입니다.");
+   }else if(!nickjung.test(nickVal)){
+      $('#nick-result').text("닉네임 형식이 맞지 않습니다.");
+   }else if(nickVal == ''){
+      $('#nick-result').text("값을 입력해주세요");
+   }
+   else{
+      $('#nick-result').text("저장버튼을 누르시면 변경이 완료됩니다.");
+      nickCheck = true;
+   }
+
+ 
+ })
 
 
  

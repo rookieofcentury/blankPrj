@@ -47,4 +47,11 @@
  		SET EMAIL = #{email}
  		WHERE NO = ${no}
  	</update>
+ 	
+ 	<update id="updateNick">
+ 		UPDATE MEMBER
+ 		SET NICK = #{nick}
+ 		WHERE NO = ${no}
+ 	</update>
+ 	
 </mapper>

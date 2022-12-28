@@ -21,5 +21,7 @@ public interface MemberDao {
 
 	public int updateEmailByNo(SqlSessionTemplate sst, MemberVo vo);
 
+	public int updateNickByNo(SqlSessionTemplate sst, MemberVo vo);
+
 
 }

@@ -40,16 +40,16 @@
 							<div><label id="loginNick">${loginMember.nick}</label></div>
 							<div><button class="change-btn" id="nick-change">변경</button></div>
 							<div class="hidden nick-hidden"></div>
-							<div class="hidden nick-hidden"><input  type="text" name="nick"></div>
-							<div class="hidden nick-hidden"><input class="change-btn" type="button" value="저장하기" id="nick-ajax"></div>
-							<div class="hidden nick-hidden span3" id="nick-result">결과창</div>
+							<div class="hidden nick-hidden"><input  type="text" name="nick" value="${loginMember.nick}"></div>
+							<div class="hidden nick-hidden"><input class="change-btn" type="button" value="저장하기" id="nick-ajax" onclick="updateNick();"></div>
+							<div class="hidden nick-hidden span3 red" id="nick-result">결과창</div>
 						</div>
 						<div>
 							<div>휴 대 전 화</div>
 							<div><label>${loginMember.phone}</label></div>
 							<div><button class="change-btn" id="phone-change">변경</button></div>
 							<div class="hidden phone-hidden"></div>
-							<div class="hidden phone-hidden"><input  type="text" name="phone"></div>
+							<div class="hidden phone-hidden"><input  type="text" name="phone" oninput="autoHyphen(this)"></div>
 							<div class="hidden phone-hidden"><input class="change-btn" type="button" value="저장하기" id="phone-ajax"></div>
 							<div class="hidden phone-hidden" id="phone-result">결과창</div>
 						</div>
@@ -117,7 +117,7 @@ function updateEmail(){
 
 
 
-let NickChangeBtn = $('#nick-change');
+let nickChangeBtn = $('#nick-change');
 //닉네임 바꾸는것 에이젝스
 function updateNick(){
 
@@ -137,16 +137,16 @@ if(!nickCheck) {
 
 		if(result == 1){
 		
-		$('#loginEmail').text(nickVal)
+		$('#loginNick').text(nickVal)
 		alert('닉네임 업데이트 되었습니다.');
-		emailChangeBtn.click();
+		nickChangeBtn.click();
 
 		}else if(result == 0){
 
-			$('#email-result').text('중복된 이메일 입니다.');  
+			$('#nick-result').text('중복된 이메일 입니다.');  
 
 		}else{
-		$('#email-result').text('이메일 업데이트 실패 ');  
+		$('#nick-result').text('이메일 업데이트 실패 ');  
 		}
 	},
 	error : function(){
