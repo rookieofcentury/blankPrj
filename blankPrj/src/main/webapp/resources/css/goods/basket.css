@@ -216,8 +216,9 @@ input::-webkit-inner-spin-button {
 .cart-info input {
     outline: none;
     border: none;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     text-align: right;
+    padding: 0px;
 }

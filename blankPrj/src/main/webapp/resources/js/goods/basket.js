@@ -16,6 +16,9 @@
 
         // 배송비 설정
         delieveryFee();
+
+        // 총계 설정
+        totalPriceCalc();
     }) 
 
     /* CART 선택 삭제 */
@@ -62,7 +65,7 @@
             
     })
 
-    /* 금액 계산 */
+    /* 금액 계산 함수 */
     function priceUpdate(data) {
         var price = data.parent().parent().prev().text();
         var parsePrice = stringNumberToInt(price);
@@ -71,7 +74,7 @@
         calPrice.text(data.val() * parsePrice);
     }
     
-    /* 상품 총 금액 계산 */
+    /* 상품 총 금액 계산 함수 */
     function productPrice() {
         var itemPrice = $('.item-price'); // 상품 총 금액
         console.log(itemPrice);
@@ -90,7 +93,7 @@
         productPrice.val(total);
     }
 
-    /* 배송비 계산 */
+    /* 배송비 계산 함수 */
     function delieveryFee() {
         var delFee = $('#del-fee');
         var productPrice = $('#product-price'); // 상품 총 금액
@@ -100,6 +103,11 @@
         } else {
             delFee.val(0);
         }
+    }
+
+    /* 총계 계산 함수 */
+    function totalPriceCalc() {
+        $('#total-price').val(parseInt($('#product-price').val()) + parseInt($('#del-fee').val()));
     }
 
     // ,로 나뉘어진 숫자를 콤마 없이 출력하는 함수
@@ -118,6 +126,7 @@
         priceUpdate($(this));
         productPrice();
         delieveryFee();
+        totalPriceCalc();
     })
 
     /* 플러스 마이너스 버튼 누르면 값 바뀌게 */
@@ -131,6 +140,7 @@
         priceUpdate(nextCntInput);
         productPrice();
         delieveryFee();
+        totalPriceCalc();
     })
     $('.plus-btn').click(function() {
         var prevCntInput = $(this).prev();
@@ -142,6 +152,7 @@
         priceUpdate(prevCntInput);
         productPrice();
         delieveryFee();
+        totalPriceCalc();
     })
 
     /* 모두 체크 버튼 누르면 다 체크되게 */
