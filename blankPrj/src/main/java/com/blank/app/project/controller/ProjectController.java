@@ -26,9 +26,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.blank.app.member.service.MemberService;
+import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.service.ProjectService;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @RequestMapping("project")
 @Controller
@@ -132,17 +136,45 @@ public class ProjectController {
 	
 
 	@GetMapping("post")
-	public String post() {
+	public String post(TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
+		List<HashMap<String, String>> category = service.selectCategory(map);
+		List<TimeVo> starttimeVo = service.selectStartime(timevo);
+		
+		//JsonObject jsonObj = JsonParser.parseString(timeVo).getAsJsonObject();
+		/*
+		 * Gson gson = new Gson(); String timeVo = gson.toJson(starttimeVo);
+		 */
+		
+		model.addAttribute("category", category);
+		model.addAttribute("time", starttimeVo);
 		return "project/post/post";
 	}
 	
+	@PostMapping("post")
+	public String post(HttpSession session, ProjectVo vo) {
+		
+		String nick =(String)session.getAttribute("nick");
+		vo.setCreator(nick);
+		
+		int result = service.tempPrj(vo);
+		if(result != 1) {
+			return "";
+		}
+		return "project/created/list";
+	}
 	
-	
-	
-	
-	
-	
-	
+	@PostMapping("savePrj")
+	public String savePrj(HttpSession session, ProjectVo vo) {
+		
+		String nick =(String)session.getAttribute("nick");
+		vo.setCreator(nick);
+		
+		int result = service.tempPrj(vo);
+		if(result != 1) {
+			return "";
+		}
+		return result+"";
+	}
 	
 	/*
 	@PostMapping("/fileupload.do")

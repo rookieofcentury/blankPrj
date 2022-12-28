@@ -198,6 +198,20 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- 웹소켓 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- Gson -->	
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.10</version>
+		</dependency>
 			
 	</dependencies>
     <build>

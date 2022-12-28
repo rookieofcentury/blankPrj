@@ -42,4 +42,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	public int deletePrj(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.selectOne("projectMapper.deletePrj");
 	}
+
+	@Override
+	public int tempPrj(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.insert("projectMapper.insertTempPrj", vo);
+	}
 }

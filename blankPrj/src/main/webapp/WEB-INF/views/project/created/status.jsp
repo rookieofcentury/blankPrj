@@ -12,6 +12,34 @@
 
 </head>
 <body>
+<script>
+ $(document).ready(function() { 
+	 alert('dd')
+         	<c:forEach items="${myPrj}" var="myPrj">
+	        var statusAll = '';
+	        var list = '';
+	
+	        var title2 = '${ myPrj.title }';
+	        var status = '${ myPrj.status }';
+	        var summary = '${ myPrj.summary }';
+	        //var img = '${ myPrj.title }';
+	        
+        	console.log(title2);
+        	list +=	'<div class="myprj-status">' + title2 + '</div>' + '<div class="list-box">'
+	        list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
+            list += '<div class="prj-info">'+'<div class="prj-content">';
+            list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
+            list += '<div>'+'<div class="management-button">'+'<a href="/blank/project/created/list?p='+title2+'">관리</a>'
+                +'</div>'+'<div class="delete-button">'+'<a href="/blank/project/created/delete?p='+title2+'">삭제</>'+'</div>'+'</div>';  
+            list += '</div>'+'</div>'+'</div>'+'</div>'; 
+	        
+            $(".list-content").append(list);
+/*  			list += '<div>' + title2 + '</div>';  */
+        
+        </c:forEach> 
+
+    }); 
+    </script>
 
     <%@ include file = "/WEB-INF/views/common/header.jsp" %>
     
@@ -30,13 +58,13 @@
             <div>종료</div>
         </div>
         <div class="myprj-list">
-            <div>
+            <div class="list-content">
                 <div class="myprj-status">작성 중 1</div>
                 <!-- <c:forEach items="${myPrj}" var="item">
                     <div>${item.title}</div>
                  </c:forEach> -->
-                <div class="list-box">
-                    <div class="prj-img"><img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"></div>
+                  <div class="list-box">
+                     <div class="prj-img"><img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"></div>
                     <div class="prj-info">
                         <div class="prj-content">
                             <div class="content-info">
@@ -52,8 +80,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> 
+                </div> 
             </div>
             <!-- <c:if test="${loginMember != null}">
             </c:if> -->
@@ -87,30 +115,7 @@
         document.getElementById("popup_layer").style.display = "none";
     }
 
-    $(document).ready(function() { 
-        var statusAll = '';
-        var list = '';
-
-        var title = '${ myPrj.title }';
-        var status = '${ myPrj.status }';
-        var summary = '${ myPrj.summary }';
-        //var img = '${ myPrj.title }';
-
-        for(const myPrj of '${myPrj}' ){
-        //<c:forEach items="${myPrj}" var="myPrj">
-            //console.log('${ myPrj.title }');
-            list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
-            list += '<div class="prj-info">'+'<div class="prj-content">';
-            list += '<div class="content-info">'+'<div>'+myPrj.title+'</div>'+'<div>'+myPrj.summary+'</div>'+'</div>';
-            list += '<div>'+'<div class="management-button">'+'<a href="/blank/project/created/list?p='+myPrj.url+'">관리</a>'
-                +'</div>'+'<div class="delete-button">'+'<a href="/blank/project/created/delete?p='+myPrj.no+'">삭제</>'+'</div>'+'</div>';  
-            list += '</div>'+'</div>';
-
-            $(".list-box").append(list);
-        }
-        //</c:forEach>
-
-    }); 
+   
 
 
     // $('.taps > div:nth-child(2)').click(function(){

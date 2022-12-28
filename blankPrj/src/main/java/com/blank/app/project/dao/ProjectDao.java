@@ -22,5 +22,7 @@ public interface ProjectDao {
 
 	int deletePrj(SqlSessionTemplate sst, ProjectVo vo);
 
+	int tempPrj(SqlSessionTemplate sst, ProjectVo vo);
+
 
 }
