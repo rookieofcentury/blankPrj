@@ -28,30 +28,35 @@
                         <th>상품 정보</th>
                         <th>가격</th>
                         <th>수량</th>
+                        <th>합계</th>
                     </tr>
 
                     <!-- 장바구니가 비어 있을 때 -->
                     <c:if test="${empty cart}">
                         <tr id="empty-box">
-                            <td rowspan="2" colspan="5" id="empty-box"><label>현재 장바구니가 비어 있습니다.</label><br>지금 바로 블랭크의 굿즈를 담아 보세요!</td>
+                            <td rowspan="2" colspan="6" id="empty-box"><label>현재 장바구니가 비어 있습니다.</label><br>지금 바로 블랭크의 굿즈를 담아 보세요!</td>
                         </tr>
                     </c:if>
 
                     <c:forEach items="${cartList}" var="item">
                         <tr>
                             <td><input type="checkbox" name="chBox" class="chBox" id="${item.no}"><label for="${item.no}"></label></td>
-                            <td><img src="" alt=""></td>
-                            <td>
+                            <td class="img-area"><img src="" alt=""></td>
+                            <td class="name-area">
                                 <span>${item.name}</span>
                             </td>
                             <td><fmt:formatNumber pattern="###,###,###" value="${item.price}"/></td>
                             <td class="cnt-area">
                                 <div class="cnt-item">
-                                    <div class="cnt-btn minus-btn"><i class="fa-solid fa-minus"></i></div>
-                                    <input type="text" name="cnt" value="${cart[item.no]}">
-                                    <div class="cnt-btn plus-btn"><i class="fa-solid fa-plus"></i></div>
+                                    <div class="cnt-btn minus-btn"><i class="fa-solid fa-minus fa-xs"></i></div>
+                                    <input type="text" name="cnt" value="${cart[item.no]}" onchange="changeValue('${item.no}', this.value);">
+                                    <div class="cnt-btn plus-btn"><i class="fa-solid fa-plus fa-xs"></i></div>
                                 </div>
-                                </td>
+                            </td>
+                            <td>
+                                <label class="item-price"></label>
+                                원
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

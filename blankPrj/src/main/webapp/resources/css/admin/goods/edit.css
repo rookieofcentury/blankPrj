@@ -91,6 +91,7 @@ main .edit-board-header{
     height: 150px;
     position: relative;
     display: flex;
+    margin-bottom: 13px;
 }
 .thumbnail-item img{
     width: 150px;

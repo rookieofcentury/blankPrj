@@ -12,7 +12,7 @@
 	justify-content: center;
 	row-gap: 25px;
 	grid-template-columns: 1fr;
-	grid-template-rows: 50px minmax(auto, 0.3fr) 100px minmax(auto, 0.5fr);
+	grid-template-rows: 50px minmax(auto, 650px) 100px minmax(auto, 1fr);
 }
 .container>div:nth-child(3) {
     display: flex;
@@ -177,7 +177,7 @@ option:hover {
     font-size: 20px;
     width: 79%;
     height: 100%;
-    border-bottom: 1px solid #343434;
+    border-bottom: 1px solid #D9D9D9;
 }
 .content-menu>button {
     display: flex;
@@ -190,7 +190,7 @@ option:hover {
     font-size: 18px;
 }
 .content-menu>button:focus {
-    border-bottom: 2px solid #000000;
+    border-bottom: 2px solid #D9D9D9;
     font-weight: bold;
 }
 
@@ -283,7 +283,7 @@ option:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border-top: 1px solid #343434;
+    border-top: 1px solid #D9D9D9;
     padding-top: 20px;
 }
 .btn-area {
@@ -335,7 +335,7 @@ option:hover {
     font-size: 20px;
     width: 79%;
     height: 100%;
-    border-bottom: 1px solid #343434;
+    border-bottom: 1px solid #D9D9D9;
 }
 .content-menu>label {
     display: flex;
@@ -360,7 +360,7 @@ option:hover {
 }
 .btn-obj input[type=radio]:checked + span {
     font-weight: bold;
-    border-bottom: 2px solid #000000;
+    border-bottom: 2px solid #343434;
 }
 
 .standard input[type=radio] {
