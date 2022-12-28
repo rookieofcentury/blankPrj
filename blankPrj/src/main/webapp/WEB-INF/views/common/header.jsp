@@ -20,10 +20,11 @@
 			</div>
 			<div class="member-area">
 				<c:if test="${loginMember != null}">
-					<div id="mypage-btn" onclick="location.href='/blank/member/mypage'">마이페이지</div>
+					<div onclick="location.href='/blank/project/agree'">프로젝트 올리기</div>
+					<div id="mypage-btn" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
 				</c:if>
 				<c:if test="${loginMember == null}">
-					<div class="flex id-area">로그인 / 회원가입</div>
+					<div class="flex id-area" onclick="location.href='/blank/member/login'">로그인</div>
 				</c:if>
 				<div class="search-area">
 					<form action="/app/search" method="get">
