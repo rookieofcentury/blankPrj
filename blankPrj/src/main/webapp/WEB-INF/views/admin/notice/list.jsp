@@ -31,7 +31,7 @@
 
                 <div class="notice-search">
                 
-                    <select class="category" name="category"><!-- name 확인! -->
+                    <select class="category" name="category">
                         <option value="title">제목</option>
                         <option value="a.id">작성자</option>
                     </select

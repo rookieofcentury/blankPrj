@@ -51,7 +51,7 @@
 	</insert>
 	
 	<!-- 공지사항 상세조회 -->
-	<select id="selectOne" resultType="NoticeVo">
+	<select id="selectNotice" resultType="NoticeVo">
 		SELECT N.NO, A.ID AS ADMIN_NO, N.TITLE, N.CONTENT, N.FIXE_YN, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, N.DELETE_YN
 		FROM NOTICE N
 		INNER JOIN ADMIN A
@@ -61,7 +61,8 @@
 	
 	<!-- 공지사항 수정 -->
 	<update id="updateNotice">
-		UPDATE NOTICE SET WRITE_DATE = SYSDATE, TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
+		UPDATE NOTICE SET WRITE_DATE = SYSDATE, TITLE = #{title}, CONTENT = #{content}
+		WHERE NO = #{no}
 	</update>
 	
 	<!-- 전체 회원 수 카운드 -->
@@ -98,13 +99,13 @@
 		ORDER BY NO DESC
 	</select>
 	
-	<!-- !!!!!여기 해야 함 !!!!! 프로젝트 상세조회 -->
-	<select id="selectPrjOne" resultType="ProjectVo">
-		SELECT N.NO, A.ID AS ADMIN_NO, N.TITLE, N.CONTENT, N.FIXE_YN, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, N.DELETE_YN
-		FROM NOTICE N
-		INNER JOIN ADMIN A
-		ON A.NO = N.ADMIN_NO
-		WHERE N.NO = #{no}
+	<!-- 프로젝트 상세조회 -->
+	<select id="selectPrj" resultType="ProjectVo">
+		SELECT P.NO, P.TITLE, C.NAME AS CATEGORY, P.PRICE, P.START_DATE, P.TIME, P.END_DATE, P.URL, P.SUMMARY, P.STATUS
+		FROM PROJECT P
+		LEFT JOIN MEMBER M ON M.NO = P.CREATOR
+		JOIN PRJ_CATEGORY C ON C.NO = P.CATEGORY
+		WHERE P.NO = #{no}
 	</select>
 	
 	<!-- 전체 신고된 프로젝트 수 카운드 -->
@@ -119,6 +120,55 @@
 		FROM REPORT R
 		INNER JOIN MEMBER M
 		ON R.NO = M.NO
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+	
+	<!-- 회원정보 상세조회 -->
+	<select id="selectMember" resultType="MemberVo">
+		SELECT NO, NICK, GENDER, PHONE, EMAIL, POINT, BANK, ACCOUNT, DEPOSITOR, STATUS, SUBSTR(ENROLL_DATE, 1, 8) AS ENROLL_DATE
+		FROM MEMBER
+		WHERE NO = #{no}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateMember">
+		UPDATE MEMBER SET NICK = #{nick}, PHONE = #{phone}, EMAIL = #{email}, POINT = #{point}, BANK = #{bank}, ACCOUNT = #{account}, DEPOSITOR = #{depositor}
+		WHERE NO = #{no}
+	</update>
+	
+	<!-- 전체 FAQ 수 카운드 -->
+	<select id="faqCount" resultType="int">
+		SELECT COUNT(*)
+		FROM FAQ
+	</select>
+	
+	<!-- FAQ 목록 조회 -->
+	<select id="selectFaqList" resultType="FaqVo">
+		SELECT F.NO, F.TITLE, C.NAME AS CATEGORY, CONCAT(SUBSTR(CONTENT, 1, 28),'...') AS CONTENT, A.ID AS ADMIN_NO, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, F.DELETE_YN
+		FROM FAQ F, ADMIN A, FAQ_CATEGORY C
+		WHERE F.ADMIN_NO = A.NO
+		AND C.NO = F.CATEGORY
+<!-- 		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if> -->
+		ORDER BY NO DESC
+	</select>
+
+	<!-- 전체 문의 수 카운드 -->
+	<select id="helpCount" resultType="int">
+		SELECT COUNT(*)
+		FROM HELP
+	</select>
+	
+	<!-- 문의 목록 조회 -->
+	<select id="selectHelpList" resultType="HelpVo">
+		SELECT H.NO, H.TITLE, H.CONTENT, M.NICK AS MEMBER_NO, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, H.STATUS
+		FROM HELP H
+		INNER JOIN MEMBER M
+		ON H.MEMBER_NO = M.NO
 		<if test=" keyword != null and keyword != '' ">
 			WHERE ${category} LIKE '%${keyword}%'
 		</if>

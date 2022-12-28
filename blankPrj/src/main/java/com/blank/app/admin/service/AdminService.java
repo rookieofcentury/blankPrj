@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.dao.AdminDao;
 import com.blank.app.admin.vo.AdminVo;
+import com.blank.app.admin.vo.FaqVo;
+import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -47,7 +49,7 @@ public class AdminService {
 
 	//공지사항 상세조회
 	public NoticeVo selectOne(NoticeVo noticeVo) {
-		return admindao.selectOne(sst, noticeVo);
+		return admindao.selectNotice(sst, noticeVo);
 	}
 
 	//공지사항 수정
@@ -74,10 +76,10 @@ public class AdminService {
 	public List<ProjectVo> selectProjectList(Map<String, String> map, PageVo pageVo) {
 		return admindao.selectProjectList(sst, map, pageVo);
 	}
-
+	
 	//프로젝트 상세조회
-	public NoticeVo selectPrjOne(ProjectVo projectVo) {
-		return admindao.selectPrjOne(sst, projectVo);
+	public ProjectVo selectPrj(ProjectVo projectVo) {
+		return admindao.selectPrj(sst, projectVo);
 	}
 
 	//신고된 프로젝트 전체 수 카운트
@@ -89,5 +91,37 @@ public class AdminService {
 	public List<ReportVo> selectDeProjectList(Map<String, String> map, PageVo pageVo) {
 		return admindao.selectDeProjectList(sst, map, pageVo);
 	}
+
+	//회원정보 상세조회
+	public MemberVo selectMember(MemberVo memberVo) {
+		return admindao.selectMember(sst, memberVo);
+	}
+	
+	//회원정보 수정
+	public int updateMember(MemberVo memberVo) {
+		return admindao.updateMember(sst, memberVo);
+	}
+
+	//FAQ 전체 수 카운트
+	public int faqCount() {
+		return admindao.faqCount(sst);
+	}
+
+	//FAQ 목록 조회
+	public List<FaqVo> selectFaq(Map<String, String> map, PageVo pageVo) {
+		return admindao.selectFaqList(sst, map, pageVo);
+	}
+
+	//고객센터 문의 전체 수 카운트
+	public int helpCount() {
+		return admindao.helpCount(sst);
+	}
+
+	//고객센터 문의 목록 조회
+	public List<HelpVo> selectHelp(Map<String, String> map, PageVo pageVo) {
+		return admindao.selectHelpList(sst, map, pageVo);
+	}
+
+
 	
 }

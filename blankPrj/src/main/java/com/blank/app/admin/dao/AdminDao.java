@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.vo.AdminVo;
+import com.blank.app.admin.vo.FaqVo;
+import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -43,8 +45,8 @@ public class AdminDao {
 	}
 
 	//공지사항 상세조회
-	public NoticeVo selectOne(SqlSessionTemplate sst, NoticeVo noticeVo) {
-		return sst.selectOne("adminMapper.selectOne", noticeVo);
+	public NoticeVo selectNotice(SqlSessionTemplate sst, NoticeVo noticeVo) {
+		return sst.selectOne("adminMapper.selectNotice", noticeVo);
 	}
 
 	//공지사항 수정
@@ -83,8 +85,8 @@ public class AdminDao {
 	}
 
 	//프로젝트 상세조회
-	public NoticeVo selectPrjOne(SqlSessionTemplate sst, ProjectVo projectVo) {
-		return sst.selectOne("adminMapper.selectPrjOne", projectVo);
+	public ProjectVo selectPrj(SqlSessionTemplate sst, ProjectVo projectVo) {
+		return sst.selectOne("adminMapper.selectPrj", projectVo);
 	}
 
 	//신고된 프로젝트 전체 수 카운트
@@ -101,6 +103,48 @@ public class AdminDao {
 		
 		return sst.selectList("adminMapper.selectDeProjectList", map, rb);
 	}
+
+	//회원정보 상세조회
+	public MemberVo selectMember(SqlSessionTemplate sst, MemberVo memberVo) {
+		return sst.selectOne("adminMapper.selectMember", memberVo);
+	}
+	
+	//회원정보 수정
+	public int updateMember(SqlSessionTemplate sst, MemberVo memberVo) {
+		return sst.update("adminMapper.updateMember", memberVo);
+	}
+
+	//FAQ 전체 수 카운트
+	public int faqCount(SqlSessionTemplate sst) {
+		return sst.selectOne("adminMapper.faqCount");
+	}
+
+	//FAQ 목록 조회
+	public List<FaqVo> selectFaqList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
+		
+		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
+		int limit = pageVo.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return sst.selectList("adminMapper.selectFaqList", map, rb);
+	}
+
+	//고객센터 문의 전체 수 카운트
+	public int helpCount(SqlSessionTemplate sst) {
+		return sst.selectOne("adminMapper.helpCount");
+	}
+
+	//고객센터 문의 목록 조회
+	public List<HelpVo> selectHelpList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
+		
+		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
+		int limit = pageVo.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return sst.selectList("adminMapper.selectHelpList", map, rb);
+	}
+
+
 
 	
 }

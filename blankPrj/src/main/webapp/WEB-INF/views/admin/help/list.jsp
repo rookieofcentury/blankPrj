@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +31,12 @@
                 
                     <div class="help-search">
                     
-                        <select class="category">
+                        <select class="category" name="category">
                             <option value="title">제목</option>
-                            <option value="name">작성자</option>
+                            <option value="m.nick">작성자</option>
                         </select
                         ><input type="text" name="keyword">
-                        <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
+                        <div class="search-icon"><input type="image" src="/blank/resources/images/admin/search.png" alt="search.png"></div>
                     
                     </div>
                     
@@ -43,7 +44,7 @@
         
                 <div class="help-list">
         
-                    <div class="help-list-top">전체 문의 64건</div>
+                    <div class="help-list-top">전체 문의 ${listCount} 건</div>
         
                     <div>번호</div>
                     <div>제목</div>
@@ -52,15 +53,33 @@
                     <div>작성 날짜</div>
                     <div>처리 여부</div>
                     <div>수정</div>
-            
-                    <div>1</div>
-                    <div>문의합니다.</div>
-                    <div>그 어쩌구 저쩌구는 어디에 있나요?</div>
-                    <div>user01</div>
-                    <div>2022-12-04</div>
-                    <div>답변 대기</div>
-                    <div><a href=""><img src="../resources/images/admin/edit.png"></a></div>
-        
+            		
+            		<c:forEach items="${voList}" var="vo">
+	           			<div>${vo.no}</div>
+	                    <div>${vo.title}</div>
+	                    <div>${vo.content}</div>
+	                    <div>${vo.memberNo}</div>
+	                    <div>${vo.writeDate}</div>
+	                    <div>${vo.status}</div>
+	                    <div><a href="/blank/admin/help?no=${vo.no}" name="no"><img src="../resources/images/admin/edit.png"></a></div>
+            		</c:forEach>
+                    
+            		<div id="page-area">
+				
+						<c:if test="${pageVo.startPage != 1}">
+							<a href="/blank/admin/help?p=${pageVo.startPage - 1}">&lt;</a>
+						</c:if>
+	
+						<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
+							<a href="/blank/admin/help?p=${num}">${num}</a>
+						</c:forEach>
+	
+						<c:if test="${pageVo.endPage != pageVo.maxPage}">
+							<a href="/blank/admin/help?p=${pageVo.endPage + 1}">&gt;</a>
+						</c:if>
+
+					</div>
+                    
                 </div>
     
             </div>

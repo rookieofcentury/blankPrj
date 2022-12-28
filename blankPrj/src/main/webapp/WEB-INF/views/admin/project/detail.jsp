@@ -37,32 +37,39 @@
 		    
 		                <div class="detail-title">프로젝트 번호</div>
 		                <div>${selectProject.no}</div>
-		                <div></div>
+		                <div>진행상태 ${selectProject.status}</div>
+		                <div>작성일 ${selectProject.no}</div>
 		    
 		                <div class="detail-title">제목</div>
 		                <div class="detail-content-style">
 		                	${selectProject.title}
 		                </div>
 		                <div></div>
+		                <div></div>
 		    
 		                <div class="detail-title">카테고리</div>
-		                <div class="detail-content-style">${selectProject.creator}</div>
+		                <div class="detail-content-style">${selectProject.category}</div>
+		                <div></div>
 		                <div></div>
 		    
 		                <div class="detail-title">대표이미지</div>
 		                <div class="detail-content-style">${selectProject.no}</div>
 		                <div></div>
+		                <div></div>
 		    
 		                <div class="detail-title">목표금액</div>
 		                <div class="detail-content-style">${selectProject.price}</div>
 		                <div></div>
+		                <div></div>
 		    
 		                <div class="detail-title">펀딩일정</div>
-		                <div class="detail-content-style">${selectProject.startDate} ~ ${selectProject.endDate}</div>
+		                <div class="detail-content-style">${selectProject.startDate} ${selectProject.time} ~ ${selectProject.endDate}</div>
+		                <div></div>
 		                <div></div>
 		    
 		                <div class="detail-title">페이지 주소</div>
 		                <div class="detail-content-style">${selectProject.url}</div>
+		                <div></div>
 		                <div></div>
 		    
 		                <div class="detail-title">프로젝트 요약</div>
@@ -70,9 +77,11 @@
 							${selectProject.summary} 
 		                </div>
 		                <div></div>
+		                <div></div>
 		    
 		                <div class="detail-title">프로젝트 스토리</div>
 		                <div class="detail-content-style">${selectProject.no}</div>
+		                <div></div>
 		                <div></div>
 		    
 		                <div id="detail-submit">
