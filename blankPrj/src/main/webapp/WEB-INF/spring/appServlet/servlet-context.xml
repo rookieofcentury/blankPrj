@@ -46,6 +46,15 @@
 		<beans:property name="maxUploadSize" value="10000000"/><!-- 10MB -->
 	</beans:bean>
 	
+	<!-- @ResponseBody 할 때 한글 깨짐 (UTF-8 설정) -->
+	<annotation-driven>
+		<message-converters>
+			<beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<beans:property name="supportedMediaTypes" value="text/html; charset=UTF-8" />
+			</beans:bean>
+		</message-converters>
+	</annotation-driven>
+	
 	<!-- 웹소켓 빈 등록 -->
 	<!-- <beans:bean id="chatBean" class="com.blank.app.member.controller.ChatServer"/> -->
 	
