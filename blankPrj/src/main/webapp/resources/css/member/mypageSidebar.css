@@ -50,3 +50,6 @@ a{
     font-size: 20px;
     margin : 0px;
 }
+.mypage-menu a:hover{
+    color: red;
+}
