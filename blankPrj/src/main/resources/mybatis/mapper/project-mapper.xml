@@ -59,7 +59,7 @@
 	</select>
 	
 	<delete id="deletePrj">
-		DELETE FROM PROJECT WHERE P.NO = 1
+		DELETE FROM PROJECT WHERE NO = 1
 	</delete>
 	
 	<insert id="insertTempPrj">
@@ -67,14 +67,31 @@
 			NO
 			, TITLE
 			, CREATOR
-			, PRICE)
+			, CATEGORY
+			, PRICE
+			)
 			VALUES
 			  	(
 	        SEQ_PROJECT_NO.NEXTVAL,
 	        #{title},
-	        <!-- #{nick} --> 1,
+	        #{creator} ,
+	        1,
 	        #{price}
 	  	)
   </insert>
+  
+  	<select id="prjCnt" resultType="int">
+		SELECT COUNT(NO)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+	</select>
+	
+	<update id="updatePrj">
+	  	UPDATE PROJECT SET
+			TITLE = #{title},
+			PRICE = #{price},
+			START_DATE = #{startDate}
+		WHERE NO = 1
+  </update>
   
 </mapper>

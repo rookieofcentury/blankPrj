@@ -47,4 +47,14 @@ public class ProjectDaoImpl implements ProjectDao{
 	public int tempPrj(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.insert("projectMapper.insertTempPrj", vo);
 	}
+
+	@Override
+	public int prjCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.prjCnt", vo);
+	}
+
+	@Override
+	public int updatePrj(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.update("projectMapper.updatePrj", vo);
+	}
 }
