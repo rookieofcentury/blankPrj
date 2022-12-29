@@ -55,7 +55,7 @@ public class AdminController {
 
 	// 회원 관리 목록(화면)
 	@GetMapping("member")
-	public String memberList(Model model, HttpServletRequest req, HttpSession session, String p) {
+	public String memberList(HttpServletRequest req, HttpSession session, String p) {
 
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -73,10 +73,6 @@ public class AdminController {
 		map.put("keyword", keyword);
 
 		List<MemberVo> voList = adminService.selectMemberList(map, pageVo);
-		
-		model.addAttribute("voList", voList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("pageVo", pageVo);
 
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
@@ -116,7 +112,7 @@ public class AdminController {
 	
 	// 프로젝트 관리 목록(화면)
 	@GetMapping("project")
-	public String projectList(Model model, HttpServletRequest req, HttpSession session, String p) {
+	public String projectList(HttpServletRequest req, HttpSession session, String p) {
 		
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -134,10 +130,6 @@ public class AdminController {
 		map.put("keyword", keyword);
 
 		List<ProjectVo> voList = adminService.selectProjectList(map, pageVo);
-
-		model.addAttribute("voList", voList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("pageVo", pageVo);
 
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
@@ -162,7 +154,7 @@ public class AdminController {
 	
 	// 신고 프로젝트 관리 목록(화면)
 	@GetMapping("deProject")
-	public String deProjectList(Model model, HttpServletRequest req, HttpSession session, String p) {
+	public String deProjectList(HttpServletRequest req, HttpSession session, String p) {
 		
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -181,9 +173,6 @@ public class AdminController {
 
 		List<ReportVo> voList = adminService.selectDeProjectList(map, pageVo);
 
-		model.addAttribute("voList", voList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("pageVo", pageVo);
 
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
@@ -200,7 +189,7 @@ public class AdminController {
 	
 	// 공지사항 목록 조회
 	@GetMapping("notice")
-	public String notice(Model model, HttpServletRequest req, HttpSession session, String p) {
+	public String notice(HttpServletRequest req, HttpSession session, String p) {
 
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -218,10 +207,6 @@ public class AdminController {
 		map.put("keyword", keyword);
 
 		List<NoticeVo> voList = adminService.selectList(map, pageVo);
-
-		model.addAttribute("voList", voList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("pageVo", pageVo);
 
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
@@ -287,7 +272,7 @@ public class AdminController {
 
 	// FAQ 목록(화면)
 	@GetMapping("faq")
-	public String faq(Model model, HttpServletRequest req, HttpSession session, String p) {
+	public String faq(HttpServletRequest req, HttpSession session, String p) {
 		
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -306,10 +291,6 @@ public class AdminController {
 
 		List<FaqVo> voList = adminService.selectFaq(map, pageVo);
 
-		model.addAttribute("voList", voList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("pageVo", pageVo);
-
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
 		session.setAttribute("pageVo", pageVo);
@@ -325,7 +306,7 @@ public class AdminController {
 	
 	// 고객센터 목록(화면)
 	@GetMapping("help")
-	public String help(Model model, HttpServletRequest req, HttpSession session, String p) {
+	public String help(HttpServletRequest req, HttpSession session, String p) {
 		
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -343,10 +324,6 @@ public class AdminController {
 		map.put("keyword", keyword);
 
 		List<HelpVo> voList = adminService.selectHelp(map, pageVo);
-
-		model.addAttribute("voList", voList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("pageVo", pageVo);
 
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);

@@ -53,7 +53,7 @@
                 <div>신고 프로젝트 번호</div>
                 <div>신고 일자</div>
                 <div>처리 상태</div>
-                <div>수정</div>
+                <div>확인</div>
         
        			<c:forEach items="${voList}" var="vo">
 	                <div>${vo.no}</div>
@@ -63,7 +63,7 @@
 	                <div>${vo.prj}</div>
 	                <div>${vo.enrollDate}</div>
 	                <div>${vo.status}</div>
-	                <div><a href=""><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
+	                <div><a href="/blank/admin/projectCheck?no=${vo.no}" name="no"><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
        			</c:forEach>
 
 				<div id="page-area">

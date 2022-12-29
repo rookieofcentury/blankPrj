@@ -89,7 +89,7 @@ main .write-board-header{
 	margin-top: 10px;
     vertical-align: top;
     text-align: left; 
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .write-list div{

@@ -36,7 +36,7 @@
                         <option value="m.nick">창작자</option>
                     </select
                     ><input type="text" name="keyword">
-                    <div class="search-icon"><input type="image" src="../resources/images/admin/search.png" alt="search.png"></div>
+                    <div class="search-icon"><input type="image" src="/blank/resources/images/admin/search.png" alt="search.png"></div>
                
                 </div>
                 

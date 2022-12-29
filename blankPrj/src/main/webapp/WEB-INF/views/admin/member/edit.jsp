@@ -82,7 +82,7 @@
 	                <div>
 	                    <input
 	                        type="text"
-	                        value="${selectMember.point}"
+	                        value="${selectMember.point} 원"
 	                        name="point"
 	                    />
 	                </div>

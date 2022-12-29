@@ -29,8 +29,16 @@
 	            
 	            <div class="project-detail-close">
 	               	 신고된 프로젝트
-	                <img src="../resources/images/admin/close.png">
+	                <img src="../resources/images/admin/close.png" onclick="goBack();">
 	            </div>
+	            
+            	<script type="text/javascript">
+	            	
+	            	function goBack(){
+	            		window.history.back();
+	            	}
+	            
+	            </script>
 	            
 	            <div class="detail-list">
 	    
