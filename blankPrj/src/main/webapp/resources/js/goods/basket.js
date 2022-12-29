@@ -31,16 +31,20 @@
             $("input[class=chBox]:checked").each(function() {
                 array.push($(this).attr("id"));
             })
+            console.log(array);
 
             $.ajax({
                 url: "/blank/goods/basket/delete",
                 type: "post",
+                tranditional: true,
                 data: {
                     chbox: array
                 },
                 success: function(data) {
-                    console.log("success !");
-                    $("input[class=chBox]:checked").parent().remove();
+                    $("input[class=chBox]:checked").parent().parent().remove();
+				        productPrice();
+				        delieveryFee();
+				        totalPriceCalc();
                 }
             })
         }
@@ -49,15 +53,23 @@
     /* CART 전부 삭제 */
     $('.delete-all').click(function() {
         var confirmOne = confirm("정말 삭제하시겠습니까?");
+        var array = new Array();
+        
+        $("input[class=chBox]").each(function() {
+                array.push($(this).attr("id"));
+        })
+        console.log(array);
 
         if(confirmOne) {
             $.ajax({
                 url: "/blank/goods/basket/delete",
                 type: "post",
+                tranditional: true,
                 data: {
-                    chbox: 'all'
+                	chbox: array
                 },
-                success: function() {
+                success: function(data) {
+                	console.log(data);
                     location.href = "/blank/goods/basket";
                 }
             })
@@ -155,9 +167,11 @@
         totalPriceCalc();
     })
 
-    /* 모두 체크 버튼 누르면 다 체크되게 */
+    /* 모두 체크 버튼 누르면 다 체크되고, 다시 누르면 해제되게 */
     $('#all-check').click(function() {
-        $('input[type=checkbox]').attr("checked", true);
+        $('input[type=checkbox]').attr('checked', function() {
+        	return !$(this).attr('checked');
+        });
     })
 
     /* 개수 바뀔 때마다 session의 Map 바꿔 주기 */

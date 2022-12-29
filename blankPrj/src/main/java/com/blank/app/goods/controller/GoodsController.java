@@ -108,13 +108,19 @@ public class GoodsController {
 			
 			List<CartVo> cartList = gs.getCartList(array);
 			session.setAttribute("cartList", cartList);
+			
+		} else {
+			
+			List<CartVo> cartList = new ArrayList<CartVo>();
+			session.setAttribute("cartList", cartList);
+
 		}
 		
 		return "goods/basket";
 		
 	}
 	
-	// 굿즈 장바구니 화면 도출
+	// 굿즈 장바구니 물품 추가
 	@RequestMapping("/basket/add")
 	@ResponseBody
 	public String basketAdd(@Param("no") String no, @Param("cnt") int cnt, HttpSession session) {
@@ -128,7 +134,35 @@ public class GoodsController {
 		session.setAttribute("cart", cart);
 		System.out.println(cart);
 		
-		return "success";
+		return "성공적으로 장바구니에 담겼습니다!";
+		
+	}
+	
+	// 굿즈 장바구니 물품 삭제
+	@RequestMapping("/basket/delete")
+	@ResponseBody
+	public String basketDelete(@RequestParam("chbox[]") String[] chbox, HttpSession session) {
+
+		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+		for(String x : chbox) {
+			cart.remove(x);
+		}
+		session.setAttribute("cart", cart);
+		
+		return "정상적으로 삭제되었습니다!";
+		
+	}
+	
+	// 굿즈 장바구니 물품 변경
+	@RequestMapping("/basket/change")
+	@ResponseBody
+	public String basketChange(String no, String quantity, HttpSession session) {
+		
+		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+		cart.put(no, Integer.parseInt(quantity));
+		session.setAttribute("cart", cart);
+		
+		return "change!";
 		
 	}
 	

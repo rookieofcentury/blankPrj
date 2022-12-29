@@ -55,6 +55,7 @@
 .image-box {
 	display: flex;
     cursor: pointer;
+    overflow: hidden;
 }
 .image-box img {
 	width: 100%;
