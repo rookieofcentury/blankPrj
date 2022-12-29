@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관심 프로젝트</title>
+<title>회원 탈퇴</title>
 <link rel="stylesheet" href="/blank/resources/css/member/quit.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <body>
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 

@@ -15,7 +15,6 @@
     grid-template-rows: 2.5fr 8fr;
 }
 
-
 .quit-info{
   display: flex;
   justify-content: space-between;
@@ -90,3 +89,6 @@ textarea{
   font-size: 14px;
   resize: none; 
 }
+
+
+
