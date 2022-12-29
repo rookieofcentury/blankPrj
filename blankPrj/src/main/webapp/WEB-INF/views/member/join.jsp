@@ -1,4 +1,4 @@
-ㅍ<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 
 	    
             <div class="join-header">
-                <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''"></div>
+                <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'"></div>
                 <div><h1>회원가입</h1></div>
             </div>
             <div class="join-container">

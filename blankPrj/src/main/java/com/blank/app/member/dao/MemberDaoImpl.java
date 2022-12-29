@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.member.vo.QuitAnswerVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,6 +63,21 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int updateNickByNo(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("memberMapper.updateNick", vo);
+	}
+
+	@Override
+	public int updatePhoneByNo(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("memberMapper.updatePhone", vo);
+	}
+
+	@Override
+	public int insertQuitAnswer(SqlSessionTemplate sst, QuitAnswerVo vo) {
+		return sst.update("memberMapper.insertQuitAnswer", vo);
+	}
+
+	@Override
+	public int updateStatus(SqlSessionTemplate sst, String mNo) {
+		return sst.update("memberMapper.updateStatus", mNo);
 	}
 
 	

@@ -22,7 +22,7 @@
 						<div><img src="/blank/resources/images/member/choi.png"></div>
 						<div>
 							<input type="file">
-							<button class="delete-btn">회원탈퇴</button>
+							<button class="delete-btn" onclick="location.href='/blank/member/quit'">회원탈퇴</button>
 						</div>
 					</div>
 					<div class="member-info-down">
@@ -32,7 +32,7 @@
 							<div><button class="change-btn" id="email-change">변경</button></div>
 							<div class="hidden email-hidden"></div>
 							<div class="hidden email-hidden"><input class="email-change-input" type="text" name="email" value="${loginMember.email}"></div>
-							<div class="hidden email-hidden"><input class="change-btn" type="button" value="저장하기" id="email-ajax" onclick="updateEmail();"></div>
+							<div class="hidden email-hidden"><input class="change-btn" type="button" value="업데이트" id="email-ajax" onclick="updateEmail();"></div>
 							<div class="hidden email-hidden span3 red" id="email-result">비밀번호 찾기에 이용되오니 수신가능한 이메일 작성을 요청드립니다.</div>
 						</div>
 						<div>
@@ -41,17 +41,17 @@
 							<div><button class="change-btn" id="nick-change">변경</button></div>
 							<div class="hidden nick-hidden"></div>
 							<div class="hidden nick-hidden"><input  type="text" name="nick" value="${loginMember.nick}"></div>
-							<div class="hidden nick-hidden"><input class="change-btn" type="button" value="저장하기" id="nick-ajax" onclick="updateNick();"></div>
+							<div class="hidden nick-hidden"><input class="change-btn" type="button" value="업데이트" id="nick-ajax" onclick="updateNick();"></div>
 							<div class="hidden nick-hidden span3 red" id="nick-result">결과창</div>
 						</div>
 						<div>
 							<div>휴 대 전 화</div>
-							<div><label>${loginMember.phone}</label></div>
+							<div><label id="loginPhone">${loginMember.phone}</label></div>
 							<div><button class="change-btn" id="phone-change">변경</button></div>
 							<div class="hidden phone-hidden"></div>
-							<div class="hidden phone-hidden"><input  type="text" name="phone" oninput="autoHyphen(this)"></div>
-							<div class="hidden phone-hidden"><input class="change-btn" type="button" value="저장하기" id="phone-ajax"></div>
-							<div class="hidden phone-hidden" id="phone-result">결과창</div>
+							<div class="hidden phone-hidden"><input  type="text" name="phone" value="${loginMember.phone}" oninput="autoHyphen(this)"></div>
+							<div class="hidden phone-hidden"><input class="change-btn" type="button" value="업데이트" id="phone-ajax" onclick="updatePhone();"></div>
+							<div class="hidden phone-hidden span3 red" id="phone-result">결과창</div>
 						</div>
 						<div>
 							<div>비 밀 번 호</div>
@@ -59,7 +59,7 @@
 							<div><button class="change-btn" id="pwd-change">변경</button></div>
 							<div class="hidden pwd-hidden"></div>
 							<div class="hidden pwd-hidden"><input  type="text" name="phone"></div>
-							<div class="hidden pwd-hidden"><input class="change-btn" type="button" value="저장하기" id="phone-ajax"></div>
+							<div class="hidden pwd-hidden"><input class="change-btn" type="button" value="업데이트" id="phone-ajax"></div>
 							<div class="hidden phone-hidden" id="phone-result">결과창</div>
 						</div>
 
@@ -74,7 +74,7 @@
 
 
 let emailChangeBtn = $('#email-change');
-//이메일 바꾸는것 에이젝스
+//이메일 업데이트 에이젝스
 function updateEmail(){
   
   alert('클릭!!!!!!!')
@@ -118,45 +118,82 @@ function updateEmail(){
 
 
 let nickChangeBtn = $('#nick-change');
-//닉네임 바꾸는것 에이젝스
+//닉네임 업데이트 에이젝스
 function updateNick(){
 
-let nickVal = $('input[name=nick]').val();
+	let nickVal = $('input[name=nick]').val();
 
-if(!nickCheck) {
-	alert('수정하시는 닉네임을 양식을 확인해주세요');
-	
-}else{
-	$.ajax({
-	url : "/blank/member/updateNick",
-	type : "post",
-	data : {
-		"nick" : nickVal
-	},
-	success : function(result){
-
-		if(result == 1){
+	if(!nickCheck) {
+		alert('수정하시는 닉네임을 양식을 확인해주세요');
 		
-		$('#loginNick').text(nickVal)
-		alert('닉네임 업데이트 되었습니다.');
-		nickChangeBtn.click();
+	}else{
+		$.ajax({
+		url : "/blank/member/updateNick",
+		type : "post",
+		data : {
+			"nick" : nickVal
+		},
+		success : function(result){
 
-		}else if(result == 0){
+			if(result == 1){
+			
+			$('#loginNick').text(nickVal)
+			alert('닉네임 업데이트 되었습니다.');
+			nickChangeBtn.click();
 
-			$('#nick-result').text('중복된 이메일 입니다.');  
+			}else if(result == 0){
 
-		}else{
-		$('#nick-result').text('이메일 업데이트 실패 ');  
-		}
-	},
-	error : function(){
-		alert('에이잭스 에러!!!!!!!!!');
-	}
-}) //ajax    
+				$('#nick-result').text('중복된 닉네임 입니다.');  
+
+			}else{
+			$('#nick-result').text('닉네임 업데이트 실패 ');  
+			}
+			},
+			error : function(){
+			alert('에이잭스 에러!!!!!!!!!');
+			}
+		}) //ajax    
+ 	}
 }
+
+let phoneChangeBtn = $('#phone-change');
+//닉네임 업데이트 에이젝스
+function updatePhone(){
+
+	let phoneVal = $('input[name=phone]').val();
+
+	if(!phoneCheck) {
+		alert('수정하시는 휴대전화 양식을 확인해주세요');
+		
+	}else{
+		$.ajax({
+		url : "/blank/member/updatePhone",
+		type : "post",
+		data : {
+			"phone" : phoneVal
+		},
+		success : function(result){
+
+			if(result == 1){
+			
+			$('#loginPhone').text(phoneVal)
+			alert('휴대전화번호가 업데이트 되었습니다.');
+			phoneChangeBtn.click();
+
+			}else if(result == 0){
+
+				$('#phone-result').text('중복된 휴대전화 입니다.');  
+
+			}else{
+			$('#phone-result').text('휴대전화번호 업데이트 실패 ');  
+			}
+			},
+			error : function(){
+			alert('에이잭스 에러!!!!!!!!!');
+			}
+		}) //ajax    
+ 	}
 }
-
-
 
 
 

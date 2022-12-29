@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.member.vo.QuitAnswerVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -84,6 +85,23 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateNickByNo(MemberVo vo) {
 		return dao.updateNickByNo(sst, vo);
+	}
+
+	@Override
+	public int updatePhoneByNo(MemberVo vo) {
+		return dao.updatePhoneByNo(sst, vo);
+	}
+
+	@Override
+	public int writeQuitAnswer(QuitAnswerVo vo) {
+		return dao.insertQuitAnswer(sst, vo);
+	}
+
+	@Override
+	public int userQuit(String mNo) {
+		// TODO Auto-generated method stub
+		return dao.updateStatus(sst, mNo);
+
 	}
 
 
