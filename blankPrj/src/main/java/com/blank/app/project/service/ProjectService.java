@@ -26,4 +26,6 @@ public interface ProjectService {
 
 	int updatePrj(ProjectVo vo);
 
+	int writingCnt(HashMap<Object, Object> map);
+
 }

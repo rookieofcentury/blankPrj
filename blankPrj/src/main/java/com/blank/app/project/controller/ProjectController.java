@@ -113,17 +113,41 @@ public class ProjectController {
 //	}
 //	
 	@GetMapping("created")
-	public String creating(String myPrjAll, HttpSession session, ProjectVo vo, Model model) {	//myPrjAll을 MemberVo로 바꾸기
+	@ResponseBody
+	public String creating(@RequestParam HashMap<Object, Object> map ,String statusWriting, HttpSession session, ProjectVo vo, Model model) {	//myPrjAll을 MemberVo로 바꾸기
 		
-		List<ProjectVo> myPrj = service.selectMyPrj(vo);
-		ProjectVo statusAll = service.selectStatusAll(vo);
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		System.out.println(nick);
+
+		//List<ProjectVo> myPrj = service.selectMyPrj(vo);
+		
+		//ProjectVo statusAll = service.selectStatusAll(vo);
 		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
-		System.out.println(myPrj);
+		//model.addAttribute("statusAll", statusAll);
 		
-		session.setAttribute("myPrj", myPrj);
-		model.addAttribute("statusAll", statusAll);
+		//session.setAttribute("myPrj", myPrj);
 		
-		return "project/created/status";
+		int resultcnt = service.writingCnt(map);
+		map.put("vo", vo);
+		map.put("statusWriting", statusWriting);
+		System.out.println(statusWriting);
+
+		
+		//1개
+		if(resultcnt > 0) {
+			System.out.println("controller");
+
+			int updateResult = service.updatePrj(vo);
+			if(updateResult == 1) {
+				return updateResult+"";
+			}
+			return 1+"";
+			//0개
+		}else {
+			return resultcnt+"";
+		}
 	}
 	
 	@GetMapping("created/delete")

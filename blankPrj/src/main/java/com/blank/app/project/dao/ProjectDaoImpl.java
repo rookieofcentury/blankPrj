@@ -57,4 +57,10 @@ public class ProjectDaoImpl implements ProjectDao{
 	public int updatePrj(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.update("projectMapper.updatePrj", vo);
 	}
+
+	@Override
+	public int writingCnt(SqlSessionTemplate sst, HashMap<Object, Object> map) {
+		System.out.println("dao");
+		return sst.selectOne("projectMapper.writingCnt", map);
+	}
 }

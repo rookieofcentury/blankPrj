@@ -12,37 +12,6 @@
 
 </head>
 <body>
-<script>
- $(document).ready(function() { 
-         	<c:forEach items="${myPrj}" var="myPrj">
-         		//<c:forEach items="${statusAll}" var="statusCount">
-	        //var statusAll = '';
-	        var list = '';
-	
-	        var cnt = '${ statusCount[status.index] }';
-            
-	        var title2 = '${ myPrj.title }';
-	        console.log(title2);
-	        var no = '${ myPrj.no }';
-	        var status = '${ myPrj.status }';
-	        var summary = '${ myPrj.summary }';
-	        //var img = '${ myPrj.title }';
-	        
-        	list +=	'<div class="myprj-status">' + cnt + '</div>' + '<div class="list-box">'
-	        list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
-            list += '<div class="prj-info">'+'<div class="prj-content">';
-            list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
-            list += '<div>'+'<div class="management-button">'+'<a href="/blank/project/created/list?p='+no+'">관리</a>'
-                +'</div>'+'<div class="delete-button">'+'<a href="/blank/project/created/delete?p='+no+'">삭제</>'+'</div>'+'</div>';  
-            list += '</div>'+'</div>'+'</div>'+'</div>'; 
-	        
-            $(".list-content").append(list);
-/*  			list += '<div>' + title2 + '</div>';  */
-        	//</c:forEach> 
-        </c:forEach> 
-
-    }); 
-    </script>
 
     <%@ include file = "/WEB-INF/views/common/header.jsp" %>
     
@@ -52,7 +21,7 @@
             <span>내가 만든 프로젝트</span>
         </div>
         <div class="taps">
-            <div>전체</div>
+            <!-- <div>전체</div> -->
             <div>작성중</div>
             <div>심사중</div>
             <div>승인됨</div>
@@ -109,6 +78,46 @@
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 
     <script>
+    var list = '';
+    $(document).ready(function() { 
+        // var writing = "작성중";
+        // console.log(writing);
+            $.ajax({
+            url : "/blank/project/created",
+            method : "GET",   
+            data :   {
+                "statusWriting" : '작성중'
+            },
+            success : function(x){
+                if(x == 1){
+                    list +=	'<div class="myprj-status">' + 0 + '</div>' + '</div>';
+                    $(".list-content").append(list);
+                    //alert('작성중');
+                }else{
+                    <c:forEach items="${myPrj}" var="myPrj">
+                        //var cnt = ;
+                        var title2 = '${ myPrj.title }';
+                        console.log(title2);
+                        var no = '${ myPrj.no }';
+                        var status = '${ myPrj.status }';
+                        var summary = '${ myPrj.summary }';
+                        
+                        list +=	'<div class="myprj-status">' + cnt + '</div>' + '<div class="list-box">'
+                        list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
+                        list += '<div class="prj-info">'+'<div class="prj-content">';
+                        list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
+                        list += '<div>' + '<div class="management-button">' + '<a href="/blank/project/created/list?p=' + no + '">관리</a>'
+                            +'</div>'+'<div class="delete-button">' + '<a href="/blank/project/created/delete?p=' + no + '">삭제</a>' + '</div>' + '</div>';  
+                        list += '</div>'+'</div>'+'</div>';
+                        
+                        $(".list-content").append(list);
+                    </c:forEach>
+            }
+            },error : function(){
+                console.log("작성중 통신에러");
+            }
+        });  
+    });
 
     /* 모달창 */
     $('.delete-button').on('click', function() {
@@ -118,7 +127,7 @@
         document.getElementById("popup_layer").style.display = "none";
     }
 
-    $('.delete-prj').click(function(){
+  /*   $('.delete-prj').click(function(){
         //function clickDelete() { 
             console.log("ww")
         $.ajax({
@@ -137,7 +146,7 @@
                 console.log("삭제 통신에러");
             }
         });  
-    })
+    }) */
 
 
     // $('.taps > div:nth-child(2)').click(function(){

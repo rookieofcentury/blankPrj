@@ -78,4 +78,10 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.updatePrj(sst,vo);
 	}
 
+	@Override
+	public int writingCnt(HashMap<Object, Object> map) {
+		System.out.println("ser");
+		return dao.writingCnt(sst,map);
+	}
+
 }
