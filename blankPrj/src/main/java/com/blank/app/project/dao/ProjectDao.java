@@ -28,5 +28,6 @@ public interface ProjectDao {
 
 	int updatePrj(SqlSessionTemplate sst, ProjectVo vo);
 
+	int writingCnt(SqlSessionTemplate sst, HashMap<Object, Object> map);
 
 }

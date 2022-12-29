@@ -94,4 +94,11 @@
 		WHERE NO = 1
   </update>
   
+  <select id="writingCnt" resultType="int" parameterType="Map">
+		SELECT COUNT(STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = #{statusWriting}
+	</select>
+	
 </mapper>

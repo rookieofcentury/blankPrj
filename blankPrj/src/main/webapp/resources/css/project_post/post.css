@@ -1029,10 +1029,10 @@ div[class*=-write] p{
 .phone-box>div:last-child{
     width: 200px;
 }
-svg{
+/* svg{
     width: 15px;
     height: 10px;
-}
+} */
 #show{
     background-color: #fff;
     border: none;
