@@ -22,4 +22,8 @@ public interface ProjectService {
 
 	int tempPrj(ProjectVo vo);
 
+	int prjCnt(ProjectVo vo);
+
+	int updatePrj(ProjectVo vo);
+
 }

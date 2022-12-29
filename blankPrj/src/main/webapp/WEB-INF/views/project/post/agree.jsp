@@ -84,11 +84,12 @@
                 <i> < </i>
                 이전
             </button>
-            <button type="button" class="buttons-start">시작하기</button>
+            <button type="button" class="buttons-start" onclick="startBtn(); return false;">시작하기</button>
         </div>
     </div>
 
     <script type="text/javascript">
+
 		$(document).ready(function() {
 			$(".ckAll").click(function() {
 				if($(".ckAll").is(":checked")) {
@@ -109,11 +110,20 @@
                     $(".ckAll").prop("checked", true); 
                 }
 			});
-		});
+    });
+        /*시작하기 href*/
+        function startBtn(){
+            if($(".ckAll").is(":checked")) {
+                location.href = "/blank/project/post";
+            }else{
+                alert('미동의 시 프로젝트를 진행할 수 없습니다.')
+            }
+        }
 
         // $(window).on('scroll',function(){
         //         $('.navi-menu').css('top', 0);
-        // });
+        // 
+
 	</script>
 	
 </body>

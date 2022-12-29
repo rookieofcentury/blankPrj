@@ -118,18 +118,22 @@ public class ProjectController {
 		List<ProjectVo> myPrj = service.selectMyPrj(vo);
 		ProjectVo statusAll = service.selectStatusAll(vo);
 		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
-		//System.out.println(myPrj);
+		System.out.println(myPrj);
 		
 		session.setAttribute("myPrj", myPrj);
 		model.addAttribute("statusAll", statusAll);
-		System.out.println(statusAll);
+		
 		return "project/created/status";
 	}
 	
 	@GetMapping("created/delete")
 	public String deletePrj(ProjectVo vo) {	//MemberVo로 바꾸기 (no)
 		int result = service.deletePrj(vo);
-		return "redirect:/project/created";
+		if(result == 1) {
+			return result+"";
+		}
+		return "";
+//		return "redirect:/project/created";
 	}
 	
 	@GetMapping("created/list")
@@ -167,16 +171,31 @@ public class ProjectController {
 	}
 	
 	@PostMapping("savePrj")
+	@ResponseBody
 	public String savePrj(HttpSession session, ProjectVo vo) {
 		
-		String nick =(String)session.getAttribute("nick");
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
 		vo.setCreator(nick);
 		
-		int result = service.tempPrj(vo);
-		if(result != 1) {
+		int resultcnt = service.prjCnt(vo);
+		if(resultcnt > 0) {
+			//update
+			int updateResult = service.updatePrj(vo);
+			if(updateResult == 1) {
+				return updateResult+"";
+			}
+			return 1+"";
+		}
+		else {
+			//insert
+			int result = service.tempPrj(vo);
+			if(result == 1) {
+				return result+"";
+			}
 			return "";
 		}
-		return result+"";
+		
 	}
 	
 	/*

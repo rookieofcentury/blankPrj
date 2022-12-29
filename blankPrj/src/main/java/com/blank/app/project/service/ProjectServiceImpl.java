@@ -65,8 +65,17 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public int tempPrj(ProjectVo vo) {
-		System.out.println("vovo");
 		return dao.tempPrj(sst,vo);
+	}
+
+	@Override
+	public int prjCnt(ProjectVo vo) {
+		return dao.prjCnt(sst,vo);
+	}
+
+	@Override
+	public int updatePrj(ProjectVo vo) {
+		return dao.updatePrj(sst,vo);
 	}
 
 }

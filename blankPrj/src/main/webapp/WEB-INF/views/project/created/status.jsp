@@ -14,15 +14,15 @@
 <body>
 <script>
  $(document).ready(function() { 
-	 //alert('dd')
          	<c:forEach items="${myPrj}" var="myPrj">
-         		<c:forEach items="${statusAll}" var="statusCount">
+         		//<c:forEach items="${statusAll}" var="statusCount">
 	        //var statusAll = '';
 	        var list = '';
 	
-	        var cnt = '${ statusCount.cnt }';
-	        console.log(cnt);
+	        var cnt = '${ statusCount[status.index] }';
+            
 	        var title2 = '${ myPrj.title }';
+	        console.log(title2);
 	        var no = '${ myPrj.no }';
 	        var status = '${ myPrj.status }';
 	        var summary = '${ myPrj.summary }';
@@ -38,7 +38,7 @@
 	        
             $(".list-content").append(list);
 /*  			list += '<div>' + title2 + '</div>';  */
-        	</c:forEach> 
+        	//</c:forEach> 
         </c:forEach> 
 
     }); 
@@ -102,7 +102,7 @@
             </div>
             <div class="popup_btn">
                 <a href="javascript:closePop();">취소</a>
-                <a id="chk_today" class="delte-prj">확인</a> 
+                <a id="chk_today" class="delete-prj" onclick="clickDelete()">확인</a> 
             </div>
         </div>
     </div>
@@ -118,7 +118,26 @@
         document.getElementById("popup_layer").style.display = "none";
     }
 
-   
+    $('.delete-prj').click(function(){
+        //function clickDelete() { 
+            console.log("ww")
+        $.ajax({
+            url : "/blank/project/created/delete",
+                traditional : true,
+            method : "GET",   
+            data :   {
+                "myPrjNo" : 1
+            },
+            success : function(x){
+                if(x == 1){
+                alert('삭제완료 되었습니다.')
+                }
+        },
+            error : function(){
+                console.log("삭제 통신에러");
+            }
+        });  
+    })
 
 
     // $('.taps > div:nth-child(2)').click(function(){

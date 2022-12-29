@@ -74,7 +74,7 @@
                     <div>프로젝트 성격과 가장 일치하는 카테고리를 선택해주세요.<br>적합하지 않을 경우 운영자에 의해 조정될 수 있습니다.</div>
                 </div>
                 <div class="category-select">
-                    <select name="category">
+                    <select name="category" id="cate-option">
                         <option value="category">==카테고리 선택==</option>
                         <c:forEach items="${category}" var="cate">
                         <option>${cate.name}</option>
@@ -612,6 +612,7 @@
 
        //펀딩일수 계산
        $("input[name='endDay']").on("focusout", function() {
+    	   console.log($("input[name='startDay']").val());
            //var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
            //var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
            var date1 = $("input[name='startDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
@@ -626,7 +627,7 @@
            if (!$("input[name='startDay']").val()) {
                alert("시작일을 입력해 주세요");
            }
-           if (date2 < date1){ 
+           if (date2 > date1){ 
                //console.log($("input[name='startDay']").val().length);
                alert("시작일이 종료일보다 늦어요ㅠ"); 
            }
@@ -855,16 +856,21 @@
 	    	   dataType: "json",
 	    	   success : function(x){
 	    		   if(x == 1){
-    		        alert('임시비밀번호가 전송되었습니다.')
+    		        alert('임시저장이 되었습니다.')
 	    	   		}
 	    	 }
-	      /*  ,
+	       ,
 	    	    error : function(x){
 	    	        console.log("받아온 리절트"+x);
 	    	        alert('에이잭스 에러!!!!!!!!!');
-	    	    } */
+	    	    } 
 	       })
        })
+       
+       /* var selectCate = $('#cate-option option:checked'); */
+       
+       
+       
         //온서브밋
        function checkAll(){
     	   console.log("성공?!");
