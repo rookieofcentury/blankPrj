@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.stereotype.Repository;
 
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.vo.AdminVo;
@@ -16,135 +15,52 @@ import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.report.vo.ReportVo;
 
-@Repository
-public class AdminDao {
+public interface AdminDao {
 
-	//로그인
-	public AdminVo login(SqlSessionTemplate sst, AdminVo vo) {
-		return sst.selectOne("adminMapper.login", vo);
-	}
+	public AdminVo login(SqlSessionTemplate sst, AdminVo vo);
 	
-	//공지사항 목록 조회
-	public List<NoticeVo> selectList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
-		
-		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
-		int limit = pageVo.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, limit);
-		
-		return sst.selectList("adminMapper.selectList", map, rb);
-	}
-
-	//공지사항 전체 글 카운트
-	public int listCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.listCount");
-	}
-
-	//공지사항 작성
-	public int noticeWrite(SqlSessionTemplate sst, NoticeVo noticeVo) {
-		return sst.insert("adminMapper.noticeWrite", noticeVo);
-	}
-
-	//공지사항 상세조회
-	public NoticeVo selectNotice(SqlSessionTemplate sst, NoticeVo noticeVo) {
-		return sst.selectOne("adminMapper.selectNotice", noticeVo);
-	}
-
-	//공지사항 수정
-	public int updateNotice(SqlSessionTemplate sst, NoticeVo noticeVo) {
-		return sst.update("adminMapper.updateNotice", noticeVo);
-	}
-
-	//전체 회원 수 카운트
-	public int memberCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.memberCount");
-	}
-
-	//회원 목록 조회
-	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
-		
-		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
-		int limit = pageVo.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, limit);
-		
-		return sst.selectList("adminMapper.selectMemberList", map, rb);
-	}
-
-	//프로젝트 전체 수 카운트
-	public int projectCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.projectCount");
-	}
+	public List<NoticeVo> selectList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
 	
-	//프로젝트 목록 조회
-	public List<ProjectVo> selectProjectList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
-		
-		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
-		int limit = pageVo.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, limit);
-		
-		return sst.selectList("adminMapper.selectProjectList", map, rb);
-	}
-
-	//프로젝트 상세조회
-	public ProjectVo selectPrj(SqlSessionTemplate sst, ProjectVo projectVo) {
-		return sst.selectOne("adminMapper.selectPrj", projectVo);
-	}
-
-	//신고된 프로젝트 전체 수 카운트
-	public int deProjectCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.deProjectCount");
-	}
-
-	//신고된 프로젝트 목록 조회
-	public List<ReportVo> selectDeProjectList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
-		
-		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
-		int limit = pageVo.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, limit);
-		
-		return sst.selectList("adminMapper.selectDeProjectList", map, rb);
-	}
-
-	//회원정보 상세조회
-	public MemberVo selectMember(SqlSessionTemplate sst, MemberVo memberVo) {
-		return sst.selectOne("adminMapper.selectMember", memberVo);
-	}
+	public int listCount(SqlSessionTemplate sst);
 	
-	//회원정보 수정
-	public int updateMember(SqlSessionTemplate sst, MemberVo memberVo) {
-		return sst.update("adminMapper.updateMember", memberVo);
-	}
+	public int noticeWrite(SqlSessionTemplate sst, NoticeVo noticeVo);
+	
+	public NoticeVo selectNotice(SqlSessionTemplate sst, NoticeVo noticeVo);
+	
+	public int updateNotice(SqlSessionTemplate sst, NoticeVo noticeVo);
+	
+	public int memberCount(SqlSessionTemplate sst);
+	
+	public List<MemberVo> selectMemberList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
+	
+	public int projectCount(SqlSessionTemplate sst);
+	
+	public List<ProjectVo> selectProjectList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
+	
+	public ProjectVo selectPrj(SqlSessionTemplate sst, ProjectVo projectVo);
+	
+	public int deProjectCount(SqlSessionTemplate sst);
+	
+	public List<ReportVo> selectDeProjectList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
+	
+	public MemberVo selectMember(SqlSessionTemplate sst, MemberVo memberVo);
+	
+	public int updateMember(SqlSessionTemplate sst, MemberVo memberVo);
+	
+	public int faqCount(SqlSessionTemplate sst);
+	
+	public List<FaqVo> selectFaqList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
+	
+	public int helpCount(SqlSessionTemplate sst);
+	
+	public List<HelpVo> selectHelpList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
 
-	//FAQ 전체 수 카운트
-	public int faqCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.faqCount");
-	}
+	public int deleteNotice(SqlSessionTemplate sst, NoticeVo noticeVo);
 
-	//FAQ 목록 조회
-	public List<FaqVo> selectFaqList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
-		
-		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
-		int limit = pageVo.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, limit);
-		
-		return sst.selectList("adminMapper.selectFaqList", map, rb);
-	}
+	public int cancelProject(SqlSessionTemplate sst, ProjectVo projectVo);
 
-	//고객센터 문의 전체 수 카운트
-	public int helpCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.helpCount");
-	}
+	public int updateReport(SqlSessionTemplate sst, ReportVo reportVo);
 
-	//고객센터 문의 목록 조회
-	public List<HelpVo> selectHelpList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo) {
-		
-		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
-		int limit = pageVo.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, limit);
-		
-		return sst.selectList("adminMapper.selectHelpList", map, rb);
-	}
-
-
-
+	public ReportVo selectReport(SqlSessionTemplate sst, ReportVo reportVo);
 	
 }

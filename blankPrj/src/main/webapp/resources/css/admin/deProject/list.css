@@ -85,7 +85,7 @@ main .project-board-header{
     border: 1px solid var(--line-gray);
     background-color: white;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 3fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(13, 54px);
     align-content: center;
     text-align: center;

@@ -65,6 +65,13 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<!-- 공지사항 삭제 -->
+	<update id="deletNotice">
+		UPDATE NOTICE
+		SET DELETE_YN = 'Y'
+		WHERE NO = #{no}
+	</update>
+	
 	<!-- 전체 회원 수 카운드 -->
 	<select id="memberCount" resultType="int">
 		SELECT COUNT(*)
@@ -121,6 +128,13 @@
 		WHERE P.NO = #{no}
 	</select>
 	
+	<!-- 프로젝트 반려 -->
+	<update id="cancelProject">
+		UPDATE PROJECT
+		SET STATUS = '반려됨'
+		WHERE NO = #{no}
+	</update>
+	
 	<!-- 전체 신고된 프로젝트 수 카운드 -->
 	<select id="deProjectCount" resultType="int">
 		SELECT COUNT(*)
@@ -129,15 +143,30 @@
 	
 	<!-- 신고된 프로젝트 목록 조회 -->
 	<select id="selectDeProjectList" resultType="ReportVo">
-		SELECT R.NO, M.NICK AS REPORTER, CONCAT(SUBSTR(TITLE, 1, 28),'...') AS TITLE, R.CONTENT, R.PRJ, SUBSTR(R.ENROLL_DATE, 1, 8) AS ENROLL_DATE, R.STATUS
+		SELECT R.NO, M.NICK AS REPORTER, T.TITLE, R.CONTENT, R.PRJ, SUBSTR(R.ENROLL_DATE, 1, 8) AS ENROLL_DATE, R.STATUS
 		FROM REPORT R
-		INNER JOIN MEMBER M
-		ON R.NO = M.NO
+		LEFT JOIN MEMBER M ON R.NO = M.NO
+		JOIN REPORT_TITLE T ON R.TITLE = T.NO
 		<if test=" keyword != null and keyword != '' ">
 			WHERE ${category} LIKE '%${keyword}%'
 		</if>
 		ORDER BY NO DESC
 	</select>
+	
+	<!-- 신고된 프로젝트 상세조회 -->
+	<select id="selectReport" resultType="ReportVo">
+		SELECT R.NO, P.TITLE AS PRJ, T.TITLE AS TITLE, R.CONTENT, R.AD_COMMENT, R.STATUS, SUBSTR(R.ENROLL_DATE, 1, 8) AS ENROLL_DATE
+		FROM REPORT R
+		LEFT JOIN PROJECT P ON R.PRJ = P.NO
+		JOIN REPORT_TITLE T ON R.TITLE = T.NO
+		WHERE R.NO = #{no}
+	</select>
+	
+	<!-- 신고된 프로젝트 접수 -->
+	<update id="updateReport">
+		UPDATE REPORT SET AD_COMMENT = #{adComment}, STATUS = 'Y'
+		WHERE NO = #{no}
+	</update>
 	
 	<!-- 전체 FAQ 수 카운드 -->
 	<select id="faqCount" resultType="int">

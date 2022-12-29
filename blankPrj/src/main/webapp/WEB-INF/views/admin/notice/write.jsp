@@ -64,7 +64,11 @@
 	    
 	                <div class="write-title content-style">내용</div>
 	                <div class="content-style">
-	                	<input type="text" id="content-input" name="content" placeholder="이곳에 내용을 작성하세요.">
+	                	<input
+	                		type="text"
+	                		id="content-input"
+	                		name="content"
+	                		placeholder="이곳에 내용을 작성하세요.">
 	                </div>
                     <div class="content-style"></div>
                     <div class="content-style"></div>

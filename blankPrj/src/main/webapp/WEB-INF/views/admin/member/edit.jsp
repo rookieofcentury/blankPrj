@@ -61,7 +61,7 @@
 	                <div class="edit-title phone-number">핸드폰 번호</div>
 	                <div class="phone-number">
 	                    <input
-	                        type="text"
+	                        type="phone"
 	                        value="${selectMember.phone}"
 	                        name="phone"
 	                    />
@@ -81,7 +81,7 @@
 	                <div class="edit-title">포인트</div>
 	                <div>
 	                    <input
-	                        type="text"
+	                        type="number"
 	                        value="${selectMember.point} 원"
 	                        name="point"
 	                    />
@@ -101,7 +101,7 @@
 	                <div class="edit-title account-number">계좌번호</div>
 	                <div class="account-number">
 	                    <input
-	                        type="text"
+	                        type="number"
 	                        value="${selectMember.account}"
 	                        name="account"
 	                    />

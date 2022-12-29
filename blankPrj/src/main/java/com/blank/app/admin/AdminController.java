@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.common.Pagination;
 import com.blank.app.admin.service.AdminService;
+import com.blank.app.admin.service.AdminServiceImpl;
 import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.FaqVo;
 import com.blank.app.admin.vo.HelpVo;
@@ -49,7 +50,7 @@ public class AdminController {
 
 		session.setAttribute("loginAdmin", loginAdmin);
 
-		return "admin/member/list";
+		return "redirect:member";
 
 	}
 
@@ -95,16 +96,12 @@ public class AdminController {
 		return "admin/member/edit";
 	}
 	
-	// 회원 정보 수정(화면)
+	// 회원 정보 수정
 	@PostMapping("memberEdit")
-	public String edit(MemberVo memberVo, HttpSession session) {
-		
-		MemberVo selectMember = (MemberVo) session.getAttribute("selectMember");
+	public String edit(MemberVo memberVo) {
 
 		int updateMember = adminService.updateMember(memberVo);
 
-		session.setAttribute("memberVo", memberVo);
-		
 		if(updateMember != 1) { return "error"; }
 		
 		return "redirect:member";
@@ -152,7 +149,18 @@ public class AdminController {
 		return "admin/project/detail";
 	}
 	
-	// 신고 프로젝트 관리 목록(화면)
+	// 프로젝트 반려
+	@PostMapping("projectCancel")
+	public String projectCancel(ProjectVo projectVo) {
+
+		int result = adminService.cancelProject(projectVo);
+		
+		if(result != 1) { return "error"; }
+
+		return "redirect:project";
+	}
+	
+	// 신고 프로젝트 목록(화면)
 	@GetMapping("deProject")
 	public String deProjectList(HttpServletRequest req, HttpSession session, String p) {
 		
@@ -180,11 +188,33 @@ public class AdminController {
 		
 		return "admin/deProject/list";
 	}
+	
+	// 신고프로젝트 상세조회(화면)
+	@GetMapping("reportCheck")
+	public String reportCheck(Model model, ReportVo reportVo, HttpSession session) {
+		
+		ReportVo selectReport = adminService.selectReport(reportVo);
 
-	// 신고프로젝트 접수(화면)
-	@GetMapping("projectCheck")
-	public String projectCheck() {
+		if (selectReport == null) {return "error";}
+
+		session.setAttribute("selectReport", selectReport);
+		session.setAttribute("reportVo", reportVo);
+		
 		return "admin/deProject/check";
+	}
+	
+	// 신고프로젝트 접수
+	@PostMapping("reportCheck")
+	public String reportCheck(ReportVo reportVo) {
+
+		int result = adminService.updateReport(reportVo);
+
+		System.out.println(reportVo);
+		System.out.println(result);
+		
+		if(result != 1) { return "error"; }
+		
+		return "redirect:deProject";
 	}
 	
 	// 공지사항 목록 조회
@@ -257,15 +287,22 @@ public class AdminController {
 
 	// 공지사항 수정
 	@PostMapping("noticeDetail")
-	public String noticeDetail(NoticeVo noticeVo, HttpSession session) {
-
-		NoticeVo selectNotice = (NoticeVo) session.getAttribute("selectNotice");
+	public String noticeDetail(NoticeVo noticeVo) {
 
 		int updateNotice = adminService.updateOne(noticeVo);
 
-		session.setAttribute("noticeVo", noticeVo);
-		
 		if(updateNotice != 1) { return "error"; }
+
+		return "redirect:notice";
+	}
+	
+	// 공지사항 삭제
+	@PostMapping("noticeDelete")
+	public String noticeDelete(NoticeVo noticeVo) {
+
+		int result = adminService.deleteNotice(noticeVo);
+		
+		if(result != 1) { return "error"; }
 
 		return "redirect:notice";
 	}

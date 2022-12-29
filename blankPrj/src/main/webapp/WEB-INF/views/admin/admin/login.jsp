@@ -10,7 +10,7 @@
 
   <main>
     
-    <div><img src="../resources/images/blank.png" class="blank-logo"></div>
+    <div><img src="/blank/resources/images/blank.png" class="blank-logo"></div>
 
     <div class="admin-login-main">
 
@@ -23,11 +23,11 @@
 	
       <section class="admin-inputs-login">
         <div class="admin-login-id center">
-          <div class="id-label"><img src="../resources/images/admin/login-id.png"></div><!--아이콘 들어감-->
+          <div class="id-label"><img src="/blank/resources/images/admin/login-id.png"></div><!--아이콘 들어감-->
           <input type="text" name="adminId">
         </div>
         <div class="admin-login-pwd center">
-          <div class="pwd-label"><img src="../resources/images/admin/login-pwd.png"></div><!--아이콘 들어감-->
+          <div class="pwd-label"><img src="/blank/resources/images/admin/login-pwd.png"></div><!--아이콘 들어감-->
           <input type="password" name="adminPwd">
         </div>
       </section>

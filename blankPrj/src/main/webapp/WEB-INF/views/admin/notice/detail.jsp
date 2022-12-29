@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <title>공지사항 수정</title>
 <link rel="stylesheet" href="/blank/resources/css/admin/notice/detail.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
 	<div class="detail-board-content">
@@ -44,8 +47,8 @@
 	    
 	                <div class="detail-title">번호</div>
 	                <div>${selectNotice.no}</div>
-	                <div>삭제여부 ${selectNotice.deleteYn}</div>
-                    <div>작성일 ${selectNotice.writeDate}</div>
+	                <div>삭제여부&nbsp;&nbsp;${selectNotice.deleteYn}</div>
+                    <div>작성일&nbsp;&nbsp;${selectNotice.writeDate}</div>
 	    
 	                <div class="detail-title">작성자</div>
 	                <div>${selectNotice.adminNo}</div>
@@ -69,13 +72,12 @@
                     <div class="content-style"></div>
 	    
 	                <div id="detail-submit">
-	                	<input type="button" value="삭제" class="detail-delete-btn"/>
-	                    <input type="submit" value="수정" class="detail-submit-btn"/>
+	                    <input type="submit" value="수정" id="detail-submit-btn"/>
+					</form>
+	                	<input type="button" value="삭제" id="delete-notice-btn"/>
 					</div>
 	    
 	            </div>
-            </form>
-
 	
 	        </div>
 	
@@ -84,4 +86,30 @@
 	</div>
 
 </body>
+
+<script>
+	// 공지사항 삭제
+	$('#delete-notice-btn').click(function() {
+		Swal.fire({
+			title: '해당 공지를 삭제하시겠어요?',
+			text: "삭제 후에는 복구할 수 없어요!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '삭제',
+			cancelButtonText: '취소'
+		}).then((result) => {
+			if (result.isConfirmed) {
+			var newForm = $('<form></form>');
+			newForm.attr("method","post");
+			newForm.attr("action","/blank/admin/noticeDelete");
+			newForm.append($('<input/>', {type: 'hidden', name: 'no', value:'${selectNotice.no}' }));
+			newForm.appendTo('body');
+			newForm.submit();
+			}
+		})
+	})
+</script>
+
 </html>

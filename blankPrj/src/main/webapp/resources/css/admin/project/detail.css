@@ -104,12 +104,12 @@
         border: none;
     }
 
-    .detail-submit{
+    #detail-submit{
         grid-column: span 4;
         margin-left: 45%;
     }
 
-    .detail-submit-no-btn{
+    #detail-submit-ok-btn{
         width: 70px;
         height: 35px;
         color: white;
@@ -121,7 +121,7 @@
         margin-top: 5%;
     }
 
-    .detail-submit-ok-btn{
+    #detail-submit-no-btn{
         width: 70px;
         height: 35px;
         color: white;
