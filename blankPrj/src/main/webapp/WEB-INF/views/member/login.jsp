@@ -10,18 +10,16 @@
 </head>
 <body>
 
-
-
 	<div id="wrap">
         <div id="login-header">
-            <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''"></div>
+            <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'"></div>
             <div><h1>로그인</h1></div>
         </div>
         <div id="login-container">
             <form action="/blank/member/login" method="post" class="login-form">
                 <div class="container-main-area">
                     <div class="login-info">이메일</div>
-                    <div><input type="text" class="input" name="email" placeholder="가입하신 이메일을 입력해주세요"></div>
+                    <div><input type="text" class="input" name="email" placeholder="가입하신 이메일을 입력해주세요" value="${cookie.saveId.value}"></div>
                 </div>
 
                 <div class="container-main-area">
@@ -29,13 +27,13 @@
                     <div><input type="password" class="input" name="pwd1" placeholder="비밀번호를 입력해주세요"></div>
                 </div>
                 <div class="container-main-area right">
-                    <div><input type="checkbox" name="SaveId" id="saveId"><label for="saveId">아이디저장</label></div>
+                    <div><input type="checkbox" name="Save" id="saveId" value="true"><label for="saveId">아이디저장</label></div>
                 </div>
                 <div class="container-main-area">
                     <div><input type="submit" value="로그인" class="input login-info"></div>
                 </div>
                 <div class="container-main-area right">
-                    <div><a>아이디를 찾기</a><a>비밀번호 찾기</a></div>
+                    <div><a href="/blank/member/findId">아이디를 찾기</a><a href="/blank/member/findPwd">비밀번호 찾기</a><a href="/blank/member/join">회원가입하기</a></div>
                 </div>
                 <div class="container-main-area flex">
                     <div class="hr-left"><hr></div>

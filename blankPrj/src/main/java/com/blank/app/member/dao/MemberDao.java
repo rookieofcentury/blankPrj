@@ -3,6 +3,7 @@ package com.blank.app.member.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.member.vo.QuitAnswerVo;
 
 
 public interface MemberDao {
@@ -22,6 +23,12 @@ public interface MemberDao {
 	public int updateEmailByNo(SqlSessionTemplate sst, MemberVo vo);
 
 	public int updateNickByNo(SqlSessionTemplate sst, MemberVo vo);
+
+	public int updatePhoneByNo(SqlSessionTemplate sst, MemberVo vo);
+
+	public int insertQuitAnswer(SqlSessionTemplate sst, QuitAnswerVo vo);
+
+	public int updateStatus(SqlSessionTemplate sst, String mNo);
 
 
 }

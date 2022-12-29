@@ -5,6 +5,7 @@
   
   
 <mapper namespace="memberMapper">
+		<!-- 회원가 -->
   <insert id="insertMember">
   
   	INSERT INTO MEMBER 
@@ -34,24 +35,53 @@
   	SELECT * 
   	FROM MEMBER
   	WHERE EMAIL = #{email}
+  	AND STATUS = 'Y'
   </select>
   
- 	<update id="updatePwd">
- 		UPDATE MEMBER 
- 		SET PWD1 = #{pwd1} 
- 		WHERE EMAIL = #{email}
- 	</update>
+	<update id="updatePwd">
+		UPDATE MEMBER 
+		SET PWD1 = #{pwd1} 
+		WHERE EMAIL = #{email}
+	</update>
+	
+	<update id="updateEmail">
+		UPDATE MEMBER
+		SET EMAIL = #{email}
+		WHERE NO = ${no}
+	</update>
+	
+	<update id="updateNick">
+		UPDATE MEMBER
+		SET NICK = #{nick}
+		WHERE NO = ${no}
+	</update>
+	
+	<update id="updatePhone">
+		UPDATE MEMBER
+		SET NICK = #{phone}
+		WHERE NO = ${no}
+	</update>
+	
+<insert id="insertQuitAnswer">
+ 
+ 	INSERT INTO QUIT_ANSWER 
+ 	( 	
+ 		M_NO,
+ 		A_NO,
+ 		A_VAR
+ 	)
+ 	VALUES
+ 	(
+       #{mNo},
+       #{aNo},
+       #{aVar}
+ 	)
  	
- 	<update id="updateEmail">
- 		UPDATE MEMBER
- 		SET EMAIL = #{email}
- 		WHERE NO = ${no}
- 	</update>
  	
- 	<update id="updateNick">
- 		UPDATE MEMBER
- 		SET NICK = #{nick}
- 		WHERE NO = ${no}
- 	</update>
- 	
+ </insert>
+	<update id="updateStatus">
+		UPDATE MEMBER
+		SET STATUS = 'N'
+		WHERE NO = ${mNo}
+	</update>
 </mapper>

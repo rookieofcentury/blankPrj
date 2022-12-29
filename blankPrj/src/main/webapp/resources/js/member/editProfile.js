@@ -126,6 +126,14 @@ pwdBtn.click(function(){
  
  })
 
+ //핸드폰번호 자동으로 하이픈
+const autoHyphen = (target) => {
+   alert('안일닝ㄹ')
+   target.value = target.value
+     .replace(/[^0-9]/g, '')
+    .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+  }
+
  let phoneCheck = false;
  let inputPhone = $('input[name=phone]');
  
@@ -137,20 +145,20 @@ pwdBtn.click(function(){
     //버튼 저장버튼 안되게! 
     emailCheck = false;
     
-    let nickVal = inputNick.val();
+    let phoneVal = inputPhone.val();
 
-   console.log(nickVal);
+   console.log(phoneVal);
 
-   if(nickVal == loginNick){
-      $('#nick-result').text("기존의 닉네임과 동일한 닉네임입니다.");
-   }else if(!nickjung.test(nickVal)){
-      $('#nick-result').text("닉네임 형식이 맞지 않습니다.");
-   }else if(nickVal == ''){
-      $('#nick-result').text("값을 입력해주세요");
+   if(phoneVal == loginPhone){
+      $('#phone-result').text("기존의 휴대전화 번호와 동일한 번호입니다.");
+   }else if(!(phoneVal.length == 13)){
+      $('#phone-result').text('휴대전화 번호 11자리 입력해주세요');
+   }else if(phoneVal == ''){
+      $('#phone-result').text("값을 입력해주세요");
    }
    else{
-      $('#nick-result').text("저장버튼을 누르시면 변경이 완료됩니다.");
-      nickCheck = true;
+      $('#phone-result').text("업데이트 버튼을 누르시면 변경이 완료됩니다.");
+      phoneCheck = true;
    }
 
  

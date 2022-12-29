@@ -1,6 +1,7 @@
 package com.blank.app.member.service;
 
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.member.vo.QuitAnswerVo;
 
 public interface MemberService {
 
@@ -19,5 +20,11 @@ public interface MemberService {
 	public int updateEmailByNo(MemberVo vo);
 
 	public int updateNickByNo(MemberVo vo);
+
+	public int updatePhoneByNo(MemberVo vo);
+
+	public int writeQuitAnswer(QuitAnswerVo vo);
+
+	public int userQuit(String mNo);
 
 }
