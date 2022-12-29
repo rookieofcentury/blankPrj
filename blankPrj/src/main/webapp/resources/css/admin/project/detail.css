@@ -76,6 +76,12 @@
         text-align: center;
     }
 
+    .summary,
+    .story
+    {
+        grid-column: span 3;
+    }
+
     .detail-list div{
         border-bottom: 1px solid var(--line-gray);
     }
@@ -92,12 +98,15 @@
     }
 
     /* 밑줄 제거 */
-    .detail-list div:last-child{
+    .detail-list div:last-child,
+    .detail-list .story-title,
+    .detail-list .story{
         border: none;
     }
 
-    #detail-submit{
-        align-items: center;
+    .detail-submit{
+        grid-column: span 4;
+        margin-left: 45%;
     }
 
     .detail-submit-no-btn{
@@ -105,6 +114,7 @@
         height: 35px;
         color: white;
         font-size: 16px;
+        border: none;
         border-radius: 7px;
         background-color: rgba(86, 122, 206, 1);
         cursor: pointer;
@@ -116,6 +126,7 @@
         height: 35px;
         color: white;
         font-size: 16px;
+        border: none;
         border-radius: 7px;
         background-color: rgba(255, 94, 94, 1);
         cursor: pointer;

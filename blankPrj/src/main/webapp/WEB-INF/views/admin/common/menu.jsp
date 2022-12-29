@@ -64,7 +64,7 @@
             <h1><img src="/blank/resources/images/admin/goods-admin.png">굿즈 관리</h1>
             <ul>
                 <li>
-                    <a href="">굿즈</a>
+                    <a href="/blank/admin/goods/list">굿즈</a>
                 </li>
                 <li>
                     <a href="">굿즈 후기</a>

@@ -29,8 +29,16 @@
 	            
 	            <div class="member-detail-close">
 	                                프로젝트 정보
-	                <img src="/blank/resources/images/admin/close.png">
+	                <img src="/blank/resources/images/admin/close.png" onclick="goBack();">
 	            </div>
+	            
+   	            <script type="text/javascript">
+	            	
+	            	function goBack(){
+	            		window.history.back();
+	            	}
+	            
+	            </script>
 	            
 	           <form action="" method="get">
 	           		<div class="detail-list">
@@ -73,18 +81,14 @@
 		                <div></div>
 		    
 		                <div class="detail-title">프로젝트 요약</div>
-		                <div class="detail-content-style">
+		                <div class="detail-content-style summary">
 							${selectProject.summary} 
 		                </div>
-		                <div></div>
-		                <div></div>
 		    
-		                <div class="detail-title">프로젝트 스토리</div>
-		                <div class="detail-content-style">${selectProject.no}</div>
-		                <div></div>
-		                <div></div>
+		                <div class="detail-title story-title">프로젝트 스토리</div>
+		                <div class="detail-content-style story">${selectProject.no}</div>
 		    
-		                <div id="detail-submit">
+		                <div class="detail-submit">
 		                    <input type="submit" value="반려" class="detail-submit-no-btn"/>
 		                    <input type="submit" value="승인" class="detail-submit-ok-btn"/>
 						</div>

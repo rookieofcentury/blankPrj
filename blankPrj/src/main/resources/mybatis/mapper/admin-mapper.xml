@@ -81,6 +81,19 @@
 		ORDER BY NO DESC
 	</select>
 	
+	<!-- 회원정보 상세조회 -->
+	<select id="selectMember" resultType="MemberVo">
+		SELECT NO, NICK, GENDER, PHONE, EMAIL, TO_CHAR(POINT,'fm999,999,999,999') AS POINT, BANK, ACCOUNT, DEPOSITOR, STATUS, SUBSTR(ENROLL_DATE, 1, 8) AS ENROLL_DATE
+		FROM MEMBER
+		WHERE NO = #{no}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateMember">
+		UPDATE MEMBER SET NICK = #{nick}, PHONE = #{phone}, EMAIL = #{email}, POINT = #{point}, BANK = #{bank}, ACCOUNT = #{account}, DEPOSITOR = #{depositor}
+		WHERE NO = #{no}
+	</update>
+	
 	<!-- 전체 프로젝트 수 카운드 -->
 	<select id="projectCount" resultType="int">
 		SELECT COUNT(*)
@@ -89,19 +102,19 @@
 	
 	<!-- 프로젝트 목록 조회 -->
 	<select id="selectProjectList" resultType="ProjectVo">
-		SELECT P.NO, M.NICK AS CREATOR, CONCAT(SUBSTR(TITLE, 1, 28),'...') AS TITLE, C.NAME AS CATEGORY, TO_CHAR(PRICE,'fm999,999,999,999') AS PRICE, P.START_DATE, P.END_DATE, P.STATUS
-		FROM PROJECT P, MEMBER M, PRJ_CATEGORY C
-		WHERE P.CREATOR = M.NO
-		AND P.CATEGORY = C.NO
-		<if test=" keyword != null and keyword != '' ">
-			WHERE ${category} LIKE '%${keyword}%'
-		</if>
+		SELECT P.NO, M.NICK AS CREATOR, CONCAT(SUBSTR(P.TITLE, 1, 28),'...') AS TITLE, C.NAME AS CATEGORY, TO_CHAR(P.PRICE,'fm999,999,999,999') AS PRICE, P.START_DATE, P.END_DATE, P.STATUS
+		FROM PROJECT P
+		LEFT JOIN MEMBER M ON P.CREATOR = M.NO
+		JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
+	   <if test=" keyword != null and keyword != '' ">
+	      WHERE ${category} LIKE '%${keyword}%'
+	   </if>
 		ORDER BY NO DESC
 	</select>
 	
 	<!-- 프로젝트 상세조회 -->
 	<select id="selectPrj" resultType="ProjectVo">
-		SELECT P.NO, P.TITLE, C.NAME AS CATEGORY, P.PRICE, P.START_DATE, P.TIME, P.END_DATE, P.URL, P.SUMMARY, P.STATUS
+		SELECT P.NO, P.TITLE, C.NAME AS CATEGORY, TO_CHAR(P.PRICE,'fm999,999,999,999') AS PRICE, P.START_DATE, P.TIME, P.END_DATE, P.URL, P.SUMMARY, P.STATUS
 		FROM PROJECT P
 		LEFT JOIN MEMBER M ON M.NO = P.CREATOR
 		JOIN PRJ_CATEGORY C ON C.NO = P.CATEGORY
@@ -125,19 +138,6 @@
 		</if>
 		ORDER BY NO DESC
 	</select>
-	
-	<!-- 회원정보 상세조회 -->
-	<select id="selectMember" resultType="MemberVo">
-		SELECT NO, NICK, GENDER, PHONE, EMAIL, POINT, BANK, ACCOUNT, DEPOSITOR, STATUS, SUBSTR(ENROLL_DATE, 1, 8) AS ENROLL_DATE
-		FROM MEMBER
-		WHERE NO = #{no}
-	</select>
-	
-	<!-- 회원정보 수정 -->
-	<update id="updateMember">
-		UPDATE MEMBER SET NICK = #{nick}, PHONE = #{phone}, EMAIL = #{email}, POINT = #{point}, BANK = #{bank}, ACCOUNT = #{account}, DEPOSITOR = #{depositor}
-		WHERE NO = #{no}
-	</update>
 	
 	<!-- 전체 FAQ 수 카운드 -->
 	<select id="faqCount" resultType="int">
