@@ -7,7 +7,10 @@
 <title>프로젝트 정보</title>
 <link rel="stylesheet" href="/blank/resources/css/admin/menu.css">
 <link rel="stylesheet" href="/blank/resources/css/admin/project/detail.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
 	<div class="detail-board-content">
@@ -45,8 +48,8 @@
 		    
 		                <div class="detail-title">프로젝트 번호</div>
 		                <div>${selectProject.no}</div>
-		                <div>진행상태 ${selectProject.status}</div>
-		                <div>작성일 ${selectProject.no}</div>
+		                <div>진행상태&nbsp;&nbsp;${selectProject.status}</div>
+		                <div></div>
 		    
 		                <div class="detail-title">제목</div>
 		                <div class="detail-content-style">
@@ -88,13 +91,13 @@
 		                <div class="detail-title story-title">프로젝트 스토리</div>
 		                <div class="detail-content-style story">${selectProject.no}</div>
 		    
-		                <div class="detail-submit">
-		                    <input type="submit" value="반려" class="detail-submit-no-btn"/>
-		                    <input type="submit" value="승인" class="detail-submit-ok-btn"/>
+		                <div id="detail-submit">
+		                    <input type="submit" value="승인" id="detail-submit-ok-btn"/>
+						</form>
+		                    <input type="button" value="반려" id="detail-submit-no-btn"/>
 						</div>
 		    
 		            </div>
-	           </form>
 	            
 	
 	        </div>
@@ -104,4 +107,29 @@
 	</div>
 
 </body>
+
+<script>
+	// 프로젝트 반려
+	$('#detail-submit-no-btn').click(function() {
+		Swal.fire({
+			title: '프로젝트를 반려하시겠어요?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '반려',
+			cancelButtonText: '취소'
+		}).then((result) => {
+			if (result.isConfirmed) {
+			var newForm = $('<form></form>');
+			newForm.attr("method","post");
+			newForm.attr("action","/blank/admin/projectCancel");
+			newForm.append($('<input/>', {type: 'hidden', name: 'no', value:'${selectProject.no}' }));
+			newForm.appendTo('body');
+			newForm.submit();
+			}
+		})
+	})
+</script>
+
 </html>

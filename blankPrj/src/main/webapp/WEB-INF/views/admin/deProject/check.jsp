@@ -29,7 +29,7 @@
 	            
 	            <div class="project-detail-close">
 	               	 신고된 프로젝트
-	                <img src="../resources/images/admin/close.png" onclick="goBack();">
+	                <img src="/blank/resources/images/admin/close.png" onclick="goBack();">
 	            </div>
 	            
             	<script type="text/javascript">
@@ -39,45 +39,48 @@
 	            	}
 	            
 	            </script>
-	            
-	            <div class="detail-list">
-	    
-	                <div class="detail-title">신고 번호</div>
-	                <div>1</div>
-	                <div>처리상태 접수대기</div>
-                    <div>작성일 2022-12-04</div>
-	    
-	                <div class="detail-title">신고 프로젝트</div>
-	                <div>3 (프로젝트 명 : ~)</div>
-	                <div></div>
-                    <div></div>
-	    
-	                <div class="detail-title">제목</div>
-	                <div>굉장히 불쾌합니다.</div>
-	                <div></div>
-                    <div></div>
-	    
-	                <div class="detail-title">내용</div>
-	                <div>신고 내용 블라 블라</div>
-                    <div></div>
-                    <div></div>
-	    
-	                <div class="detail-title answer-style">처리 내용</div>
-	                <div class="answer-style">
-	                    <input
-	                        type="text"
-	                        value="신고가 접수되었습니다."
-	                        name="check-answer"
-	                    />
-	                </div>
-	                <div class="answer-style"></div>
-                    <div class="answer-style"></div>
-	    
-	                <div id="check-submit">
-	                    <input type="submit" value="접수" class="check-submit-btn"/>
-					</div>
-	    
-	            </div>
+	            <form action="/blank/admin/reportCheck" method="post">
+					<div class="detail-list">
+		    
+		                <div class="detail-title">신고 번호</div>
+		                <div>${selectReport.no}</div>
+		                <div>처리상태&nbsp;&nbsp;${selectReport.status}</div>
+	                    <div>작성일&nbsp;&nbsp;${selectReport.enrollDate}</div>
+		    
+		                <div class="detail-title">신고 프로젝트</div>
+		                <div>${reportVo.prj} (프로젝트 명: ${selectReport.prj})</div>
+		                <div><input type="hidden" name="no" value="${selectReport.no}"></div>
+	                    <div></div>
+		    
+		                <div class="detail-title">제목</div>
+		                <div>${selectReport.title}</div>
+		                <div></div>
+	                    <div></div>
+		    
+		                <div class="detail-title">내용</div>
+		                <div>${selectReport.content}</div>
+	                    <div></div>
+	                    <div></div>
+		    
+		                <div class="detail-title answer-style">처리 내용</div>
+		                <div class="answer-style">
+		                    <input
+		                        type="text"
+		                        name="adComment"
+		                        value="${selectReport.adComment}"
+		                        placeholder="이곳에 내용을 작성하세요."
+		                    />
+		                </div>
+		                <div class="answer-style"></div>
+	                    <div class="answer-style"></div>
+		    
+		                <div id="check-submit">
+		                    <input type="submit" value="접수" class="check-submit-btn"/>
+						</div>
+		    
+		            </div>
+	            </form>
+
 	
 	        </div>
 	
