@@ -25,7 +25,7 @@
                             </tr>
                             <tr>
                                 <th>주문 일자</th>
-                                <td>20221203-0000001</td>
+                                <td>${pay.payDate}</td>
                             </tr>
                             <tr>
                                 <th>처리 상태</th>
@@ -38,19 +38,19 @@
                         <table>
                             <tr>
                                 <th>총 주문 금액</th>
-                                <td><span>72,000</span> 원</td>
+                                <td><span>${pay.price}</span> 원</td>
                             </tr>
                             <tr>
                                 <th>포인트 사용</th>
-                                <td><span>2,000</span> P</td>
+                                <td><span>${pay.usepoint}</span> P</td>
                             </tr>
                             <tr>
                                 <th>총 결제 금액</th>
-                                <td><span>70,000</span> 원</td>
+                                <td><span>${pay.totalprice}</span> 원</td>
                             </tr>
                             <tr>
                                 <th>결제 수단</th>
-                                <td><button>확인하러 가기</button></td>
+                                <td><a href="${pay.receiptUrl}">확인하러 가기</a></td>
                             </tr>
                         </table>
                     </div>
@@ -62,15 +62,15 @@
                     </div>
                     <div class="delivery-info">
                         <div>받는 분</div>
-                        <div><input type="text" name="name"></div>
+                        <div><input type="text" name="name" value="${pay.name}" readonly></div>
                         <div>휴대폰 번호</div>
-                        <div><input type="tel" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13"></div>
+                        <div><input type="tel" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" value="${pay.phone}" readonly></div>
                         <div class="address-area">주소</div>
-                        <div class="address-search"><input type="text" name="address1"></div>
-                        <div><input type="text" name="address2"></div>
-                        <div><input type="text" name="address3"></div>
+                        <div class="address-search"><input type="text" name="address1" value="${pay.address1}" readonly></div>
+                        <div><input type="text" name="address2" value="${pay.address2}" readonly></div>
+                        <div><input type="text" name="address3" value="${pay.address3}" readonly></div>
                         <div>배송 메시지</div>
-                        <div><input type="text" placeholder="20자 내로 작성해 주세요."></div>
+                        <div><input type="text" placeholder="20자 내로 작성해 주세요." value="${pay.message}" readonly></div>
                     </div>
                     <div>주문 상품 확인 및 결제 취소는 마이페이지에서 진행해 주세요.</div>
                     <div class="order-mypage" onclick="location.href=''">주문 배송 조회</div>

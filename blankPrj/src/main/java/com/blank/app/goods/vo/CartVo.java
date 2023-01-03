@@ -11,6 +11,6 @@ public class CartVo {
 	private String name;
 	private List<String> thumbnail;
 	private String price;
-	private String quantity;
+	private String cnt;
 
 }

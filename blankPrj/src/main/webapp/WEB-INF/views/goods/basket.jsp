@@ -22,6 +22,14 @@
         <div class="basket">
             <div>
                 <table>
+                    <colgroup>
+                        <col style="width: 10%">
+                        <col style="width: 15%">
+                        <col style="width: 20%">
+                        <col style="width: 15%">
+                        <col style="width: 15%">
+                        <col style="width: 15%">
+                    </colgroup>
                     <tr>
                         <th><input type="checkbox" id="all-check"><label for="all-check"></label></th>
                         <th>이미지</th>
@@ -30,7 +38,7 @@
                         <th>수량</th>
                         <th>합계</th>
                     </tr>
-
+                <form action="/blank/goods/payment" id="payment-form" method="post">
                     <!-- 장바구니가 비어 있을 때 -->
                     <c:if test="${empty cart}">
                         <tr id="empty-box">
@@ -40,8 +48,8 @@
 
                     <c:forEach items="${cartList}" var="item">
                         <tr>
-                            <td><input type="checkbox" name="chBox" class="chBox" id="${item.no}"><label for="${item.no}"></label></td>
-                            <td class="img-area"><img src="" alt=""></td>
+                            <td><input type="checkbox" name="no" class="chBox" id="${item.no}" value="${item.no}"><label for="${item.no}"></label></td>
+                            <td class="img-area"><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt=""></td>
                             <td class="name-area">
                                 <span>${item.name}</span>
                             </td>
@@ -59,6 +67,7 @@
                             </td>
                         </tr>
                     </c:forEach>
+                </form>
                 </table>
             </div>
             <div class="btn-area">
@@ -72,23 +81,38 @@
                     <div>
                         <span class="bold">상품 금액</span>
                         <div class="price">
-                            <input type="text" class="price-area val spot" id="product-price" readonly>
-                            <span class="unit">원</span>
+                            <c:if test="${empty cart}">
+                                <input type="text" class="price-area val spot" value="상품을">
+                            </c:if>
+                            <c:if test="${!empty cart}">
+                                <input type="text" class="price-area val spot" id="product-price" readonly>
+                                <span class="unit">원</span>
+                            </c:if>
                         </div>
                     </div>
                     <div>
                         <span class="bold">배송비</span>
                         <div class="price">
-                            <input type="text" class="price-area" id="del-fee" readonly>
-                            <span class="unit">원</span>
+                            <c:if test="${empty cart}">
+                                <input type="text" class="price-area val spot" value="추가해">
+                            </c:if>
+                            <c:if test="${!empty cart}">
+                                <input type="text" class="price-area" id="del-fee" readonly>
+                                <span class="unit">원</span>
+                            </c:if>
                         </div>
                     </div>
                     <hr>
                     <div>
                         <span class="bold">총계</span>
                         <div class="price">
-                            <input type="text" class="price-area val spot" id="total-price" readonly>
-                            <span class="unit">원</span>
+                            <c:if test="${empty cart}">
+                                <input type="text" class="price-area val spot" value="주세요!">
+                            </c:if>
+                            <c:if test="${!empty cart}">
+                                <input type="text" class="price-area val spot" id="total-price" readonly>
+                                <span class="unit">원</span>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -107,4 +131,23 @@
 
 </body>
 <script src="/blank/resources/js/goods/basket.js"></script>
+<script>
+    // 로그인 안 했으면 로그인하게 해야 함 **
+
+    /* 선택 상품 주문 */
+    $('#order-select').click(function() {
+        if($("input[class=chBox]:checked").length >= 1) {
+            $("input[class=chBox]:not(:checked)").attr("disabled", true);
+            $('#payment-form').submit();
+        } else {
+            alert('최소 한 개 이상 선택한 후 주문해 주세요!')
+        }
+    })
+
+    /* 전체 상품 주문 */
+    $('#order-all').click(function() {
+        $("input[class=chBox]").prop("checked", true);
+        $('#payment-form').submit();
+    })
+</script>
 </html>

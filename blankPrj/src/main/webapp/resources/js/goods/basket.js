@@ -42,9 +42,10 @@
                 },
                 success: function(data) {
                     $("input[class=chBox]:checked").parent().parent().remove();
-				        productPrice();
-				        delieveryFee();
-				        totalPriceCalc();
+                    productPrice();
+                    delieveryFee();
+                    totalPriceCalc();
+                    location.href = "/blank/goods/basket";
                 }
             })
         }
@@ -69,7 +70,6 @@
                 	chbox: array
                 },
                 success: function(data) {
-                	console.log(data);
                     location.href = "/blank/goods/basket";
                 }
             })
@@ -181,7 +181,7 @@
             method: "POST",
             data: {
                 no: no,
-                cnt: quantity
+                quantity: quantity
             },
             success: function(data) {
                 console.log(data);

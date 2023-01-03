@@ -44,12 +44,20 @@
     font-weight: bold;
     padding-left: 40px;
 }
+.cart-info input {
+    width: 50px;
+    text-align: center;
+    outline: none;
+    border: none;
+    background: none;
+}
 .cart-table {
     border-top: 1px solid #343434;
     padding: 15px;
 }
 .cart-table>div:nth-child(2) {
     display: flex;
+    justify-content: space-between;
 }
 .cart-table>table {
     width: 100%;
@@ -64,9 +72,7 @@ tr, td {
 }
 .name-option>span {
     display: flex;
-}
-.option {
-    color: #696969;
+    padding-left: 20px;
 }
 .price {
     font-weight: bold;
@@ -140,6 +146,16 @@ tr, td {
 #use-point::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+#payment-price {
+    outline: none;
+    background: none;
+    border: none;
+    width: 100px;
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    color: #567ACE;
 }
 .pay-area {
     font-size: 24px;

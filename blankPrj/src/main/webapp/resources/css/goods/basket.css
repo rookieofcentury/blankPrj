@@ -24,7 +24,7 @@
 	justify-content: center;
     padding: 20px;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(3, minmax(30px, auto));
+	grid-template-rows: minmax(30px, auto) repeat(2, minmax(20px, auto));
 }
 th {
     color: #9D9D9D;

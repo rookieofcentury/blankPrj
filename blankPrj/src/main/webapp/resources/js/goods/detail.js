@@ -25,7 +25,7 @@ function stringNumberToInt(stringNumber){
     return parseInt(stringNumber.replace(/,/g , ''));
 }
 
-const goodsCntInput = $('input[name=cnt]');
+const goodsCntInput = $('input[name=quantity]');
 
 // cnt 값 달라질 때 개수 * 가격 해서 표시해 주는 함수
 goodsCntInput.keyup(function() {
