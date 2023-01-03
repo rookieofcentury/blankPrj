@@ -130,6 +130,9 @@
     cursor: pointer;
     border-radius: 10px;
 }
+.like-icon{
+    margin-bottom: 0    ;
+}
 .bi-heart, .bi-heart-fill{
     --font-size: 30px;
     --line-height: 30px;

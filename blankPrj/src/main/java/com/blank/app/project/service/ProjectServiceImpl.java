@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.project.dao.ProjectDao;
+import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
 
@@ -44,8 +45,9 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public List<ProjectVo> selectMyPrj(ProjectVo vo) {
-		return (List<ProjectVo>) dao.selectMyPrj(sst, vo);
+	public List<ProjectVo> selectMyPrj(HashMap<String, Object> map) {
+		System.out.println(map);
+		return (List<ProjectVo>) dao.selectMyPrj(sst, map);
 	}
 
 	@Override
@@ -54,14 +56,14 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int deletePrj(ProjectVo vo) {
-		int result = dao.deletePrj(sst, vo);
-		if(result == 1) {
-			return result;
-		}else {
-			return (Integer) null;
+		public int deletePrj(String no) {
+			int result = dao.deletePrj(sst, no);
+			if(result == 1) {
+				return result;
+			}else {
+				return 0;
+			}
 		}
-	}
 
 	@Override
 	public int tempPrj(ProjectVo vo) {
@@ -79,9 +81,35 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int writingCnt(HashMap<Object, Object> map) {
-		System.out.println("ser");
+	public int writingCnt(HashMap<String, Object> map) {
 		return dao.writingCnt(sst,map);
+	}
+
+	@Override
+	public int insertPrj(ProjectVo vo) {
+		return dao.insertPrj(sst,vo);
+	}
+
+	/* 로그인 찜한 프로젝트 조회 */
+	@Override
+	public int selectMyLikePrj(LikeProjectVo vo) {
+		return dao.selectMyLikePrj(sst,vo);
+	}
+
+	/*찜 ++*/
+	@Override
+	public int insertLikePrj(LikeProjectVo vo) {
+		System.out.println("서비스 브이오" + vo);
+		
+		int result = dao.insertLikePrj(sst,vo);
+		System.out.println("서비스 리절트 "+result);
+		return result;
+	}
+
+	/*찜 --*/
+	@Override
+	public int deleteLikePrj(LikeProjectVo vo) {
+		return dao.deleteLikePrj(sst,vo);
 	}
 
 }

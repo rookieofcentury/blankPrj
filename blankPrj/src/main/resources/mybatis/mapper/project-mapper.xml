@@ -40,7 +40,7 @@
 		FROM START_TIME
 	</select>
 	
-	<select id="selectMyPrj" resultType="ProjectVo">
+	<select id="selectMyPrj" resultType="ProjectVo" parameterType="Map">
 		SELECT  
         	NO
         	,TITLE
@@ -48,36 +48,63 @@
         	,STATUS
         	,SUMMARY
 		FROM PROJECT 
-		WHERE CREATOR = 1
+		WHERE CREATOR = #{vo.creator}
+        AND STATUS = #{statusWriting}
+        AND DELETE_YN = 'N'
 	</select>
 	
-	<select id="selectStatusAll" resultType="ProjectVo">
+	<!-- <select id="selectStatusAll" resultType="ProjectVo">
 		SELECT  
 		    COUNT(DISTINCT STATUS) AS cnt
 		FROM PROJECT 
-		WHERE CREATOR = 1
-	</select>
+		WHERE CREATOR #{creator}
+	</select> -->
 	
-	<delete id="deletePrj">
-		DELETE FROM PROJECT WHERE NO = 1
-	</delete>
-	
+	<update id="deletePrj">
+		UPDATE PROJECT SET DELETE_YN = 'Y' WHERE NO = #{no}
+	</update> 
+
 	<insert id="insertTempPrj">
-	  	INSERT INTO PROJECT(
+	  	INSERT ALL 
+	  	INTO PROJECT(
 			NO
 			, TITLE
 			, CREATOR
 			, CATEGORY
 			, PRICE
+			, START_DATE
+			, END_DATE
+			, SUMMARY
+			, TIME
+			, URL
 			)
 			VALUES
 			  	(
 	        SEQ_PROJECT_NO.NEXTVAL,
 	        #{title},
 	        #{creator} ,
-	        1,
-	        #{price}
+	        #{category},
+	        #{price},
+	        #{startDate},
+	        #{endDate},
+	        #{summary},
+	        #{time},
+	        #{url}
 	  	)
+		INTO PRJ_ATTACHMENT
+			(
+				NO ,
+				PRJ_NO ,
+				CHANGE_NAME ,
+				ENROLL_DATE
+			)
+		VALUES
+		(
+			GET_SEQ_NO('SEQ_PRJ_ATTACHMENT_NO') ,
+			GET_SEQ_CURR_NO('SEQ_PRJ_NO_NO') ,
+			#{changeName} ,
+			SYSDATE
+		)
   </insert>
   
   	<select id="prjCnt" resultType="int">
@@ -91,14 +118,36 @@
 			TITLE = #{title},
 			PRICE = #{price},
 			START_DATE = #{startDate}
-		WHERE NO = 1
+		WHERE NO = #{no}
   </update>
   
   <select id="writingCnt" resultType="int" parameterType="Map">
 		SELECT COUNT(STATUS)
 		FROM PROJECT 
-		WHERE CREATOR = #{creator}
+		WHERE CREATOR = #{vo.creator}
         AND STATUS = #{statusWriting}
+        AND DELETE_YN = 'N'
 	</select>
+	
+	<insert id="insertPrj" >
+	INSERT INTO PROJECT(NO, CREATOR)
+	 VALUES
+  	( SEQ_PROJECT_NO.NEXTVAL, #{creator})
+	</insert>
+	
+	<select id="selectMyLikePrj" resultType="int">
+	SELECT COUNT(PRJ_NO)
+		FROM LIKE_PROJECT
+        WHERE M_NO = #{mNo}
+        AND PRJ_NO = #{prjNo}
+	</select>
+	
+	<insert id="insertLikePrj" >
+	 INSERT INTO LIKE_PROJECT  VALUES (${mNo} , ${prjNo})
+	</insert>
+	
+	<delete id="deleteLikePrj" >
+       DELETE FROM LIKE_PROJECT WHERE M_NO = #{mNo} AND PRJ_NO = #{prjNo}
+	</delete>
 	
 </mapper>

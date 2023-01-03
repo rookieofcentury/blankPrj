@@ -114,11 +114,25 @@
         /*시작하기 href*/
         function startBtn(){
             if($(".ckAll").is(":checked")) {
-                location.href = "/blank/project/post";
-            }else{
+                
+            $.ajax({
+            url : "/blank/project/agree",
+            method : "POST",   
+            data :   {
+                "start" : 1
+            },
+            success : function(x){
+                
+                location.href = "/blank/project/post"
+            
+            },error : function(){
+                console.log("동의 통신에러");
+            }
+            });
+            } else{
                 alert('미동의 시 프로젝트를 진행할 수 없습니다.')
             }
-        }
+        };
 
         // $(window).on('scroll',function(){
         //         $('.navi-menu').css('top', 0);

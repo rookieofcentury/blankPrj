@@ -52,14 +52,14 @@
     <div id="container">
         <div id="content">
             <div class="content-box">
-                <div class="preview-box">
+                <div class="preview-item">
                     <div class="preview-set">
                         <div>내가 만든 세트</div>
                         <% if(1 < 2){%>
                             <ul>
-                                <li class="set-list">
+                                <li class="item-list">
                                     <button type="button">
-                                        <div class="set-buttons">
+                                        <div class="item-box">
                                             <strong>과일</strong>
                                         </div>
                                         <ol type="1" class="set-item">
@@ -108,7 +108,7 @@
                                 <div class="textbox">
                                     <textarea name="addOption" cols="77" rows="5" placeholder="콤마(,)로 구분해서 작성하시면 항목이 생성됩니다.&#13;&#10; ex) 블랙, 화이트, 레드"></textarea>
                                 </div>
-                            <div class="button-submit"><input type="submit" value="저장" name="save"></div>
+                            <div class="item-submit"><input type="submit" value="저장" name="save"></div>
                         </div>
                     </div>
                 </div>
