@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
 
 @Service
@@ -38,5 +39,9 @@ public interface GoodsService {
 	List<GoodsVo> selectMainGoodsList();
 
 	List<CartVo> getCartList(List<String> array);
+
+	int insertOrder(List<CartVo> orderList, PaymentVo pay);
+
+	PaymentVo selectPaymentVoByNo(PaymentVo pay);
 
 }

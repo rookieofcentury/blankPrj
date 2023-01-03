@@ -220,4 +220,75 @@
 		</foreach>
 	</select>
 	
+	<update id="insertOrder">
+		INSERT ALL
+			INTO GOODS_PAYMENT VALUES
+				(
+					SEQ_GOODS_PAYMENT_NO.NEXTVAL,
+					#{pay.consumer},
+					#{pay.price},
+					#{pay.delivery},
+					#{pay.usepoint},
+					#{pay.totalprice},
+					#{pay.payMethod},
+					#{pay.payment},
+					#{pay.payDate},
+					#{pay.receiptUrl},
+					#{pay.status}
+				)
+			INTO GOODS_DELIVERY VALUES
+				(
+					SEQ_GOODS_PAYMENT_NO.NEXTVAL,
+					#{pay.name},
+					#{pay.phone},
+					#{pay.address1},
+					#{pay.address2},
+					#{pay.address3},
+					#{pay.message}
+				)
+		<foreach collection="orderList" item="item" close="SELECT * FROM DUAL" separator=" ">
+			INTO GOODS_ORDER VALUES (GET_SEQ_NO('SEQ_GOODS_ORDER_NO'), SEQ_GOODS_PAYMENT_NO.NEXTVAL, #{item.no}, #{item.cnt})
+		</foreach>
+	</update>
+	
+	<update id="updatePoint">
+		UPDATE MEMBER SET POINT = POINT - ${usepoint} WHERE NO = #{consumer}
+	</update>
+	
+	<select id="selectPaymentVoByNo" resultType="com.blank.app.goods.vo.PaymentVo">
+		SELECT 
+			    P.NO,
+			    P.CONSUMER,
+			    P.PRICE,
+			    P.DELIVERY,
+			    P.USEPOINT,
+			    P.TOTALPRICE,
+			    P.PAY_METHOD,
+			    P.PAYMENT,
+			    P.PAY_DATE,
+			    P.RECEIPT_URL,
+			    P.STATUS,
+			    D.NAME,
+			    D.PHONE,
+			    D.ADDRESS1,
+			    D.ADDRESS2,
+			    D.ADDRESS3,
+			    D.MESSAGE
+			FROM GOODS_PAYMENT P
+			INNER JOIN GOODS_DELIVERY D
+			ON P.NO = D.NO
+		WHERE
+		<if test=" no != null and no != '' ">
+			P.NO = #{no}
+		</if>
+		<if test=" payDate != null and payDate != '' and consumer != null and consumer != '' ">
+			P.PAY_DATE = #{payDate} AND P.CONSUMER = #{consumer}
+		</if>
+	</select>
+	
+	<select id="selectPaymentVoListByNo" resultType="com.blank.app.goods.vo.PaymentVo">
+		SELECT * FROM GOODS_PAYMENT
+		WHERE CONSUMER = #{consumer}
+	</select>
+	
 </mapper>

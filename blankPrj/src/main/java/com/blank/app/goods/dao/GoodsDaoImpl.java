@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
 
 @Repository
@@ -102,6 +103,22 @@ public class GoodsDaoImpl implements GoodsDao {
 	public List<CartVo> selectCartList(SqlSessionTemplate sst, List<String> array) {
 		return sst.selectList("goodsMapper.getCartList", array);
 	}
+
+	// 주문 내역 insert all
+	public int insertOrder(SqlSessionTemplate sst, Map<String, Object> list) {
+		return sst.update("goodsMapper.insertOrder", list);
+	}
+
+	// 포인트 사용한 만큼 update
+	public int updatePoint(SqlSessionTemplate sst, PaymentVo pay) {
+		return sst.update("goodsMapper.updatePoint", pay);
+	}
+
+	// 결제 내역 찾기
+	public PaymentVo selectPaymentVoByNo(SqlSessionTemplate sst, PaymentVo pay) {
+		return sst.selectOne("goodsMapper.selectPaymentVoByNo", pay);
+	}
+
 
 
 

@@ -14,12 +14,12 @@
             <div class="notice-area">
                 <div>
                     <div class="notice-box-title">블랭크</div>
-                    <div>공지 사항</div>
+                    <div><a href="/blank/notice/list">공지 사항</a></div>
                     <div>서비스 소개</div>
                 </div>
                 <div>
                     <div class="notice-box-title">이용 안내</div>
-                    <div>고객 센터</div>
+                    <div><a href="/blank/help/main">고객 센터</a></div>
                 </div>
                 <div>
                     <div class="notice-box-title">정책</div>

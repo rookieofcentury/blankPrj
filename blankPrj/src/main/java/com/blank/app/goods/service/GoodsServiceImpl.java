@@ -15,6 +15,7 @@ import com.blank.app.admin.common.PageVo;
 import com.blank.app.goods.dao.GoodsDao;
 import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
 
 @Service
@@ -116,9 +117,50 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	// 장바구니 화면에서 list 출력하기
-	@Override
 	public List<CartVo> getCartList(List<String> array) {
 		return dao.selectCartList(sst, array);
+	}
+
+	// 주문 완료
+	@Transactional
+	public int insertOrder(List<CartVo> orderList, PaymentVo pay) {
+		
+		if(pay.getStatus().equals("paid")) {
+			pay.setStatus("P"); // 기본 값
+		} else if(pay.getStatus().equals("ready")) {
+			pay.setStatus("R");
+		} else {
+			pay.setStatus("F");
+		}
+		
+		Map<String, Object> list = new HashMap<String, Object>();
+		list.put("orderList", orderList);
+		list.put("pay", pay);
+		
+		int result1 = dao.insertOrder(sst, list);
+		int result2 = 2;
+		
+		if(Integer.parseInt(pay.getUsepoint()) > 0) {
+			result2 = dao.updatePoint(sst, pay);
+		}
+		
+		return result1 * result2;
+	}
+
+	// 주문 화면 도출에 필요한 no 받아 오기
+	public PaymentVo selectPaymentVoByNo(PaymentVo pay) {
+		
+		PaymentVo vo = dao.selectPaymentVoByNo(sst, pay);
+		
+		if(vo.getStatus().equals("P")) {
+			vo.setStatus("결제 완료");
+		} else if(vo.getStatus().equals("R")) {
+			vo.setStatus("결제 미확인");
+		} else {
+			vo.setStatus("결제 취소");
+		}
+		
+		return vo;
 	}
 
 

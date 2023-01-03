@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
 
 @Repository
@@ -57,5 +58,14 @@ public interface GoodsDao {
 
 	// 장바구니 화면 list 도출
 	List<CartVo> selectCartList(SqlSessionTemplate sst, List<String> array);
+
+	// 주문내역 insert
+	int insertOrder(SqlSessionTemplate sst, Map<String, Object> list);
+
+	// 포인트 update
+	int updatePoint(SqlSessionTemplate sst, PaymentVo pay);
+
+	// 주문 완료 화면 도출에 필요한 결제 내역 받기
+	PaymentVo selectPaymentVoByNo(SqlSessionTemplate sst, PaymentVo pay);
 
 }

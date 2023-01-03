@@ -12,7 +12,9 @@
        Kakao.isInitialized();  
    </script>
 <script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
@@ -27,29 +29,32 @@
                 <div>
                     <div class="image-box"><img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt=""></div>
                     <div>
-                        <div id="info">
-                            <div>판매가</div>
-                            <div><span id="vo-price"><fmt:formatNumber pattern="###,###,###" value="${goods.price}"/></span> 원</div>
-                            <div>배송료</div>
-                            <div>유료 (70,000 원 이상 구매 시 무료)</div>
-                            <div></div>
-                            <div></div>
-                            <div>수량</div>
-                            <div class="cnt-area"><input type="number" name="cnt" value="1" min="1" max="${goods.stock}"><label id="minus-btn"><i class="fa-solid fa-minus"></i></label><label id="plus-btn"><i class="fa-solid fa-plus"></i></label></div>
-                        </div>
-                        <c:if test="${goods.stock >= 1}">
-                        <div class="btn-block">
-                            <div class="btn-area">
-                                <span>총 <span class="goods-cnt-box">1</span> 개</span>
-                                <span><span id="final-pay"><fmt:formatNumber pattern="###,###,###" value="${goods.price}"/></span> 원</span>
+                        <form action="/blank/goods/payment" method="post" id="payment-form">
+                            <div id="info">
+                                <input type="hidden" name="no" value="${goods.no}">
+                                <div>판매가</div>
+                                <div><span id="vo-price"><fmt:formatNumber pattern="###,###,###" value="${goods.price}"/></span> 원</div>
+                                <div>배송료</div>
+                                <div>유료 (70,000 원 이상 구매 시 무료)</div>
+                                <div></div>
+                                <div></div>
+                                <div>수량</div>
+                                <div class="cnt-area"><input type="number" name="quantity" value="1" min="1" max="${goods.stock}"><label id="minus-btn"><i class="fa-solid fa-minus"></i></label><label id="plus-btn"><i class="fa-solid fa-plus"></i></label></div>
                             </div>
-                            <div class="btn-area">
-                                <div class="btn-white" onclick="addBasket();">장바구니 담기</div>
-                                <div class="btn-main">바로 구매</div>
-                                <div class="btn-white share-btn" id="share-btn" onclick="Kakao.Share.createScrapButton();"><i class="fa-solid fa-share-nodes"></i></div>
+                            <c:if test="${goods.stock >= 1}">
+                            <div class="btn-block">
+                                <div class="btn-area">
+                                    <span>총 <span class="goods-cnt-box">1</span> 개</span>
+                                    <span><span id="final-pay"><fmt:formatNumber pattern="###,###,###" value="${goods.price}"/></span> 원</span>
+                                </div>
+                                <div class="btn-area">
+                                    <div class="btn-white" onclick="addBasket();">장바구니 담기</div>
+                                    <div class="btn-main" id="buy-now">바로 구매</div>
+                                    <div class="btn-white share-btn" id="share-btn" onclick="Kakao.Share.createScrapButton();"><i class="fa-solid fa-share-nodes"></i></div>
+                                </div>
                             </div>
-                        </div>
-                        </c:if>
+                            </c:if>
+                        </form>
                         <c:if test="${goods.stock == 0}">
                             <div class="no-stock-info flex">현재 재고가 없어 주문할 수 없는 상품입니다.</div>
                             <div class="btn-area">
@@ -207,13 +212,14 @@
 	  requestUrl: 'http://localhost:8888/blank/goods/detail',
 	});
 
+    // 장바구니 추가
     function addBasket() {
         $.ajax({
             url: "/blank/goods/basket/add",
             method: "POST",
             data: {
                 no: '${goods.no}',
-                cnt: $('input[name=cnt]').val()
+                cnt: $('input[name=quantity]').val()
             },
             success: function(data) {
                 alert(data);
@@ -223,5 +229,28 @@
             }
         })
     }
+
+    // 바로 구매 버튼
+    $('#buy-now').click(function() {
+        Swal.fire({
+            title: '바로 구매하시겠어요?',
+            text: "다른 상품들이 많이 기다리고 있어요!",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#567ACE',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '바로 구매',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                var noArr = new Array();
+                var noVal = $('input[name=no]').val();
+                noArr.push(noVal);
+                $('#payment-form').submit();
+
+            }
+        })
+    })
 </script>
 </html>
