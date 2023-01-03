@@ -20,13 +20,13 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>;
 
-<<script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
+<script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
 <!--<script src = "${path}/ckeditor/ckeditor.js"></script> -->
 <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 <script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script>
 
 <body>
-<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();">
+<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();" enctype="multipart/form-data">
 <div class="navi-menu">
         <div class="content-editor">
             <div class="editor-logo">
@@ -47,7 +47,7 @@
 <div id="mem-header"></div>
     <div id="mem-full">
         
-            <input type="radio" id="default-info" name="mem-navi" selected >
+            <input type="radio" id="default-info" name="mem-navi" checked >
             <label for="default-info" ><span id="icon1" class="material-symbols-outlined">기본정보</span>&nbsp;</label>
             <input type="radio" id="option-create" name="mem-navi">
             <label for="option-create" ><span class="material-symbols-outlined md-24">옵션설계</span></label>
@@ -88,7 +88,7 @@
                     <div>대표이미지</div>
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
-                <div class="img-upload">파일업로드</div>
+                <div class="img-upload"><input multiple="multiple" type="file" name="prjfile"></div>
             </div>
             <div class="content-price">
                 <div class="price-info">
@@ -117,10 +117,11 @@
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select>
-                                        <option value="">==시작시간 선택==</option>
+                                        <option value="prjTime">==시작시간 선택==</option>
                                          <c:forEach items="${time}" var="tt">
                                         <option>${tt.time}시</option>
 										</c:forEach> 
+                                        
                                     </select>
                                     <!-- <div>dd</div> -->
                                 </div>
@@ -215,173 +216,215 @@
             </div>   
 		</div>
 
-             <!-- 컨텐츠 2 -->
+    <!-- 컨텐츠 2 -->
 	<div class="mp-main2 main">
-	<div class="header-menubar">
-            <div class="menu-button">
-                <button type="button" onclick="location.href='/blank/project/post/optionSet'">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
-                        <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
-                    </svg>
-                    세트
-                </button>
-                <button type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
-                        <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
-                        <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
-                    </svg>
-                    아이템
-                </button>
+        <div class="main2-header">
+            <!-- <c:if test = "1>2">  </c:if>-->
+            <div><h2>아직 완성된 세트가 없어요ㅜㅅㅜ</h2></div>
+            <div><h2>↓ 세트를 구성할 아이템을 추가해 주세요 ↓</h2></div>
+            <!-- <div>아이템 추가</div> -->
+        </div>
+        <!-- 아이템 추가 모달창 -->
+        <div id="label-center">
+            <input type="checkbox" id="itemPopup">
+            <label for="itemPopup" >아이템 추가</label>
+            <div>
+                <div>
+                        <div class="content-box">
+                            <div class="preview-item">
+                                <div class="preview-set">
+                                    <div>내가 만든 세트</div>
+                                    <!-- <% if(1 < 2){%>
+                                        <ul class="set-box">
+                                            <li class="item-list">
+                                                <button type="button" class="itemBox">
+                                                    <div class="item-box">
+                                                        <strong>과일</strong>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <ol type="1" class="set-item">
+                                                        <li>사과</li>
+                                                    </ol>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    <%}else{ %>
+                                        <div class="set-none">만든 아이템이 없습니다.</div>
+                                    <%}%> -->
+                                </div>
+                            </div>
+                            <div class="making-box">
+                                <div class="making-set">
+                                    <div>
+                                        <div class="post-set">
+                                            <div class="set-notice">
+                                                <strong>아이템명</strong>
+                                                <div>아이템은 선물에 포함되는 구성 품목입니다. <br>세트를 구성할 아이템을 만들어 보세요.</div>
+                                            </div>
+                                            <div class="item-option">
+                                                <input placeholder="아이템을 입력해 주세요" name="itemName">
+                                                <span>10글자 남음</span>
+                                            </div>
+                                        </div>
+                                        <div class="post-set">
+                                            <div class="set-notice">
+                                                <strong>옵션 추가</strong>
+                                            </div>
+                                            <div class="add-option">
+                                                <!-- <p class="none" onclick='noneOption()'>없음</p>
+                                                <p class="add">추가</p> -->
+                                                <input type="radio" id="option-none" name="radio" selected >
+                                                <label for="option-none" ><p class="none">없음</p></label>
+                                                <input type="radio" id="option-add" name="radio">
+                                                <label for="option-add" ><p class="add">추가</p></label>
+                                            </div>
+                                        </div>
+                                            <div class="textbox">
+                                                <textarea name="addOption" cols="77" rows="5" placeholder="콤마(,)로 구분해서 작성하시면 항목이 생성됩니다.&#13;&#10; ex) 블랙, 화이트, 레드"></textarea>
+                                            </div>
+                                        <div class="item-submit">
+                                            <input type="button" value="적용" name="apply">
+                                            <input type="button" value="추가" name="itemSave">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <label for="itemPopup"></label>
+                </div>
+                <label for="itemPopup"></label>
             </div>
         </div>
-	<div id="container">
-        <div class="content">
-        <div id="mem-mp2-content">
-            <div class="content-box">
-                <div class="preview-box">
-                    <div class="preview-set">
-                        <div>내가 만든 세트</div>
-                        <% if(1 < 2){%>
-                            <ul>
-                                <li class="set-list">
-                                    <button type="button">
-                                        <div class="set-buttons">
-                                            <strong>29,000원</strong>
-                                        </div>
-                                        <p class="set-name">과일 세트</p>
-                                        <ul class="set-item">
-                                            <li>사과 x 1</li>
-                                            <li>바나나 x 1</li>
-                                        </ul>
-                                        <div class="set-quantity">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                                            </svg>
-                                            <div>제한 수량</div>
-                                            <div>200</div>
-                                            <div>개</div>
-                                        </div>
-                                    </button>
-                                    <button type="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                        </svg>
-                                    </button>
-                                </li>
-                            </ul>
-                        <%}else{ %>
-                            <div class="set-none">만든 세트가 없습니다.</div>
-                        <%}%>
-                    </div>
-                </div>
-                <div class="making-box">
-                    <div class="making-set">
-                        <div>
-                            <div class="post-set">
-                                <div class="set-notice">
-                                    <div>세트 아이템</div>
-                                    <div>세트는 후원자에게 프로젝트의 가치를 전달하는 수단입니다. <br>다양한 금액대로 여러 개의 선물을 만들어주세요.</div>
-                                </div>
-                                <div class="set-option">
-                                    <select class="">
-                                        <option>사과 (옵션 2개)</option>
-                                        <option>토마토 (옵션 1개)</option>
-                                        <option>가지 (옵션 3개)</option>
-                                    </select>
-                                </div>
-                                <!-- <div class="set-option">
-                                    <span>
-                                        <input placeholder="아이템을 선택해 주세요" readonly>
-                                        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
-                                        </div>
-                                    </span>
-                                    <div class="set-select">
-                                        <div>
-                                            <ul>
-                                                <li>
-                                                    <label for="option1" class="select-option">
-                                                        <input type="checkbox" id="option1">
-                                                        <span class="item-name">사과 (옵션2개)</span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label for="option2" class="select-option">
-                                                        <input type="checkbox" id="option2">
-                                                        <span class="item-name">메론 (옵션2개)</span>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                            <div class="selete-submit">선택완료</div>
-                                        </div> 
-                                    </div>
-                                </div> -->
-                            </div>
-                            <ul class="selected">
-                                <li>
-                                    <div>
-                                        <div>사과</div>
-                                        <div>
-                                            <div class="quantity-box">
-                                                <button>
-                                                    <img src="/blank/resources/images/project/minus.svg">
-                                                </button>
-                                                <input type="number" value="1" name="optionQuantity">
-                                                <button>
-                                                    <img src="/blank/resources/images/project/plus.svg">
-                                                </button>
-                                            </div>
-                                            <button class="delete-button">
+
+        <div id="option-container">
+            <div class="content">
+            <div id="mem-mp2-content">
+                <div class="content-box">
+                    <div class="preview-box">
+                        <div class="preview-range">
+                            <div>내가 만든 세트</div>
+                            <% if(1 < 2){%>
+                                <ul>
+                                    <li class="set-list">
+                                        <button type="button">
+                                            <div class="set-buttons">
+                                                <strong>29,000원</strong>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                                 </svg>
-                                            </button>
-                                        </div>
+                                            </div>
+                                            <p class="set-name">과일 세트</p>
+                                            <ul class="set-item">
+                                                <li>사과 x 1</li>
+                                                <li>바나나 x 1</li>
+                                            </ul>
+                                            <div class="set-quantity">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                                <div>제한 수량</div>
+                                                <div>200</div>
+                                                <div>개</div>
+                                            </div>
+                                        </button>
+                                        <button type="button">
+                                        </button>
+                                    </li>
+                                </ul>
+                            <%}else{ %>
+                                <div class="set-none">만든 세트가 없습니다.</div>
+                            <%}%>
+                        </div>
+                    </div>
+                    <div class="making-box">
+                        <div class="making-set">
+                            <div>
+                                <div class="post-set">
+                                    <div class="set-notice">
+                                        <div>세트 아이템</div>
+                                        <div>세트는 후원자에게 프로젝트의 가치를 전달하는 수단입니다. <br>다양한 금액대로 여러 개의 선물을 만들어주세요.</div>
                                     </div>
-                                    <ol type="1">
-                                        <li>민트</li>
-                                        <li>레드</li>
-                                    </ol>
-                                </li>
-                                <li>
-                                </li>
-                            </ul>
-                            <div class="set-info">
-                                <div class="info-name">세트명</div>
-                                <div><input type="text" placeholder="세트명을 입력해 주세요." name="setName"></div>
-                            </div>
-                            <div class="set-info">
-                                <div class="info-quantity">수량 설정</div>
-                                <div class="text-price">
-                                    <div><input type="number" name="limitedQuantity"></div>
-                                    <div>개</div>
+                                    <div class="set-option">
+                                        <select class="myitemList">
+                                            <option>== 아 이 템 선 택 ==</option>
+                                            <!-- <option>사과 (블루,레드,그린)</option>
+                                            <option>토마토 (블루,레드)</option>
+                                            <option>가지</option> -->
+                                        </select>
+                                        <select class="myitemOption">
+                                            <option>== 옵 션 선 택 ==</option>
+                                            <!-- <option>사과 (블루,레드,그린)</option>
+                                            <option>토마토 (블루,레드)</option>
+                                            <option>가지</option> -->
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="set-info">
-                                <div class="info-price">
-                                    <div>금액 설정</div>
-                                    <div>배송이 필요한 선물은 배송비를 포함해주세요.</div>
+                                <ul class="selected">
+                                    <li>
+                                        <div>
+                                            <div>사과</div>
+                                            <div>
+                                                <div class="quantity-box">
+                                                    <button>
+                                                        <img src="/blank/resources/images/project/minus.svg">
+                                                    </button>
+                                                    <input type="number" value="1" name="optionQuantity">
+                                                    <button>
+                                                        <img src="/blank/resources/images/project/plus.svg">
+                                                    </button>
+                                                </div>
+                                                <button class="delete-button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- <ol type="1">
+                                            <li>민트</li>
+                                            <li>레드</li>
+                                        </ol> -->
+                                    </li>
+                                    <li>
+                                    </li>
+                                </ul>
+                                <div class="set-insert">
+                                    <div class="info-name">세트명</div>
+                                    <div><input type="text" placeholder="세트명을 입력해 주세요." name="setName"></div>
                                 </div>
-                                <div class="text-quantity">
-                                    <div><input type="number" name="setPrice"></div>
-                                    <div>원</div>
+                                <div class="set-insert">
+                                    <div class="info-quantity">수량 설정</div>
+                                    <div class="text-price">
+                                        <div><input type="number" name="limitedQuantity"></div>
+                                        <div>개</div>
+                                    </div>
                                 </div>
+                                <div class="set-insert">
+                                    <div class="info-price">
+                                        <div>금액 설정</div>
+                                        <div>배송되는 선물은 배송비를 포함해주세요.</div>
+                                    </div>
+                                    <div class="text-quantity">
+                                        <div><input type="number" name="setPrice"></div>
+                                        <div>원</div>
+                                    </div>
+                                </div>
+                                <div class="button-submit"><input type="button" value="저장" name="save"></div>
+                                
                             </div>
-                            <div class="button-submit"><input type="submit" value="저장" name="save"></div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+        </div>   
     </div>
-            </div>   
-		</div>
 
              
-             <!-- 컨텐츠 내용 3 -->
-             <div class="mp-main3 main">
+    <!-- 컨텐츠 내용 3 -->
+    <div class="mp-main3 main">
 	<div id="container">
         <div class="content">
         <div id="mem-mp3-content">
@@ -536,13 +579,15 @@
            CKEDITOR.replace('[editor4]');
        });
        
-       /* <script>
-       $(function () {
+       /* $(function () {
            CKEDITOR.replace('contents', {
                filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
            });
-       }); */
+       }); 
+        */
+        
        
+        
        CKEDITOR.replace('editor4', {height: 500});
 
        //온 서브밋을 위한 변수 선언;
@@ -553,6 +598,7 @@
 
        //글자수 체크(제목)
        $('input[name="title"]').keyup(function(e) {
+        console.log($('.start-time option:selected').val());
            titleCheckReturn = false;
            var content = $(this).val();
            $('.title-write > p').text(40 - content.length + "글자 남음"); 
@@ -845,7 +891,15 @@
                 });
             });
        
-       
+       /*옵션 없음 추가*/
+       $("#option-add").click(function(){
+            //$(".textbox").toggleClass("block");
+            $(".textbox").show();
+        });
+        $("#option-none").click(function(){
+            $(".textbox").hide();
+        });
+
        //임시저장
        $('.buttons-storage').click(function() {
 	       $.ajax({
@@ -894,6 +948,87 @@
        /* function requestBtn(){
            location.href = "/blank/project/post/save";
        } */
+       
+       
+       /*아이템 추가*/
+       var itemName = $('input[name=itemName]').val();
+       var optionName = $('textarea[name=addOption]').val();
+       $('input[name=itemSave]').click(function(){
+           //console.log($('words').length());   
+           console.log(words.length);
+           console.log(words[0]);
+           
+           //for (var j = 0; j < words.length; j++){}
+           
+            var list = '';
+            list +=  '<ul class="set-box">' + '<li class="item-list">' + '<button type="button" class="itemBox">'
+                list += '<div class="item-box">' + '<div class="item-name">' + itemName + '</div>' 
+                list +=  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + 
+                    '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' + '</svg>'
+                    list += '</div>' + '<ol type="1" class="set-item">' + '<li class="itemOption">' + optionName + '</li>' + '</ol>' 
+                    list += '</button>' + '</li>' + '</ul>'
+                    $(".preview-set").append(list);
+                    $('input[name=itemName]').val("");
+                    $('textarea[name=addOption]').val("");
+                    
+                });
+                
+                $('input[name=apply]').click(function(){
+                    if($(".item-name").text()){
+                        $('input[id*="itemPopup"]+ label + div').css("display", "none");
+                        
+                        // var myArray = {id1: 100, id2: 200, "tag with spaces": 300};
+                        // for (var key in myArray) {
+                            //     console.log("key " + key + " has value " + myArray[key]);
+                            // }
+                            
+            var words = optionName.split(',');
+            let setArray = {}; 
+
+            for (let key in setArray) {
+                console.log(key + " => " + obj1[key]);
+            }
+
+            // for(let i = 0; i < itemName; i++){ 
+            //     itemName = words[i]; 
+            // } 
+            // for (let key of Object.keys(obj1)) { 
+            // console.log(key + " => " + obj1[key] ) 
+            // } 
+
+            //아이템 select에 넣기
+            var allItem = document.querySelectorAll( '.itemBox' );
+            allItem.forEach(element => {
+                const itemName = element.querySelector('.item-name').innerHTML;
+
+                // var i = 0;
+                // var optionValue = i + 1
+                var list = '';
+                //list += '<option>' + '== 아 이 템 선 택 == ' + '</option>';
+                list += '<option value=' +  itemName +  '>' + itemName + '</option>';
+                $(".myitemList").append(list);
+                    
+                for (var j = 0; j < $('.set-box').size(); j++){
+                    const itemOption = element.querySelector('.itemOption').innerHTML;
+                    var words = itemOption.split(',');
+
+                    // var list2 = '';
+                    // list2 += '<select name=' + 'itemName + '>';
+                    // $(".myitemOption").append(list);
+                }
+
+
+                // list += '<option>' +  itemName +  ' (' + itemOption + ')' + '</option>';
+            });
+            
+        //     
+        // });
+        }else{
+            alert("아이템을 등록해 주세요")
+        }
+        });
+
+        
        
   </script>
 </body>

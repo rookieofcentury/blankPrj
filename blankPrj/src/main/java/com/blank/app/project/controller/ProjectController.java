@@ -25,17 +25,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.blank.app.member.service.MemberService;
+import com.blank.app.common.file.FileUploader;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.service.ProjectService;
+import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("project")
 @Controller
+@Slf4j
 public class ProjectController {
 
 	@Autowired
@@ -50,6 +52,65 @@ public class ProjectController {
 		return "project/detail/info";
 	}
 	
+	/*로그인멤버 찜한 프로젝트 확인*/
+	@PostMapping("mylikePrj")
+	@ResponseBody
+	public String mylikePrj(HttpSession session, String pno, LikeProjectVo vo){
+		
+		System.out.println("받아온 플젝넘버 : " + pno);
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setMNo(nick);
+		vo.setPrjNo(pno);
+		
+		int likeVo = service.selectMyLikePrj(vo);
+		System.out.println(likeVo);
+		if(likeVo != 1) {
+			return "0";
+		}
+		return 1+"";
+	}
+	
+	/*찜하기 ++*/
+	@PostMapping("likePlusPrj")
+	@ResponseBody
+	public String likePlusPrj(HttpSession session, String pno, LikeProjectVo vo){
+		
+		System.out.println("plus 받아온 플젝넘버 : " + pno);
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setMNo(nick);
+		vo.setPrjNo(pno);
+		System.out.println("likeprjvo   " + vo);
+		
+		int likeVo = service.insertLikePrj(vo);
+		System.out.println("여기까지 왓나");
+		System.out.println("likevo" + likeVo);
+		if(likeVo != 1) {
+			return "0";
+		}
+		return "1";
+	}
+	
+	/*찜하기 --*/
+	@PostMapping("likeMinusPrj")
+	@ResponseBody
+	public String likeMinusPrj(HttpSession session, String pno, LikeProjectVo vo){
+		
+		System.out.println("minus 받아온 플젝넘버 : " + pno);
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setMNo(nick);
+		vo.setPrjNo(pno);
+		
+		int likeVo = service.deleteLikePrj(vo);
+		System.out.println(likeVo);
+		if(likeVo != 1) {
+			return "0";
+		}
+		return "1";
+	}
+	
 	@GetMapping("news")
 	public String prjNews() {
 		return "project/detail/news";
@@ -61,8 +122,32 @@ public class ProjectController {
 	}
 	
 	@GetMapping("agree")
-	public String postAgree() {
+	public String agree() {
 		return "project/post/agree";
+	}
+	
+	@PostMapping("agree")
+	@ResponseBody
+	public String postAgree(HttpSession session, ProjectVo vo, String start, Model model) {
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		int result = service.insertPrj(vo);
+		
+		//result == 1이면 select 다시 해와서 모델에 담아주고 콘솔에 찎어야 보인다..
+		System.out.println("컨트롤러 플젝번호 생성 " + vo.getNo());
+		if(result == 1) {
+			int prjSelect = service.insertPrj(vo);
+			model.addAttribute("prjNo", vo.getNo());
+		}
+		
+		
+		if(result != 1) {
+			return "";
+		}
+		return vo.getNo();
 	}
 	
 	@GetMapping("post/defaultInfo")
@@ -107,64 +192,81 @@ public class ProjectController {
 		return "project/post/creatorInfo";
 	}
 	
-//	@GetMapping("created")
-//	public String createdStatus() {
-//		return "project/created/status";
-//	}
-//	
 	@GetMapping("created")
+	public String createdStatus() {
+		return "project/created/status";
+	}
+	
+	@GetMapping("created/writing")
 	@ResponseBody
-	public String creating(@RequestParam HashMap<Object, Object> map ,String statusWriting, HttpSession session, ProjectVo vo, Model model) {	//myPrjAll을 MemberVo로 바꾸기
+	public String writing(String statusWriting, HttpSession session, ProjectVo vo, Model model) {	
 		
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setCreator(nick);
-		System.out.println(nick);
-
-		//List<ProjectVo> myPrj = service.selectMyPrj(vo);
 		
 		//ProjectVo statusAll = service.selectStatusAll(vo);
 		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
 		//model.addAttribute("statusAll", statusAll);
 		
-		//session.setAttribute("myPrj", myPrj);
-		
-		int resultcnt = service.writingCnt(map);
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("vo", vo);
 		map.put("statusWriting", statusWriting);
-		System.out.println(statusWriting);
-
+		int resultcnt = service.writingCnt(map);
+		System.out.println(resultcnt);
 		
-		//1개
-		if(resultcnt > 0) {
-			System.out.println("controller");
-
-			int updateResult = service.updatePrj(vo);
-			if(updateResult == 1) {
-				return updateResult+"";
-			}
-			return 1+"";
-			//0개
+		if(resultcnt == 0) {
+			return 0+"";
 		}else {
-			return resultcnt+"";
+			List<ProjectVo> myPrj = service.selectMyPrj(map);
+			session.setAttribute("myPrj", myPrj);
+			//System.out.println(myPrj);
 		}
+		String result = (String.valueOf(resultcnt));
+		return result;
 	}
 	
-	@GetMapping("created/delete")
-	public String deletePrj(ProjectVo vo) {	//MemberVo로 바꾸기 (no)
-		int result = service.deletePrj(vo);
-		if(result == 1) {
-			return result+"";
+	@GetMapping("created/examination")
+	@ResponseBody
+	public String examination(String statusWriting, HttpSession session, ProjectVo vo, Model model) {	
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("vo", vo);
+		map.put("statusWriting", statusWriting);
+		int resultcnt = service.writingCnt(map);
+		
+		if(resultcnt == 0) {
+			return 0+"";
+		}else {
+			List<ProjectVo> myPrj = service.selectMyPrj(map);
+			session.setAttribute("myPrj", myPrj);
 		}
-		return "";
-//		return "redirect:/project/created";
+		String result = (String.valueOf(resultcnt));
+		return result;
+	}
+	
+	//프로젝트 삭제
+	@GetMapping("created/delete")
+	@ResponseBody
+	public String deletePrj(String no) {	
+		
+		int result = service.deletePrj(no);
+		if(result == 1) {
+			System.out.println(result);
+			String result2 = Integer.toString(result);
+			return result2;
+		}
+		return "redirect:/project/created";
 	}
 	
 	@GetMapping("created/list")
 	public String createdList() {
 		return "project/created/list";
 	}
-	
 
 	@GetMapping("post")
 	public String post(TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
@@ -181,114 +283,124 @@ public class ProjectController {
 		return "project/post/post";
 	}
 	
-	@PostMapping("post")
-	public String post(HttpSession session, ProjectVo vo) {
-		
-		String nick =(String)session.getAttribute("nick");
-		vo.setCreator(nick);
-		
-		int result = service.tempPrj(vo);
-		if(result != 1) {
-			return "";
-		}
-		return "project/created/list";
-	}
+//	@PostMapping("post")
+//	public String post(HttpSession session, ProjectVo vo) {
+//		
+//		String nick =(String)session.getAttribute("nick");
+//		vo.setCreator(nick);
+//		
+//		int result = service.tempPrj(vo);
+//		if(result != 1) {
+//			return "";
+//		}
+//		return "project/created/list";
+//	}
 	
+	/* 임시저장 */
 	@PostMapping("savePrj")
 	@ResponseBody
-	public String savePrj(HttpSession session, ProjectVo vo) {
+	public String savePrj(HttpSession session, ProjectVo vo, HttpServletRequest req) {
 		
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setCreator(nick);
+
+		//파일 저장
+		String changeName = "";
+		if(!vo.isEmpty()) {
+			changeName = (String) FileUploader.upload(req, vo);
+		}
+		vo.setChangeName(changeName);
 		
-		int resultcnt = service.prjCnt(vo);
-		if(resultcnt > 0) {
-			//update
-			int updateResult = service.updatePrj(vo);
-			if(updateResult == 1) {
-				return updateResult+"";
-			}
-			return 1+"";
-		}
-		else {
-			//insert
-			int result = service.tempPrj(vo);
-			if(result == 1) {
-				return result+"";
-			}
+		//insert 서비스 갔다오면 돼
+				
+//		int resultcnt = service.prjCnt(vo);
+//		if(resultcnt > 0) {
+//			//update
+//			int updateResult = service.updatePrj(vo);
+//			if(updateResult == 1) {
+//				return updateResult+"";
+//			}
+//			return 1+"";
+//		}
+//		else {
+//			//insert
+//			int result = service.tempPrj(vo);
+//			if(result == 1) {
+//				return result+"";
+//			}
 			return "";
-		}
+//		}
 		
 	}
 	
-	/*
-	@PostMapping("/fileupload.do")
-	@ResponseBody
-	public String fileUpload(HttpServletRequest request, HttpServletResponse response,
-			MultipartHttpServletRequest multiFile) throws IOException {
 	
-		//Json 객체 생성
-		JsonObject json = new JsonObject();
-		// Json 객체를 출력하기 위해 PrintWriter 생성
-		PrintWriter printWriter = null;
-		OutputStream out = null;
-		//파일을 가져오기 위해 MultipartHttpServletRequest 의 getFile 메서드 사용
-		MultipartFile file = multiFile.getFile("upload");
-		//파일이 비어있지 않고(비어 있다면 null 반환)
-		if (file != null) {
-			// 파일 사이즈가 0보다 크고, 파일이름이 공백이 아닐때
-			if (file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
-				if (file.getContentType().toLowerCase().startsWith("image/")) {
-
-					try {
-						//파일 이름 설정
-						String fileName = file.getName();
-						//바이트 타입설정
-						byte[] bytes;
-						//파일을 바이트 타입으로 변경
-						bytes = file.getBytes();
-						//파일이 실제로 저장되는 경로 
-						String uploadPath = request.getServletContext().getRealPath("/resources/ckimage/");
-						//저장되는 파일에 경로 설정
-						File uploadFile = new File(uploadPath);
-						if (!uploadFile.exists()) {
-							uploadFile.mkdirs();
-						}
-						//파일이름을 랜덤하게 생성
-						fileName = UUID.randomUUID().toString();
-						//업로드 경로 + 파일이름을 줘서  데이터를 서버에 전송
-						uploadPath = uploadPath + "/" + fileName;
-						out = new FileOutputStream(new File(uploadPath));
-						out.write(bytes);
-						
-						//클라이언트에 이벤트 추가
-						printWriter = response.getWriter();
-						response.setContentType("text/html");
-						
-						//파일이 연결되는 Url 주소 설정
-						String fileUrl = request.getContextPath() + "/resources/ckimage/" + fileName;
-						
-						//생성된 jason 객체를 이용해 파일 업로드 + 이름 + 주소를 CkEditor에 전송
-						json.addProperty("uploaded", 1);
-						json.addProperty("fileName", fileName);
-						json.addProperty("url", fileUrl);
-						printWriter.println(json);
-					} catch (IOException e) {
-						e.printStackTrace();
-					} finally {
-						if(out !=null) {
-							out.close();
-						}
-						if(printWriter != null) {
-							printWriter.close();
-						}
-					}
-				}
-			}
-		}
-			return null;
-	}*/
+//	@PostMapping("/fileupload.do")
+//	@ResponseBody
+//	public String fileUpload(HttpServletRequest request, HttpServletResponse response,
+//			MultipartHttpServletRequest multiFile) throws IOException {
+//	
+//		//Json 객체 생성
+//		JsonObject json = new JsonObject();
+//		// Json 객체를 출력하기 위해 PrintWriter 생성
+//		PrintWriter printWriter = null;
+//		OutputStream out = null;
+//		//파일을 가져오기 위해 MultipartHttpServletRequest 의 getFile 메서드 사용
+//		MultipartFile file = multiFile.getFile("upload");
+//		//파일이 비어있지 않고(비어 있다면 null 반환)
+//		if (file != null) {
+//			// 파일 사이즈가 0보다 크고, 파일이름이 공백이 아닐때
+//			if (file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+//				if (file.getContentType().toLowerCase().startsWith("image/")) {
+//
+//					try {
+//						//파일 이름 설정
+//						String fileName = file.getName();
+//						//바이트 타입설정
+//						byte[] bytes;
+//						//파일을 바이트 타입으로 변경
+//						bytes = file.getBytes();
+//						//파일이 실제로 저장되는 경로 
+//						String uploadPath = request.getServletContext().getRealPath("/resources/ckimage/");
+//						//저장되는 파일에 경로 설정
+//						File uploadFile = new File(uploadPath);
+//						if (!uploadFile.exists()) {
+//							uploadFile.mkdirs();
+//						}
+//						//파일이름을 랜덤하게 생성
+//						fileName = UUID.randomUUID().toString();
+//						//업로드 경로 + 파일이름을 줘서  데이터를 서버에 전송
+//						uploadPath = uploadPath + "/" + fileName;
+//						out = new FileOutputStream(new File(uploadPath));
+//						out.write(bytes);
+//						
+//						//클라이언트에 이벤트 추가
+//						printWriter = response.getWriter();
+//						response.setContentType("text/html");
+//						
+//						//파일이 연결되는 Url 주소 설정
+//						String fileUrl = request.getContextPath() + "/resources/ckimage/" + fileName;
+//						
+//						//생성된 jason 객체를 이용해 파일 업로드 + 이름 + 주소를 CkEditor에 전송
+//						json.addProperty("uploaded", 1);
+//						json.addProperty("fileName", fileName);
+//						json.addProperty("url", fileUrl);
+//						printWriter.println(json);
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					} finally {
+//						if(out !=null) {
+//							out.close();
+//						}
+//						if(printWriter != null) {
+//							printWriter.close();
+//						}
+//					}
+//				}
+//			}
+//		}
+//			return null;
+//	}
 
 }
 

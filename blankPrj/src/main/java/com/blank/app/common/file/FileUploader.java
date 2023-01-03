@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.project.vo.ProjectVo;
 
 public class FileUploader {
 
@@ -37,6 +38,22 @@ public class FileUploader {
 		}
 
 		return list;
+
+	}
+
+	//// 프로젝트 - 파일 업로드
+	public static String upload(HttpServletRequest req, ProjectVo vo) {
+
+			String path = req.getSession().getServletContext().getRealPath("/resources/upload/goods/");
+			String originName = vo.getPrjfile().get(0).getOriginalFilename();
+			String ext = originName.substring(originName.lastIndexOf("."), originName.length());
+
+			String changeName = "prj_" + System.nanoTime() + ext;
+	
+			File target = new File(path + changeName);
+	
+
+		return changeName;
 
 	}
 

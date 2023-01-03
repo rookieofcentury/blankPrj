@@ -3,6 +3,7 @@ package com.blank.app.project.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
 
@@ -14,11 +15,11 @@ public interface ProjectService {
 
 	List<TimeVo> selectStartime(TimeVo timevo);
 
-	List<ProjectVo> selectMyPrj(ProjectVo vo);
+	List<ProjectVo> selectMyPrj(HashMap<String, Object> map);
 
 	ProjectVo selectStatusAll(ProjectVo vo);
 
-	int deletePrj(ProjectVo vo);
+	int deletePrj(String no);
 
 	int tempPrj(ProjectVo vo);
 
@@ -26,6 +27,14 @@ public interface ProjectService {
 
 	int updatePrj(ProjectVo vo);
 
-	int writingCnt(HashMap<Object, Object> map);
+	int writingCnt(HashMap<String, Object> map);
+
+	int insertPrj(ProjectVo vo);
+
+	int selectMyLikePrj(LikeProjectVo vo);
+
+	int insertLikePrj(LikeProjectVo vo);
+
+	int deleteLikePrj(LikeProjectVo vo);
 
 }

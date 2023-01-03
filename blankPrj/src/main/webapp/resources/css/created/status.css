@@ -16,7 +16,7 @@
     line-height: 44px !important;
 }
 .taps{
-    margin: 20px auto 0px;    
+    margin: 20px 0 0 0;    
     width: 1080px; /*or 100%*/
 }
 .taps>*{
@@ -44,6 +44,15 @@
     background: rgb(255, 255, 255);
     border: 1px solid #567ace;
 }
+.selected-tap{
+	color: #fff;
+    background: #567ace;
+}
+.unselected-tap{
+	color: #567ace;
+    background: rgb(255, 255, 255);
+    border: 1px solid #567ace;
+}
 .myprj-list{
     padding: 0px 0px 120px;
 }
@@ -53,7 +62,7 @@
     margin-top: 20px;
 }
 .list-box{
-    margin-top: 10px;
+    margin-bottom: 25px;
     padding: 20px 26px;
     display: flex;
     flex-direction: row;
@@ -105,11 +114,10 @@
     margin: 0px;
     width: 440px;
 }
-.prj-content div:last-child{
+.content-info div:last-child{
     font-size: 14px;
     line-height: 22px;
     color: rgb(109, 109, 109);
-    cursor: pointer;
 }
 .management-button, .delete-button{
     display: inline-flex;
@@ -123,11 +131,12 @@
     line-height: 22px;
     border: 1px solid #567ace;
     border-radius: 10px;
+    cursor: pointer;
 }
 .management-button{
     margin-bottom: 5px;
 }
-.management-button>a, .delete-button>a{
+.management-button>a, .delete-button{
     color: #567ace;
 }
 .popup_cont>img{

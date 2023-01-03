@@ -137,7 +137,7 @@
     margin-top: -34px;
     justify-content: center;
 }
-.preview-box{
+.preview-item{
     width: 360px;
     --width: 27vw;
 }
@@ -172,7 +172,7 @@
     padding: 0px;
     list-style: none;
 }
-.set-list{
+.item-list{
     --padding: 0px;
     --list-style: none;
     overflow: hidden;
@@ -185,7 +185,7 @@
     box-sizing: border-box;
     margin: 0px 0px 12px;
 }
-.set-list>button{
+.item-list>button{
     --width: 100%;
     --min-height: 90px;
     padding: 15px 28px;
@@ -194,7 +194,7 @@
     border: 0px;
     background: transparent;
 }
-.set-list>button:last-child{
+.item-list>button:last-child{
     padding-left: 110px;
 }
 .set-buttons{
@@ -237,13 +237,13 @@ strong+div{
     width: 40%;
     margin-right: 30px;
 }
-.set-option{
+.item-option{
     width: 60%;
     display: flex;
     flex-direction: column;
     padding-top: 10px;
 }
-.set-option>input{
+.item-option>input{
     border-radius: 10px;
     border: 1px solid #567ace;
     height: 30px;
@@ -251,14 +251,14 @@ strong+div{
     padding-left: 10px;
     font-size: 14px;
 }
-.set-option>span{
+.item-option>span{
     background: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     font-size: 14px;
     padding: 3px 0 0 5px;
 }
-.button-submit{
+.item-submit{
     display: flex;
     justify-content: space-around;
     margin-top: 20px;

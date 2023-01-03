@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로젝트 상세조회</title>
 <link rel="stylesheet" href="/blank/resources/css/project_view/detailInfo.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">;
@@ -63,14 +63,14 @@
 							<div class="period"><strong>펀딩기간</strong></div>
 							<div><fmt:formatDate value="${prj.startDate}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${prj.endDate}" pattern="yyyy-MM-dd"/></div>
 								<!-- ${prj.startDate}~${prj.endDate}</div> -->
+						</div>
 						<div class="info-payment">
 							<div class="payment"><strong>결제</strong></div>
 							<div>100% 이상 모이면 펀딩이 성공되며, 펀딩 마감일까지 목표 금액이 100% 모일 경우 펀딩이 끝난 다음 날 결제가 진행됩니다.</div>
 						</div>
-					</div>
 					<div class="sub-buttons">
 						<div class="buttons-like">
-                            <div class="like-lcon"><i class="bi bi-heart"></i></div>
+                            <div class="like-icon"><i class="bi bi-heart"></i></div>
                             <div class="like-count">110</div>
                         </div>
 						<button class="buttons-funding">프로젝트 후원하기</button>
@@ -134,17 +134,79 @@
 
 	<script>
 
+		/* 접속 시 플젝 찜하기 확인 */
+		$(document).ready(function() {
+			if('${loginMember.no}'){
+				console.log('로그인멤버 you');
+				$.ajax({
+					type: "",
+					url  : "/blank/project/mylikePrj",
+					type : "POST",
+					data : {
+						"pno" : '${prj.no}'
+					},
+					success : function(x){
+						console.log(x);
+					if(x == 1){
+						$(this).attr('class','bi-heart-fill');
+						i++;
+					}
+				},error : function(x){
+					console.log("받아온 리절트"+x);
+					alert('내가 찜한 프로젝트 에러!!!!!!!!!');
+				} 
+				})
+			}
+		})
+
 		/*찜하트 채우기*/
         var i = 0;
         $('i').on('click',function(){
+			if(!'${loginMember.no}'){
+				alert('로그인 후 이용해 주세요')
+			}else{
             if(i==0){
-                $(this).attr('class','bi-heart-fill');
-                i++;
+				console.log("로그인 ㅇㅋ, 찜하기 눌럿어");
+				$.ajax({
+					type: "",
+					url  : "/blank/project/likePlusPrj",
+					type : "POST",
+					data : {
+						"pno" : '${prj.no}'
+					},
+					success : function(x){
+					if(x == 1){
+						alert('찜하기 완~')
+						//location.reload();
+						$('i').eq(0).attr('class','bi-heart-fill');
+						i++;
+					}
+				},error : function(x){
+					console.log('찜한 프로젝트 ++에러!!!!!!!!!');
+				} 
+				})
             }else if(i==1){
-                $(this).attr('class','bi-heart');
-                i--;
-            }
-        });
+				console.log("로그인 ㅇㅋ, 찜하기 끌거야");
+				$.ajax({
+					type: "",
+					url  : "/blank/project/likeMinusPrj",
+					type : "POST",
+					data : {
+						"pno" : '${prj.no}'
+					},
+					success : function(x){
+					if(x == 1){
+						alert('찜하기 취소완~')
+						$(this).attr('class','bi-heart');
+						i--;
+					}
+				},error : function(x){
+					console.log('찜한 프로젝트 --에러!!!!!!!!!');
+				} 
+				})
+			}
+			}
+		});
 
 		/*옵션 선택*/
 		$('.card-option').click(function(){
