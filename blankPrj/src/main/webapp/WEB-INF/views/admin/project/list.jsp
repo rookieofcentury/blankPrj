@@ -62,7 +62,24 @@
 	                <div>${vo.category}</div>
 	                <div>${vo.price}</div>
 	                <div>${vo.startDate} ~ ${vo.endDate}</div>
-	                <div>${vo.status}</div>
+	                <c:if test="${vo.status eq '작성중'}">
+	                <div>작성 중</div>
+	                </c:if>
+	                <c:if test="${vo.status eq '심사중'}">
+	                <div id="project-waiting">승인 대기</div>
+	                </c:if>
+	                <c:if test="${vo.status eq '승인됨'}">
+	                <div>승인</div>
+	                </c:if>
+	                <c:if test="${vo.status eq '반려됨'}">
+	                <div id="project-cancel">반려</div>
+	                </c:if>
+	                <c:if test="${vo.status eq '진행중'}">
+	                <div>진행 중</div>
+	                </c:if>
+	                <c:if test="${vo.status eq '종료'}">
+	                <div>종료</div>
+	                </c:if>
 	                <div><a href="/blank/admin/prjDetail?no=${vo.no}" name="no"><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
         		</c:forEach>
 

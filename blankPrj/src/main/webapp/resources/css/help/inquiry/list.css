@@ -1,1 +1,109 @@
-@charset "UTF-8";
+#waiting{
+	color: rgba(86, 122, 206, 1);
+}
+
+.inquiry-header{
+    width: 1180px;
+    margin-left: 21%;
+}
+
+.inquiry-header h1{
+    font-size: 30px;
+    font-weight: 100;
+    color: rgba(53, 53, 53, 1);
+}
+
+.inquiry-search{
+    height: 35px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: grid;
+    grid-template-columns: 5fr 0.1fr 0.1fr 0.5fr 0.1fr;
+}
+
+.search-category .category,
+.search-keyword .keyword{
+    font-size: 16px;
+    height: 30px;
+    outline: none;
+}
+
+.search-category .category{
+    border: 1px solid rgba(182, 182, 182, 1);
+    border-right: none;
+    border-radius: 3px 0px 0px 3px;
+    background-color: rgba(239, 239, 239, 1);
+    color: rgb(74, 74, 74);
+    width: 55px;
+}
+
+.search-keyword .keyword{
+    border: 1px solid rgba(182, 182, 182, 1);
+    border-radius: 0px 3px 3px 0px;
+    width: 180px;
+}
+
+#inquiry-search-form .inquiry-search input[type="image"]{
+    width: 20px;
+    height: 20px;
+    border: none;
+    margin: 5px;
+}
+
+#inquiry-container button{
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: rgb(74, 74, 74);
+    background-color: white;
+    border: 1px solid rgba(182, 182, 182, 1);
+    border-radius: 5px;
+}
+
+.wrtie-btn{
+    cursor: pointer;
+}
+
+#wrtie-btn{
+    margin-bottom: 10%;
+}
+
+main{
+    border: 1px solid rgba(197, 197, 197, 1);
+    border-top: none;
+    border-radius: 3px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.inquiry-list{
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 1fr 1fr 1fr;
+    text-align: center;
+}
+
+.inquiry-list div{
+    color: rgb(74, 74, 74);
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid rgba(182, 182, 182, 1);
+}
+
+.inquiry-list .inquiry-title{
+    background-color: rgba(239, 239, 239, 1);
+}
+
+#page-area{
+    width: 150px;
+    height: 60px;
+    margin-left: 47%;
+    margin-top: 25px;
+    border-bottom: none;
+}
+
+#page-area a{
+    color: rgb(74, 74, 74);
+    text-decoration: none;
+    margin: 3px;
+}

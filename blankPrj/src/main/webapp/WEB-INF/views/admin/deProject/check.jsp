@@ -39,6 +39,7 @@
 	            	}
 	            
 	            </script>
+	            
 	            <form action="/blank/admin/reportCheck" method="post">
 					<div class="detail-list">
 		    

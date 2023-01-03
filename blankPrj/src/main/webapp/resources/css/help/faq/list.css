@@ -1,1 +1,49 @@
-@charset "UTF-8";
+.faq-header{
+    width: 1180px;
+    margin-left: 21%;
+}
+
+.faq-header h1{
+    font-size: 30px;
+    font-weight: 100;
+    color: rgba(53, 53, 53, 1);
+}
+
+main{
+    border: 1px solid rgba(197, 197, 197, 1);
+    border-top: none;
+    border-radius: 3px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.faq-list{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 3fr 1fr;
+    text-align: center;
+}
+
+.faq-list div{
+    color: rgb(74, 74, 74);
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid rgba(182, 182, 182, 1);
+}
+
+.faq-list .faq-title{
+    background-color: rgba(239, 239, 239, 1);
+}
+
+#page-area{
+    width: 150px;
+    height: 60px;
+    margin-left: 47%;
+    margin-top: 25px;
+    border-bottom: none;
+}
+
+#page-area a{
+    color: rgb(74, 74, 74);
+    text-decoration: none;
+    margin: 3px;
+}

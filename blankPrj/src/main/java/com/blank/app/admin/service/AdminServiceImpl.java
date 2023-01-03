@@ -3,6 +3,7 @@ package com.blank.app.admin.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,6 +82,12 @@ public class AdminServiceImpl implements AdminService{
 		return admindao.selectPrj(sst, projectVo);
 	}
 
+	//프로젝트 승인
+	@Override
+	public int approvalProject(ProjectVo projectVo) {
+		return admindao.approvalProject(sst, projectVo);
+	}
+	
 	//프로젝트 반려
 	@Override
 	public int cancelProject(ProjectVo projectVo) {
@@ -97,6 +104,18 @@ public class AdminServiceImpl implements AdminService{
 		return admindao.selectDeProjectList(sst, map, pageVo);
 	}
 
+	//신고프로젝트 상세조회
+	@Override
+	public ReportVo selectReport(ReportVo reportVo) {
+		return admindao.selectReport(sst, reportVo);
+	}
+	
+	//신고프로젝트 접수
+	@Override
+	public int updateReport(ReportVo reportVo) {
+		return admindao.updateReport(sst, reportVo);
+	}
+	
 	//회원정보 상세조회
 	public MemberVo selectMember(MemberVo memberVo) {
 		return admindao.selectMember(sst, memberVo);
@@ -117,6 +136,30 @@ public class AdminServiceImpl implements AdminService{
 		return admindao.selectFaqList(sst, map, pageVo);
 	}
 
+	//FAQ 상세조회
+	@Override
+	public FaqVo selectFaq(FaqVo faqVo) {
+		return admindao.selectFaq(sst, faqVo);
+	}
+
+	//FAQ 작성
+	@Override
+	public int faqWrite(FaqVo faqVo) {
+		return admindao.faqWrite(sst, faqVo);
+	}
+	
+	//FAQ 수정
+	@Override
+	public int updateFaq(FaqVo faqVo) {
+		return admindao.updateFaq(sst, faqVo);
+	}
+
+	//FAQ 삭제
+	@Override
+	public int deleteFaq(FaqVo faqVo) {
+		return admindao.deleteFaq(sst, faqVo);
+	}
+	
 	//고객센터 문의 전체 수 카운트
 	public int helpCount() {
 		return admindao.helpCount(sst);
@@ -127,23 +170,33 @@ public class AdminServiceImpl implements AdminService{
 		return admindao.selectHelpList(sst, map, pageVo);
 	}
 
+	//고객센터 문의 상세조회
+	@Override
+	public HelpVo selectHelp(HelpVo helpVo) {
+		return admindao.selectHelp(sst, helpVo);
+	}
+	
+	//고객센터 문의 답변
+	@Override
+	public int updateHelp(HelpVo helpVo) {
+		return admindao.updateHelp(sst, helpVo);
+	}
+	
 	//공지사항 삭제
 	@Override
 	public int deleteNotice(NoticeVo noticeVo) {
 		return admindao.deleteNotice(sst, noticeVo);
 	}
 
-	//신고프로젝트 상세조회
-	@Override
-	public ReportVo selectReport(ReportVo reportVo) {
-		return admindao.selectReport(sst, reportVo);
-	}
-	
-	//신고프로젝트 접수
-	@Override
-	public int updateReport(ReportVo reportVo) {
-		return admindao.updateReport(sst, reportVo);
-	}
+
+
+
+
+
+
+
+
+
 
 
 

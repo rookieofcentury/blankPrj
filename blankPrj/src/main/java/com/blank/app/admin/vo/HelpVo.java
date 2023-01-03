@@ -12,6 +12,8 @@ public class HelpVo {
 	private String writeDate;
 	private String views;
 	private String status;
+	private String adminNo;
+	private String adComment;
 	private String password;
 	private String secretYn;
 	private String modifyDate;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +19,16 @@
             <div class="title">무엇을 도와 드릴까요?</div>
 
             <form action="" method="get">
+            
                 <div class="search">
-                    <div><input type="text"></div>
+                
+                    <div><input type="text" name="keyword"></div>
                     <div>
-                        <input type="image" src="../resources/images/admin/search.png" alt="search.png">
+                        <input type="image" src="/blank/resources/images/admin/search.png" alt="search.png">
                     </div>
+                    
                 </div>
+                
             </form>
 
         </div>
@@ -46,34 +51,19 @@
 
             <div class="inquiry-contents">
 
-                <div>Q. 회원가입은 어떻게 하나요?</div>
-                <div>user01</div>
-                <div>2022-12-04</div>
-    
-                <div>Q. 회원가입은 어떻게 하나요?</div>
-                <div>user01</div>
-                <div>2022-12-04</div>
-    
-                <div>Q. 회원가입은 어떻게 하나요?</div>
-                <div>user01</div>
-                <div>2022-12-04</div>
+			<c:forEach items="${voList}" var="vo">
+			
+				<div>Q. ${vo.title}</div>
+                <div>${vo.memberNo}</div>
+                <div>${vo.writeDate}</div>
 
-                <div>Q. 회원가입은 어떻게 하나요?</div>
-                <div>user01</div>
-                <div>2022-12-04</div>
+			</c:forEach>
 
-                <div>Q. 회원가입은 어떻게 하나요?</div>
-                <div>user01</div>
-                <div>2022-12-04</div>
-
-                <div>Q. 회원가입은 어떻게 하나요?</div>
-                <div>user01</div>
-                <div>2022-12-04</div>
 
             </div>
 
             <div class="more">
-                <a href="">더보기</a>
+                <a href="/blank/help/inquiryList">더보기</a>
             </div>
 
         </div>

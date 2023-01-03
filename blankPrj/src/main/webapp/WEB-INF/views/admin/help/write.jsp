@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,51 +28,72 @@
 	        <div class="write-board">
 	            
 	            <div class="help-write-close">
-	                고객센터 문의
-	                <img src="../resources/images/admin/close.png">
+	                	고객센터 문의
+	                <img src="/blank/resources/images/admin/close.png" onclick="goBack();">
 	            </div>
 	            
-	            <div class="write-list">
-	    
-	                <div class="write-title">번호</div>
-	                <div>1</div>
-	                <div>진행상태 답변대기</div>
-                    <div>작성일 2022-12-04</div>
-	    
-	                <div class="write-title">제목</div>
-	                <div>문의합니다.</div>
-	                <div></div>
-                    <div></div>
-
-	                <div class="write-title content-style">작성자</div>
-	                <div class="content-style">user01</div>
-	                <div class="content-style"></div>
-                    <div class="content-style"></div>
-	    
-	                <div class="write-title">내용</div>
-	                <div>그 어쩌구는 어디에 있나요?</div>
-                    <div></div>
-                    <div></div>
-	    
-                    <div class="write-title content-style">처리자</div>
-                    <div class="content-style">admin01</div>
-                    <div class="content-style"></div>
-                    <div class="content-style"></div>
-
-                    <div class="write-title content-style">답변 내용</div>
-	                <div class="content-style">안녕하세요. 블랭크 입니다.
-
-                        문의 주신 어쩌구 저쩌구 관련된 사항은 쩌기에 가 보시면 확인할 수 있습니다.
-                        
-                        감사합니다.</div>
-                    <div class="content-style"></div>
-                    <div class="content-style"></div>
-
-	                <div id="write-submit">
-	                    <input type="submit" value="작성" class="write-submit-btn"/>
-					</div>
-	    
-	            </div>
+               	<script type="text/javascript">
+	            	
+	            	function goBack(){
+	            		window.history.back();
+	            	}
+	            
+	            </script>
+	            
+	            <form action="/blank/admin/helpCheck" method="post">
+	            
+		            <div class="write-list">
+		    
+		                <div class="write-title">번호</div>
+		                <div>${selectHelp.no}</div>
+		                <div>진행상태 ${selectHelp.status}</div>
+	                    <div>작성일 ${selectHelp.writeDate}</div>
+		    
+		                <div class="write-title">제목</div>
+		                <div>${selectHelp.title}</div>
+		                <div><input type="hidden" name="no" value="${selectHelp.no}"></div>
+	                    <div><input type="hidden" name="adminNo" value="${loginAdmin.no}"></div>
+	
+		                <div class="write-title content-style">작성자</div>
+		                <div class="content-style">${selectHelp.memberNo}</div>
+		                <div class="content-style"></div>
+	                    <div class="content-style"></div>
+		    
+		                <div class="write-title">내용</div>
+		                <div>${selectHelp.content}</div>
+	                    <div></div>
+	                    <div></div>
+		    
+	                    <div class="write-title content-style">처리자</div>
+	                    <c:if test="${selectHelp.adComment == null}">
+		                <div class="content-style">${loginAdmin.adminId}</div>
+		                </c:if>
+		                <c:if test="${selectHelp.adComment != null}">
+		                <div class="content-style">${selectHelp.adminNo}</div>
+		                </c:if>
+	                    <div class="content-style"></div>
+	                    <div class="content-style"></div>
+	
+	                    <div class="write-title content-style">답변 내용</div>
+		                <div class="content-style">
+		                	<input
+								type="text"
+								id="answer-content-input"
+								name="adComment"
+								value="${selectHelp.adComment}"
+								placeholder="이곳에 내용을 작성하세요.">
+		                </div>
+	                    <div class="content-style"></div>
+	                    <div class="content-style"></div>
+	
+		                <div id="write-submit">
+		                    <input type="submit" value="작성" class="write-submit-btn"/>
+						</div>
+		    
+		            </div>
+	            
+	            </form>
+	            
 	
 	        </div>
 	

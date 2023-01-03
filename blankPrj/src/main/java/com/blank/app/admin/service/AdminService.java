@@ -3,6 +3,7 @@ package com.blank.app.admin.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help;
 import org.springframework.stereotype.Service;
 
 import com.blank.app.admin.common.PageVo;
@@ -62,6 +63,20 @@ public interface AdminService {
 	public int updateReport(ReportVo reportVo);
 
 	public ReportVo selectReport(ReportVo reportVo);
+
+	public int approvalProject(ProjectVo projectVo);
+
+	public FaqVo selectFaq(FaqVo faqVo);
+
+	public int updateFaq(FaqVo faqVo);
+
+	public int deleteFaq(FaqVo faqVo);
+
+	public int faqWrite(FaqVo faqVo);
+
+	public HelpVo selectHelp(HelpVo helpVo);
+
+	public int updateHelp(HelpVo helpVo);
 
 
 }

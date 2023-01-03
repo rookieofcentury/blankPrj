@@ -70,17 +70,6 @@ main .member-board-header{
     border-radius: 0px 5px 5px 0px;
 }
 
-#notice-search-form div button{
-    width: 80px;
-    height: 45px;
-    font-size: 16px;
-    background-color: rgba(214, 214, 214, 1);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    float: right;
-}
-
 #member-search-form{
     display: grid;
 }
@@ -131,7 +120,7 @@ main .member-board-header{
     width: 150px;
     height: 60px;
     margin-left: 50%;
-	grid-column: span 10;
+	grid-column: span 9;
     border-bottom: none;
 }
 
