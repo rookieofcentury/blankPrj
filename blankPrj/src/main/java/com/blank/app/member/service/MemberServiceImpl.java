@@ -1,13 +1,16 @@
 package com.blank.app.member.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blank.app.member.dao.MemberDao;
+import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
-import com.blank.app.member.vo.QuitAnswerVo;
+import com.blank.app.pay.vo.PayVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,17 +41,16 @@ public class MemberServiceImpl implements MemberService{
 		String inputPwd = vo.getPwd1();
 		String checkPwd = dbMember.getPwd1();
 		
-		System.out.println(inputPwd);
-	 	System.out.println(checkPwd);
+
 		boolean isMatch = enc.matches(inputPwd, checkPwd);
 		
 		log.warn("디비랑 화면이랑 비밀번호가 같나요?!?!"+isMatch);
 		
-		if(!isMatch) {
-			return null;
+		if(isMatch) {
+			return dbMember;
 		}
-		log.warn("서비스에서 리턴하는 멤버 " + dbMember);
-		return dbMember;
+		return null;
+
 	}
 
 	//아이디 중복체크 에이젝스 
@@ -93,15 +95,30 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int writeQuitAnswer(QuitAnswerVo vo) {
+	public int writeQuitAnswer(MemberVo vo) {
 		return dao.insertQuitAnswer(sst, vo);
 	}
 
 	@Override
 	public int userQuit(String mNo) {
-		// TODO Auto-generated method stub
 		return dao.updateStatus(sst, mNo);
+	}
 
+	
+	@Override
+	public List<PayVo> selectPayByNo(String mNo) {
+		return dao.selectPayByNo(sst, mNo);
+	}
+
+	@Override
+	public int addrCount(String mNo) {
+		return dao.countAddrByNo(sst, mNo);
+	}
+
+	@Override
+	public int insertAddr(AddressVo vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

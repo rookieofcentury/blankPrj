@@ -18,20 +18,15 @@
 			<div><%@ include file = "/WEB-INF/views/member/mypage/mypageSidebar.jsp" %></div>
 				<div class="content-container">
 					<div class="member-info-up">
-							<div><h2>회원 정보 수정</h2></div>
-							<div class="member-profile">
-								<div>사진이라고 이름 쓸거임 </div>
-								<div><img src="/blank/resources/images/member/choi.png" alt="프로필사진임돠"></div>
-								<div>
-									<button class="change-btn">변경</button>
-									<button class="change-btn">삭제</button>
-								</div>
-							</div>
+						<div><h2>회원 정보 수정</h2></div>
+						<div class="member-profile">
+							<div>프로필 사진</div>
+							<div><img src="/blank/resources/images/member/choi.png" alt="프로필사진임돠"></div>
 							<div>
-								<a>
-									회원탈퇴
-								</a>
+								<button class="change-btn">변경</button>
+								<button class="change-btn">삭제</button>
 							</div>
+						</div>
 					</div>
 					<div class="member-info-down">
 						<div>
@@ -71,7 +66,11 @@
 							<div class="hidden phone-hidden" id="phone-result">결과창</div>
 						</div>
 
-
+					</div>
+					<div class="member-quit">
+						<a href="/blank/member/quit">
+							회원탈퇴
+						</a>
 					</div>
 				</div>
 			</div>

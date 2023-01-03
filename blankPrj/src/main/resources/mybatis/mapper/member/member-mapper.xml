@@ -5,7 +5,7 @@
   
   
 <mapper namespace="memberMapper">
-		<!-- 회원가 -->
+		<!-- 회원가입  -->
   <insert id="insertMember">
   
   	INSERT INTO MEMBER 
@@ -62,26 +62,20 @@
 		WHERE NO = ${no}
 	</update>
 	
-<insert id="insertQuitAnswer">
+<update id="insertQuitAnswer">
  
- 	INSERT INTO QUIT_ANSWER 
- 	( 	
- 		M_NO,
- 		A_NO,
- 		A_VAR
- 	)
- 	VALUES
- 	(
-       #{mNo},
-       #{aNo},
-       #{aVar}
- 	)
+ 	UPDATE MEMBER  
+ 	SET
+	QUIT_NO = ${quitNo},
+	QUIT_VAR = #{quitVar},
+	STATUS = 'N'
+ 	WHERE NO = #{no}
  	
- 	
- </insert>
-	<update id="updateStatus">
-		UPDATE MEMBER
-		SET STATUS = 'N'
-		WHERE NO = ${mNo}
-	</update>
+ </update>
+ 
+ 
+ <select id="countAddrByNo" resultType="int">
+  	SELECT COUNT(*) FROM ADDRESS WHERE M_NO = #{mNo}
+  </select>
+	
 </mapper>

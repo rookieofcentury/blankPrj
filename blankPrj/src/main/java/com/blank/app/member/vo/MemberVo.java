@@ -24,6 +24,8 @@ public class MemberVo {
 	private String account;
 	private String bank;
 	private String depositor;
+	private String quitNo;
+	private String quitVar;
 	
 	private MultipartFile profile; 
 	

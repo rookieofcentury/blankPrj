@@ -7,6 +7,7 @@
 <title>블랭크 회원가입</title>
 <link rel="stylesheet" href="/blank/resources/css/member/join.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
 </head>
 <body>
