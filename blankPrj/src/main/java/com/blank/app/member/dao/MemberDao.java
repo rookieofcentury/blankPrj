@@ -1,9 +1,12 @@
 package com.blank.app.member.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.member.vo.QuitAnswerVo;
+import com.blank.app.pay.vo.PayVo;
 
 
 public interface MemberDao {
@@ -26,9 +29,13 @@ public interface MemberDao {
 
 	public int updatePhoneByNo(SqlSessionTemplate sst, MemberVo vo);
 
-	public int insertQuitAnswer(SqlSessionTemplate sst, QuitAnswerVo vo);
+	public int insertQuitAnswer(SqlSessionTemplate sst, MemberVo vo);
 
 	public int updateStatus(SqlSessionTemplate sst, String mNo);
+
+	public List<PayVo> selectPayByNo(SqlSessionTemplate sst, String mNo);
+
+	public int countAddrByNo(SqlSessionTemplate sst, String mNo);
 
 
 }

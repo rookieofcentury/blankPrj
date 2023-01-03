@@ -39,7 +39,7 @@
     position: absolute;
     margin: 10px;
     height: 0.1px;
-    background-color: #8ca8e9;
+    background-color: #8ca8e99a;
     box-shadow: 0 0px 6px 1px var(--main-color);
     transition: .6s ease-out;
   }
@@ -63,12 +63,26 @@
     grid-column: 1/ 3;
   }
   .content-first{
-    display: grid;
-    justify-items: start;
-    grid-template-columns: 1fr 2fr 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 10px;
   }
+  .content-first > div{
+    height: 120x;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .content-first > form > div{
+    height: 120x;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
   .btn{
+    cursor: pointer;
     height: 40px; 
     width: 100px;
   }
@@ -133,4 +147,244 @@
   padding: 7px;
   font-size: 14px;
   display: block;
+}
+.delete{
+  border-color: red;
+  color: red;
+}
+.card-info{
+  margin: 10px;
+}
+input[name=delete]{
+  margin-top: 10px;
+}
+
+
+/* 모달 창  */
+input[id="popup"]{
+  display: none;
+}
+input[id="popup"] + label{
+  display: inline-block;
+  padding: 20px;
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+input[id="popup"] + label + div{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+input[id="popup"] + label + div > div{
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 550px;
+  background-color: #fff;
+  z-index: 2;
+}
+
+
+input[id="popup"] + label + div > div > label{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  transform: translate(-40%, -40%);
+  padding: 20px;
+  background-color: red;
+  border-radius: 100%;
+  z-index: 1;
+}
+
+input[id="popup"] + label + div > label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+}
+input[id="popup"] + label + div{
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s;
+}
+input[id="popup"]:checked + label + div{
+  opacity: 1;
+  visibility: visible;
+  
+}
+.hidden{
+  visibility: hidden;
+}
+.plus-pay{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pay-title{
+  margin: 30px 10px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.card{
+  width: 71px;
+}
+.card-in{
+  display: flex;
+  flex-direction: row;
+}
+.card-in > div {
+  margin: 10px 10px 10px 0px;
+}
+select {
+    width: 100%;
+    height: 40px;
+    padding: 0 0 0 5px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    border-radius: 0;
+    vertical-align: middle;
+    font-size: 15px;
+}
+.pay-content input[type=text]{
+  height: 38px;
+  border: 1px solid #ccc;
+}
+.margin-down{
+  margin-bottom: 10px;
+}
+.card-in > select:nth-child(1){
+  margin-right:  5px;
+}
+input[class=card]{
+  padding-left: 10px;
+}
+.plus-card-btn{
+  width: 100%;
+  height: 40px;
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing :0.5px;
+}
+.margin-down2 > input[type=checkbox]{
+  margin-right: 10px;
+}
+.pay-content>div>div:nth-child(8){
+  margin-bottom: 20px;
+}
+.card-in>div>div:nth-child(2)>input{
+  padding: 10px;
+}
+
+
+
+/* 주소 모달창  */
+input[id="addr-pop"]{
+  display: none;
+}
+input[id="addr-pop"] + label{
+  display: inline-block;
+  padding: 20px;
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+input[id="addr-pop"] + label + div{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+input[id="addr-pop"] + label + div > div{
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: #fff;
+  z-index: 2;
+}
+
+
+input[id="addr-pop"] + label + div > div > label{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  transform: translate(-40%, -40%);
+  padding: 20px;
+  background-color: red;
+  border-radius: 100%;
+  z-index: 1;
+}
+
+input[id="addr-pop"] + label + div > label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+}
+/* input[id="addr-pop"] + label + div{
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s;
+}
+input[id="addr-pop"]:checked + label + div{
+  opacity: 1;
+  visibility: visible;
+  
+} */
+.addr-title{
+  margin: 30px 10px;
+  font-size: 25px;
+  text-align: center;
+}
+.addr-content > form{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+.addr-content > form > div > input{
+  height: 38px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+.width50{
+  width: 45%;
+}
+.width100{
+  width: 95%;
+}
+.width30{
+  width: 25%;
+}
+.width70{
+  width: 65%;
+}
+.ace{
+  background-color: var(--main-color);
+  color: #fff;
+  font-size: 14px;
+  
 }

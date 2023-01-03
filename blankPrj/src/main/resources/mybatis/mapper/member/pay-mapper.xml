@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="payMapper">
+	<!-- 카드를 저장하자   -->
+  <insert id="insertCard">
+  
+  	INSERT INTO PAY (
+	    NO,
+	    M_NO,
+	    CARD_NO,
+	    CARD_TYPE,        
+	    CARD_EXP_M,     
+	    CARD_EXP_Y,      
+	    CARD_PWD,    
+	    CARD_USER_BIRTH
+    )
+    VALUES(
+	    PAY_NO_SEQ.NEXTVAL,
+	    #{mNo},
+	    #{cardNo},
+	    #{cardType},
+	    #{cardExpM},
+	    #{cardExpY},
+	    #{cardPwd},
+	    #{cardUserBirth}
+    )
+  	
+  	
+  </insert>
+  
+  <select id="selectPayByNo" resultType="PayVo">
+  	SELECT * FROM PAY 
+  	WHERE M_NO = #{mNo}
+  
+  </select>
+  
+  <delete id="deleteCard">
+  	DELETE FROM PAY
+  	WHERE NO = #{no}
+  	AND M_NO = #{mNo}
+  </delete>
+	
+	<select id="countCard" resultType="int">
+	SELECT COUNT(*)
+	FROM PAY
+	WHERE M_NO = #{mNo}
+	</select>
+</mapper>

@@ -1,10 +1,12 @@
 package com.blank.app.member.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.blank.app.member.vo.MemberVo;
-import com.blank.app.member.vo.QuitAnswerVo;
+import com.blank.app.pay.vo.PayVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +23,6 @@ public class MemberDaoImpl implements MemberDao {
 	public MemberVo selectMemberOneById(SqlSessionTemplate sst, MemberVo vo) {
 		
 		MemberVo dbMember = sst.selectOne("memberMapper.selectOneMember", vo);
-		log.warn("디비에서 받앙온 로그인 " + dbMember );
 		return dbMember;
 				
 	}
@@ -31,7 +32,6 @@ public class MemberDaoImpl implements MemberDao {
 	public int doubleCheckByEmail(SqlSessionTemplate sst, String email) {
 		// TODO Auto-generated method stub
 		int result = sst.selectOne("doubleCheckMapper.selectCntByEmail" , email);
-		log.warn("디에이오 리절트 "+result);
 		return result; 
 	}
 	
@@ -69,15 +69,26 @@ public class MemberDaoImpl implements MemberDao {
 	public int updatePhoneByNo(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("memberMapper.updatePhone", vo);
 	}
-
+	
+	
 	@Override
-	public int insertQuitAnswer(SqlSessionTemplate sst, QuitAnswerVo vo) {
+	public int insertQuitAnswer(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("memberMapper.insertQuitAnswer", vo);
 	}
 
 	@Override
 	public int updateStatus(SqlSessionTemplate sst, String mNo) {
 		return sst.update("memberMapper.updateStatus", mNo);
+	}
+
+	@Override
+	public List<PayVo> selectPayByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectList("payMapper.selectPayByNo", mNo);
+	}
+
+	@Override
+	public int countAddrByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectOne("memberMapper.countAddrByNo", mNo);
 	}
 
 	

@@ -30,7 +30,7 @@
 						<div>
 							<div>틸퇴사유</div>	
 							<div>
-								<select name="aNo" id="aNum">
+								<select name="quitNo" id="aNum">
 									<option value="1">서비스가 만족스럽지 않아요</option>
 									<option value="2">사이트가 구려요</option>
 									<option value="3">찾는 펀딩이 열리지 않아요</option>
@@ -41,7 +41,7 @@
 						</div>
 						<div>
 							<div>상세사유 / <br>개선점</div>
-							<div><textarea name="aVar"></textarea></div>
+							<div><textarea name="quitVar"></textarea></div>
 						</div>
 						<div><input type="submit" value="탈퇴" class="submit"></div>
 					</div>
