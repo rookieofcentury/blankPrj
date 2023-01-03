@@ -62,7 +62,12 @@
 	                <div>${vo.content}</div>
 	                <div>${vo.prj}</div>
 	                <div>${vo.enrollDate}</div>
-	                <div>${vo.status}</div>
+	                <c:if test="${vo.status eq 'Y'}">
+	                <div>접수 완료</div>
+	                </c:if>
+	                <c:if test="${vo.status eq 'N'}">
+	                <div id="waiting">접수 대기</div>
+	                </c:if>
 	                <div><a href="/blank/admin/reportCheck?no=${vo.no}&prj=${vo.prj}" name="no"><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
        			</c:forEach>
 

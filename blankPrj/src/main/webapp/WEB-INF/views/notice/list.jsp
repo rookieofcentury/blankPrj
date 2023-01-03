@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,68 +22,42 @@
     
             <div class="notice-list">
     
-                <div class="notice-list-contents">
-                        <div>블랭크 창작자 대모집(~23년 1월)</div>
-                        <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div>블랭크 창작자 대모집(~23년 1월)</div>
-                    <div>2022-12-04</div>
-                </div>
-    
-                <div class="notice-list-contents">
-                    <div class="border-style">블랭크 창작자 대모집(~23년 1월)</div>
-                    <div class="border-style">2022-12-04</div>
-                </div>
-                
+    			<c:forEach items="${voList}" var="vo">
+	                <div class="notice-list-contents">
+						<div><a href="/blank/notice/detail?no=${vo.no}" name="no">${vo.title}</a></div>
+						<div>${vo.writeDate}</div>
+	                </div>
+    			</c:forEach>
+
             </div>
     
         </main>
+    
+		<div id="page-area">
+		
+			<c:if test="${pageVo.startPage != 1}">
+			<a href="/blank/notice/list?p=${pageVo.startPage - 1}">&lt;</a>
+			</c:if>
+			
+			<c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
+			<a href="/blank/notice/list?p=${num}">${num}</a>
+			</c:forEach>
+			
+			<c:if test="${pageVo.endPage != pageVo.maxPage}">
+			<a href="/blank/notice/list?p=${pageVo.endPage + 1}">&gt;</a>
+			</c:if>
+		
+		</div>
     
         <form action="" method="get">
 
             <div class="search">
                 <div>
-                    <input type="text" placeholder="검색어를 입력하세요.">
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요.">
+                    <input type="hidden" name="category" value="title">
                 </div>
                 <div>
-                    <input type="image" src="../resources/images/admin/search.png" alt="search.png">
+                    <input type="image" src="/blank/resources/images/admin/search.png" alt="search.png">
                 </div>
             </div>
 

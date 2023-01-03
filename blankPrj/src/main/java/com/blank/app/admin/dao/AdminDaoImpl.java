@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -98,6 +99,12 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.selectOne("adminMapper.selectPrj", projectVo);
 	}
 
+	//프로젝트 승인
+	@Override
+	public int approvalProject(SqlSessionTemplate sst, ProjectVo projectVo) {
+		return sst.update("adminMapper.updateProject", projectVo);
+	}
+	
 	//프로젝트 반려
 	@Override
 	public int cancelProject(SqlSessionTemplate sst, ProjectVo projectVo) {
@@ -119,6 +126,18 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.selectList("adminMapper.selectDeProjectList", map, rb);
 	}
 
+	//신고 프로젝트 상세조회
+	@Override
+	public ReportVo selectReport(SqlSessionTemplate sst, ReportVo reportVo) {
+		return sst.selectOne("adminMapper.selectReport", reportVo);
+	}
+
+	//신고 프로젝트 접수
+	@Override
+	public int updateReport(SqlSessionTemplate sst, ReportVo reportVo) {
+		return sst.update("adminMapper.updateReport", reportVo);
+	}
+	
 	//회원정보 상세조회
 	public MemberVo selectMember(SqlSessionTemplate sst, MemberVo memberVo) {
 		return sst.selectOne("adminMapper.selectMember", memberVo);
@@ -144,6 +163,30 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.selectList("adminMapper.selectFaqList", map, rb);
 	}
 
+	//FAQ 상세조회
+	@Override
+	public FaqVo selectFaq(SqlSessionTemplate sst, FaqVo faqVo) {
+		return sst.selectOne("adminMapper.selectFaq", faqVo);
+	}
+
+	//FAQ 작성
+	@Override
+	public int faqWrite(SqlSessionTemplate sst, FaqVo faqVo) {
+		return sst.insert("adminMapper.faqWrite", faqVo);
+	}
+	
+	//FAQ 수정
+	@Override
+	public int updateFaq(SqlSessionTemplate sst, FaqVo faqVo) {
+		return sst.update("adminMapper.updateFaq", faqVo);
+	}
+
+	//FAQ 삭제
+	@Override
+	public int deleteFaq(SqlSessionTemplate sst, FaqVo faqVo) {
+		return sst.update("adminMapper.deleteFaq", faqVo);
+	}
+	
 	//고객센터 문의 전체 수 카운트
 	public int helpCount(SqlSessionTemplate sst) {
 		return sst.selectOne("adminMapper.helpCount");
@@ -159,17 +202,26 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.selectList("adminMapper.selectHelpList", map, rb);
 	}
 
-	//신고 프로젝트 상세조회
+	//고객센터 문의 상세조회
 	@Override
-	public ReportVo selectReport(SqlSessionTemplate sst, ReportVo reportVo) {
-		return sst.selectOne("adminMapper.selectReport", reportVo);
+	public HelpVo selectHelp(SqlSessionTemplate sst, HelpVo helpVo) {
+		return sst.selectOne("adminMapper.selectHelp", helpVo);
+	}
+	
+	//고객센터 문의 답변
+	@Override
+	public int updateHelp(SqlSessionTemplate sst, HelpVo helpVo) {
+		return sst.update("adminMapper.updateHelp", helpVo);
 	}
 
-	//신고 프로젝트 접수
-	@Override
-	public int updateReport(SqlSessionTemplate sst, ReportVo reportVo) {
-		return sst.update("adminMapper.updateReport", reportVo);
-	}
+
+
+
+
+
+
+
+
 
 
 	

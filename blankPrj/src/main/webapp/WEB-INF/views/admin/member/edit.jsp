@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
-<link rel="stylesheet" href="/blank/resources/css/admin/menu.css">
 <link rel="stylesheet" href="/blank/resources/css/admin/member/edit.css">
 </head>
 <body>

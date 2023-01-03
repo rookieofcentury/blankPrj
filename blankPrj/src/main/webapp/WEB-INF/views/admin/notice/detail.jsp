@@ -43,6 +43,7 @@
 	            </script>
 	            
             <form action="/blank/admin/noticeDetail" method="post">
+            
    	            <div class="detail-list">
 	    
 	                <div class="detail-title">번호</div>
@@ -73,8 +74,11 @@
 	    
 	                <div id="detail-submit">
 	                    <input type="submit" value="수정" id="detail-submit-btn"/>
-					</form>
+	                    
+			</form>
+			
 	                	<input type="button" value="삭제" id="delete-notice-btn"/>
+	                	
 					</div>
 	    
 	            </div>

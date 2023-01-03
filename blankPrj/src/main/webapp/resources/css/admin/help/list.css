@@ -112,11 +112,15 @@ main .help-board-header{
     border: none;
 }
 
+#help-waiting{
+    color: rgba(0, 178, 18, 1);
+}
+
 #page-area{
     width: 150px;
     height: 60px;
     margin-left: 50%;
-	grid-column: span 7;
+	grid-column: span 6;
     border-bottom: none;
 }
 

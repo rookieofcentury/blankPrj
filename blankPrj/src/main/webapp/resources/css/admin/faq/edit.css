@@ -3,7 +3,7 @@ html{
 }
 
 /* 제목 부분 */
-main .detail-board-header{
+main .edit-board-header{
     width: 1625px;
     height: 64px;
     color: rgba(90, 90, 90, 1);
@@ -14,24 +14,24 @@ main .detail-board-header{
     grid-template-columns: 0.17fr 1fr;
 }
 
-.detail-board-header div h1{
+.edit-board-header div h1{
     margin-left: 15px;
     transform: translate(0, -20%)
 }
 
-.detail-board-header div h2{
+.edit-board-header div h2{
     font-weight: normal;
 }
 
-.detail-board-content{
+.edit-board-content{
     width: 1380px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
 /* 창 닫기 */
-.notice-detail-close{
-    width: 160px;
+.faq-edit-close{
+    width: 195px;
     height: 30px;
     border: 1px solid rgba(197, 197, 197, 1);
     border-bottom: none;
@@ -43,29 +43,29 @@ main .detail-board-header{
     margin-top: 55px;
 }
 
-.notice-detail-close img{
+.faq-edit-close img{
     width: 11px;
     height: 11px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 /* 리스트 부분 */
-.detail-board{
+.edit-board{
     width: 1625px;
     height: 868px;
     border: 1px solid var(--line-gray);
     background-color: rgba(237, 236, 236, 1);
 }
 
-.detail-list{
+.edit-list{
     width: 1580px;
     height: 710px;
     border: 1px solid var(--line-gray);
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr 1fr;
-    grid-template-rows: 54px 54px 54px 450px;
+    grid-template-rows: 54px 54px 54px 54px auto;
     text-align: left;
     margin: 0 auto;
     font-size: 16px;
@@ -73,54 +73,56 @@ main .detail-board-header{
     border-radius: 0px 5px 5px 5px;
 }
 
-.detail-title{
+.edit-list div input[type=text]{
+	width: 800px;
+}
+
+.edit-title{
     text-align: center;
 }
 
-#title-input{
-	width: 800px;
-	height: 30px;
-}
-
-#content-input{
-	width: 800px;
-	margin-top: 10px;
-}
-
-.detail-list div{
+.edit-list div{
     border-bottom: 1px solid var(--line-gray);
 }
 
-.detail-list div:last-child img{
+.edit-list div:last-child img{
     width: 18px;
     height: 18px;
 }
 
-.detail-list .detail-list-top{
+.edit-list .detail-list-top{
     grid-column: span 10;
     text-align: left;
     margin-left: 10px;
     border: none;
 }
 
-.detail-list input{
+.edit-list input{
     border: none;
     outline: none;
     font-size: 16px
 }
 
-.detail-list .content-style{
+.edit-list .content-style{
     border: none;
 }
 
-#detail-submit{
+.category{
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid black;
+    outline: none;
+}
+
+#edit-submit{
     border: none;
     grid-column: span 3;
     height: 43px;
     margin-left: 55%;
 }
 
-#detail-submit-btn{
+#edit-submit-btn{
     width: 70px;
     height: 35px;
     color: white;
@@ -128,10 +130,10 @@ main .detail-board-header{
     border-radius: 7px;
     background-color: rgba(86, 122, 206, 1);
     cursor: pointer;
-    margin-top: 5%;
+    margin-top: 25%;
 }
 
-#delete-notice-btn{
+#delete-faq-btn{
     width: 70px;
     height: 35px;
     color: white;
@@ -139,5 +141,5 @@ main .detail-board-header{
     border-radius: 7px;
     background-color: rgba(255, 94, 94, 1);
     cursor: pointer;
-    margin-top: 5%;
+    margin-top: 25%;
 }

@@ -137,7 +137,7 @@ main .notice-board-header{
     width: 150px;
     height: 60px;
     margin-left: 50%;
-	grid-column: span 7;
+	grid-column: span 6;
     border-bottom: none;
 }
 

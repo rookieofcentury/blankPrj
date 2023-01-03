@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.blank.app.admin.common.PageVo;
@@ -62,5 +63,19 @@ public interface AdminDao {
 	public int updateReport(SqlSessionTemplate sst, ReportVo reportVo);
 
 	public ReportVo selectReport(SqlSessionTemplate sst, ReportVo reportVo);
+
+	public int approvalProject(SqlSessionTemplate sst, ProjectVo projectVo);
+
+	public FaqVo selectFaq(SqlSessionTemplate sst, FaqVo faqVo);
+
+	public int updateFaq(SqlSessionTemplate sst, FaqVo faqVo);
+
+	public int deleteFaq(SqlSessionTemplate sst, FaqVo faqVo);
+
+	public int faqWrite(SqlSessionTemplate sst, FaqVo faqVo);
+
+	public HelpVo selectHelp(SqlSessionTemplate sst, HelpVo helpVo);
+
+	public int updateHelp(SqlSessionTemplate sst, HelpVo helpVo);
 	
 }

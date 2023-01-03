@@ -112,6 +112,14 @@ main .project-board-header{
     border: none;
 }
 
+#project-waiting{
+    color: rgba(0, 178, 18, 1);
+}
+
+#project-cancel{
+    color: rgba(255, 52, 52, 1);
+}
+
 #page-area{
     width: 150px;
     height: 60px;

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="helpMapper">
+
+	<!-- 전체 고객센터 문의 수 카운드 -->
+	<select id="listCount" resultType="int">
+		SELECT COUNT(*)
+		FROM HELP
+	</select>
+
+	<!-- 고객센터 문의 목록 조회(메인 화면) -->
+	<select id="selectList" resultType="HelpVo">
+		SELECT H.NO, H.TITLE, M.NICK AS MEMBER_NO, SUBSTR(H.WRITE_DATE, 1, 8) AS WRITE_DATE
+		FROM HELP H
+		INNER JOIN MEMBER M
+		ON H.MEMBER_NO = M.NO
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+	
+	<!-- 고객센터 문의 조회 -->
+	<select id="selectInquiryList" resultType="HelpVo">
+		SELECT H.NO, H.TITLE, H.CONTENT, M.NICK AS MEMBER_NO, H.STATUS, TO_CHAR(H.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE
+		FROM HELP H
+		INNER JOIN MEMBER M
+		ON H.MEMBER_NO = M.NO
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+
+	<!-- 고객센터 문의 상세조회 -->
+	<select id="selectInquiry" resultType="HelpVo">
+		SELECT H.NO, M.NICK AS MEMBER_NO, H.TITLE, H.CONTENT, TO_CHAR(H.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE, H.AD_COMMENT
+		FROM HELP H
+		JOIN MEMBER M
+		ON H.MEMBER_NO = M.NO
+		WHERE H.NO = #{no}
+	</select>
+
+	<!-- 고객센터 문의 등록 -->
+	<insert id="inquiryWrite">
+		INSERT INTO HELP
+		(
+			NO,
+			MEMBER_NO,
+			TITLE,
+			CONTENT,
+			PASSWORD,
+			SECRET_YN,
+			WRITE_DATE
+		)
+		VALUES
+		(
+			SEQ_NOTICE_NO.NEXTVAL,
+			#{memberNo},
+			#{title},
+			#{content},
+			#{secretYn},
+			#{writeDate},
+			SYSDATE
+		)
+	</insert>
+
+	<!-- FAQ 카운드 -->
+	<select id="faqCount" resultType="int">
+		SELECT COUNT(*)
+		FROM FAQ
+	</select>
+	
+	<!-- FAQ 목록 조회 -->
+	<select id="selectFaqList" resultType="FaqVo">
+		SELECT F.NO, F.TITLE, C.NAME AS CATEGORY, CONCAT(SUBSTR(F.CONTENT, 1, 30),'..') AS CONTENT, TO_CHAR(F.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE
+		FROM FAQ F
+		INNER JOIN FAQ_CATEGORY C
+		ON F.CATEGORY = C.NO
+		<if test=" keyword != null and keyword != '' ">
+			WHERE ${category} LIKE '%${keyword}%'
+		</if>
+		ORDER BY NO DESC
+	</select>
+
+	<!-- FAQ 상세조회 -->
+	<select id="selectFaq" resultType="FaqVo">
+		SELECT F.NO, F.TITLE, C.NAME AS CATEGORY, F.CONTENT, TO_CHAR(F.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE
+		FROM FAQ F
+		INNER JOIN FAQ_CATEGORY C
+		ON F.CATEGORY = C.NO
+		WHERE F.NO = #{no}
+	</select>
+
+</mapper>

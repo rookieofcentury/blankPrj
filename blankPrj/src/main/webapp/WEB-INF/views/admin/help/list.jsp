@@ -52,7 +52,7 @@
                     <div>작성자</div>
                     <div>작성 날짜</div>
                     <div>처리 여부</div>
-                    <div>수정</div>
+                    <div>작성</div>
             		
             		<c:forEach items="${voList}" var="vo">
 	           			<div>${vo.no}</div>
@@ -60,8 +60,13 @@
 	                    <div>${vo.content}</div>
 	                    <div>${vo.memberNo}</div>
 	                    <div>${vo.writeDate}</div>
-	                    <div>${vo.status}</div>
-	                    <div><a href="/blank/admin/help?no=${vo.no}" name="no"><img src="../resources/images/admin/edit.png"></a></div>
+	                    <c:if test="${vo.status eq 'Y'}">
+		                <div>답변 완료</div>
+		                </c:if>
+		                <c:if test="${vo.status eq 'N'}">
+		                <div id="help-waiting">답변 대기</div>
+		                </c:if>
+	                    <div><a href="/blank/admin/helpDetail?no=${vo.no}" name="no"><img src="../resources/images/admin/edit.png"></a></div>
             		</c:forEach>
                     
             		<div id="page-area">
