@@ -84,12 +84,26 @@
 
     var list = '';
     
+    // $(document).ready(function() { 
+    //     $.ajax({
+    //         url : "/blank/project/created/writing",
+    //         method : "GET",   
+    //         data :   {
+    //             "statusWriting" : $('.taps > div:nth-child(1)').text()
+    //             "statusWriting" : $('.taps > div:nth-child(2)').text()
+    //             "statusWriting" : $('.taps > div:nth-child(3)').text()
+    //             "statusWriting" : $('.taps > div:nth-child(4)').text()
+    //             "statusWriting" : $('.taps > div:nth-child(5)').text()
+    //             "statusWriting" : $('.taps > div:nth-child()').text()
+    //         },
+    //         success : function(x){
+    // });
+
     $(document).ready(function() { 
     	//$(function(){
        // $(document).on('click',$('.writing'),function(){
     //function handleclick(){
         //$(".writing").click(function() {
-		console.log('test');	
             $.ajax({
             url : "/blank/project/created/writing",
             method : "GET",   
@@ -102,33 +116,30 @@
                     list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(1)').text() + '인 프로젝트가 없습니다.' + '</h3>' + '</div>' + '</div>';
                     $(".list-content").append(list);
                 }else{
-
                     list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(1)').text() + ' ' + x + '</h3>' + '</div>' ;
                     <c:forEach items="${myPrj}" var="myPrj">
-                        console.log("ttt");
-                    
                         //var cnt = ;
                         var title2 = '${ myPrj.title }';
                         var no = '${ myPrj.no }';
                         var status = '${ myPrj.status }';
                         var summary = '${ myPrj.summary }';
+                    console.log(title2);
+                        list += '<div class="list-box">';
+                        list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
+                        list += '<div class="prj-info">'+'<div class="prj-content">';
+                        list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
+                        list += '<div>' + '<div class="management-button">' + '<a href="/blank/project/created/list?p=' + no + '">관리</a>'
+                            +'</div>'+'<div class="delete-button">' + '<input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />' + '삭제' + '</div>' + '</div>';  
+                        list += '</div>'+'</div>'+'</div>';
 
-                        // list += '<div class="list-box">';
-                        // list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
-                        // list += '<div class="prj-info">'+'<div class="prj-content">';
-                        // list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
-                        // list += '<div>' + '<div class="management-button">' + '<a href="/blank/project/created/list?p=' + no + '">관리</a>'
-                        //     +'</div>'+'<div class="delete-button">' + '<input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />' + '삭제' + '</div>' + '</div>';  
-                        // list += '</div>'+'</div>'+'</div>';
-
-                        list += `<div class="list-box">
-                        <div class="prj-img"><img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/></div>
-                        <div class="prj-info"><div class="prj-content">
-                        <div class="content-info"><div>${title2}</div><div>${summary}</div></div>
-                        <div><div class="management-button"><a href="/blank/project/created/list?p=${no}">관리</a>
-                            </div><div class="delete-button"><input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />삭제</div></div>
-                        </div></div></div>
-                        `;
+                        // list += `<div class="list-box">
+                        // <div class="prj-img"><img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/></div>
+                        // <div class="prj-info"><div class="prj-content">
+                        // <div class="content-info"><div>${title2}</div><div>${summary}</div></div>
+                        // <div><div class="management-button"><a href="/blank/project/created/list?p=${no}">관리</a>
+                        //     </div><div class="delete-button"><input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />삭제</div></div>
+                        // </div></div></div>
+                        // `;
                         
                         </c:forEach>
                         $(".list-content").append(list);
@@ -137,7 +148,6 @@
                 console.log("작성중 통신에러");
             }
         });  
-            //};
     });
 
     /* 심사중 ajax*/

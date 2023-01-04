@@ -129,10 +129,10 @@
         AND DELETE_YN = 'N'
 	</select>
 	
-	<insert id="insertPrj" >
+	<insert id="insertPrj" parameterType="Map">
 	INSERT INTO PROJECT(NO, CREATOR)
 	 VALUES
-  	( SEQ_PROJECT_NO.NEXTVAL, #{creator})
+  	( #{random}, #{vo.creator})
 	</insert>
 	
 	<select id="selectMyLikePrj" resultType="int">
@@ -143,7 +143,7 @@
 	</select>
 	
 	<insert id="insertLikePrj" >
-	 INSERT INTO LIKE_PROJECT  VALUES (${mNo} , ${prjNo})
+	 INSERT INTO LIKE_PROJECT  VALUES (${mNo} , ${prjNo}, SYSDATE)
 	</insert>
 	
 	<delete id="deleteLikePrj" >

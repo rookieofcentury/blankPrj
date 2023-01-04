@@ -29,12 +29,13 @@ public interface ProjectService {
 
 	int writingCnt(HashMap<String, Object> map);
 
-	int insertPrj(ProjectVo vo);
+	int insertPrj(HashMap<String, Object> map);
 
 	int selectMyLikePrj(LikeProjectVo vo);
 
 	int insertLikePrj(LikeProjectVo vo);
 
 	int deleteLikePrj(LikeProjectVo vo);
+
 
 }
