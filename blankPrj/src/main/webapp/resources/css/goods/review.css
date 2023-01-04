@@ -5,28 +5,36 @@
 .modal {
 	display: none;
     position: absolute;
-    top: 0;
 	justify-content: center;
 	align-items: center;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,0.75);
-    box-shadow: 0 8px 32px 0 gray;
 }
 
 .modal-container {
+    z-index: 6;
     border: 1px solid #9D9D9D;
     background-color: white;
     border-radius: 15px;
     margin: 20px;
     padding: 60px;
 	width: 700px;
-    height: 900px;
+    height: 750px;
 	display: grid;
 	justify-content: center;
 	row-gap: 25px;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(4, minmax(30px, auto));
+	grid-template-rows: repeat(5, minmax(10px, auto));
+}
+
+.goods-review-img {
+    width: 100px;
+    height: 100px;
+}
+.goods-review-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 textarea {
@@ -46,6 +54,7 @@ textarea::placeholder {
     flex-direction: column;
     align-items: center;
     font-size: 24px;
+    gap: 12px;
     font-weight: bold;
     justify-content: space-between;
 }
@@ -132,6 +141,7 @@ textarea::placeholder {
     width: 35%;
     height: 70%;
     justify-content: center;
+    align-items: center;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -141,28 +151,43 @@ textarea::placeholder {
     font-weight: bold;
     border: 1px solid #9D9D9D;
     border-radius: 15px;
+    cursor: pointer;
+}
+
+.modal-container>div:nth-child(1) {
+    position: relative;
+}
+
+#x-button {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    border: 1px solid #9D9D9D;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .modal-goods-info {
     display: flex;
-    gap: 40px;
+    gap: 60px;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    padding-bottom: 60px;
     border-bottom: 1px solid #9D9D9D;
 }
 .modal-goods-info>div:nth-child(2) {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 .modal-goods-info>div:nth-child(2)>span:nth-child(1) {
     font-size: 20px;
     font-weight: bold;
 }
 .modal-goods-info>div:nth-child(2)>span:nth-child(2) {
-    color: #567ace;
     font-size: 20px;
+    color: #567ace;
     font-weight: bold;
 }
 .modal-goods-info>div:nth-child(2)>span:nth-child(3) {

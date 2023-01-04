@@ -68,4 +68,10 @@ public interface GoodsDao {
 	// 주문 완료 화면 도출에 필요한 결제 내역 받기
 	PaymentVo selectPaymentVoByNo(SqlSessionTemplate sst, PaymentVo pay);
 
+	// 리뷰 목록 찾기
+	List<ReviewVo> selectReviewListbyGNo(SqlSessionTemplate sst, int no, PageVo vo);
+
+	// 리뷰 수 확인
+	int selectReviewCnt(SqlSessionTemplate sst, int no);
+
 }

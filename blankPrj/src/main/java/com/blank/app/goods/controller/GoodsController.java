@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.blank.app.admin.common.PageVo;
+import com.blank.app.admin.common.Pagination;
 import com.blank.app.goods.service.GoodsService;
 import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
@@ -82,12 +84,33 @@ public class GoodsController {
 		// no로 첨부파일 테이블 한 번 더 다녀오고 set 해 주기
 		List<String> thumbnail = gs.findThumbnail(no);
 		vo.setThumbnail(thumbnail);
-
+		
 		// jsp로 데이터 보내 주기
 		model.addAttribute("goods", vo);
 
 		return "goods/detail";
 
+	}
+	
+	// ajax로 list 받아서 넘기기
+	public List<ReviewVo> reviewList(int no, String p) {
+	
+		if(p == null) {
+			p = "1";
+		}
+		
+		int listCount = gs.findReviewCnt(no);
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 3;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+		
+		// 리뷰 리스트 정보 받기
+		List<ReviewVo> voList = gs.reviewListbyGNo(no, pageVo);
+		System.out.println(voList);
+		
+		return voList;
+		
 	}
 
 	// 굿즈 장바구니 화면 도출
@@ -186,11 +209,11 @@ public class GoodsController {
 
 		int result = gs.reviewWrite(vo);
 
-		if (result == 1) {
-			return "success";
-		} else {
+		if (result != 1) {
 			return "fail";
 		}
+		
+		return "success";
 
 	}
 
@@ -254,13 +277,12 @@ public class GoodsController {
 	}
 
 	// 굿즈 결제 완료
-	@PostMapping("/payment/complete")
+	@PostMapping("/order")
 	public String paymentComplete(PaymentVo pay, HttpSession session, Model model) {
 		
 		String dateStr = getTimestampToDate(pay.getPayDate());
 		pay.setPayDate(dateStr);
 		pay.setNo(null);
-		System.out.println(pay);
 		
 		List<CartVo> orderList = (List<CartVo>) session.getAttribute("orderList");
 		int result = gs.insertOrder(orderList, pay);
@@ -271,23 +293,15 @@ public class GoodsController {
 		
 		PaymentVo vo = gs.selectPaymentVoByNo(pay);
 		
+		model.addAttribute("pay", vo);
 		session.removeAttribute("cart");
 
-		return "redirect:goods/order?no=" + vo.getNo() ;
+		return "goods/order";
 
 	}
 	
-	// 주문 완료 화면
-	@RequestMapping("/order")
-	public String order(String no, Model model) {
-		
-		PaymentVo vo = new PaymentVo();
-		vo.setNo(no);
-		
-		PaymentVo order = gs.selectPaymentVoByNo(vo);
-		
-		model.addAttribute("pay", order);
-		
+	@GetMapping("/order")
+	public String order() {
 		return "goods/order";
 	}
 
