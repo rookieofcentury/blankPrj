@@ -5,8 +5,11 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.blank.app.admin.vo.HelpVo;
+import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ProjectVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -89,6 +92,25 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int countAddrByNo(SqlSessionTemplate sst, String mNo) {
 		return sst.selectOne("memberMapper.countAddrByNo", mNo);
+	}
+
+	@Override
+	public int insertAddr(SqlSessionTemplate sst, AddressVo vo) {
+		
+		return sst.insert("memberMapper.insertAddr", vo);
+	}
+
+	@Override
+	public List<HelpVo> selectHelpListByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectList("memberMapper.selectHelpListByNo", mNo);
+	}
+
+	@Override
+	public List<ProjectVo> selectLikePrjByNo(SqlSessionTemplate sst, String mNo) {
+		
+		return sst.selectList("memberMapper.selectLikePrjByNo", mNo);
+	
+
 	}
 
 	

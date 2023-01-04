@@ -2,9 +2,11 @@ package com.blank.app.member.service;
 
 import java.util.List;
 
+import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ProjectVo;
 
 
 public interface MemberService {
@@ -36,6 +38,10 @@ public interface MemberService {
 	public int addrCount(String mNo);
 
 	public int insertAddr(AddressVo vo);
+
+	public List<HelpVo> selectHelpListByNo(String mNo);
+
+	public List<ProjectVo> selectLikePrjByNo(String mNo);
 
 
 

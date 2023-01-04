@@ -78,4 +78,58 @@
   	SELECT COUNT(*) FROM ADDRESS WHERE M_NO = #{mNo}
   </select>
 	
+	<insert id="insertAddr">
+	INSERT INTO ADDRESS 
+	(
+		    NO,
+		    M_NO,
+		    NAME,       
+		    ADDR_NO,     
+		    ADDR,        
+		    PHONE
+	)
+	VALUES
+	(
+    	ADDRESS_NO_SEQ.NEXTVAL,
+    		#{mNo},
+    		#{name},
+    		#{addrNo},
+    		#{addr},
+    		#{phone}
+    )
+	
+	</insert>
+	
+	<select id="selectHelpListByNo" resultType="HelpVo">
+		SELECT  H.NO, H.TITLE, M.NICK AS MEMBER_NO, 
+				H.STATUS, TO_CHAR(H.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE,
+				H.SECRET_YN, H.PASSWORD
+		
+		FROM HELP H
+		JOIN MEMBER M
+		ON H.MEMBER_NO = M.NO
+		WHERE MEMBER_NO = #{mNo}
+		ORDER BY WRITE_DATE DESC
+	</select>
+	
+	
+	<select id="selectLikePrjByNo" resultType="ProjectVo">
+	
+		SELECT  P.NO AS NO, P.TITLE AS TITLE , M.NICK AS CREATOR, 
+		P.STATUS AS STATUS, P.CATEGORY as CATEGORY, PA.CHANGE_NAME AS CHANGE_NAME
+
+		FROM PROJECT P
+		INNER JOIN MEMBER M
+		ON P.CREATOR = M.NO
+		INNER JOIN LIKE_PROJECT LP
+		ON LP.PRJ_NO = P.NO
+        left outer JOIN PRJ_ATTACHMENT PA
+        ON PA.PRJ_NO = P.NO
+        
+		WHERE LP.M_NO = #{mNo}
+        AND P.DELETE_YN = 'N'
+        
+		ORDER BY LP.LIKE_DATE DESC
+		
+	</select>
 </mapper>

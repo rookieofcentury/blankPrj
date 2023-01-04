@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.service.MailSendService;
 import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ProjectVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -226,14 +228,26 @@ public class MemberController {
 		return "member/mypage/payProject";
 	}
 	
-	//마이페이지 관심있는 프로젝트 
+	//마이페이지 관심있는 프로젝트
+	//관심 프로젝트에 가져오자 
 	@GetMapping("member/mypage/likeProject")
 	public String mypageLikeProject(HttpSession session, Model model) {
+		
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
 		if(loginMember == null) {
 			model.addAttribute("msg", "로그인 후 이용가능합니다.");
 			return "home";
 		}
+		
+		String mNo = loginMember.getNo();
+		
+		List<ProjectVo> voList = service.selectLikePrjByNo(mNo);
+		
+		model.addAttribute("likePrjVoList", voList);
+	
+		
+		
 		return "member/mypage/likeProject";
 	}
 	
@@ -248,6 +262,14 @@ public class MemberController {
 			return "home";
 		}
 		
+		String mNo = loginMember.getNo();
+		
+		
+		List<HelpVo> helpVoList = service.selectHelpListByNo(mNo);
+		
+		model.addAttribute("helpVoList", helpVoList);
+		
+		log.warn("헬프에 머가들었니 "+helpVoList);
 		return "member/mypage/reportQ";
 	}
 	
@@ -392,18 +414,25 @@ public class MemberController {
 		}
 		
 		@PostMapping("member/addrPlus")
-		public String insertAddr(AddressVo vo , HttpSession session) {
+		public String insertAddr(AddressVo vo , HttpSession session, Model model) {
 			
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-			String mNo = loginMember.getNo();
 			
-			log.warn("주소 받아왔다이이이이이잉"+vo);
+			String mNo = loginMember.getNo();
 			
 			vo.setMNo(mNo);
 			
+			log.warn("주소 받아왔다이이이이이잉"+vo);
+			
 			int result = service.insertAddr(vo);
 			
-			return "meme/mypage/payAddr";
+			log.warn("주소추가 결과 "+result);
+			
+			if(result ==1 ) {
+				model.addAttribute("msg", "주소가 정상적으로 추가되었습니다.");
+			}
+			
+			return "redirect:/member/mypage/payAddr";
 			
 		}
 		

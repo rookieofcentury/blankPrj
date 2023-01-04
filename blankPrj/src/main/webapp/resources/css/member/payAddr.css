@@ -343,7 +343,7 @@ input[id="addr-pop"] + label + div > label{
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 1;
 }
-/* input[id="addr-pop"] + label + div{
+input[id="addr-pop"] + label + div{
   opacity: 0;
   visibility: hidden;
   transition: all 1s;
@@ -352,7 +352,7 @@ input[id="addr-pop"]:checked + label + div{
   opacity: 1;
   visibility: visible;
   
-} */
+}
 .addr-title{
   margin: 30px 10px;
   font-size: 25px;

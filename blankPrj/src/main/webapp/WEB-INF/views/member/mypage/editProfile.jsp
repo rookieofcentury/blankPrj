@@ -21,9 +21,9 @@
 						<div><h2>회원 정보 수정</h2></div>
 						<div class="member-profile">
 							<div>프로필 사진</div>
-							<div><img src="/blank/resources/images/member/choi.png" alt="프로필사진임돠"></div>
+							<div><img src="/blank/resources/images/member/cho.png" alt="프로필사진임돠"></div>
 							<div>
-								<button class="change-btn">변경</button>
+								<button class="change-btn" id="">변경</button><input type="file" style="display: none;">
 								<button class="change-btn">삭제</button>
 							</div>
 						</div>
