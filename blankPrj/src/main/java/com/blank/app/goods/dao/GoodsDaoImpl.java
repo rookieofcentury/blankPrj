@@ -119,6 +119,21 @@ public class GoodsDaoImpl implements GoodsDao {
 		return sst.selectOne("goodsMapper.selectPaymentVoByNo", pay);
 	}
 
+	// 리뷰 리스트 찾기
+	public List<ReviewVo> selectReviewListbyGNo(SqlSessionTemplate sst, int no, PageVo pv) {
+
+		int offset = (pv.getCurrentPage() - 1) * pv.getBoardLimit();
+		int limit = pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return sst.selectList("goodsMapper.selectReviewListbyGNo", no, rb);
+	}
+
+	// 해당 굿즈 리뷰 수 확인
+	public int selectReviewCnt(SqlSessionTemplate sst, int no) {
+		return sst.selectOne("goodsMapper.selectReviewCntbyGNo", no);
+	}
+
 
 
 

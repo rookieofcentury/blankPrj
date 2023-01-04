@@ -9,6 +9,7 @@
         }
     })
 
+    // 썸네일
     function readURL(input) {
         if(input.files && input.files[0]) {
             var reader = new FileReader();
@@ -19,6 +20,26 @@
         }
     }
 
+    // 점수 주면 별 개수 달라지게
     const drawStar = (target) => {
         document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
     }
+
+    // 리뷰 작성 창 띄우기
+    function showReview() {
+        $('.modal').css("top", $(window).scrollTop());
+        $('.modal').css("display", "flex");
+    }
+
+    // 창 내려갈 때마다 top 현재 위치로 fixed 지정해 주기
+    $(window).on("scroll",function() {
+        $('.modal').css("top", $(window).scrollTop());
+    });
+    
+    // x 버튼 누르면 꺼질 거
+    $('#x-button').click(function() {
+        $('#content-area').val("");
+        $('input[name=score]').val(0);
+        drawStar($('input[name=score]'));
+        $('.modal').css("display", "none");
+    })

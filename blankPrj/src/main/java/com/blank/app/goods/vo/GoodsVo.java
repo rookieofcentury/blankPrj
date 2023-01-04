@@ -23,6 +23,8 @@ public class GoodsVo {
 	private String content;
 	private String enrollDate;
 	private char deleteYn;
+	private String reviewCnt;
+	private String reviewScore;
 	private String exhibition;
 	private List<String> thumbnail;
 	private List<MultipartFile> thumbnailFile;

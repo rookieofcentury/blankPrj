@@ -133,7 +133,9 @@
 			G.CONTENT ,
 			G.ENROLL_DATE ,
 			E.TITLE AS EXHIBITION ,
-			G.DELETE_YN
+			G.DELETE_YN,
+            (SELECT COUNT(*) FROM GOODS_REVIEW WHERE GOODS = #{no}) AS REVIEW_CNT,
+            (SELECT TRUNC(AVG(SCORE),1)/2 FROM GOODS_REVIEW WHERE GOODS = #{no}) AS REVIEW_SCORE
 		FROM GOODS G
 		INNER JOIN GOODS_CATEGORY C
 			ON C.NO = G.CATEGORY
@@ -289,6 +291,16 @@
 	<select id="selectPaymentVoListByNo" resultType="com.blank.app.goods.vo.PaymentVo">
 		SELECT * FROM GOODS_PAYMENT
 		WHERE CONSUMER = #{consumer}
+	</select>
+	
+	<select id="selectReviewListbyGNo" resultType="com.blank.app.goods.vo.ReviewVo">
+		SELECT * FROM GOODS_REVIEW
+		WHERE GOODS = #{no}
+	</select>
+	
+	<select id ="selectReviewCntbyGNo" resultType="int">
+		SELECT COUNT(*) FROM GOODS_REVIEW
+		WHERE GOODS = #{no}
 	</select>
 	
 </mapper>

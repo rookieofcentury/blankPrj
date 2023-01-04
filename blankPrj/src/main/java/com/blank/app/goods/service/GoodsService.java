@@ -44,4 +44,8 @@ public interface GoodsService {
 
 	PaymentVo selectPaymentVoByNo(PaymentVo pay);
 
+	List<ReviewVo> reviewListbyGNo(int no, PageVo pageVo);
+
+	int findReviewCnt(int no);
+
 }

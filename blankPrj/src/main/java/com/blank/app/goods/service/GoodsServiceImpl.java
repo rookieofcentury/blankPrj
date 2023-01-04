@@ -163,6 +163,16 @@ public class GoodsServiceImpl implements GoodsService {
 		return vo;
 	}
 
+	// 리뷰 리스트 받기
+	public List<ReviewVo> reviewListbyGNo(int no, PageVo vo) {
+		return dao.selectReviewListbyGNo(sst, no, vo);
+	}
+
+	// 해당 굿즈의 리뷰 수 확인하기
+	public int findReviewCnt(int no) {
+		return dao.selectReviewCnt(sst, no);
+	}
+
 
 
 }

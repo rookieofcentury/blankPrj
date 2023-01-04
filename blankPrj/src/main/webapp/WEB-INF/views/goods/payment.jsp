@@ -17,7 +17,7 @@
 <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
     <div class="wrap">
-        <form action="/blank/goods/payment/complete" method="post" id="order-form">
+        <form action="/blank/goods/order" method="post" id="order-form">
         
         <div class="container">
             <div class="cart-info">

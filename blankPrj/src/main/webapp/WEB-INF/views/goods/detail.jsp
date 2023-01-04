@@ -6,6 +6,7 @@
 <head>
 <title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/detail.css">
+<link rel="stylesheet" href="/blank/resources/css/goods/review.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
    <script>
        Kakao.init('4cca08bc633d6646753296f4efd16743');
@@ -39,7 +40,11 @@
                                 <div></div>
                                 <div></div>
                                 <div>수량</div>
-                                <div class="cnt-area"><input type="number" name="quantity" value="1" min="1" max="${goods.stock}"><label id="minus-btn"><i class="fa-solid fa-minus"></i></label><label id="plus-btn"><i class="fa-solid fa-plus"></i></label></div>
+                                <div class="cnt-area">
+                                    <div class="cnt-btn minus-btn"><i class="fa-solid fa-minus fa-xs"></i></div>
+                                    <input type="number" name="quantity" value="1" min="1" max="${goods.stock}">
+                                    <div class="cnt-btn plus-btn"><i class="fa-solid fa-plus fa-xs"></i></div>
+                                </div>
                             </div>
                             <c:if test="${goods.stock >= 1}">
                             <div class="btn-block">
@@ -111,16 +116,16 @@
                             <div>
                                 <span>전체 상품 후기 수</span>
                                 <div><i class="fa-solid fa-comment-dots fa-2x"></i></div>
-                                <span><span>3</span> 건</span>
+                                <span><span>${goods.reviewCnt}</span> 건</span>
                             </div>
                             <div>
                                 <span>총 평점</span>
                                 <div id="avg">★★★★★</div>
-                                <span><span>5.0</span> / 5.0 </span>
+                                <span><span>${goods.reviewScore}</span> / 5.0 </span>
                             </div>
                         </div>
                         <div class="review-menu">
-                            <div id="review-write-btn" onclick=""><i class="fa-solid fa-pen"></i> 글쓰기</div>
+                            <div id="review-write-btn" onclick="showReview();"><i class="fa-solid fa-pen"></i> 글쓰기</div>
                             <div class="align-standard">
                                 <div><label class="standard"><input type="radio" name="standard" value="popular" checked><span>인기순</span></label></div>
                                 <div><label class="standard"><input type="radio" name="standard" value="new"><span>최신순</span></label></div>
@@ -202,10 +207,48 @@
         
     </div>
     
-    <%@ include file = "/WEB-INF/views/goods/review.jsp" %>
+    <div class="modal">
+        <div class="modal-container">
+            <div><button id="x-button"><i class="fa-solid fa-xmark"></i></button></div>
+            <div class="modal-goods-info">
+                <div class="goods-review-img">
+                    <img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt="img">
+                </div>
+                <div>
+                    <span>${goods.name}</span>
+                    <span>&#x20A9; <span>${goods.price}</span></span>
+                    <span>리뷰 <span>3</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span>5.0</span></span>
+                </div>
+            </div>
+            <div class="review-modal-score">
+                <span>상품은 어떠셨나요?</span>
+                <span class="star">
+                        ★★★★★
+                    <span>★★★★★</span>
+                    <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                </span>
+            </div>
+            <div class="review-modal-content">
+                <textarea name="content" id="content-area" cols="30" rows="10" placeholder="자세한 후기는 다른 고객의 구매에 많은 도움이 되며, 오해의 소지가 있는 내용을 작성 시 검토 후 비공개 조치될 수 있습니다. 반품/환불 문의는 1:1 문의로 가능합니다."></textarea>
+                <span id="countReview">0 자 / 최대 200 자</span>
+            </div>
+            <div class="review-modal-pic">
+                <div>
+                    <span>사진 등록</span>
+                    <span>0 장 / 최대 2 장</span>
+                </div>
+                <div>
+                    <label id="input-file-button" for="input-file"> + </label>
+                    <input type="file" id="input-file" onchange="readURL(this);">
+                    <button id="submit-button">작성하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 </body>
 <script src="/blank/resources/js/goods/detail.js"></script>
+<script src="/blank/resources/js/goods/review.js"></script>
 <script>
     Kakao.Share.createScrapButton({
 	  container: '#share-btn',
@@ -214,18 +257,35 @@
 
     // 장바구니 추가
     function addBasket() {
-        $.ajax({
-            url: "/blank/goods/basket/add",
-            method: "POST",
-            data: {
-                no: '${goods.no}',
-                cnt: $('input[name=quantity]').val()
-            },
-            success: function(data) {
-                alert(data);
-            },
-            error: function() {
-                console.log('error');
+        Swal.fire({
+            title: '장바구니에 넣으시겠어요?',
+            text: "${goods.name}" + $('input[name=quantity').val() + '개를 장바구니에 넣습니다.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#567ACE',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '장바구니 담기',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/blank/goods/basket/add",
+                    method: "POST",
+                    data: {
+                        no: '${goods.no}',
+                        cnt: $('input[name=quantity]').val()
+                    },
+                    success: function(data) {
+                        Swal.fire(
+                            '장바구니에 넣었습니다!',
+                            '즐거운 쇼핑 되세요!',
+                            'info'
+                        )
+                    },
+                    error: function() {
+                        console.log('error');
+                    }
+                })
             }
         })
     }
@@ -235,7 +295,7 @@
         Swal.fire({
             title: '바로 구매하시겠어요?',
             text: "다른 상품들이 많이 기다리고 있어요!",
-            icon: 'info',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#567ACE',
             cancelButtonColor: '#d33',
@@ -251,6 +311,56 @@
 
             }
         })
+    })
+</script>
+<script>
+
+    // 리뷰 작성 ajax
+    $('#submit-button').click(function() {
+        Swal.fire({
+            title: '리뷰를 작성하시겠어요?',
+            text: "내용 점검 부탁드립니다!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#567ACE',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '작성하기',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $.ajax({
+                    url: "/blank/goods/review/write",
+                    method: "POST",
+                    data: {
+                        goods: '${goods.no}',
+                        writer: '${loginMember.no}',
+                        content: $('#content-area').val(),
+                        score: $('input[name=score]').val()
+                    },
+                    success: function(data) {
+                        $('#content-area').val("");
+                        $('input[name=score]').val(0);
+                        drawStar($('input[name=score]'));
+                        $('.modal').css("display", "none");
+                        Swal.fire(
+                            '작성 완료!',
+                            '지금 내 리뷰를 확인해 보세요!',
+                            'info'
+                        )
+                    },
+                    error: function() {
+                        console.log('error');
+                    }
+                })
+
+            }
+        })
+    })
+
+    // 리뷰 리스트 불러오기
+    $('#review-btn').click(function() {
+        
     })
 </script>
 </html>
