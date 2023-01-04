@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/blank/resources/css/project_post/agree.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -114,16 +115,17 @@
         /*시작하기 href*/
         function startBtn(){
             if($(".ckAll").is(":checked")) {
-                
+            let random = String(Math.floor(Math.random()*1000000)).padStart(6, "0");
+            console.log(random);
             $.ajax({
             url : "/blank/project/agree",
             method : "POST",   
             data :   {
-                "start" : 1
+                "random" : random
             },
             success : function(x){
                 
-                location.href = "/blank/project/post"
+                location.href = "/blank/project/post?="+ x;
             
             },error : function(){
                 console.log("동의 통신에러");

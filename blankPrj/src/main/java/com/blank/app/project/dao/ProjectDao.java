@@ -31,13 +31,14 @@ public interface ProjectDao {
 
 	int writingCnt(SqlSessionTemplate sst, HashMap<String, Object> map);
 
-	int insertPrj(SqlSessionTemplate sst, ProjectVo vo);
+	int insertPrj(SqlSessionTemplate sst, HashMap<String, Object> map);
 
 	int selectMyLikePrj(SqlSessionTemplate sst, LikeProjectVo vo);
 
 	int insertLikePrj(SqlSessionTemplate sst, LikeProjectVo vo);
 
 	int deleteLikePrj(SqlSessionTemplate sst, LikeProjectVo vo);
+
 
 
 }

@@ -533,6 +533,7 @@ input[id*="itemPopup"] + label{
     color: #fff;
     width: 400px;
     text-align: center;
+    cursor: pointer;
 }
 input[id*="itemPopup"] + label + div{
     position: fixed;
@@ -1093,6 +1094,7 @@ input[name=save], input[name=apply], input[name=itemSave]{
     text-align: center;
     border: none;
     font-weight: 700;
+    cursor: pointer;
 }
 .info-price>div:last-child{
     color: rgb(109, 109, 109);

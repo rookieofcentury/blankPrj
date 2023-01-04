@@ -128,21 +128,23 @@ public class ProjectController {
 	
 	@PostMapping("agree")
 	@ResponseBody
-	public String postAgree(HttpSession session, ProjectVo vo, String start, Model model) {
+	public String postAgree(HttpSession session, ProjectVo vo, String random, Model model) {
 		
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setCreator(nick);
 		
-		int result = service.insertPrj(vo);
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("vo", vo);
+		map.put("random", random);
 		
+		int result = service.insertPrj(map);
+		
+		//원래 해당 난수의 프로젝트가 있는지 체크해줘야함 ^.^..
 		//result == 1이면 select 다시 해와서 모델에 담아주고 콘솔에 찎어야 보인다..
-		System.out.println("컨트롤러 플젝번호 생성 " + vo.getNo());
 		if(result == 1) {
-			int prjSelect = service.insertPrj(vo);
-			model.addAttribute("prjNo", vo.getNo());
+			model.addAttribute("prjNo", random);
 		}
-		
 		
 		if(result != 1) {
 			return "";

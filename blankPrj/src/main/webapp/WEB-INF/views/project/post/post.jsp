@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로젝트 등록</title>
 
+<link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="/blank/resources/css/project_post/post.css">
 
@@ -306,8 +306,8 @@
                         <div class="preview-range">
                             <div>내가 만든 세트</div>
                             <% if(1 < 2){%>
-                                <ul>
-                                    <li class="set-list">
+                                <ul class="mySet">
+                                    <!-- <li class="set-list">
                                         <button type="button">
                                             <div class="set-buttons">
                                                 <strong>29,000원</strong>
@@ -331,7 +331,7 @@
                                         </button>
                                         <button type="button">
                                         </button>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             <%}else{ %>
                                 <div class="set-none">만든 세트가 없습니다.</div>
@@ -355,16 +355,13 @@
                                         </select>
                                         <select class="myitemOption">
                                             <option>== 옵 션 선 택 ==</option>
-                                            <!-- <option>사과 (블루,레드,그린)</option>
-                                            <option>토마토 (블루,레드)</option>
-                                            <option>가지</option> -->
                                         </select>
                                     </div>
                                 </div>
                                 <ul class="selected">
                                     <li>
                                         <div>
-                                            <div>사과</div>
+                                            <div class="selected-item">사과</div>
                                             <div>
                                                 <div class="quantity-box">
                                                     <button>
@@ -382,13 +379,12 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <!-- <ol type="1">
-                                            <li>민트</li>
-                                            <li>레드</li>
-                                        </ol> -->
+                                        <ol type="1">
+                                            <li class="selected-opt">민트</li>
+                                        </ol>
                                     </li>
                                     <li>
-                                    </li>
+                                    </li> 
                                 </ul>
                                 <div class="set-insert">
                                     <div class="info-name">세트명</div>
@@ -888,10 +884,10 @@
                     $('.policy-agree').text("확인하기"); 
                     $('.policy-agree').off('click');
                 }
-                });
             });
+        });
        
-       /*옵션 없음 추가*/
+       /*옵션 없음, 추가*/
        $("#option-add").click(function(){
             //$(".textbox").toggleClass("block");
             $(".textbox").show();
@@ -924,24 +920,23 @@
        /* var selectCate = $('#cate-option option:checked'); */
        
        
-       
         //온서브밋
        function checkAll(){
     	   console.log("성공?!");
-       if(!titleCheckReturn){ alert('제목이 입력되지않았습니다'); return false;}
-       if(!priceCheckReturn){ alert('목표금액이 입력되지않았습니다.'); return false;}
-       if(!urlCheckReturn){ alert('url이 입력되지않았습니다'); return false;}
+       if(!titleCheckReturn){ alert('제목이 입력되지 않았습니다'); return false;}
+       if(!priceCheckReturn){ alert('목표금액이 입력되지 않았습니다.'); return false;}
+       if(!urlCheckReturn){ alert('url이 입력되지 않았습니다'); return false;}
        if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
        
-       if(!nameCheckReturn){ alert('이름이 입력되지않았습니다'); return false;}
-       if(!infoCheckReturn){ alert('소개가 입력되지않았습니다.'); return false;}
-       if(!bankCheckReturn){ alert('은행명이 입력되지않았습니다'); return false;}
+       if(!nameCheckReturn){ alert('이름이 입력되지 않았습니다'); return false;}
+       if(!infoCheckReturn){ alert('소개가 입력되지 않았습니다.'); return false;}
+       if(!bankCheckReturn){ alert('은행명이 입력되지 않았습니다'); return false;}
        if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
        if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
        if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
        if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
 
-       return true;
+    //    return true;
        }
 
        /*심사요청 href*/
@@ -950,86 +945,126 @@
        } */
        
        
+       let map = new Map([]);
        /*아이템 추가*/
-       var itemName = $('input[name=itemName]').val();
-       var optionName = $('textarea[name=addOption]').val();
        $('input[name=itemSave]').click(function(){
+           var itemName = $('input[name=itemName]').val();
+           var optionName = $('textarea[name=addOption]').val();
            //console.log($('words').length());   
-           console.log(words.length);
-           console.log(words[0]);
            
            //for (var j = 0; j < words.length; j++){}
            
             var list = '';
             list +=  '<ul class="set-box">' + '<li class="item-list">' + '<button type="button" class="itemBox">'
-                list += '<div class="item-box">' + '<div class="item-name">' + itemName + '</div>' 
-                list +=  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + 
+            list += '<div class="item-box">' + '<div class="item-name">' + itemName + '</div>' 
+            list +=  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + 
                     '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' + '</svg>'
-                    list += '</div>' + '<ol type="1" class="set-item">' + '<li class="itemOption">' + optionName + '</li>' + '</ol>' 
-                    list += '</button>' + '</li>' + '</ul>'
-                    $(".preview-set").append(list);
-                    $('input[name=itemName]').val("");
-                    $('textarea[name=addOption]').val("");
-                    
-                });
-                
-                $('input[name=apply]').click(function(){
-                    if($(".item-name").text()){
-                        $('input[id*="itemPopup"]+ label + div').css("display", "none");
-                        
-                        // var myArray = {id1: 100, id2: 200, "tag with spaces": 300};
-                        // for (var key in myArray) {
-                            //     console.log("key " + key + " has value " + myArray[key]);
-                            // }
-                            
-            var words = optionName.split(',');
-            let setArray = {}; 
+            list += '</div>' + '<ol type="1" class="set-item">' + '<li class="itemOption">' + optionName + '</li>' + '</ol>' 
+            list += '</button>' + '</li>' + '</ul>'
 
-            for (let key in setArray) {
-                console.log(key + " => " + obj1[key]);
-            }
+            map.set(itemName,optionName);
 
-            // for(let i = 0; i < itemName; i++){ 
-            //     itemName = words[i]; 
-            // } 
-            // for (let key of Object.keys(obj1)) { 
-            // console.log(key + " => " + obj1[key] ) 
-            // } 
+            $(".preview-set").append(list);
+            $('input[name=itemName]').val("");
+            $('textarea[name=addOption]').val("");
+            //console.log(map);
+        });
 
-            //아이템 select에 넣기
-            var allItem = document.querySelectorAll( '.itemBox' );
-            allItem.forEach(element => {
+        /* select option에 집어넣기 (item) */   
+        $('input[name=apply]').click(function(){
+            if($(".item-name").text()){
+                $('input[id*="itemPopup"]+ label + div').css("display", "none");
+                //var words = optionName.split(',');
+
+                var allItem = document.querySelectorAll( '.itemBox' );
+                allItem.forEach(element => {
                 const itemName = element.querySelector('.item-name').innerHTML;
-
-                // var i = 0;
-                // var optionValue = i + 1
+            
                 var list = '';
                 //list += '<option>' + '== 아 이 템 선 택 == ' + '</option>';
                 list += '<option value=' +  itemName +  '>' + itemName + '</option>';
                 $(".myitemList").append(list);
-                    
-                for (var j = 0; j < $('.set-box').size(); j++){
-                    const itemOption = element.querySelector('.itemOption').innerHTML;
-                    var words = itemOption.split(',');
-
-                    // var list2 = '';
-                    // list2 += '<select name=' + 'itemName + '>';
-                    // $(".myitemOption").append(list);
-                }
-
-
-                // list += '<option>' +  itemName +  ' (' + itemOption + ')' + '</option>';
-            });
-            
-        //     
-        // });
-        }else{
-            alert("아이템을 등록해 주세요")
-        }
+                });
+            }else{
+                alert("아이템을 등록해 주세요")
+            }
         });
 
-        
-       
-  </script>
+        /* option에 집어넣기 (option) */
+        var i = 0;
+        $('.myitemList').change(function(){
+            var opt = $('.myitemList option:selected').val();
+
+            map.forEach(function(value, key) {
+                // console.log('key : ' + key);
+                // console.log('value : ' + value);
+                if(key == opt){
+                    var words = value.split(',');
+                    for (var j = 0; j < words.length; j++){
+                        var optionValue = i + 1;
+                            var list = '';
+                            list += '<option value=' +  optionValue +  '>' + words[j] + '</option>';
+                            $(".myitemOption").append(list);
+                        }
+                    }
+            });
+        });
+
+        /* item option append*/
+        $('.myitemOption').change(function(){
+            var item = $('.myitemList option:selected').val();
+            var option = $('.myitemOption option:selected').text();
+            
+            var list = '';
+            list += '<li>' + '<div>' + '<div class="selected-item">' + item + '</div>' + '<div>' + '<div class="quantity-box">';
+            list += '<button>' + '<img src="/blank/resources/images/project/minus.svg">' + '</button>';
+            list += '<input type="number" value="1" name="optionQuantity">' + '<button>' + '<img src="/blank/resources/images/project/plus.svg">' + '</button>' + '</div>';
+            list += '<button class="delete-button">' + '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + 
+                    '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' + '</svg>';
+            list += '</button>' + '</div>' + '</div>' + '<ol type="1">' + '<li class="selected-opt">' + option + '</li>' + '</ol>' + '</li>';
+            $(".selected").append(list);
+        });
+
+    /* 플러스 마이너스 버튼 누르면 값 바뀌게 */
+    $('.quantity-box > button:first-child').click(function() {
+            console.log('으으');
+            var nextCntInput = $(this).next();
+            nextCntInput.val(String(parseInt(nextCntInput.val()) - 1));
+            if(nextCntInput.val() <= 0) {
+                alert('0 이하로는 입력할 수 없습니다!');
+                nextCntInput.val(1);
+            }
+        })
+    $('.quantity-box > button:last-child').click(function() {
+        console.log('55');
+        var prevCntInput = $(this).prev();
+        prevCntInput.val(String(parseInt(prevCntInput.val()) + 1));
+        if(prevCntInput.val() <= 0) {
+            alert('0 이하로는 입력할 수 없습니다!');
+            prevCntInput.val(1);
+        }
+    });
+
+    /*세트 저장*/
+    $('input[name=save]').click(function(){
+        if(!$('input[name=setName]').val().trim() == '' && !$('input[name=setPrice]').val().trim() == '' && !$('input[name=limitedQuantity]').val().trim() == ''){
+            console.log('아야오오');
+            var list = '';
+            list += '<li class="set-list">' + '<button type="button">' + '<div class="set-buttons">' + '<strong>' + $('input[name=setPrice]').val() + '원' + '</strong>' 
+            list += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' +
+                                                '</svg>' + '</div>' + '<p class="set-name">' + $('input[name=setName]').val() + '</p>';
+            list += '<ul class="set-item">' + '<li>' + '사과' + ' x 1' + '</li>' + '</ul>'
+            list += '<div class="set-quantity">' + '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">' + '<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>'+ '</svg>';
+            list += '<div>' + '제한 수량' + '</div>' + '<div>' + $('input[name=limitedQuantity]').val() + '</div>' + '<div>' + '개' + '</div>' + '</div>' + '</button>'
+            list += '<button type="button">' + '</button>' + '</li>';
+            $(".mySet").append(list);
+            console.log('33');
+            }else{
+                alert("모든 항목을 입력해 주세요");
+            }
+    });
+
+
+</script>
 </body>
 </html>

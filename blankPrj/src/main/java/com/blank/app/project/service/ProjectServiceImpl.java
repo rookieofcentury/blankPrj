@@ -86,8 +86,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int insertPrj(ProjectVo vo) {
-		return dao.insertPrj(sst,vo);
+	public int insertPrj(HashMap<String, Object> map) {
+		return dao.insertPrj(sst,map);
 	}
 
 	/* 로그인 찜한 프로젝트 조회 */

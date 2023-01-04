@@ -73,9 +73,9 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
-	public int insertPrj(SqlSessionTemplate sst, ProjectVo vo) {
-		int result = sst.insert("projectMapper.insertPrj", vo);
-		log.warn("플젝 새로 추가 + 플젝번호" + vo.getNo() );
+	public int insertPrj(SqlSessionTemplate sst, HashMap<String, Object> map) {
+		int result = sst.insert("projectMapper.insertPrj", map);
+		log.warn("플젝 새로 추가 + 플젝번호 : " + map );
 		return result;
 	}
 
