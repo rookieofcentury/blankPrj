@@ -21,7 +21,7 @@ public interface HelpDao {
 
 	int inquiryWrite(SqlSessionTemplate sst, HelpVo helpVo);
 
-	int faqCount(SqlSessionTemplate sst);
+	int faqCount(SqlSessionTemplate sst, String category);
 
 	List<FaqVo> selectFaqList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
 

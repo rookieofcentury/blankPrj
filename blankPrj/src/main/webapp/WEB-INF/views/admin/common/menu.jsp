@@ -75,7 +75,7 @@
             <h1><img src="/blank/resources/images/admin/survey-admin.png">탈퇴 설문 관리</h1>
             <ul>
                 <li>
-                    <a href="">설문 문항</a>
+                    <a href="/blank/admin/quit">설문 문항</a>
                 </li>
                 <li>
                     <a href="">통계</a>
@@ -89,3 +89,15 @@
     </div>
 
 </aside>
+
+<script>
+
+    window.onload = function() {
+        var link = document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = '/blank/resources/images/member/blank.ico';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }();
+
+</script>

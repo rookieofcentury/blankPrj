@@ -42,7 +42,7 @@
     
             <div class="member-list">
     
-                <div class="member-list-top">전체 회원  ${listCount} 명</div>
+                <div class="member-list-top">전체 회원  <a id="listCount">${listCount}</a> 명</div>
     
                 <div>번호</div>
                 <div>닉네임</div>

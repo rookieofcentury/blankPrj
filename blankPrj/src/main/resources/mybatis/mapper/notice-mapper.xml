@@ -13,18 +13,18 @@
 
 	<!-- 공지사항 목록 조회 -->
 	<select id="selectList" resultType="NoticeVo">
-			SELECT NO, TITLE, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, DELETE_YN
+			SELECT NO, TITLE, TO_CHAR(WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE, DELETE_YN, FIXE_YN
 			FROM NOTICE
 			WHERE DELETE_YN = 'N'
 			<if test=" keyword != null and keyword != '' ">
-				WHERE ${category} LIKE '%${keyword}%'
+				AND TITLE LIKE '%${keyword}%'
 			</if>
 			ORDER BY NO DESC
 	</select>
 
 	<!-- 공지사항 상세조회 -->
 	<select id="selectNotice" resultType="NoticeVo">
-			SELECT NO, TITLE, CONTENT, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE
+			SELECT NO, TITLE, CONTENT, TO_CHAR(WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE, FIXE_YN
 			FROM NOTICE
 			WHERE NO = #{no}
 	</select>

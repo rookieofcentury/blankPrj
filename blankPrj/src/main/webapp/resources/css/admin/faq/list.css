@@ -7,6 +7,10 @@ body{
     padding: 0;
 }
 
+#listCount{
+    color: rgba(86, 122, 206, 1);
+}
+
 .faq-board-content{
     width: 1380px;
     display: grid;
@@ -18,7 +22,6 @@ main .faq-board-header{
     height: 64px;
     color: rgba(90, 90, 90, 1);
     background-color: rgba(241, 241, 241, 1);
-    border: 1px solid var(--line-gray);
     position: relative;
     display: grid;
     grid-template-columns: 0.17fr 1fr;
@@ -100,7 +103,7 @@ main .faq-board-header{
     border: 1px solid var(--line-gray);
     background-color: white;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 3fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 3fr 1fr 1fr 1fr ;
     grid-template-rows: repeat(13, 54px);
     align-content: center;
     text-align: center;
@@ -121,7 +124,7 @@ main .faq-board-header{
 }
 
 .faq-list .faq-list-top{
-    grid-column: span 8;
+    grid-column: span 7;
     text-align: left;
     margin-left: 10px;
     border: none;
@@ -131,7 +134,7 @@ main .faq-board-header{
     width: 150px;
     height: 60px;
     margin-left: 50%;
-	grid-column: span 7;
+	grid-column: span 6;
     border-bottom: none;
 }
 

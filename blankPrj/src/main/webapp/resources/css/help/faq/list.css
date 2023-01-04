@@ -1,12 +1,41 @@
 .faq-header{
-    width: 1180px;
     margin-left: 21%;
+    margin-right: 18%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2.5fr;
 }
 
 .faq-header h1{
     font-size: 30px;
     font-weight: 100;
     color: rgba(53, 53, 53, 1);
+}
+
+.faq-category{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.faq-category div a{
+    line-height: 76px;
+    font-size: 20px;
+    color: rgba(112, 112, 112, 1);
+}
+
+#now-category{
+    color: rgba(86, 122, 206, 1);
+}
+
+.back-btn{
+    height: 30px;
+    color: rgb(74, 74, 74);
+    margin-top: 6%;
+    margin-left: 76%;
+    border: 1px solid rgba(197, 197, 197, 1);
+    border-radius: 15px;
+    background-color: white;
+    cursor: pointer;
 }
 
 main{
@@ -37,7 +66,7 @@ main{
 #page-area{
     width: 150px;
     height: 60px;
-    margin-left: 47%;
+    margin-left: 49%;
     margin-top: 25px;
     border-bottom: none;
 }

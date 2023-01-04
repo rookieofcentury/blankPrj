@@ -14,56 +14,83 @@
 
     <main>
 
-        <div class="help-header">
+        <div id="help-main-content">
 
-            <div class="title">무엇을 도와 드릴까요?</div>
-
-            <form action="" method="get">
-            
-                <div class="search">
+            <div class="help-header">
+    
+                <div class="title">무엇을 도와 드릴까요?</div>
+    
+                <form action="" method="get">
                 
-                    <div><input type="text" name="keyword"></div>
-                    <div>
-                        <input type="image" src="/blank/resources/images/admin/search.png" alt="search.png">
+                    <div class="search">
+                    
+                        <div><input type="text" name="keyword"></div>
+                        <div>
+                            <input type="image" src="/blank/resources/images/admin/search.png" alt="search.png">
+                        </div>
+                        
                     </div>
                     
+                </form>
+    
+            </div>
+    
+            <div class="help-middle">
+    
+                <div class="title">자주 묻는 질문(FAQ)</div>
+    
+                <div class="faq-contents">
+                    <div>
+                    	<a href="/blank/help/faqList?category=1" name="category">
+                    	<img src="">회원</a>
+                    </div>
+                    <div>
+	                    <a href="/blank/help/faqList?category=2" name="category">
+	                    <img src="">결제</a>
+                    </div>
+                    <div>
+	                    <a href="/blank/help/faqList?category=3" name="category">
+	                    <img src="">배송</a>
+                    </div>
+                    <div>
+	                    <a href="/blank/help/faqList?category=4" name="category">
+	                    <img src="">기타</a>
+                    </div>
                 </div>
+    
+            </div>
+    
+            <div class="help-bottom">
+                <div class="title">블랭크에게 문의하기</div>
+    
+                <div class="inquiry-contents">
+    
+                <c:forEach items="${voList}" var="vo">
                 
-            </form>
-
-        </div>
-
-        <div class="help-middle">
-
-            <div class="title">자주 묻는 질문(FAQ)</div>
-
-            <div class="faq-contents">
-                <div><img src="">회원</div>
-                <div><img src="">결제</div>
-                <div><img src="">배송</div>
-                <div><img src="">기타</div>
-            </div>
-
-        </div>
-
-        <div class="help-bottom">
-            <div class="title">블랭크에게 문의하기</div>
-
-            <div class="inquiry-contents">
-
-			<c:forEach items="${voList}" var="vo">
-			
-				<div>Q. ${vo.title}</div>
-                <div>${vo.memberNo}</div>
-                <div>${vo.writeDate}</div>
-
-			</c:forEach>
-
-
-            </div>
-
-            <div class="more">
-                <a href="/blank/help/inquiryList">더보기</a>
+                    <c:if test="${vo.secretYn eq 'N'}">
+	                    <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
+	                </c:if>
+	                
+	               	<c:if test="${vo.secretYn == null}">
+	                    <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
+	                </c:if>
+                    
+                    <c:if test="${vo.secretYn eq 'Y'}">
+	                	<div>Q. ${vo.title} &nbsp; <img src="/blank/resources/images/help/secret.png" width="11" height="13"></div>
+	                </c:if>
+                    
+                    <div>${vo.memberNo}</div>
+                    <div>${vo.writeDate}</div>
+    
+                </c:forEach>
+    
+    
+                </div>
+    
+                <div class="more">
+                    <a href="/blank/help/inquiryList">더보기</a>
+                </div>
+    
             </div>
 
         </div>

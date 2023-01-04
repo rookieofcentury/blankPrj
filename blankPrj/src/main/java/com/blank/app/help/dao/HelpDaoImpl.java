@@ -54,13 +54,14 @@ public class HelpDaoImpl implements HelpDao{
 	//고객센터 문의 등록
 	@Override
 	public int inquiryWrite(SqlSessionTemplate sst, HelpVo helpVo) {
+		System.out.println(helpVo);
 		return sst.insert("helpMapper.inquiryWrite", helpVo);
 	}
 
 	//FAQ 전체 카운트
 	@Override
-	public int faqCount(SqlSessionTemplate sst) {
-		return sst.selectOne("helpMapper.faqCount");
+	public int faqCount(SqlSessionTemplate sst, String category) {
+		return sst.selectOne("helpMapper.faqCount", category);
 	}
 
 	//FAQ 목록 조회

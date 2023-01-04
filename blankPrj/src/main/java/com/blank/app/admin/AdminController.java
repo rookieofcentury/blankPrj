@@ -508,4 +508,10 @@ public class AdminController {
 		return "redirect:help";
 	}
 	
+	//탈퇴 설문 관리
+	@GetMapping("quit")
+	public String quit() {
+		return "admin/quit/write";
+	}
+	
 }
