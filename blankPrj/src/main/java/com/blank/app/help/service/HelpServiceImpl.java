@@ -53,8 +53,8 @@ public class HelpServiceImpl implements HelpService{
 
 	//FAQ 전체 카운트
 	@Override
-	public int faqCount() {
-		return helpDao.faqCount(sst);
+	public int faqCount(String category) {
+		return helpDao.faqCount(sst, category);
 	}
 
 	//FAQ 목록 조회

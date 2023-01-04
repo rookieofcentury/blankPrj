@@ -30,7 +30,7 @@
 		            	<input type="text" id="title-input" name="title" placeholder="이곳에 제목을 작성하세요.">
 		            </div>
 		            <div class="secret-btn content-style">
-						<input type="checkbox" name="secretYn" id="secret-check" onclick="toggleTextbox(this);"
+						<input type="checkbox" name="secretYn" value="Y" id="secret-check" onclick="toggleTextbox(this);"
 						>비밀글
 					</div>
 		            <div class="password-input content-style">PW&nbsp;&nbsp;<input type="password" name="password" id="result" disabled></div>

@@ -1,21 +1,18 @@
 #notice-container{
-	width: 100vw;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 main{
-    width: 830px;
-    height: 900px;
+    height: 910px;
     display: grid;
     grid-template-rows: repeat(10, 80px);
     border-radius: 5px;
     border: 1px solid rgb(172, 171, 171);
-    margin-left: 28%;
     margin-top: 20px;
 }
 
 .notice-header h1{
-    margin: 0;
-    margin-left: 530px;
     font-weight: normal;
 }
 
@@ -48,10 +45,10 @@ main{
 }
 
 .search{
-    width: 290px;
     display: flex;
-    margin: 15px;
-    margin-left: 43%;
+    margin-bottom: 15px;
+    margin-left: 35%;
+    margin-right: 35%;
 }
 
 .search input{
@@ -79,13 +76,15 @@ main{
 }
 
 #page-area{
-    width: 150px;
-    height: 60px;
-    margin-left: 50%;
+    height: 40px;
+    margin-left: 45%;
+    margin-right: 45%;
+    margin-top: 25px;
     border-bottom: none;
 }
 
 #page-area a{
-    color: black;
+    color: rgb(74, 74, 74);
     text-decoration: none;
+    margin: 3px;
 }

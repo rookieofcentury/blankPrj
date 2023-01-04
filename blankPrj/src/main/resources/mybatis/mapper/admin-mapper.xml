@@ -189,9 +189,9 @@
 		LEFT JOIN ADMIN A ON F.ADMIN_NO = A.NO
 		JOIN FAQ_CATEGORY C ON C.NO = F.CATEGORY
 		WHERE F.DELETE_YN = 'N'
-<!-- 		<if test=" keyword != null and keyword != '' ">
-			WHERE ${category} LIKE '%${keyword}%'
-		</if> -->
+ 		<if test=" keyword != null and keyword != '' ">
+			AND ${category} LIKE '%${keyword}%'
+		</if>
 		ORDER BY NO DESC
 	</select>
 

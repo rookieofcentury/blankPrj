@@ -17,7 +17,12 @@
     
             <div class="notice-detail-hearder">
                 <div>공지사항</div>
-                <div>${selectNotice.title}</div>
+                <c:if test="${selectNotice.fixeYn == 'Y'}">
+                	<div>${selectNotice.title}&nbsp;&nbsp;<img src="/blank/resources/images/help/pin.png" width="24" height="25"></div>
+               	</c:if>
+               	<c:if test="${selectNotice.fixeYn == 'N'}">
+               		<div>${selectNotice.title}</div>
+               	</c:if>
                 <div>${selectNotice.writeDate}</div>
             </div>
             
@@ -42,16 +47,8 @@
         </div>
 
         <div class="back-btn">
-            <input type="button" value="목록으로 돌아가기" onclick="goBack();">
+        	<a href="/blank/notice/list"><input type="button" value="목록으로 돌아가기"></a>
         </div>
-        
-		<script type="text/javascript">
-		
-			function goBack(){
-				window.history.back();
-			}
-		
-		</script>
 
     </div>
 

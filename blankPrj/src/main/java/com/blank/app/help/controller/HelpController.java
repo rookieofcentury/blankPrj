@@ -104,7 +104,7 @@ public class HelpController {
 		helpVo.setMemberNo(loginMember.getNo());
 		
 		int result = helpService.inquiryWrite(helpVo);
-
+		
 		if (result != 1) {
 			return "error";
 		}
@@ -141,8 +141,8 @@ public class HelpController {
 		if (p == null) {
 			p = "1";
 		}
-
-		int listCount = helpService.faqCount();
+		
+		int listCount = helpService.faqCount(category);
 		int currentPage = Integer.parseInt(p);
 		int boardLimit = 10;
 		int pageLimit = 5;
@@ -157,6 +157,7 @@ public class HelpController {
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
 		session.setAttribute("pageVo", pageVo);
+		session.setAttribute("category", category);
 		
 		return "help/faq/list";
 	}

@@ -44,7 +44,7 @@
     
             <div class="project-list">
     
-                <div class="project-list-top">전체 신고 프로젝트 ${listCount} 개</div>
+                <div class="project-list-top">전체 신고 프로젝트 <a id="listCount">${listCount}</a> 개</div>
     
                 <div>번호</div>
                 <div>작성자</div>

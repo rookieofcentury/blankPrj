@@ -26,28 +26,23 @@
     font-size: 16px;
     height: 30px;
     outline: none;
+    border: none;
 }
 
 .search-category .category{
-    border: 1px solid rgba(182, 182, 182, 1);
-    border-right: none;
-    border-radius: 3px 0px 0px 3px;
-    background-color: rgba(239, 239, 239, 1);
     color: rgb(74, 74, 74);
     width: 55px;
 }
 
 .search-keyword .keyword{
-    border: 1px solid rgba(182, 182, 182, 1);
-    border-radius: 0px 3px 3px 0px;
     width: 180px;
 }
 
 #inquiry-search-form .inquiry-search input[type="image"]{
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: none;
-    margin: 5px;
+    margin: 6px;
 }
 
 #inquiry-container button{

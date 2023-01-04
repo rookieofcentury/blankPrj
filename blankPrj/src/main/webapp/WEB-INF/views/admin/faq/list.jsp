@@ -46,7 +46,7 @@
             
                     <div class="faq-list">
             
-                        <div class="faq-list-top">전체 FAQ ${listCount} 개</div>
+                        <div class="faq-list-top">전체 FAQ <a id="listCount">${listCount}</a> 개</div>
             
                         <div>번호</div>
                         <div>제목</div>
@@ -54,7 +54,6 @@
                         <div>내용</div>
                         <div>작성자</div>
                         <div>작성날짜</div>
-                        <div>삭제 여부</div>
                         <div>수정</div>
                 
                 		<c:forEach items="${voList}" var="vo">
@@ -64,7 +63,6 @@
 	                        <div>${vo.content}</div>
 	                        <div>${vo.adminNo}</div>
 	                        <div>${vo.writeDate}</div>
-	                        <div>${vo.deleteYn}</div>
 	                        <div><a href="/blank/admin/faqDetail?no=${vo.no}" name="no"><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
                 		</c:forEach>
 

@@ -61,8 +61,6 @@ public class NoticeController {
 		
 		NoticeVo selectNotice = noticeService.selectOne(noticeVo);
 
-		System.out.println(selectNotice);
-		
 		if (selectNotice == null) {
 			return "error";
 		}

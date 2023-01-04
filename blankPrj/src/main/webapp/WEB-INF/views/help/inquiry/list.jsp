@@ -31,7 +31,7 @@
 					</select>
 				</div>
 			    <div class="search-keyword">
-					<input type="text" class="keyword" name="keyword">
+					<input type="text" class="keyword" name="keyword" placeholder="  검색어를 입력하세요.">
 				</div>
 				<div>
 					<div class="search-icon"><input type="image" src="/blank/resources/images/admin/search.png" alt="search.png"></div>
@@ -56,9 +56,26 @@
 				<div class="inquiry-title">작성날짜</div>
    
     			<c:forEach items="${voList}" var="vo">
-	                <div>${vo.no}</div>
-	                <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
-	                <div>${vo.content}</div>
+    				
+                	<div>${vo.no}</div>
+    				<c:if test="${vo.secretYn eq 'Y'}">
+	                	<div>${vo.title}</div>
+	                </c:if>
+	                <c:if test="${vo.secretYn eq 'N'}">
+		                <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+	                </c:if>
+	                <c:if test="${vo.secretYn == null}">
+		                <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+	                </c:if>
+	                <c:if test="${vo.secretYn eq 'Y'}">
+	                	<div>작성자와 관리자만 확인할 수 있습니다. &nbsp;<img src="/blank/resources/images/help/secret.png" width="11" height="13"></div>
+	                </c:if>
+	                <c:if test="${vo.secretYn eq 'N'}">
+	                	<div>${vo.content}</div>
+	                </c:if>
+	                <c:if test="${vo.secretYn == null}">
+	                	<div>${vo.content}</div>
+	                </c:if>
 	                <div>${vo.memberNo}</div>
 	                <c:if test="${vo.status eq 'N'}">
 	                	<div id="waiting">답변 대기</div>
@@ -67,6 +84,7 @@
 	                	<div>답변 완료</div>
 	                </c:if>
 	                <div>${vo.writeDate}</div>
+	                
     			</c:forEach>
 
             </div>

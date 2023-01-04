@@ -7,6 +7,10 @@ body{
     padding: 0;
 }
 
+#listCount{
+    color: rgba(86, 122, 206, 1);
+}
+
 .project-board-content{
     width: 1380px;
     display: grid;
@@ -18,7 +22,6 @@ main .project-board-header{
     height: 64px;
     color: rgba(90, 90, 90, 1);
     background-color: rgba(241, 241, 241, 1);
-    border: 1px solid var(--line-gray);
     position: relative;
     display: grid;
     grid-template-columns: 0.17fr 1fr;

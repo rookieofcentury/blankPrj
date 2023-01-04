@@ -19,7 +19,7 @@ public interface HelpService {
 
 	int inquiryWrite(HelpVo helpVo);
 
-	int faqCount();
+	int faqCount(String category);
 
 	List<FaqVo> selectFaqList(Map<String, String> map, PageVo pageVo);
 

@@ -61,7 +61,7 @@
 	                <input type="text" id="title-input" name="title" value="${selectNotice.title}">
 	                </div>
 	                <div>
-	                	<label>상단에 표시하기<input type="checkbox" name="fixe" value="${selectNotice.fixeYn}"></label>
+	                	<div class="content-style">고정여부&nbsp;&nbsp;${selectNotice.fixeYn}</div>
 	                </div>
                     <div></div>
 	    

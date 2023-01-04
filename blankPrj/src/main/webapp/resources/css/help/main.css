@@ -1,8 +1,10 @@
 main{
-    width: 890px;
-    height: 750px;
-    /* border: 1px solid red; */
-    margin-left: 27%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#help-main-content div{
+    color: rgba(53, 53, 53, 1);
 }
 
 .help-header{
@@ -23,7 +25,7 @@ main{
     border-radius: 1px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-left: 36%;
+    margin-left: 33%;
     margin-top: 10px;
 }
 
@@ -59,27 +61,26 @@ main{
 
 .faq-contents div{
     width: 150px;
-    height: 150px;
+    height: 140px;
     margin: 10px;
     border: 1px solid rgb(150, 150, 150);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .help-bottom{
     height: 300px;
-    /* border: 1px solid red; */
 }
 
 .help-bottom .title{
     font-size: 20px;
-    margin-top: 25px;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 
 .inquiry-contents{
-    width: 760px;
     display: grid;
-    grid-template-columns: 5fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr;
     margin-left: 7%;
 }
 
@@ -89,6 +90,6 @@ main{
 
 .more{
     text-align: right;
-    margin-right: 8%;
+    margin-right: 3%;
     margin-top: 5px;
 }

@@ -44,7 +44,7 @@
         
                 <div class="help-list">
         
-                    <div class="help-list-top">전체 문의 ${listCount} 건</div>
+                    <div class="help-list-top">전체 문의 <a id="listCount">${listCount}</a> 건</div>
         
                     <div>번호</div>
                     <div>제목</div>

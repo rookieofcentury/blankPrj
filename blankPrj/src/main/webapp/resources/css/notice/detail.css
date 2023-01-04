@@ -1,15 +1,10 @@
-#notice-container{
-	width: 100vw;
-}
-
 .notice-detail{
-    width: 890px;
-    height: 900px;
     display: grid;
     grid-template-rows: 2fr 8fr;
     border-radius: 5px;
     border: 1px solid rgb(172, 171, 171);
     margin-left: 26%;
+    margin-right: 26%;
     margin-top: 20px;
 }
 
@@ -40,6 +35,12 @@
     border-bottom: 1px solid white;
     margin: 20px;
     margin-left: 30px;
+}
+
+.notice-detail-content{
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .notice-detail-footer{

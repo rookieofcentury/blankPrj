@@ -7,6 +7,10 @@ body{
     padding: 0;
 }
 
+#listCount{
+    color: rgba(86, 122, 206, 1);
+}
+
 .notice-board-content{
     width: 1380px;
     display: grid;
@@ -18,7 +22,6 @@ main .notice-board-header{
     height: 64px;
     color: rgba(90, 90, 90, 1);
     background-color: rgba(241, 241, 241, 1);
-    border: 1px solid var(--line-gray);
     position: relative;
     display: grid;
     grid-template-columns: 0.17fr 1fr;
@@ -106,7 +109,7 @@ main .notice-board-header{
     border: 1px solid var(--line-gray);
     background-color: white;
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 3fr 1fr 1fr 1fr ;
     grid-template-rows: repeat(13, 54px);
     align-content: center;
     text-align: center;
@@ -127,7 +130,7 @@ main .notice-board-header{
 }
 
 .notice-list .notice-list-top{
-    grid-column: span 7;
+    grid-column: span 6;
     text-align: left;
     margin-left: 10px;
     border: none;
@@ -137,7 +140,7 @@ main .notice-board-header{
     width: 150px;
     height: 60px;
     margin-left: 50%;
-	grid-column: span 6;
+	grid-column: span 5;
     border-bottom: none;
 }
 
