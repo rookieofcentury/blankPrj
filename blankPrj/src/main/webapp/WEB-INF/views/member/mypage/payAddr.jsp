@@ -23,6 +23,7 @@
 		<div class="mypage-container">
 			<div><%@ include file = "/WEB-INF/views/member/mypage/mypageSidebar.jsp" %></div>
 			<div class="content-container">
+				<h2>결제 / 배송지</h2>
 				<nav id="nav">
 					<ul>
 						<li>결제수단</li>
@@ -85,7 +86,7 @@
 					  
 					  <div id="contents__item" class="content-second">
 							<div>
-								<div><h3></h3></div>
+								<div><h3>등록된 배송지</h3></div>
 								<div><input type="button" class="btn plus" id="addr-plus" name="addrPlus" value="추가"></div>
 							</div>
 							<div>
@@ -289,7 +290,7 @@
 							<input type="hidden" name="addr">
 						</div>
 						<div>
-							<input type="text" name="phone" placeholder="휴대전화 번호" class="width100" name="phone">
+							<input type="text" name="phone" placeholder="휴대전화 번호" class="width100" name="phone" oninput="autoHyphen(this)">
 						</div>
 						<div>
 							<input type="submit" class="width100 ace" name="addrPlus">

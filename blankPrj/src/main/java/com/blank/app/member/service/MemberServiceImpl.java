@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ProjectVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -117,8 +119,22 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int insertAddr(AddressVo vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return dao.insertAddr(sst, vo);
+	}
+
+
+	@Override
+	public List<HelpVo> selectHelpListByNo(String mNo) {
+		return dao.selectHelpListByNo(sst, mNo);
+	}
+
+	@Override
+	public List<ProjectVo> selectLikePrjByNo(String mNo) {
+		
+		List<ProjectVo> voList = dao.selectLikePrjByNo(sst, mNo);
+		log.warn("서비스에서 받는 리스트 "+ voList);
+		return voList;
 	}
 
 
