@@ -1,8 +1,11 @@
 package com.blank.app.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -12,11 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.service.MailSendService;
 import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.AddressVo;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -273,6 +278,32 @@ public class MemberController {
 		return "member/mypage/reportQ";
 	}
 	
+		//마이페이지 팔로잉 / 팔로워  내역  
+		@GetMapping("member/mypage/likePeople")
+		public String mypageFollow(HttpSession session, Model model) {
+			
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			
+			if(loginMember == null) {
+				model.addAttribute("msg", "로그인 후 이용가능합니다.");
+				return "home";
+			}
+			
+			String mNo = loginMember.getNo();
+			
+			//내가발로잉한 사람 
+			List<MemberVo> followingList = service.selectFollowing(mNo);
+			log.warn("내가 팔로잉한 목록 ::: "+followingList);
+			
+			//나를 팔로잉 한사람 = 팔로워 
+			List<MemberVo> followerList = service.selectFollower(mNo);
+			log.warn("내가 팔로잉한 목록 ::: "+followerList);
+			
+			return "member/mypage/follow";
+		}
+	
+	
+	
 	//이메일 중복 확인 후 없으면 이메일 업데이트 있으면 중복된 이메일이라고 알림
 	@ResponseBody
 	@PostMapping("/member/updateEmail")
@@ -437,8 +468,121 @@ public class MemberController {
 		}
 		
 		
+		//팔로잉되어있는지확인하는 구문 
+		@PostMapping("member/checkLikeMember")
+		public String checkLikeMember(){
+			return "";
+		}
 		
 		
 		
+		//팔로잉 기능 --에이잭스 쓰시나 물어봐야함 
+		//다시 한번 확인해야함 ㅂ팔로우 한 사람인지 아닌ㄷ지 
+		//자기자신 팔로잉 도 확인 
+		@ResponseBody
+		@PostMapping("member/insertLikeMember")
+		public String insertLikeMemberByNo(HttpSession session, String likeMemberNo) {
+			
+
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			//로그인한 사람 
+			String mNo = loginMember.getNo();
+			
+			LikeMemberVo insertVo = new LikeMemberVo();
+			insertVo.setMNo(mNo);
+			insertVo.setLikeMemberNo(likeMemberNo);
+			
+			
+			int result = service.insertLikeMemberByNo(insertVo);
+			
+			
+			if(result == 1) {
+				//성공시 
+				return 1+"";
+			}
+			return 0+"";
+			
+		}
 		
+		
+		//팔로잉 기능 --에이잭스 쓰시나 물어봐야함 
+		@ResponseBody
+		@PostMapping("member/deleteMember")
+		public String deleteLikeMemberByNo(HttpSession session, String likeMemberNo) {
+			
+
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			//로그인한 사람 
+			String mNo = loginMember.getNo();
+			//삭제할 사람 
+			LikeMemberVo deleteVo = new LikeMemberVo();
+			
+			deleteVo.setMNo(mNo);
+			deleteVo.setLikeMemberNo(likeMemberNo);
+			
+			
+			int result = service.deleteLikeMemberByNo(deleteVo);
+			
+			
+			if(result == 1) {
+				//성공시 
+				return 1+"";
+				
+			}
+			return 0+"";
+			
+		}
+		
+		
+		//프로필 사진 올리기
+		@PostMapping("member/mypage/plus-profile")
+		public String uploadPorfileh(HttpServletRequest req, HttpSession session, MultipartFile profile) {
+			
+			
+			String path = req.getSession().getServletContext().getRealPath("/resources/upload/member/");
+			String changeName = "profile_"+ System.nanoTime();
+			String originName = profile.getOriginalFilename();
+			String ext = originName.substring(originName.lastIndexOf("."), originName.length());
+		
+			File target = new File(path + changeName + ext) ;
+			
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			//로그인한 사람 
+			String no = loginMember.getNo();
+			String profileName = changeName + ext;
+			//업데이트 정보 넘겨주는 것 
+			
+			
+			MemberVo vo = new MemberVo();
+			vo.setNo(no);
+			vo.setProfile(profileName);
+			
+			boolean isEmpty = profile.isEmpty();
+			
+			int result = 0;
+			
+			if(isEmpty) {
+				return "redirect:/member/mypage/editprofile";
+			}
+		
+			
+			try {
+				profile.transferTo(target);
+				 result = service.updateProfile(vo);
+				 
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+				
+			
+			
+			if(result ==1) {
+				loginMember.setProfile(profileName);
+				System.out.println("로그인멤버 어떻게 되나용?"+loginMember);
+				session.setAttribute("loginMember", loginMember);
+				
+			}
+			return "redirect:/member/mypage/editprofile";
+		}
 }

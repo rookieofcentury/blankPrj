@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.member.vo.AddressVo;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -135,6 +136,35 @@ public class MemberServiceImpl implements MemberService{
 		List<ProjectVo> voList = dao.selectLikePrjByNo(sst, mNo);
 		log.warn("서비스에서 받는 리스트 "+ voList);
 		return voList;
+	}
+
+
+	@Override
+	public int insertLikeMemberByNo(LikeMemberVo insertVo) {
+		
+		return dao.insertLikeMemberByNo(sst, insertVo);
+	}
+
+	@Override
+	public int deleteLikeMemberByNo(LikeMemberVo deleteVo) {
+		return dao.deleteLikeMemberByNo(sst, deleteVo);
+	}
+
+	@Override
+	public List<MemberVo> selectFollowing(String mNo) {
+		
+		return dao.selectFollowing(sst, mNo);
+	}
+
+	@Override
+	public List<MemberVo> selectFollower(String mNo) {
+		return dao.selectFollower(sst, mNo);
+	}
+
+
+	@Override
+	public int updateProfile(MemberVo vo) {
+		return dao.updateProfile(sst, vo);
 	}
 
 
