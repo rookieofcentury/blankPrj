@@ -116,16 +116,16 @@
                             <div>
                                 <span>전체 상품 후기 수</span>
                                 <div><i class="fa-solid fa-comment-dots fa-2x"></i></div>
-                                <span><span>${goods.reviewCnt}</span> 건</span>
+                                <span><span class="review-total-cnt"></span> 건</span>
                             </div>
                             <div>
                                 <span>총 평점</span>
-                                <div id="avg">★★★★★</div>
-                                <span><span>${goods.reviewScore}</span> / 5.0 </span>
+                                <div id="avg">★★★★★<span>★★★★★</span></div>
+                                <span><span class="review-total-score"></span> / 5.0 </span>
                             </div>
                         </div>
                         <div class="review-menu">
-                            <div id="review-write-btn" onclick="showReview();"><i class="fa-solid fa-pen"></i> 글쓰기</div>
+                            <div id="review-write-btn"><i class="fa-solid fa-pen"></i> 글쓰기</div>
                             <div class="align-standard">
                                 <div><label class="standard"><input type="radio" name="standard" value="popular" checked><span>인기순</span></label></div>
                                 <div><label class="standard"><input type="radio" name="standard" value="new"><span>최신순</span></label></div>
@@ -133,73 +133,12 @@
                                 <div><label class="standard"><input type="radio" name="standard" value="low"><span>평점낮은순</span></label></div>
                             </div>
                         </div>
-                        <div class="review-item">
-                            <div class="review-item-left">
-                                <div class="review-score"><span>★★★★★</span></div>
-                                <div class="review-like"><button><i class="fa-solid fa-heart fa-lg"></i></button><span>32</span></div>
-                                <div class="review-option">블랭크 기본 패턴</div>
-                                <div class="review-content">
-                                    쫀떡 조아 재롱 귀여워 초롱 내 꼬 리랑이 말괄량이 대충 샘플입니다
-                                    이렇게 사용합니다 최대 50 자까지 보여 줄 겁니다
-                                </div>
-                                <div class="review-writer">
-                                    <div>nick***</div>
-                                    <div><span> | </span></div>
-                                    <div>2022.12.04</div>
-                                </div>
-                            </div>
-                            <div class="review-item-pic">
-                                <img src="" alt="">
-                            </div>
-                            <div class="review-item-more">
-    
-                            </div>
+                        <div class="review-list-area">
+
                         </div>
-                        <div class="review-item">
-                            <div class="review-item-left">
-                                <div class="review-score"><span>★★★★★</span></div>
-                                <div class="review-like"><button><i class="fa-solid fa-heart fa-lg"></i></button><span>32</span></div>
-                                <div class="review-option">블랭크 기본 패턴</div>
-                                <div class="review-content">
-                                    쫀떡 조아 재롱 귀여워 초롱 내 꼬 리랑이 말괄량이 대충 샘플입니다
-                                    이렇게 사용합니다 최대 50 자까지 보여 줄 겁니다
-                                </div>
-                                <div class="review-writer">
-                                    <div>nick***</div>
-                                    <div><span> | </span></div>
-                                    <div>2022.12.04</div>
-                                </div>
-                            </div>
-                            <div class="review-item-pic">
-                                <img src="" alt="">
-                            </div>
-                            <div class="review-item-more">
-    
-                            </div>
+                        <div>
+                            페이지네이션
                         </div>
-                        <div class="review-item">
-                            <div class="review-item-left">
-                                <div class="review-score"><span>★★★★★</span></div>
-                                <div class="review-like"><button><i class="fa-solid fa-heart fa-lg"></i></button><span>32</span></div>
-                                <div class="review-option">블랭크 기본 패턴</div>
-                                <div class="review-content">
-                                    쫀떡 조아 재롱 귀여워 초롱 내 꼬 리랑이 말괄량이 대충 샘플입니다
-                                    이렇게 사용합니다 최대 50 자까지 보여 줄 겁니다
-                                </div>
-                                <div class="review-writer">
-                                    <div>nick***</div>
-                                    <div><span> | </span></div>
-                                    <div>2022.12.04</div>
-                                </div>
-                            </div>
-                            <div class="review-item-pic">
-                                <img src="" alt="">
-                            </div>
-                            <div class="review-item-more">
-    
-                            </div>
-                        </div>
-                        <div>페이지네이션</div>
                     </div>
                 </div>
             </div>
@@ -217,7 +156,7 @@
                 <div>
                     <span>${goods.name}</span>
                     <span>&#x20A9; <span>${goods.price}</span></span>
-                    <span>리뷰 <span>3</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span>5.0</span></span>
+                    <span>리뷰 <span class="review-total-cnt"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span class="review-total-score"></span></span>
                 </div>
             </div>
             <div class="review-modal-score">
@@ -225,7 +164,7 @@
                 <span class="star">
                         ★★★★★
                     <span>★★★★★</span>
-                    <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                    <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10" required>
                 </span>
             </div>
             <div class="review-modal-content">
@@ -259,7 +198,7 @@
     function addBasket() {
         Swal.fire({
             title: '장바구니에 넣으시겠어요?',
-            text: "${goods.name}" + $('input[name=quantity').val() + '개를 장바구니에 넣습니다.',
+            text: "${goods.name} " + $('input[name=quantity').val() + '개를 장바구니에 넣습니다.',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#567ACE',
@@ -314,6 +253,25 @@
     })
 </script>
 <script>
+    
+    // 리뷰 작성 버튼 눌렀을 때 로그인 안 됐으면 로그인 먼저, 아닐 시 modal 창 열리기
+    $('#review-write-btn').click(function() {
+        if('${loginMember}.nick' == null) {
+            Swal.fire({
+                title: '로그인이 필요합니다!',
+                text: '로그인 창으로 이동합니다.',
+                icon: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#567ACE',
+                confirmButtonText: '이동하기'
+            }).then((result) => {
+                location.href='/blank/member/login'
+            })
+        } else {
+            $('.modal').css("top", $(window).scrollTop());
+            $('.modal').css("display", "flex");
+        }
+    })
 
     // 리뷰 작성 ajax
     $('#submit-button').click(function() {
@@ -341,26 +299,100 @@
                     success: function(data) {
                         $('#content-area').val("");
                         $('input[name=score]').val(0);
-                        drawStar($('input[name=score]'));
+                        $('.star span').css("width", $('input[name=score]').val() * 10 + '%');
                         $('.modal').css("display", "none");
                         Swal.fire(
                             '작성 완료!',
                             '지금 내 리뷰를 확인해 보세요!',
                             'info'
                         )
+                        reviewTotal();
+                        reviewList();
                     },
                     error: function() {
                         console.log('error');
                     }
                 })
-
             }
         })
     })
 
-    // 리뷰 리스트 불러오기
+    // 리뷰 버튼 => 리스트 불러오기
     $('#review-btn').click(function() {
-        
+        reviewTotal();
+        reviewList();
     })
+
+    // 리뷰 개수, 평균 score 계산
+    function reviewTotal() {
+        $.ajax({
+            url: "/blank/goods/review/cnt",
+            method: "POST",
+            data: {
+                no: '${goods.no}'
+            },
+            success: function(data) {
+                for(var i = 0; i < data.length; i++) {
+                    var map = data[i];
+                    $('.review-total-cnt').text(map.REVIEW_CNT);
+                    $('.review-total-score').text(map.REVIEW_SCORE);
+                    if(map.REVIEW_SCORE == null) {
+                        $('.review-total-score').text("0.0");
+                    }
+                    $('#avg span').css("width", map.REVIEW_SCORE * 2 * 10 + '%');
+                }
+            }
+        })
+    }
+
+    // 기준 누르면 list 바뀌게!
+    $('.standard').click(function() {
+        reviewList();
+    })
+
+    // 리뷰 리스트 ajax
+    function reviewList() {
+        $.ajax({
+            url: "/blank/goods/review/list",
+            method: "POST",
+            data: {
+                no: '${goods.no}',
+                p: "1",
+                standard: $('input[name=standard]:checked').val()
+            },
+            success: function(data) {
+                var temp = "";
+                $('.review-list-area').empty();
+                $(data).each(function() {
+                    temp += `<div class="review-item">
+                            <div class="review-item-left">
+                            <div class="review-score"><span class="score-star">★★★★★<span style="width: `+ this.score * 10 + `%">★★★★★</span>
+                            </span></div>
+                                <div class="review-like"><button><i class="fa-solid fa-heart fa-lg"></i></button><span>`+ this.like +`</span></div>
+                                <div class="review-content">` + this.content + `
+                                </div>
+                                <div class="review-writer">
+                                    <div>`+ this.writer +`</div>
+                                    <div><span> | </span></div>
+                                    <div>`+ this.enrollDate +`</div>
+                                </div>
+                            </div>
+                            <div class="review-item-pic">
+                                <img src="" alt="">
+                            </div>
+                            <div class="review-item-more">
+    
+                            </div>
+                        </div>`;
+                })
+                if(data.length == 0) {
+                    temp += `<div class="review-item"><div class="review-content">아직 남겨진 리뷰가 없습니다. 리뷰를 작성해 보세요!</div></div>`
+                }
+                $('.review-list-area').append(temp);
+            }
+        })
+    }
+
+
 </script>
 </html>

@@ -13,6 +13,7 @@
 	row-gap: 25px;
 	grid-template-columns: 1fr;
 	grid-template-rows: 50px minmax(auto, 650px) 100px minmax(auto, 1fr);
+    padding-bottom: 60px;
 }
 .container>div:nth-child(3) {
     display: flex;
@@ -122,13 +123,24 @@
     align-items: center;
     grid-template-columns: 0.4fr 1fr;
     grid-template-rows: repeat(4, 50px);
+    padding-bottom: 50px;
 }
-/* input name = cnt */
-#info input {
-    width: 30%;
-    font-size: 18px;
+
+.cnt-area {
+    width: 140px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #C5C5C5;
     border-radius: 10px;
+}
+
+/* input name = quantity */
+#info input {
+    width: 80px;
+    border: none;
+    font-size: 18px;
     padding: 5px 20px;
     text-align: center;
 }
@@ -254,8 +266,9 @@ option:hover {
 .goods-info>div:nth-child(2)>div:nth-child(2) {
     display: flex;
     width: 30%;
+    height: 100%;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     font-size: 18px;
     gap: 20px;
 }
@@ -319,13 +332,6 @@ option:hover {
     background-color: var(--main-color);
     border-radius: 15px;
     cursor: pointer;
-}
-
-#info {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 0.4fr 1fr;
-    grid-template-rows: repeat(4, 50px);
 }
 
 .content-menu {
@@ -432,9 +438,11 @@ option:hover {
 }
 .pd-review-info>div {
     display: flex;
+    justify-content: space-around;
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    height: 150px;
 }
 .pd-review-info>div>span {
     font-weight: bold;
@@ -448,6 +456,12 @@ option:hover {
 }
 .align-standard {
     display: flex;
+    gap: 20px;
+}
+
+.review-list-area {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
@@ -465,16 +479,13 @@ option:hover {
     row-gap: 15px;
     align-items: center;
 }
-.review-content, .review-option, .review-writer {
+.review-content, .review-writer {
     grid-column: 1/3;
-}
-.review-option {
-    color: #6F6F6F;
 }
 .review-writer {
     display: flex;
     gap: 5px;
-    color: #D8D8D8;
+    color: #6F6F6F;
 }
 .review-item-pic {
     width: 140px;
@@ -504,10 +515,6 @@ option:hover {
     cursor: pointer;
 }
 
-#avg {
-    font-size: 38px;
-}
-
 #review-write-btn {
     cursor: pointer;
 }
@@ -515,4 +522,36 @@ option:hover {
 input[name=goodsCnt] {
     display: flex;
     justify-content: center;
+}
+
+/* 리뷰 점수 */
+.score-star {
+    position: relative;
+    font-size: 20px;
+    color: #ddd;
+}
+.score-star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    top: 0;
+    color: #ffc400;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* 총 평균 점수 */
+#avg {
+    position: relative;
+    font-size: 36px;
+    color: #9F9F9F;
+}
+#avg span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    top: 0;
+    color: #ffc400;
+    overflow: hidden;
+    pointer-events: none;
 }

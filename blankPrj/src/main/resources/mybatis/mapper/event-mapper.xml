@@ -6,28 +6,37 @@
 <mapper namespace="eventMapper">
 
 	<insert id="insertAttendance">
-
 		INSERT INTO ATTENDANCE
 		(
-		NO
-		, ATT_DATE
+			NO
+			, ATT_DATE
 		)
 		VALUES
 		(
-		#{no}
-		, SYSDATE
+			#{no}
+			, SYSDATE
 		)
-
 	</insert>
 
 	<update id="updatePoint">
-		
 		UPDATE MEMBER
 		SET
 			POINT = POINT + 10
 		WHERE
-			NICK = #{nick}
-		
+			NO = #{no}
 	</update>
+	
+	<select id="selectTodayAtt" resultType="int">
+		SELECT COUNT(*)
+		FROM ATTENDANCE
+		WHERE NO = #{no}
+		AND ATT_DATE LIKE '%' || SUBSTR(SYSDATE, 1, 8) || '%'
+	</select>
+	
+	<select id="selectAttList" resultType="String">
+		SELECT SUBSTR(ATT_DATE, 1, 8) AS ATT_DATE
+		FROM ATTENDANCE
+		WHERE NO = #{no}
+	</select>
 
 </mapper>

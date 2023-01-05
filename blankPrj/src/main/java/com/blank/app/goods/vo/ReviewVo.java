@@ -16,6 +16,7 @@ public class ReviewVo {
 	private String writer;
 	private int score;
 	private String content;
+	private int like;
 	private String enrollDate;
 
 }

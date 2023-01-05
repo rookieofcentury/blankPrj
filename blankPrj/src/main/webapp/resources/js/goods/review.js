@@ -25,12 +25,6 @@
         document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
     }
 
-    // 리뷰 작성 창 띄우기
-    function showReview() {
-        $('.modal').css("top", $(window).scrollTop());
-        $('.modal').css("display", "flex");
-    }
-
     // 창 내려갈 때마다 top 현재 위치로 fixed 지정해 주기
     $(window).on("scroll",function() {
         $('.modal').css("top", $(window).scrollTop());
