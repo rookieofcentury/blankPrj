@@ -1,5 +1,6 @@
 package com.blank.app.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 
 @Controller
@@ -508,10 +510,52 @@ public class AdminController {
 		return "redirect:help";
 	}
 	
-	//탈퇴 설문 관리
+	// 탈퇴 설문 관리 목록(화면)
 	@GetMapping("quit")
-	public String quit() {
-		return "admin/quit/write";
+	public String quit(HttpSession session) {
+
+		List<QuitVo> voList = adminService.selectQuit();
+
+		session.setAttribute("voList", voList);
+		
+		return "admin/quit/list";
+	}
+	
+	// 탈퇴 설문 작성
+	@PostMapping("quitWrite")
+	public String quitWrite(Model model, HttpServletRequest req, HttpSession session) {
+		
+		String[] adminNo = req.getParameterValues("adminNo");
+		String[] content = req.getParameterValues("content");
+		
+		List<QuitVo> quitList = new ArrayList<QuitVo>();
+		
+		QuitVo quitVo = new QuitVo();
+		
+		for(int i = 0; i < adminNo.length; i++) {
+			
+			
+			quitVo.setAdminNo(adminNo[i]);
+			quitVo.setContent(content[i]);
+			
+			quitList.add(quitVo);
+			
+		}
+		
+		int result = adminService.quitWrite(quitList);
+		
+		if (result != 1) {
+			return "error";
+		}
+		
+		System.out.println(quitList);
+		
+		session.setAttribute("quitVo", quitVo);
+		
+		model.addAttribute("quitVo", quitVo);
+		
+		return "redirect:quit";
+
 	}
 	
 }

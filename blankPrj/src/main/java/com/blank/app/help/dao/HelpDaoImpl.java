@@ -54,7 +54,6 @@ public class HelpDaoImpl implements HelpDao{
 	//고객센터 문의 등록
 	@Override
 	public int inquiryWrite(SqlSessionTemplate sst, HelpVo helpVo) {
-		System.out.println(helpVo);
 		return sst.insert("helpMapper.inquiryWrite", helpVo);
 	}
 

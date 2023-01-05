@@ -13,6 +13,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 
 
@@ -77,6 +78,12 @@ public interface AdminService {
 	public HelpVo selectHelp(HelpVo helpVo);
 
 	public int updateHelp(HelpVo helpVo);
+
+	public int quitCount();
+
+	public int quitWrite(List<QuitVo> quitList);
+
+	public List<QuitVo> selectQuit();
 
 
 }
