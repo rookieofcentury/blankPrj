@@ -44,8 +44,10 @@ public interface GoodsService {
 
 	PaymentVo selectPaymentVoByNo(PaymentVo pay);
 
-	List<ReviewVo> reviewListbyGNo(int no, PageVo pageVo);
+	List<ReviewVo> reviewListbyGNo(int no, PageVo pageVo, String mno, String standard);
 
 	int findReviewCnt(int no);
+
+	List<Map<String, Object>> findReviewTotal(int no);
 
 }

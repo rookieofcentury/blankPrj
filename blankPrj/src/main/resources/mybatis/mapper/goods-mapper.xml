@@ -214,6 +214,7 @@
 		<![CDATA[WHERE ROWNUM <= 8]]>
 	</select>
 	
+	<!-- 장바구니 목록 정보 조회 -->
 	<select id="getCartList" resultType="com.blank.app.goods.vo.CartVo">
 		SELECT NO, NAME, PRICE FROM GOODS
 		WHERE
@@ -222,6 +223,7 @@
 		</foreach>
 	</select>
 	
+	<!-- 결제 완료 후 주문건 넣기 -->
 	<update id="insertOrder">
 		INSERT ALL
 			INTO GOODS_PAYMENT VALUES
@@ -253,10 +255,12 @@
 		</foreach>
 	</update>
 	
+	<!-- 결제할 때 사용한 point만큼 차감 -->
 	<update id="updatePoint">
 		UPDATE MEMBER SET POINT = POINT - ${usepoint} WHERE NO = #{consumer}
 	</update>
 	
+	<!-- 결제 내역 번호로 결제 내역 조회 -->
 	<select id="selectPaymentVoByNo" resultType="com.blank.app.goods.vo.PaymentVo">
 		SELECT 
 			    P.NO,
@@ -288,18 +292,55 @@
 		</if>
 	</select>
 	
+	<!-- 내가 결제한 모든 결제 내역 조회 -->
 	<select id="selectPaymentVoListByNo" resultType="com.blank.app.goods.vo.PaymentVo">
 		SELECT * FROM GOODS_PAYMENT
 		WHERE CONSUMER = #{consumer}
 	</select>
 	
+	<!-- 굿즈 넘버로 리뷰 리스트 가지고 오기! -->
 	<select id="selectReviewListbyGNo" resultType="com.blank.app.goods.vo.ReviewVo">
-		SELECT * FROM GOODS_REVIEW
+		SELECT
+            R.NO,
+            R.GOODS,
+            M.NICK AS WRITER,
+            R.SCORE,
+            R.CONTENT,
+            SUBSTR(R.ENROLL_DATE, 1, 14) AS ENROLL_DATE,
+            R.DELETE_YN,
+            H.COUNT
+        FROM GOODS_REVIEW R
+        INNER JOIN MEMBER M
+        ON M.NO = R.WRITER
+        LEFT OUTER JOIN (SELECT NO, COUNT(*) AS COUNT FROM GOODS_REVIEW_HEART GROUP BY NO) H ON R.NO = H.NO
+		WHERE GOODS = #{no}
+		<if test=" mno != null and mno != '' ">
+		AND M.NO = #{mno}
+		</if>		
+		<if test=" standard != null and standard == 'popular' ">
+		ORDER BY COUNT DESC NULLS LAST
+		</if>
+		<if test=" standard != null and standard == 'new' ">
+		ORDER BY ENROLL_DATE DESC 
+		</if>
+		<if test=" standard != null and standard == 'high' ">
+		ORDER BY SCORE DESC
+		</if>
+		<if test=" standard != null and standard == 'low' ">
+		ORDER BY SCORE
+		</if>
+	</select>
+	
+	<!-- 이 굿즈 번호로 조회했을 때 리뷰 몇 개나 있나요? -->
+	<select id ="selectReviewCntbyGNo" resultType="int">
+		SELECT COUNT(*) FROM GOODS_REVIEW
 		WHERE GOODS = #{no}
 	</select>
 	
-	<select id ="selectReviewCntbyGNo" resultType="int">
-		SELECT COUNT(*) FROM GOODS_REVIEW
+	<!-- 이 굿즈 번호로 조회했을 때 리뷰 몇 개나 있고, 평균 점수는 얼마인가요? -->
+	<select id="selectTotalListbyGNo" resultType="java.util.HashMap">
+		SELECT COUNT(*) AS REVIEW_CNT, TRUNC(AVG(SCORE),1)/2 AS REVIEW_SCORE
+		FROM GOODS_REVIEW
 		WHERE GOODS = #{no}
 	</select>
 	

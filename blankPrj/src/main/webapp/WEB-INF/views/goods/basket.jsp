@@ -9,7 +9,9 @@
 <title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/basket.css">
 <script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
@@ -136,18 +138,52 @@
 
     /* 선택 상품 주문 */
     $('#order-select').click(function() {
-        if($("input[class=chBox]:checked").length >= 1) {
-            $("input[class=chBox]:not(:checked)").attr("disabled", true);
-            $('#payment-form').submit();
+        if('${loginMember}.nick' == null) {
+            Swal.fire({
+                title: '로그인이 필요합니다!',
+                text: '로그인 창으로 이동합니다.',
+                icon: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#567ACE',
+                confirmButtonText: '이동하기'
+            }).then((result) => {
+                location.href='/blank/member/login'
+            })
         } else {
-            alert('최소 한 개 이상 선택한 후 주문해 주세요!')
+            if($("input[class=chBox]:checked").length >= 1) {
+                $("input[class=chBox]:not(:checked)").attr("disabled", true);
+                $('#payment-form').submit();
+            } else {
+                Swal.fire({
+                    title: '최소 한 개 이상 선택한 후 주문해 주세요!',
+                    confirmButtonColor: '#567ACE'
+                })
+            }
         }
     })
 
     /* 전체 상품 주문 */
     $('#order-all').click(function() {
-        $("input[class=chBox]").prop("checked", true);
-        $('#payment-form').submit();
+        if('${loginMember}.nick' == null) {
+            Swal.fire({
+                title: '로그인이 필요합니다!',
+                text: '로그인 창으로 이동합니다.',
+                icon: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#567ACE',
+                confirmButtonText: '이동하기'
+            }).then((result) => {
+                location.href='/blank/member/login'
+            })
+        } else if('${empty cart}') {
+            Swal.fire({
+                title: '장바구니가 비어 있습니다!',
+                confirmButtonColor: '#567ACE'
+            })
+        } else {
+            $("input[class=chBox]").prop("checked", true);
+            $('#payment-form').submit();
+        }
     })
 </script>
 </html>

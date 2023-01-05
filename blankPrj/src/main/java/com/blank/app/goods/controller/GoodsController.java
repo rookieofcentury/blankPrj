@@ -92,9 +92,21 @@ public class GoodsController {
 
 	}
 	
-	// ajax로 list 받아서 넘기기
-	public List<ReviewVo> reviewList(int no, String p) {
+	@PostMapping("/review/cnt")
+	@ResponseBody
+	public List<Map<String, Object>> reviewCnt(int no) {
+		
+		List<Map<String, Object>> list = gs.findReviewTotal(no);
+		
+		return list;
+		
+	}
 	
+	// ajax로 list 받아서 넘기기
+	@PostMapping("/review/list")
+	@ResponseBody
+	public List<ReviewVo> reviewList(int no, String p, String standard, String mno) {
+		
 		if(p == null) {
 			p = "1";
 		}
@@ -106,8 +118,7 @@ public class GoodsController {
 		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
 		
 		// 리뷰 리스트 정보 받기
-		List<ReviewVo> voList = gs.reviewListbyGNo(no, pageVo);
-		System.out.println(voList);
+		List<ReviewVo> voList = gs.reviewListbyGNo(no, pageVo, mno, standard);
 		
 		return voList;
 		

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // 출석부 오늘 날짜, 요일 도출
     let today = new Date();
 
@@ -11,13 +12,15 @@ $(document).ready(function() {
 
     $('.today-date').append(year + ' 년 ' + month + ' 월 ' + date + ' 일');
     $('.today-day').append('(' + week[day] + ')');
+    refresh();
 })
 
-var currentTitle = $('#current-year-month');
+var currentTitle = $('#current-year');
+var currentMonth = $('#current-month');
 var calendarBody = $('#calendar-body');
 
 var today = new Date();
-var first = new Date(today.getFullYear(), today.getMonth(),1);
+var first = new Date(today.getFullYear(), today.getMonth(), 1);
 var dayList = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var monthList = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 var leapYear = [31,29,31,30,31,30,31,31,30,31,30,31];
@@ -42,17 +45,22 @@ function showCalendar(){
                 $tr.append($td);     
             }else{
                 var $td = document.createElement('td');
-                $td.textContent = cnt;
+                var $div = document.createElement('div');
+                $div.textContent = cnt;
+                $div.setAttribute('class', 'flex');
                 $td.setAttribute('id', cnt);                
                 $tr.append($td);
+                $td.append($div);
                 cnt++;
             }
         }
         monthCnt++;
         calendarBody.append($tr);
     }
-    currentTitle.text(monthList[first.getMonth()] + " " + first.getFullYear());
+    currentTitle.text(first.getFullYear())
+    currentMonth.text(monthList[first.getMonth()])
 }
+
 showCalendar();
 
 function removeCalendar(){
@@ -81,6 +89,7 @@ function prev(){
     currentTitle.innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar();
+    refresh();
 }
 
 function next(){
@@ -100,4 +109,5 @@ function next(){
     currentTitle.innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar(); 
+    refresh();
 }

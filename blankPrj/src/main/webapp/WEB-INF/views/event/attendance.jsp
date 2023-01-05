@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 	<title>Blank</title>
@@ -11,7 +11,6 @@
     <div class="wrap">
 
         <div class="container">
-
             <div class="info">
                 <div class="inner">
                     <div class="date-area">
@@ -27,19 +26,24 @@
                             <div>출석하고 포인트 받으세요!</div>
                             <div>출석 시 기본 포인트 <span id="attPoint">10</span> 포인트 획득합니다.</div>
                         </div>
-                        <div id="submit-btn">출석하기</div>
+                        <c:if test="${isCheck == true}">
+                            <div class="att-info-box"><label>출석 완료!</label> &nbsp;개근 n 일째!</div>
+                        </c:if>
+                        <c:if test="${isCheck == false}">
+                            <div id="submit-btn">출석하기</div>
+                        </c:if>
                     </div>
                     <div class="client-area">
                         <div class="client-profile"><img src="" alt=""></div>
                         <div class="client-info">
                             <div class="client-name">
-                                <span id="name">송혜은</span>
+                                <span id="name">${loginMember.nick}</span>
                                 <span> 님</span>
                             </div>
                             <div class="client-point">
                                 <div>포인트</div>
                                 <div>
-                                    <span id="point">4839</span>
+                                    <span id="point">${loginMember.point}</span>
                                     <span>&nbsp;P</span>
                                 </div>
                             </div>
@@ -89,7 +93,10 @@
                             &#60;
                         </label>
                       </td>
-                      <td id="current-year-month" colspan="5"></td>
+                      <td id="current-year-month" colspan="5">
+                        <label id="current-month"></label>
+                        <label id="current-year"></label>
+                      </td>
                       <td>
                         <label id="next" onclick="next();">
                             &#62;
@@ -115,4 +122,44 @@
     
 </body>
 <script src="/blank/resources/js/event/attendance.js"></script>
+<script>
+
+    $('#submit-btn').click(function() {
+        attCheck();
+    })
+
+    // 도장 찍기
+    function refresh() {        
+        var attArr = new Array();
+        <c:forEach items="${attList}" var="item">
+            attArr.push('${item}');
+        </c:forEach>
+        console.log(attArr);
+    
+        $.each(attArr, function(index, item) {
+            today = new Date('20' + item.substring(0, 2), item.substring(3, 5)-1, item.substring(6, 9));
+            console.log(today);
+            if($('#current-year').text() == today.getFullYear()) {
+                if($('#current-month').text() == monthList[today.getMonth()]) {
+                    $('#' + today.getDate()).children().append('<img src="/blank/resources/images/event/attendance.png" alt="웅!">');
+                }
+            }
+        })
+    }
+
+
+    function attCheck() {
+        $.ajax({
+            url: "/blank/attendance",
+            method: "POST",
+            data: {
+                no: '${loginMember.no}',
+            },
+            success: function(data) {
+                location.href='/blank/attendance'
+            }
+        })
+    }
+
+</script>
 </html>
