@@ -30,8 +30,8 @@
         </div>
         <div class="myprj-list">
             <div class="list-content">
-                <!-- <div class="myprj-status">작성 중 1</div>
-                  <div class="list-box">
+                <div class="myprj-status">작성 중 1</div>
+                  <!-- <div class="list-box">
                      <div class="prj-img"><img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"></div>
                     <div class="prj-info">
                         <div class="prj-content">
@@ -41,10 +41,12 @@
                             </div>
                             <div>
                                 <div class="management-button">
-                                    <a href="/blank/project/created/list?p='+sp[i].no+'">관리</a>
+                                    <a href="/blank/project/created/list?p=${no}">관리</a>
                                 </div>
                                 <div class="delete-button">
-                                    <a >삭제</a>
+                                    <div class="delete-button">
+                                        <input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />삭제
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,22 +85,6 @@
 	});
 
     var list = '';
-    
-    // $(document).ready(function() { 
-    //     $.ajax({
-    //         url : "/blank/project/created/writing",
-    //         method : "GET",   
-    //         data :   {
-    //             "statusWriting" : $('.taps > div:nth-child(1)').text()
-    //             "statusWriting" : $('.taps > div:nth-child(2)').text()
-    //             "statusWriting" : $('.taps > div:nth-child(3)').text()
-    //             "statusWriting" : $('.taps > div:nth-child(4)').text()
-    //             "statusWriting" : $('.taps > div:nth-child(5)').text()
-    //             "statusWriting" : $('.taps > div:nth-child()').text()
-    //         },
-    //         success : function(x){
-    // });
-
     $(document).ready(function() { 
     	//$(function(){
        // $(document).on('click',$('.writing'),function(){
@@ -108,7 +94,12 @@
             url : "/blank/project/created/writing",
             method : "GET",   
             data :   {
-                "statusWriting" : $('.taps > div:nth-child(1)').text()
+                "statusWriting" : $('.taps > div:nth-child(1)').text(),
+                "examination" : $('.taps > div:nth-child(2)').text(),
+                "confirm" : $('.taps > div:nth-child(3)').text(),
+                "return" : $('.taps > div:nth-child(4)').text(),
+                "Proceed" : $('.taps > div:nth-child(5)').text(),
+                "end" : $('.taps > div:nth-child(5)').text()
             },
             success : function(x){
                 console.log(x);
@@ -118,12 +109,12 @@
                 }else{
                     list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(1)').text() + ' ' + x + '</h3>' + '</div>' ;
                     <c:forEach items="${myPrj}" var="myPrj">
-                        //var cnt = ;
+
                         var title2 = '${ myPrj.title }';
                         var no = '${ myPrj.no }';
                         var status = '${ myPrj.status }';
                         var summary = '${ myPrj.summary }';
-                    console.log(title2);
+
                         list += '<div class="list-box">';
                         list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
                         list += '<div class="prj-info">'+'<div class="prj-content">';
@@ -169,8 +160,6 @@
                 "statusWriting" : $('.taps > div:nth-child(2)').text()
             },
             success : function(x){
-            	console.log("심사중");
-            
                 if(x == 0){
                     list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(2)').text() + '인 프로젝트가 없습니다.' + '</h3>' + '</div>' + '</div>';
                     $(".list-content").append(list);

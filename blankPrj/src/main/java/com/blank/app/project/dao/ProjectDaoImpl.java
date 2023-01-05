@@ -35,9 +35,7 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public List<ProjectVo> selectMyPrj(SqlSessionTemplate sst, HashMap<String, Object> map) {
 		List<ProjectVo> list = sst.selectList("projectMapper.selectMyPrj", map);
-		//log.warn("디비에서 받은 작성중리스트 " + list );
 		return list;
-		//return sst.selectList("projectMapper.selectMyPrj", map);
 	}
 
 	@Override
@@ -103,5 +101,10 @@ public class ProjectDaoImpl implements ProjectDao{
 		int result = sst.delete("projectMapper.deleteLikePrj", vo);
 		log.warn("dao --찜 조회" + result);
 		return result;
+	}
+
+	@Override
+	public List<ProjectVo> selectMyPrj(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectList("projectMapper.selectwritingPrj", vo);
 	}
 }

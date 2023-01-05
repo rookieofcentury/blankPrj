@@ -37,5 +37,7 @@ public interface ProjectService {
 
 	int deleteLikePrj(LikeProjectVo vo);
 
+	List<ProjectVo> selectMyPrj(ProjectVo vo);
+
 
 }

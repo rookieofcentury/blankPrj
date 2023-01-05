@@ -46,7 +46,6 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public List<ProjectVo> selectMyPrj(HashMap<String, Object> map) {
-		System.out.println(map);
 		return (List<ProjectVo>) dao.selectMyPrj(sst, map);
 	}
 
@@ -110,6 +109,11 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public int deleteLikePrj(LikeProjectVo vo) {
 		return dao.deleteLikePrj(sst,vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectMyPrj(ProjectVo vo) {
+		return dao.selectMyPrj(sst, vo);
 	}
 
 }

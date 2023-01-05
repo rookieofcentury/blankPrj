@@ -39,6 +39,8 @@ public interface ProjectDao {
 
 	int deleteLikePrj(SqlSessionTemplate sst, LikeProjectVo vo);
 
+	List<ProjectVo> selectMyPrj(SqlSessionTemplate sst, ProjectVo vo);
+
 
 
 }

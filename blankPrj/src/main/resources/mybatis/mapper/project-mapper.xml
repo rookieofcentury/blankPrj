@@ -150,4 +150,17 @@
        DELETE FROM LIKE_PROJECT WHERE M_NO = #{mNo} AND PRJ_NO = #{prjNo}
 	</delete>
 	
+	<select id="selectwritingPrj" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+		FROM PROJECT 
+		WHERE CREATOR = #{vo.creator}
+        AND STATUS = '작성중'
+        AND DELETE_YN = 'N'
+	</select>
+	
 </mapper>
