@@ -132,4 +132,48 @@
 		ORDER BY LP.LIKE_DATE DESC
 		
 	</select>
+	
+	<insert id="insertLikeMemberByNo">
+		INSERT INTO LIKE_MEMBER
+		VALUES
+		(#{mNo},#{likeMemberNo});
+	
+	</insert>
+	<delete id="deleteLikeMemberByNo" >
+	 	DELETE LIKE_MEMBER
+        WHERE M_NO = #{mNo}
+        
+        AND LIKE_MEMBER_NO = #{likeMemberNo};
+	</delete>
+	
+	<select id="selectFollowingByNo" resultType="memberVo">
+		
+		SELECT * FROM MEMBER 
+        WHERE NO IN 
+        (
+                SELECT LIKE_MEMBER_NO
+                FROM LIKE_MEMBER
+                WHERE M_NO = #{mNo}
+        )
+		
+	</select>
+	
+	<select id="selectFollowerByNo" resultType="memberVo">
+		
+		SELECT * FROM MEMBER 
+        WHERE NO IN 
+        (
+                SELECT M_NO
+                FROM LIKE_MEMBER
+                WHERE LIKE_MEMBER_NO = #{mNo}
+        )
+		
+	</select>
+	
+	<update id="updateProfile">
+		UPDATE MEMBER
+		SET PROFILE = #{profile}
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>

@@ -14,7 +14,7 @@
         <div class="mypage-side-container">
             <div class="sidebar-container">
                 <div class="user-info">
-                    <div><img src="/blank/resources/images/member/choi.png"></div>
+                    <div><img src="/blank/resources/upload/member/${loginMember.profile}"></div>
                     <div><strong>짱고심</strong></div>
                     <div>가입일자 : 2022/05/30</div>
                         <div class="mypage-grid mypage-point-project">

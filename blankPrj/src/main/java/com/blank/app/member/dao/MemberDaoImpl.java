@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -111,6 +112,36 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectList("memberMapper.selectLikePrjByNo", mNo);
 	
 
+	}
+
+	@Override
+	public int insertLikeMemberByNo(SqlSessionTemplate sst, LikeMemberVo insertVo) {
+		
+		return sst.insert("memberMapper.insertLikeMemberByNo", insertVo);
+	}
+
+	@Override
+	public int deleteLikeMemberByNo(SqlSessionTemplate sst, LikeMemberVo deleteVo) {
+		
+		return sst.delete("memberMapper.deleteLikeMemberByNo", deleteVo);
+	}
+
+	@Override
+	public List<MemberVo> selectFollowing(SqlSessionTemplate sst, String mNo) {
+		
+		return sst.selectList("memberMapper.selectFollowingByNo", mNo);
+	}
+
+	@Override
+	public List<MemberVo> selectFollower(SqlSessionTemplate sst, String mNo) {
+		return sst.selectList("memberMapper.selectFollowerByNo", mNo);	
+	}
+
+
+
+	@Override
+	public int updateProfile(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("memberMapper.updateProfile", vo);
 	}
 
 	

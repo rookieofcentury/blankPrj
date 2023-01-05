@@ -14,9 +14,6 @@ public class MemberVo {
 	private String phone;
 	private String gender;
 	private String nick;
-	private String addrA;
-	private String addrB;
-	private String addrC;
 	private String status;
 	private String enrollDate;
 	private String alarm;
@@ -27,7 +24,7 @@ public class MemberVo {
 	private String quitNo;
 	private String quitVar;
 	
-	private MultipartFile profile; 
+	private String profile; 
 	
 	public void encode(BCryptPasswordEncoder enc) {
 		this.pwd1 = enc.encode(pwd1);

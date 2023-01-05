@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -42,6 +43,18 @@ public interface MemberService {
 	public List<HelpVo> selectHelpListByNo(String mNo);
 
 	public List<ProjectVo> selectLikePrjByNo(String mNo);
+
+	public int insertLikeMemberByNo(LikeMemberVo insertVo);
+
+	public int deleteLikeMemberByNo(LikeMemberVo deleteVo);
+
+	public List<MemberVo> selectFollowing(String mNo);
+
+	public List<MemberVo> selectFollower(String mNo);
+
+	public int updateProfile(MemberVo vo);
+
+
 
 
 

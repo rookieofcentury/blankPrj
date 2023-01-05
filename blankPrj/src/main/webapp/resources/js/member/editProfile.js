@@ -162,7 +162,10 @@ const autoHyphen = (target) => {
    }
 
  
+ });
+
+
+ $('#plus-profile').click(function() {
+    $('#profile-submit').click();
+
  })
-
-
- $('')

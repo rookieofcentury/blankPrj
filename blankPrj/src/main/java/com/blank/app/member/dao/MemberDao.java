@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.member.vo.QuitAnswerVo;
 import com.blank.app.pay.vo.PayVo;
@@ -46,6 +47,16 @@ public interface MemberDao {
 	public List<HelpVo> selectHelpListByNo(SqlSessionTemplate sst, String mNo);
 
 	public List<ProjectVo> selectLikePrjByNo(SqlSessionTemplate sst, String mNo);
+
+	public int insertLikeMemberByNo(SqlSessionTemplate sst, LikeMemberVo vo);
+
+	public int deleteLikeMemberByNo(SqlSessionTemplate sst, LikeMemberVo deleteVo);
+
+	public List<MemberVo> selectFollowing(SqlSessionTemplate sst, String mNo);
+
+	public List<MemberVo> selectFollower(SqlSessionTemplate sst, String mNo);
+
+	public int updateProfile(SqlSessionTemplate sst, MemberVo vo);
 
 
 }

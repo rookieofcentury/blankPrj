@@ -21,10 +21,16 @@
 						<div><h2>회원 정보 수정</h2></div>
 						<div class="member-profile">
 							<div>프로필 사진</div>
-							<div><img src="/blank/resources/images/member/cho.png" alt="프로필사진임돠"></div>
+							<div><img id="View" src="/blank/resources/upload/member/${loginMember.profile}" alt="이미지 미리보기" /></div>
 							<div>
-								<button class="change-btn" id="">변경</button><input type="file" style="display: none;">
-								<button class="change-btn">삭제</button>
+								<form action="/blank/member/mypage/plus-profile" name="profile" id="profile-form" method="post" enctype="multipart/form-data">
+									<input type="file" name="profile" id="input-profile">
+									<button type ="button" class="change-btn" id="plus-profile">변경</button>
+									<button type ="button" class="change-btn">삭제</button>
+									<input type="submit" id="profile-submit">
+									
+								</form>
+								
 							</div>
 						</div>
 					</div>
@@ -205,6 +211,22 @@ function updatePhone(){
 
 
 
+
+
+$(function() {
+    $("#input-profile").on('change', function(){
+    readURL(this);
+    });
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $('#View').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 
 
