@@ -15,6 +15,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -214,15 +215,15 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.update("adminMapper.updateHelp", helpVo);
 	}
 
+	//탈퇴 설문 카운트
+	@Override
+	public int quitCount(SqlSessionTemplate sst) {
+		return sst.selectOne("adminMapper.quitCount");
+	}
 
-
-
-
-
-
-
-
-
-
+	@Override
+	public int quitWrite(SqlSessionTemplate sst, QuitVo quitVo) {
+		return sst.insert("adminMapper.quitWrite", quitVo);
+	}
 	
 }

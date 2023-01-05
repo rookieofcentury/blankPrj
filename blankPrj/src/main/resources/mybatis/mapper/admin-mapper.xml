@@ -271,6 +271,27 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<!-- 카운드 -->
+	<select id="quitCount" resultType="int">
+		SELECT COUNT(*)
+		FROM QUIT
+	</select>
+	
+	<!-- 탈퇴 질문 등록 -->
+	<insert id="quitWrite">
+		INSERT INTO QUIT
+		(
+			NO,
+			CONTENT,
+			ADMIN_NO
+		)
+		VALUES
+		(
+			SEQ_NOTICE_NO.NEXTVAL,
+			#{content},
+			#{adminNo}
+		)
+	</insert>
 </mapper>
 
 

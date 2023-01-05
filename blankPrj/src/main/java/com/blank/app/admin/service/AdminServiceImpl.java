@@ -16,6 +16,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 
 @Service
@@ -187,6 +188,30 @@ public class AdminServiceImpl implements AdminService{
 	public int deleteNotice(NoticeVo noticeVo) {
 		return admindao.deleteNotice(sst, noticeVo);
 	}
+
+	//탈퇴 설문 카운트
+	@Override
+	public int quitCount() {
+		return admindao.quitCount(sst);
+	}
+
+	//탈퇴 설문 조회
+	@Override
+	public int quitWrite(List<QuitVo> quitList) {
+		int result = 0;
+		for(QuitVo quitVo : quitList) {
+			result = admindao.quitWrite(sst, quitVo);
+		}
+		return result;
+	}
+
+	@Override
+	public List<QuitVo> selectQuit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 

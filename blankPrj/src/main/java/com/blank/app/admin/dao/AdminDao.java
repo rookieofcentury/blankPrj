@@ -14,6 +14,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 
 public interface AdminDao {
@@ -77,5 +78,10 @@ public interface AdminDao {
 	public HelpVo selectHelp(SqlSessionTemplate sst, HelpVo helpVo);
 
 	public int updateHelp(SqlSessionTemplate sst, HelpVo helpVo);
+
+	public int quitCount(SqlSessionTemplate sst);
+
+	public int quitWrite(SqlSessionTemplate sst, QuitVo quitVo);
+
 	
 }
