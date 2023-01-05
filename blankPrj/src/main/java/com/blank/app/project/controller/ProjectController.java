@@ -195,8 +195,25 @@ public class ProjectController {
 	}
 	
 	@GetMapping("created")
-	public String createdStatus() {
+	public String writing(HttpSession session, ProjectVo vo, Model model) {
+//		
+//		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+//		String nick = loginMember.getNo();
+//		vo.setCreator(nick);
+//		
+//		int resultcnt = service.writingCnt(vo);
+////		
+////		if(resultcnt == 0) {
+////			return 0+"";
+////		}else {
+////			List<ProjectVo> myPrj = service.selectMyPrj(map);
+////			session.setAttribute("myPrj", myPrj);
+////			//System.out.println(myPrj);
+////		}
+//		List<ProjectVo> myPrj = service.selectMyPrj(vo);
+//		model.addAttribute("writing", myPrj);
 		return "project/created/status";
+		
 	}
 	
 	@GetMapping("created/writing")
@@ -215,14 +232,12 @@ public class ProjectController {
 		map.put("vo", vo);
 		map.put("statusWriting", statusWriting);
 		int resultcnt = service.writingCnt(map);
-		System.out.println(resultcnt);
 		
 		if(resultcnt == 0) {
 			return 0+"";
 		}else {
 			List<ProjectVo> myPrj = service.selectMyPrj(map);
 			session.setAttribute("myPrj", myPrj);
-			//System.out.println(myPrj);
 		}
 		String result = (String.valueOf(resultcnt));
 		return result;
@@ -271,18 +286,17 @@ public class ProjectController {
 	}
 
 	@GetMapping("post")
-	public String post(TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
+	public String post(@RequestParam(name="p") int p, TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
+		
 		List<HashMap<String, String>> category = service.selectCategory(map);
 		List<TimeVo> starttimeVo = service.selectStartime(timevo);
 		
 		//JsonObject jsonObj = JsonParser.parseString(timeVo).getAsJsonObject();
-		/*
-		 * Gson gson = new Gson(); String timeVo = gson.toJson(starttimeVo);
-		 */
-		
+		/*Gson gson = new Gson(); String timeVo = gson.toJson(starttimeVo);*/
+		 
 		model.addAttribute("category", category);
 		model.addAttribute("time", starttimeVo);
-		return "project/post/post";
+		return "project/post";
 	}
 	
 //	@PostMapping("post")
@@ -301,7 +315,7 @@ public class ProjectController {
 	/* 임시저장 */
 	@PostMapping("savePrj")
 	@ResponseBody
-	public String savePrj(HttpSession session, ProjectVo vo, HttpServletRequest req) {
+	public String savePrj(@RequestParam(name="p") int p, HttpSession session, ProjectVo vo, HttpServletRequest req) {
 		
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
@@ -403,6 +417,4 @@ public class ProjectController {
 //		}
 //			return null;
 //	}
-
 }
-

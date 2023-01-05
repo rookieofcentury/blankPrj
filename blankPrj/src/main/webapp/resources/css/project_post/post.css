@@ -1263,6 +1263,14 @@ ul{
     --padding-right: 45px;
     --padding-left: 60px;
 }
+.story-editor{
+    /* border : 1px solid; */
+    width : 50%;
+    margin : 0 auto;
+}
+#prj-content {
+    display: none;
+}
 
 /*정책 모달창*/
 .background {

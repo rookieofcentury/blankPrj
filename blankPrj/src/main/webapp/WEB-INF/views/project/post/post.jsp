@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="/blank/resources/css/project_post/post.css">
 
+<!-- 웹에디터 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 </head>
 
 <!-- 제이쿼리 -->
@@ -19,11 +22,11 @@
 <!-- 날짜위젯 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>;
-
+<!-- 
 <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
 <!--<script src = "${path}/ckeditor/ckeditor.js"></script> -->
 <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
-<script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script> -->
 
 <body>
 <form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();" enctype="multipart/form-data">
@@ -75,9 +78,8 @@
                 </div>
                 <div class="category-select">
                     <select name="category" id="cate-option">
-                        <option value="category">==카테고리 선택==</option>
                         <c:forEach items="${category}" var="cate">
-                        <option>${cate.name}</option>
+                        <option value="${cate.no}">${cate.name}</option>
 						</c:forEach>
                     </select>
                     <div></div>
@@ -208,11 +210,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="story-editor"><textarea id="editor4" name="editor4"></textarea></div>
-            </div>    
-                            
-                        </div>
+                <div class="story-editor">
+                    <!-- <textarea id="editor4" name="editor4"></textarea> -->
+                    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+                    <textarea name="editor" id="prj-content" required></textarea>
                 </div>
+            </div>    
+            </div>
+            </div>
             </div>   
 		</div>
 
@@ -424,7 +429,7 @@
 	<div id="container">
         <div class="content">
         <div id="mem-mp3-content">
-            <div class="content-title">
+            <!-- <div class="content-title">
                 <div class="title-info">
                     <div>이름</div>
                     <div>창작자 개인이나 팀을 대표할 수 있는 이름을 써주세요.</div>
@@ -442,7 +447,7 @@
                 <div>
                     <div>등록하기</div>
                 </div>
-            </div>
+            </div> -->
             <div class="content-title">
                 <div class="title-info">
                     <div>소개</div>
@@ -453,7 +458,7 @@
                     <p>40글자 남음</p>
                 </div>
             </div>
-            <div class="content-email">
+            <!-- <div class="content-email">
                 <div class="email-info">
                     <div>이메일</div>
                     <div>펀딩서비스 이용을 위해 추가 계약이나 약정이 필요할 수 있어요.<br>추가 발송될 전자 약정서를 체결할 이메일을 입력해 주세요.</div>
@@ -481,7 +486,7 @@
                         <label for="email-check"> 회원정보와 동일</label>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="content-policy">
                 <div class="policy-info">
                     <div>정산 정책 확인</div>
@@ -571,20 +576,24 @@
            $( "input[name='deliver']" ).datepicker(config);
        });
 
-       $(document).ready(function() {
-           CKEDITOR.replace('[editor4]');
-       });
+    //    $(document).ready(function() {
+    //        CKEDITOR.replace('[editor4]');
+    //    });
        
+    //    CKEDITOR.replace('editor4', {height: 500});
        /* $(function () {
            CKEDITOR.replace('contents', {
                filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
            });
        }); 
         */
-        
-       
-        
-       CKEDITOR.replace('editor4', {height: 500});
+
+       const editor = new toastui.Editor({
+            el: document.querySelector('.story-editor'),
+            previewStyle: 'vertical',
+            height: '500px',
+            //initialValue: '안녕하세요. 코딩노잼입니다.'
+        });
 
        //온 서브밋을 위한 변수 선언;
        let titleCheckReturn = false;
@@ -897,12 +906,16 @@
         });
 
        //임시저장
+        var memberId = $("#memberId").val();
+        var memberPass = $("#memberPass").val();
+        
+        var param = {"memberId":memberId, "memberPass":memberPass}
        $('.buttons-storage').click(function() {
 	       $.ajax({
 	    	   type: "",
 	    	   url  : "/blank/project/savePrj",
 	    	   type : "POST",
-	    	   data : $("#postPrj").serialize(),
+	    	   data : $("#postPrj").serialize(), random, 
 	    	   dataType: "json",
 	    	   success : function(x){
 	    		   if(x == 1){
@@ -916,9 +929,7 @@
 	    	    } 
 	       })
        })
-       
        /* var selectCate = $('#cate-option option:checked'); */
-       
        
         //온서브밋
        function checkAll(){
@@ -936,7 +947,7 @@
        if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
        if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
 
-    //    return true;
+        return true;
        }
 
        /*심사요청 href*/
@@ -944,15 +955,12 @@
            location.href = "/blank/project/post/save";
        } */
        
-       
        let map = new Map([]);
        /*아이템 추가*/
        $('input[name=itemSave]').click(function(){
            var itemName = $('input[name=itemName]').val();
            var optionName = $('textarea[name=addOption]').val();
            //console.log($('words').length());   
-           
-           //for (var j = 0; j < words.length; j++){}
            
             var list = '';
             list +=  '<ul class="set-box">' + '<li class="item-list">' + '<button type="button" class="itemBox">'
@@ -969,7 +977,6 @@
             $('textarea[name=addOption]').val("");
             //console.log(map);
         });
-
         /* select option에 집어넣기 (item) */   
         $('input[name=apply]').click(function(){
             if($(".item-name").text()){
@@ -979,7 +986,9 @@
                 var allItem = document.querySelectorAll( '.itemBox' );
                 allItem.forEach(element => {
                 const itemName = element.querySelector('.item-name').innerHTML;
-            
+                const itemOption = element.querySelector('.itemOption').innerHTML;
+                console.log(itemOption);
+
                 var list = '';
                 //list += '<option>' + '== 아 이 템 선 택 == ' + '</option>';
                 list += '<option value=' +  itemName +  '>' + itemName + '</option>';

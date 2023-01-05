@@ -8,7 +8,10 @@ public class itemVo {
 	/*item*/
 	private String itemNo;
 	private String itemName;
-	private String option;
+	
+	/*option*/
+	private String optionNo;
+	private String optionName;
 	
 	/*set item*/
 	private String no;
