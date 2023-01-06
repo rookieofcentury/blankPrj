@@ -85,15 +85,16 @@ public class AdminGoodsController {
 			p = "1";
 		}
 		
-		int listCount = gs.listCount();
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+
+		int listCount = gs.listCount(map);
 		int currentPage = Integer.parseInt(p);
 		int boardLimit = 10;
 		int pageLimit = 5;
 		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("category", category);
-		map.put("keyword", keyword);
 		
 		List<GoodsVo> list = gs.adminList(map, pageVo);
 	

@@ -27,7 +27,7 @@
                             <div>출석 시 기본 포인트 <span id="attPoint">10</span> 포인트 획득합니다.</div>
                         </div>
                         <c:if test="${isCheck == true}">
-                            <div class="att-info-box"><label>출석 완료!</label> &nbsp;개근 n 일째!</div>
+                            <div class="att-info-box"><label>출석 완료!</label> &nbsp;개근 ${perfectAtt} 일째!</div>
                         </c:if>
                         <c:if test="${isCheck == false}">
                             <div id="submit-btn">출석하기</div>
@@ -50,7 +50,7 @@
                             <div class="client-attday">
                                 <div>총출석</div>
                                 <div>
-                                    <span id="attday">20</span>
+                                    <span id="attday">${totalAtt}</span>
                                     <span>&nbsp;일</span>
                                 </div>
                             </div>
@@ -146,7 +146,6 @@
             }
         })
     }
-
 
     function attCheck() {
         $.ajax({

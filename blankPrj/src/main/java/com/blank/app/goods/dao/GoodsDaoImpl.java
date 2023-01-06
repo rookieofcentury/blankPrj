@@ -44,8 +44,8 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// admin 페이지 goods list Count - countGoods
 	@Override
-	public int countGoods(SqlSessionTemplate sst) {
-		return sst.selectOne("goodsMapper.goodsCnt");
+	public int countGoods(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("goodsMapper.goodsCnt", map);
 	}
 	
 	// admin 페이지 goods list 조회 - selectAdminGoodsList

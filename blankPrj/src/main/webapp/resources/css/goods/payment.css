@@ -15,6 +15,7 @@
     grid-template-rows: repeat(2, auto) 1fr;
     padding: 20px;
     gap: 50px;
+    padding-bottom: 60px;
 }
 .container>div {
 	display: flex;

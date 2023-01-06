@@ -89,8 +89,11 @@
 	</insert>
 	
 	<select id="goodsCnt" resultType="int">
-		SELECT COUNT(*) FROM GOODS
+		SELECT COUNT(*) FROM GOODS G
 		WHERE DELETE_YN = 'N'
+		<if test=" keyword != null and keyword != '' ">
+			AND ${category} LIKE '%${keyword}%'
+		</if>
 	</select>
 	
 	<!-- SELECT ADMIN GOODS LIST -->

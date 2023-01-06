@@ -56,9 +56,9 @@
                     </div>
                 </div>
                 <div>
-                    <div>
+                    <div class="title-area">
                         <span class="title">배송 정보</span>
-                        <button>변경</button>
+                        <button id="delivery-change-btn">변경</button>
                     </div>
                     <div class="delivery-info">
                         <div>받는 분</div>
@@ -72,48 +72,29 @@
                         <div>배송 메시지</div>
                         <div><input type="text" placeholder="20자 내로 작성해 주세요." value="${pay.message}" readonly></div>
                     </div>
-                    <div>주문 상품 확인 및 결제 취소는 마이페이지에서 진행해 주세요.</div>
-                    <div class="order-mypage" onclick="location.href=''">주문 배송 조회</div>
+                    <div class="warn-message"><i class="fa-solid fa-triangle-exclamation"></i> 주문 상품 확인 및 결제 취소는 마이페이지에서 진행해 주세요.</div>
+                    <div id="order-mypage" class="flex" onclick="location.href='/blank/member/mypage'">주문 배송 조회</div>
                 </div>
             </div>
 
-            <div>
-                <div>
+            <div class="rec-box">
+                <div class="rec-area">
                     <div>
                         <span>이런 상품은 어떠세요?</span>
                         <div class="under-bar"></div>
                     </div>
-                    <div>홈으로 돌아가기</div>
+                    <div id="back-home-btn" onclick="location.href='/blank/goods'">홈으로 돌아가기</div>
                 </div>
                 <div class="goods-list">
-                    <div class="goods-item" onclick="location.href='/blank/goods/detail';">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>아이템명</span>
-                            <span>가격</span>
+                    <c:forEach items="${fourList}" var="item">
+                        <div class="goods-item" onclick="location.href='/blank/goods/detail?no=${item.no}';">
+                            <div class="image-box"><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt="item-pic"></div>
+                            <div>
+                                <span>${item.name}</span>
+                                <span><fmt:formatNumber pattern="###,###,###" value="${item.price}"/> 원</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="goods-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>아이템명</span>
-                            <span>가격</span>
-                        </div>
-                    </div>
-                    <div class="goods-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>아이템명</span>
-                            <span>가격</span>
-                        </div>
-                    </div>
-                    <div class="goods-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>아이템명</span>
-                            <span>가격</span>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
 

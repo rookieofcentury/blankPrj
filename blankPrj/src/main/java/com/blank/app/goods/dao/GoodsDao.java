@@ -42,7 +42,7 @@ public interface GoodsDao {
 	int deleteGoods(SqlSessionTemplate sst, int no);
 
 	// 총 굿즈 몇 개
-	int countGoods(SqlSessionTemplate sst);
+	int countGoods(SqlSessionTemplate sst, Map<String, String> map);
 
 	// 굿즈 수정하기
 	int editGoods(SqlSessionTemplate sst, GoodsVo vo);

@@ -26,7 +26,7 @@ public interface GoodsService {
 
 	int deleteGoods(int no);
 
-	int listCount();
+	int listCount(Map<String, String> map);
 
 	List<Map<String, String>> categoryOption();
 
