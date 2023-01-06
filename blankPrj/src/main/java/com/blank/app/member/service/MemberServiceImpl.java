@@ -14,6 +14,7 @@ import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.report.vo.ReportVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,11 +40,14 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVo login(MemberVo vo) {
+		
 		MemberVo dbMember = dao.selectMemberOneById(sst, vo);
 		
 		String inputPwd = vo.getPwd1();
 		String checkPwd = dbMember.getPwd1();
-		
+		if(checkPwd == null) {
+			return null;
+		}
 
 		boolean isMatch = enc.matches(inputPwd, checkPwd);
 		
@@ -165,6 +169,41 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateProfile(MemberVo vo) {
 		return dao.updateProfile(sst, vo);
+	}
+
+	@Override
+	public List<ReportVo> selectReportListByNo(String mNo) {
+		return dao.selectReportListByNo(sst, mNo);
+	}
+
+	@Override
+	public List<AddressVo> selectAddrByNo(String mNo) {
+		return dao.selectAddrByNo(sst, mNo);
+	}
+
+	@Override
+	public int deleteAddr(AddressVo vo) {
+		return dao.delectAddr(sst, vo);
+	}
+
+	@Override
+	public int checkPwd(MemberVo vo) {
+		MemberVo dbMember = dao.selectMemberOneByNo(sst, vo);
+		
+		//작성한인풋 
+		String inputPwd = vo.getPwd1();
+		String checkPwd = dbMember.getPwd1();
+		
+
+		boolean isMatch = enc.matches(inputPwd, checkPwd);
+		
+		log.warn("비밀번호 변경할 건데 일치하나용 "+isMatch);
+		
+		if(isMatch) {
+			return 1;
+		}
+		
+		return 0;
 	}
 
 

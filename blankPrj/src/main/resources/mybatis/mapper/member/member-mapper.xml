@@ -41,7 +41,7 @@
 	<update id="updatePwd">
 		UPDATE MEMBER 
 		SET PWD1 = #{pwd1} 
-		WHERE EMAIL = #{email}
+		WHERE No = #{no}
 	</update>
 	
 	<update id="updateEmail">
@@ -136,14 +136,14 @@
 	<insert id="insertLikeMemberByNo">
 		INSERT INTO LIKE_MEMBER
 		VALUES
-		(#{mNo},#{likeMemberNo});
+		(#{mNo},#{likeMemberNo})
 	
 	</insert>
 	<delete id="deleteLikeMemberByNo" >
 	 	DELETE LIKE_MEMBER
         WHERE M_NO = #{mNo}
         
-        AND LIKE_MEMBER_NO = #{likeMemberNo};
+        AND LIKE_MEMBER_NO = #{likeMemberNo}
 	</delete>
 	
 	<select id="selectFollowingByNo" resultType="memberVo">
@@ -176,4 +176,36 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<select id="selectReportListByNo" resultType="ReportVo">
+		SELECT  R.NO, R.TITLE, SUBSTR(P.TITLE,1,15) AS PRJ,
+				R.STATUS, TO_CHAR(R.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE		
+		
+        
+		FROM REPORT R
+        JOIN MEMBER M
+		ON R.REPORTER = M.NO
+        JOIN PROJECT P
+        ON P.NO = R.PRJ
+		WHERE REPORTER = #{mNo}
+		ORDER BY ENROLL_DATE DESC
+	</select>
+	
+	<select id="selectAddrByNo" resultType="AddrVo">
+		SELECT * FROM ADDRESS
+		WHERE M_NO = #{mNo}
+	
+	
+	</select>
+	<delete id="deleteAddr">
+	DELETE ADDRESS
+	WHERE NO =#{no}
+	AND   M_NO =#{mNo}
+	
+	</delete>
+	
+	<select id="selectOneMemberByNo" resultType="memberVo">
+		SELECT PWD1 FROM MEMBER
+		WHERE NO = #{no}
+		
+	</select>
 </mapper>

@@ -84,17 +84,30 @@
 						
 					  </div>
 					  <div id="contents__item" class="content">
-							<div class="title">
+							<div class="title2">
 								<div>신고 번호</div>
+								<div>신고 제목</div>
 								<div>프로젝트 제목</div>
-								<div>신고일시</div>
 								<div>진행 상태</div>
+								<div>신고 일시</div>
 							</div>
-							<div class="list">
-								<div>1</div>
-								<div>배송</div>
-								<div>2022-11-24</div>
-								<div>답변 대기</div>
+							<div class="list2">
+								<c:forEach items="${reportVoList}" var="list">
+									<div class="hover2">
+										<div>${list.no}</div>
+										<div><a href="">${list.title}</a></div>
+										<div><a href="">${list.prj}</a></div>
+										<c:choose>
+											<c:when test="${list.status eq 'N'}">
+												<div id="waiting">접수 대기</div>
+											</c:when>
+											<c:when test="${list.status eq 'Y'}">
+												<div id="waiting">접수 완료</div>
+											</c:when>
+										</c:choose>
+										<d>${list.enrollDate}</d   iv>
+									</div>
+								</c:forEach>
 							</div>
 							<div>
 								<div>1 2 3 4</div>

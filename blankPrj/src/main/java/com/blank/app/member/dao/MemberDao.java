@@ -12,6 +12,7 @@ import com.blank.app.member.vo.QuitAnswerVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.report.vo.ReportVo;
 
 
 public interface MemberDao {
@@ -57,6 +58,14 @@ public interface MemberDao {
 	public List<MemberVo> selectFollower(SqlSessionTemplate sst, String mNo);
 
 	public int updateProfile(SqlSessionTemplate sst, MemberVo vo);
+
+	public List<ReportVo> selectReportListByNo(SqlSessionTemplate sst, String mNo);
+
+	public List<AddressVo> selectAddrByNo(SqlSessionTemplate sst, String mNo);
+
+	public int delectAddr(SqlSessionTemplate sst, AddressVo vo);
+
+	public MemberVo selectMemberOneByNo(SqlSessionTemplate sst, MemberVo vo);
 
 
 }

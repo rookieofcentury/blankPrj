@@ -51,5 +51,8 @@ a{
     margin : 0px;
 }
 .mypage-menu a:hover{
-    color: red;
+    text-shadow: 2px 2px 2px rgba(177, 177, 177, 0.592);
+}
+.mypage-menu > div > a{
+    color: var(--main-color);
 }
