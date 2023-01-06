@@ -41,6 +41,7 @@
                     <div class="search-icon"><input type="submit" value="" id="search-btn"></div>
                     
                 </div>
+                <input type="hidden" name="p" value="1">
                 <div id="goods-add-btn" onclick="location.href='/blank/admin/goods/add'">굿즈 등록</div>
                 
             </form>

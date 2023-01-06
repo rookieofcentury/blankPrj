@@ -58,9 +58,9 @@
                             <td><fmt:formatNumber pattern="###,###,###" value="${item.price}"/></td>
                             <td class="cnt-area">
                                 <div class="cnt-item">
-                                    <div class="cnt-btn minus-btn"><i class="fa-solid fa-minus fa-xs"></i></div>
+                                    <div class="cnt-btn minus-btn" onclick="minusBtnEvent(this, '${item.no}')"><i class="fa-solid fa-minus fa-xs"></i></div>
                                     <input type="text" name="cnt" value="${cart[item.no]}" onchange="changeValue('${item.no}', this.value);">
-                                    <div class="cnt-btn plus-btn"><i class="fa-solid fa-plus fa-xs"></i></div>
+                                    <div class="cnt-btn plus-btn" onclick="plusBtnEvent(this, '${item.no}')""><i class="fa-solid fa-plus fa-xs"></i></div>
                                 </div>
                             </td>
                             <td>
@@ -84,7 +84,7 @@
                         <span class="bold">상품 금액</span>
                         <div class="price">
                             <c:if test="${empty cart}">
-                                <input type="text" class="price-area val spot" value="상품을">
+                                <input type="text" class="price-area val spot" value="">
                             </c:if>
                             <c:if test="${!empty cart}">
                                 <input type="text" class="price-area val spot" id="product-price" readonly>
@@ -96,10 +96,10 @@
                         <span class="bold">배송비</span>
                         <div class="price">
                             <c:if test="${empty cart}">
-                                <input type="text" class="price-area val spot" value="추가해">
+                                <input type="text" class="price-area val spot" value="">
                             </c:if>
                             <c:if test="${!empty cart}">
-                                <input type="text" class="price-area" id="del-fee" readonly>
+                                <input type="text" class="price-area val" id="del-fee" readonly>
                                 <span class="unit">원</span>
                             </c:if>
                         </div>
@@ -109,7 +109,7 @@
                         <span class="bold">총계</span>
                         <div class="price">
                             <c:if test="${empty cart}">
-                                <input type="text" class="price-area val spot" value="주세요!">
+                                <input type="text" class="price-area val spot empty" value="EMPTY">
                             </c:if>
                             <c:if test="${!empty cart}">
                                 <input type="text" class="price-area val spot" id="total-price" readonly>
@@ -134,16 +134,16 @@
 </body>
 <script src="/blank/resources/js/goods/basket.js"></script>
 <script>
-    // 로그인 안 했으면 로그인하게 해야 함 **
 
     /* 선택 상품 주문 */
     $('#order-select').click(function() {
-        if('${loginMember}.nick' == null) {
+        console.log('${loginMember.nick} == null');
+        if('${loginMember.nick} == null') {
             Swal.fire({
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
                 icon: 'info',
-                showCancelButton: false,
+                showCancelButton: true,
                 confirmButtonColor: '#567ACE',
                 confirmButtonText: '이동하기'
             }).then((result) => {
@@ -164,12 +164,12 @@
 
     /* 전체 상품 주문 */
     $('#order-all').click(function() {
-        if('${loginMember}.nick' == null) {
+        if('${loginMember.nick == null}') {
             Swal.fire({
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
                 icon: 'info',
-                showCancelButton: false,
+                showCancelButton: true,
                 confirmButtonColor: '#567ACE',
                 confirmButtonText: '이동하기'
             }).then((result) => {

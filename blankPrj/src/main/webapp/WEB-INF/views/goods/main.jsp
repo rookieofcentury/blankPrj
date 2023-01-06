@@ -30,9 +30,33 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-        <div class="content">
-            <div onclick="location.href='/blank/goods/basket'">장바구니 가기</div>
-            <div>검색창 혹은 카테고리 만들 자리임</div>
+        <div class="content first-area">
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+            <div class="first-third">
+                <div>
+                    <form action="/blank/goods/search" method="get">
+						<div class="flex search-box">
+							<input type="text" class="input-hidden" name="searchGoods"
+								placeholder="검색어를 입력해 주세요.">
+							<button class="material-symbols-outlined">search</button>
+						</div>
+					</form>
+                </div>
+                <div class="cart-area flex" onclick="location.href='/blank/goods/basket'">
+                    <div class="cart-icon">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <div class="on-count">
+                            <span></span>
+                        </div>
+                    </div>
+                    <label>장바구니 가기</label>
+                </div>
+            </div>
         </div>
         <div class="content">
             <div class="goods-list">

@@ -6,6 +6,7 @@
 <meta charset="EUC-KR">
 <title>Blank</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
 <link rel="stylesheet" href="/blank/resources/css/common/header.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,14 +21,17 @@
 			</div>
 			<div class="member-area">
 				<c:if test="${loginMember != NULL}">
-					<div onclick="location.href='/blank/project/agree'">프로젝트 올리기</div>
-					<div id="mypage-btn" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
+					<div class="mypage-area">
+						<div onclick="location.href='/blank/project/agree'">프로젝트 올리기</div>
+						<div id="mypage-btn" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
+						<div onclick="location.href='/blank/member/logout'">로그아웃</div>
+					</div>
 				</c:if>
 				<c:if test="${loginMember == NULL}">
-					<div class="flex id-area" onclick="location.href='/blank/member/login'">로그인</div>
+					<div class="flex id-area" onclick="location.href='/blank/member/login'"><span class="material-symbols-outlined">account_circle</span>로그인</div>
 				</c:if>
 				<div class="search-area">
-					<form action="/app/search" method="get">
+					<form action="/blank/project/search" method="get">
 						<div class="flex search-box">
 							<input type="text" class="input-hidden" name="searchPrj"
 								placeholder="검색어를 입력해 주세요.">
@@ -40,8 +44,8 @@
 
 		<div class="header-menu-container">
 			<div class="menu-area">
-				<div>
-					<a href=""><span>카테고리</span></a>
+				<div class="menu-category">
+					<label for="expand-cate"><span>카테고리</span></label>
 				</div>
 				<div>
 					<a href=""><span>인기</span></a>
@@ -59,9 +63,24 @@
 					<a href="/blank/goods"><span>굿즈</span></a>
 				</div>
 			</div>
+			<input type="checkbox" id="expand-cate">
+			<div class="menu-detail-area">
+				<ul class="menu-detail-box">
+					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">checkroom</span>의류</a></li>
+					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">design_services</span>디자인문구</a></li>
+					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">scene</span>홈/리빙</a></li>
+					<li class="flex"><a href="" class="menu-item"><span><i class="fa-solid fa-glasses fa-lg fa-fw"></i></span>패션/잡화</a></li>
+					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">restaurant</span>푸드</a></li>
+					<li class="flex"><a href="" class="menu-item"><span><i class="fa-solid fa-palette fa-lg fa-fw"></i></span>예술</a></li>
+					<li class="flex"><a href="" class="menu-item"><span><i class="fa-solid fa-ghost fa-lg fa-fw"></i></span>캐릭터/굿즈</a></li>
+					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">pets</span>반려동물</a></li>
+				</ul>
+			</div>
 		</div>
-
+		
 	</div>
+	
+	<%@ include file = "/WEB-INF/views/common/fixedbutton.jsp" %>
 
 </body>
 <script src="/blank/resources/js/common/header.js"></script>

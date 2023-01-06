@@ -58,9 +58,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	// admin 쪽 goodsList 불러올 때 전체 개수 조회
-	@Override
-	public int listCount() {
-		return dao.countGoods(sst);
+	public int listCount(Map<String, String> map) {
+		return dao.countGoods(sst, map);
 	}
 	
 	// admin 쪽 goodsList 불러오기

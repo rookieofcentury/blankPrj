@@ -70,6 +70,11 @@ html {
 	justify-content: space-around;
 }
 
+.member-area .mypage-area {
+	display: flex;
+	gap: 10px;
+}
+
 .member-area .id-area {
 	width: 145px;
 	height: 40px;
@@ -77,11 +82,7 @@ html {
 	border: 1px solid #D9D9D9;
 	border-radius: 10px;
 	cursor: pointer;
-}
-
-.member-area .id-area:hover {
-	color: white;
-	background-color: #567ACE;
+	gap: 5px;
 }
 
 .logo-img {
@@ -109,19 +110,19 @@ html {
 }
 
 /* 호버 효과 */
-a {
+.header-menu-container a:not(.menu-item) {
 	position: relative;
 	text-decoration: none;
 	color: #343434;
 }
-a>span {
+.header-menu-container a:not(.menu-item)>span {
 	position: relative;
 	z-index: 3;
 }
-a>span:hover {
+.header-menu-container a:not(.menu-item)>span:hover {
 	font-weight: bold;
 }
-a>span::after {
+.header-menu-container a:not(.menu-item)>span::after {
 	content: '';
 	display: block;
 	width: 0;
@@ -133,7 +134,38 @@ a>span::after {
 	opacity: 0.5;
 	z-index: 2;
 }
-a:hover>span::after {
+.header-menu-container a:not(.menu-item):hover>span::after {
+	width: 100%;
+	transition: width .3s;
+}
+
+/* 카테고리 hover 필요해서 뺌 */
+.header-menu-container label {
+	position: relative;
+	text-decoration: none;
+	color: #343434;
+	cursor: pointer;
+}
+.header-menu-container label>span {
+	position: relative;
+	z-index: 3;
+}
+.header-menu-container label>span:hover {
+	font-weight: bold;
+}
+.header-menu-container label>span::after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 10px;
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	background: var(--main-color);
+	opacity: 0.5;
+	z-index: 2;
+}
+.header-menu-container label:hover>span::after {
 	width: 100%;
 	transition: width .3s;
 }
@@ -148,17 +180,55 @@ a:hover>span::after {
 	color: #8F8F8F;
 	border: none;
 	background: none;
-	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+	cursor: pointer;
 }
 
 /* fixed */
 .fixed {
 	position: fixed;
-	left: 0;
 	top: 0;
+	left: 0;
 	background-color: white;
 	width: 100%;
 	padding: 30px 27%;
 	z-index: 5;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* menu */
+#expand-cate { /* 체크박스 폼 요소 감춤 */
+    display: none;
+}
+.menu-detail-area {
+	position: relative;
+}
+.menu-detail-area a {
+	text-decoration: none;
+	color: #343434;
+}
+.menu-detail-area ul {
+	width: 400px;
+	height: 200px;
+	display: none;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(4, 1fr);
+	column-gap: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 20px 40px;
+	border: 1px solid #D9D9D9;
+}
+.menu-detail-area li {
+	font-size: 16px;
+}
+.menu-item {
+	display: grid;
+	width: 100%;
+	column-gap: 20px;
+	grid-template-columns: 0.2fr 0.8fr;
+	align-items: center;
+}
+.menu-item i {
+	color: #8F8F8F;
 }

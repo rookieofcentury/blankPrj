@@ -142,30 +142,32 @@
     })
 
     /* 플러스 마이너스 버튼 누르면 값 바뀌게 */
-    $('.minus-btn').click(function() {
-        var nextCntInput = $(this).next();
+    function minusBtnEvent (object, no) {
+        var nextCntInput = $(object).next();
         nextCntInput.val(String(parseInt(nextCntInput.val()) - 1));
         if(nextCntInput.val() <= 0) {
             alert('0 이하로는 입력할 수 없습니다!');
             nextCntInput.val(1);
         }
+        changeValue(no, nextCntInput.val());
         priceUpdate(nextCntInput);
         productPrice();
         delieveryFee();
         totalPriceCalc();
-    })
-    $('.plus-btn').click(function() {
-        var prevCntInput = $(this).prev();
+    }
+    function plusBtnEvent (object, no) {
+        var prevCntInput = $(object).prev();
         prevCntInput.val(String(parseInt(prevCntInput.val()) + 1));
         if(prevCntInput.val() <= 0) {
             alert('0 이하로는 입력할 수 없습니다!');
             prevCntInput.val(1);
         }
+        changeValue(no, prevCntInput.val());
         priceUpdate(prevCntInput);
         productPrice();
         delieveryFee();
         totalPriceCalc();
-    })
+    }
 
     /* 모두 체크 버튼 누르면 다 체크되고, 다시 누르면 해제되게 */
     $('#all-check').click(function() {
@@ -191,3 +193,9 @@
             }
         })
     }
+
+    /* 일정 scroll 이상 내려가면 가격창 fixed */
+    var cartInfo = $(".cart-info");
+    $(window).scroll(function(){
+        cartInfo.css("top", $(this).scrollTop());
+    });

@@ -215,11 +215,12 @@
                         cnt: $('input[name=quantity]').val()
                     },
                     success: function(data) {
-                        Swal.fire(
-                            '장바구니에 넣었습니다!',
-                            '즐거운 쇼핑 되세요!',
-                            'info'
-                        )
+                        Swal.fire({
+                            title: '장바구니에 넣었습니다!',
+                            text: '즐거운 쇼핑 되세요!',
+                            icon: 'info',
+                            confirmButtonColor: '#567ACE'
+                        })
                     },
                     error: function() {
                         console.log('error');
@@ -256,7 +257,7 @@
     
     // 리뷰 작성 버튼 눌렀을 때 로그인 안 됐으면 로그인 먼저, 아닐 시 modal 창 열리기
     $('#review-write-btn').click(function() {
-        if('${loginMember}.nick' == null) {
+        if('${loginMember}.nick == null') {
             Swal.fire({
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
@@ -301,11 +302,12 @@
                         $('input[name=score]').val(0);
                         $('.star span').css("width", $('input[name=score]').val() * 10 + '%');
                         $('.modal').css("display", "none");
-                        Swal.fire(
-                            '작성 완료!',
-                            '지금 내 리뷰를 확인해 보세요!',
-                            'info'
-                        )
+                        Swal.fire({
+                            title: '작성 완료!',
+                            text: '지금 내 리뷰를 확인해 보세요!',
+                            icon: 'info',
+                            confirmButtonColor: '#567ACE'
+                        })
                         reviewTotal();
                         reviewList();
                     },
@@ -392,7 +394,5 @@
             }
         })
     }
-
-
 </script>
 </html>

@@ -20,10 +20,24 @@
 
 	<update id="updatePoint">
 		UPDATE MEMBER
-		SET
-			POINT = POINT + 10
+		<if test=" att == 7 ">
+			SET
+				POINT = POINT + 500
+		</if>
+		<if test=" att == 30 ">
+			SET
+				POINT = POINT + 3000
+		</if>
+		<if test=" att == 365 ">
+			SET
+				POINT = POINT + 45000
+		</if>
+		<if test=" att != 0 and att > 0 ">
+			SET
+				POINT = POINT + 10
+		</if>
 		WHERE
-			NO = #{no}
+			NO = #{no}			
 	</update>
 	
 	<select id="selectTodayAtt" resultType="int">
@@ -33,10 +47,26 @@
 		AND ATT_DATE LIKE '%' || SUBSTR(SYSDATE, 1, 8) || '%'
 	</select>
 	
+	<!-- 로그인멤버 출석한 날짜 전부 배열로 -->
 	<select id="selectAttList" resultType="String">
 		SELECT SUBSTR(ATT_DATE, 1, 8) AS ATT_DATE
 		FROM ATTENDANCE
 		WHERE NO = #{no}
+	</select>
+	
+	<!-- 로그인멤버 총 출석일 -->
+	<select id="selectTotalAtt" resultType="int">
+		SELECT COUNT(*)
+		FROM ATTENDANCE
+		WHERE NO = #{no}
+	</select>
+	
+	<!-- 오늘 날짜 기준으로 n일 전에 출석했는지 -->
+	<select id="selectContinuousAtt" resultType="int">
+		SELECT COUNT(*)
+		FROM ATTENDANCE
+		WHERE NO = #{no}
+		AND ATT_DATE LIKE #{day}
 	</select>
 
 </mapper>
