@@ -118,24 +118,24 @@ function putCardNo(){
 
 //주소 추가전에 3개인지 확인하자
 $('#addr-plus').click(function(){
-  $('#addr-pop').click();
   console.log("클릭");
+  
+  $.ajax({
+    url : "/blank/member/addrCnt",
+    type : "post",
+    success : function(result){
+      
+      if(result ==1){
+          $('#addr-pop').click();
 
-  // $.ajax({
-  //   url : "/blank/member/addrCnt",
-  //   type : "post",
-  //   success : function(result){
-
-  //       if(result ==1){
-
-  //       }else{
-  //         alert('등록하신 주소가 3개 이상입니다. 삭제를 먼저 진행하여 주세요')
-  //       }
-  //   },
-  //   error : function(){
-  //       alert('에이잭스 에러!!!!!!!!!');
-  //   }
-  // }) //ajax    
+        }else{
+          alert('등록하신 주소가 3개 이상입니다. 삭제를 먼저 진행하여 주세요')
+        }
+    },
+    error : function(){
+        alert('에이잭스 에러!!!!!!!!!');
+    }
+  }) //ajax    
 
 })
 
@@ -158,4 +158,14 @@ const autoHyphen = (target) => {
    .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
  }
 
-      
+
+
+function checkDelete() {
+  let isDelete = confirm('정말 삭제하시겠습니까?');
+  
+  if(isDelete){
+    return true;
+  }else{
+    return false;
+  }
+}

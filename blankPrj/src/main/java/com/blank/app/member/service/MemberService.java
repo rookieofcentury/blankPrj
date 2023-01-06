@@ -8,6 +8,7 @@ import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.report.vo.ReportVo;
 
 
 public interface MemberService {
@@ -53,6 +54,16 @@ public interface MemberService {
 	public List<MemberVo> selectFollower(String mNo);
 
 	public int updateProfile(MemberVo vo);
+
+	public List<ReportVo> selectReportListByNo(String mNo);
+
+	public List<AddressVo> selectAddrByNo(String mNo);
+
+	public int deleteAddr(AddressVo vo);
+
+	public int checkPwd(MemberVo vo);
+
+
 
 
 

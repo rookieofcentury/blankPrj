@@ -47,6 +47,8 @@
 .change-btn{
     width: 90px;
     height: 35px;
+    border: 1px solid var(--gray);
+    cursor: pointer;
 }
 .member-info-input{
     width: 250px;
@@ -92,7 +94,21 @@ input{
     text-align: right;
     padding-right: 8%;
 }
- #profile-submit{
-    display: none;
-} 
 
+input[type=file]::file-selector-button {
+    width: 100px;
+    height: 30px;
+    background: #fff;
+
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+input[type=text], input[type=password]{
+    border : 1px solid rgba(182, 182, 182, 1);
+    width: 200px;
+    height: 35px;
+    padding: 5px 0px 5px 10px;
+    color:rgb(88, 87, 87); 
+}

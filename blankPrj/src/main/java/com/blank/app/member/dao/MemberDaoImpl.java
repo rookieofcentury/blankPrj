@@ -11,6 +11,7 @@ import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.report.vo.ReportVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -142,6 +143,28 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int updateProfile(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("memberMapper.updateProfile", vo);
+	}
+
+	@Override
+	public List<ReportVo> selectReportListByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectList("memberMapper.selectReportListByNo", mNo);
+	}
+
+	@Override
+	public List<AddressVo> selectAddrByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectList("memberMapper.selectAddrByNo", mNo);
+	}
+
+	@Override
+	public int delectAddr(SqlSessionTemplate sst, AddressVo vo) {
+		return sst.delete("memberMapper.deleteAddr", vo);
+		
+	}
+
+	@Override
+	public MemberVo selectMemberOneByNo(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.selectOne("memberMapper.selectOneMemberByNo", vo);
+		
 	}
 
 	

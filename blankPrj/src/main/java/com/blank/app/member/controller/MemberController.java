@@ -1,7 +1,6 @@
 package com.blank.app.member.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,8 +25,10 @@ import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.report.vo.ReportVo;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Slf4j
@@ -73,15 +75,12 @@ public class MemberController {
 		Cookie c = new Cookie("saveId", loginMember.getEmail());
 		c.setPath("/blank");
 		
-
 		
 		if(save == null) { 
 			c.setMaxAge(0);
 		}
 		
-
 		resp.addCookie(c);
-
 		
 		return "redirect:/";
 	}
@@ -208,15 +207,16 @@ public class MemberController {
 		String mNo = loginMember.getNo();
 		
 		List<PayVo> loginPayVoList = service.selectPayByNo(mNo);
-		
+		List<AddressVo> loginAddrVoList = service.selectAddrByNo(mNo);
 		
 		if(loginPayVoList.size() == 0) {
 			
 			return "member/mypage/payAddr";
 		}
 		
+		model.addAttribute("addrVoList",loginAddrVoList);
 		model.addAttribute("payVoList", loginPayVoList);
-
+	
 		
 		return "member/mypage/payAddr";
 	}
@@ -269,12 +269,13 @@ public class MemberController {
 		
 		String mNo = loginMember.getNo();
 		
-		
 		List<HelpVo> helpVoList = service.selectHelpListByNo(mNo);
+		List<ReportVo> reportVoList = service.selectReportListByNo(mNo);
+		
+		log.warn("리포트 에 머가들었니 "+reportVoList);
 		
 		model.addAttribute("helpVoList", helpVoList);
-		
-		log.warn("헬프에 머가들었니 "+helpVoList);
+		model.addAttribute("reportVoList", reportVoList);
 		return "member/mypage/reportQ";
 	}
 	
@@ -294,10 +295,12 @@ public class MemberController {
 			//내가발로잉한 사람 
 			List<MemberVo> followingList = service.selectFollowing(mNo);
 			log.warn("내가 팔로잉한 목록 ::: "+followingList);
+			model.addAttribute("followingList", followingList);
 			
 			//나를 팔로잉 한사람 = 팔로워 
 			List<MemberVo> followerList = service.selectFollower(mNo);
 			log.warn("내가 팔로잉한 목록 ::: "+followerList);
+			model.addAttribute("followerList", followerList);
 			
 			return "member/mypage/follow";
 		}
@@ -411,6 +414,53 @@ public class MemberController {
 			return 2 + "";
 		}
 		
+		//변경시 비밀번호가맞는 지 확인 
+		@ResponseBody
+		@PostMapping("member/checkPwd")
+		public String checkPwd(String pwd, HttpSession session) {
+			
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			
+			String userNo = loginMember.getNo();
+
+			MemberVo vo = new MemberVo();
+			vo.setNo(userNo);
+			vo.setPwd1(pwd);
+			
+			int result = service.checkPwd(vo);
+			
+			if(result == 1 ) {
+				return 1+ "";
+			}else {
+				return 0 +"";
+			}
+		}
+		//비밀번호 업데이트 
+		@ResponseBody
+		@PostMapping("member/updatePwd")
+		public String updatePwd(String pwd1, HttpSession session) {
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			
+			String userNo = loginMember.getNo();
+			//업데이트 해줄 정보 
+			MemberVo vo = new MemberVo();
+			vo.setNo(userNo);
+			vo.setPwd1(pwd1);
+			
+			System.out.println(vo);
+			
+			int result = service.updatePwd(vo);
+			
+			if(result == 1) {
+				return 1+"";
+			}else {
+				return 0+"";
+			}
+		}
+		
+		
+		
+		
 		
 		//네이버 로그인
 		@GetMapping("/naverLogin")
@@ -465,6 +515,33 @@ public class MemberController {
 			
 			return "redirect:/member/mypage/payAddr";
 			
+		}
+		
+		@PostMapping("member/deleteaddr")
+		public String deleteAddr(@RequestParam(name="no") String no, HttpSession session, Model model) {
+			
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			AddressVo vo = new AddressVo();
+			
+			log.warn("주소 고유번호"+ no);
+			
+			//저장된 번호가져옴 
+			vo.setMNo(loginMember.getNo());
+			vo.setNo(no);
+			
+			System.out.println(vo);
+			
+			int result = service.deleteAddr(vo);
+			
+			if(result == 0) {
+				System.out.println("삭제못했다 ");
+				model.addAttribute("msg", "주소가 정상적으로 삭제되지 않았습니다. ");
+				return "redirect:/member/mypage/payAddr";
+			}else {
+				
+			}
+			model.addAttribute("msg", "주소가 정상적으로 삭제되었습니다.");
+			return "redirect:/member/mypage/payAddr";
 		}
 		
 		

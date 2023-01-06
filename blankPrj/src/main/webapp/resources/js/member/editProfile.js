@@ -43,19 +43,7 @@ phoneBtn.click(function(){
    }
 
 })
-//비밀번호
-let pwdBtn = $('#pwd-change   az');
-pwdBtn.click(function(){
 
-    $('#pwd-hidden').toggle()
-
-    if (pwdBtn.text() == "변경") {
-      
-      pwdBtn.text("취소"); 
-   } else {
-      pwdBtn.text("변경");
-   }
- })
 
  let emailCheck = false;
  let inputEmail = $('input[name=email]');
@@ -128,7 +116,7 @@ pwdBtn.click(function(){
 
  //핸드폰번호 자동으로 하이픈
 const autoHyphen = (target) => {
-   alert('안일닝ㄹ')
+
    target.value = target.value
      .replace(/[^0-9]/g, '')
     .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
@@ -165,7 +153,3 @@ const autoHyphen = (target) => {
  });
 
 
- $('#plus-profile').click(function() {
-    $('#profile-submit').click();
-
- })

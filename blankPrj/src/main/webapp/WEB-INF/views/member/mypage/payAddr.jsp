@@ -14,6 +14,7 @@
     if('${msg}' != ""){
         alert('${msg}')
     }
+	
 </script>
 
 <body>
@@ -41,7 +42,7 @@
 						</div>
 						<c:if test="${fn:length(payVoList) != 0}">
 							<c:forEach items="${payVoList}" var="list">
-								<form action="/blank/pay/deletecard" method="post" name="${list.no}">
+								<form action="/blank/pay/deletecard" method="post" name="${list.no}"  onsubmit="return checkDelete();">
 										<div class="card-info">
 											<div>
 												<c:choose>
@@ -89,29 +90,25 @@
 								<div><h3>등록된 배송지</h3></div>
 								<div><input type="button" class="btn plus" id="addr-plus" name="addrPlus" value="추가"></div>
 							</div>
-							<div>
-								<div>
-									<div>이름</div>
-									<div>배송지</div>
-								</div>
-								<div><button class="btn delete">삭제</button></div>
-							</div>
-							<div>
-								<div>이름</div>
-								<div>배송지</div>
-								<div><button class="btn delete">삭제</button></div>
-							</div>
-							<div>
-								<div>이름</div>
-								<div>배송지</div>
-								<div><button class="btn delete">삭제</button></div>
-							</div>
-						
+							<c:if test="${fn:length(addrVoList) != 0}">
+								<c:forEach items="${addrVoList}" var="list">
+									<form action="/blank/member/deleteaddr" method="post" name="${list.no}"  onsubmit="return checkDelete();">
+										<input type="hidden" name="no" value="${list.no}">
+										<div class="addr-container">
+											<div class="addr-top">
+												<div>${list.name}&nbsp;(${list.phone})</div>
+												<div><input type="submit" class="btn delete" value="삭제"></div>
+											</div>
+											<div class="addr-down">(${list.addrNo})&nbsp;${list.addr}</div>
+										</div>
+									</form>
+								</c:forEach>
+							</c:if>
 					  </div>
 				
 				
 					</div>
-				  </div>
+				</div>
 			
 			</div>
 		</div>
