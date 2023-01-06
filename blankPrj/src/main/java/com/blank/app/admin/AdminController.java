@@ -451,11 +451,8 @@ public class AdminController {
 
 	// 고객센터 문의 목록(화면)
 	@GetMapping("help")
-	public String help(HttpServletRequest req, HttpSession session, String p) {
-
-		String category = req.getParameter("category");
-		String keyword = req.getParameter("keyword");
-
+	public String help(String category, String keyword, HttpSession session, String p) {
+		
 		if (p == null) {
 			p = "1";
 		}
@@ -510,30 +507,37 @@ public class AdminController {
 		return "redirect:help";
 	}
 	
-	// 탈퇴 설문 관리 목록(화면)
+	// 탈퇴 설문 목록
 	@GetMapping("quit")
-	public String quit(HttpSession session) {
-
+	public String quit(Model model, HttpSession session) {
+		
 		List<QuitVo> voList = adminService.selectQuit();
 
+		System.out.println("목록:"+voList);
+		
 		session.setAttribute("voList", voList);
+		model.addAttribute("voList", voList);
 		
 		return "admin/quit/list";
 	}
 	
+	// 탈퇴 설문 작성(화면)
+	@GetMapping("quitWrite")
+	public String quitWrite() {
+		return "admin/quit/write";
+	}
+	
 	// 탈퇴 설문 작성
 	@PostMapping("quitWrite")
-	public String quitWrite(Model model, HttpServletRequest req, HttpSession session) {
-		
-		String[] adminNo = req.getParameterValues("adminNo");
-		String[] content = req.getParameterValues("content");
+	public String quitWrite(String[] adminNo, String[] content, Model model, HttpSession session) {
+
+		QuitVo quitVo = null;
 		
 		List<QuitVo> quitList = new ArrayList<QuitVo>();
 		
-		QuitVo quitVo = new QuitVo();
-		
 		for(int i = 0; i < adminNo.length; i++) {
 			
+			quitVo = new QuitVo();
 			
 			quitVo.setAdminNo(adminNo[i]);
 			quitVo.setContent(content[i]);
@@ -548,14 +552,24 @@ public class AdminController {
 			return "error";
 		}
 		
-		System.out.println(quitList);
-		
 		session.setAttribute("quitVo", quitVo);
-		
 		model.addAttribute("quitVo", quitVo);
 		
 		return "redirect:quit";
 
+	}
+	
+	// 탈퇴 설문 삭제
+	@PostMapping("quitDelete")
+	public String quitDelete(QuitVo quitVo) {
+
+		int result = adminService.deleteQuit(quitVo);
+
+		if (result != 1) {
+			return "error";
+		}
+
+		return "redirect:quit";
 	}
 	
 }

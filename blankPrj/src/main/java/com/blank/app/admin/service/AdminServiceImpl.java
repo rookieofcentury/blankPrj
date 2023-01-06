@@ -189,26 +189,27 @@ public class AdminServiceImpl implements AdminService{
 		return admindao.deleteNotice(sst, noticeVo);
 	}
 
-	//탈퇴 설문 카운트
-	@Override
-	public int quitCount() {
-		return admindao.quitCount(sst);
-	}
-
-	//탈퇴 설문 조회
+	//탈퇴 설문 등록
 	@Override
 	public int quitWrite(List<QuitVo> quitList) {
 		int result = 0;
 		for(QuitVo quitVo : quitList) {
 			result = admindao.quitWrite(sst, quitVo);
 		}
+		
 		return result;
+		
+	}
+
+	//탈퇴 설문 목록
+	@Override
+	public List<QuitVo> selectQuit() {
+		return admindao.selectQuitList(sst);
 	}
 
 	@Override
-	public List<QuitVo> selectQuit() {
-		// TODO Auto-generated method stub
-		return null;
+	public int deleteQuit(QuitVo quitVo) {
+		return admindao.deleteQuit(sst, quitVo);
 	}
 
 

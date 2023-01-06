@@ -79,9 +79,11 @@ public interface AdminDao {
 
 	public int updateHelp(SqlSessionTemplate sst, HelpVo helpVo);
 
-	public int quitCount(SqlSessionTemplate sst);
-
 	public int quitWrite(SqlSessionTemplate sst, QuitVo quitVo);
+
+	public List<QuitVo> selectQuitList(SqlSessionTemplate sst);
+
+	public int deleteQuit(SqlSessionTemplate sst, QuitVo quitVo);
 
 	
 }

@@ -53,7 +53,7 @@
 	    
 	                <div class="detail-title">작성자</div>
 	                <div>${selectNotice.adminNo}</div>
-	                <div><input type="hidden" value="${selectNotice.no}" name="no"></div>
+	                <div></div>
                     <div></div>
 
 	                <div class="detail-title">제목</div>
