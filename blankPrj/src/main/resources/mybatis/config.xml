@@ -21,6 +21,7 @@
       <typeAlias type="com.blank.app.pay.vo.PayVo" alias="PayVo"/>
       <typeAlias type="com.blank.app.member.vo.AddressVo" alias="AddrVo"/>
       <typeAlias type="com.blank.app.project.vo.LikeProjectVo" alias="LikeProjectVo"/>
+      <typeAlias type="com.blank.app.quit.vo.QuitVo" alias="QuitVo"/>
    </typeAliases>
 
 </configuration>

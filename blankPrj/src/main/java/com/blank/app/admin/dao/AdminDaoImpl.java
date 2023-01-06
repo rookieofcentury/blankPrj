@@ -215,15 +215,21 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.update("adminMapper.updateHelp", helpVo);
 	}
 
-	//탈퇴 설문 카운트
-	@Override
-	public int quitCount(SqlSessionTemplate sst) {
-		return sst.selectOne("adminMapper.quitCount");
-	}
-
+	//탈퇴 설문 등록
 	@Override
 	public int quitWrite(SqlSessionTemplate sst, QuitVo quitVo) {
 		return sst.insert("adminMapper.quitWrite", quitVo);
+	}
+
+	//탈퇴 설문 목록 조회
+	@Override
+	public List<QuitVo> selectQuitList(SqlSessionTemplate sst) {
+		return sst.selectList("adminMapper.selectQuitList");
+	}
+
+	@Override
+	public int deleteQuit(SqlSessionTemplate sst, QuitVo quitVo) {
+		return sst.update("adminMapper.deleteQuit", quitVo);
 	}
 	
 }

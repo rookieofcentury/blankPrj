@@ -1,0 +1,135 @@
+header{
+    border: 1px solid blue;
+    width: 420px;
+    height: 50px;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 6%;
+    border-radius: 20px 20px 0px 0px;
+}
+
+header div{
+    line-height: 40px;
+    margin-left: 10%;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(66, 66, 66);
+}
+
+main{
+    width: 420px;
+    height: 650px;
+    margin-left: 40%;
+    margin-right: 40%;
+    border: 1px solid red;
+    overflow:auto;
+    border-radius: 0px 0px 20px 20px;
+}
+
+#title{
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+}
+
+main::-webkit-scrollbar {
+    width: 6px;  /* 스크롤바의 너비 */
+}
+
+main::-webkit-scrollbar-thumb {
+    height: 5%; /* 스크롤바의 길이 */
+    background: rgb(176, 176, 176); /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+main::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+a {
+    text-decoration-line: none;
+}
+
+#blank-logo{
+    width: 85px;
+    height: 80px;
+    border: 1px solid red;
+    background-color: rgb(244, 242, 242);
+    margin-left: 40%;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+
+.blank-logo{
+    width: 70px;
+    height: 65px;
+    margin: 8%;
+}
+
+#chat-content{
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+}
+
+.chatbot-icon{
+    width: 35px;
+    height: 35px;
+    padding-top: 130px;
+    margin: 10px;
+}
+
+.chat-ment{
+    border: 1px solid red;
+    border-radius: 20px;
+    width: 290px;
+}
+
+.chat-ment div:nth-child(1){
+    font-size: 16px;
+    text-align: left;
+    margin: 10px;
+}
+
+.faq-url{
+    border: 1px solid blue;
+    width: 130px;
+    height: 35px;
+    line-height: 15px;
+    border-radius: 5px;
+    margin-left: 30%;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.faq-url a{
+    color: rgb(66, 66, 66);
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 35px;
+}
+
+.question-item{
+    border: 1px solid red;
+    border-radius: 15px;
+    text-align: center;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.question-item-btn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.user-talk{
+    border: 1px solid red;
+    border-radius: 15px;
+    text-align: center;
+    padding: 3px;
+}
+
+.user-talk-btn{
+    margin-left: 73%;
+    margin-top: 10px;
+}

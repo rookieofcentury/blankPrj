@@ -271,12 +271,6 @@
 		WHERE NO = #{no}
 	</update>
 	
-	<!-- 카운드 -->
-	<select id="quitCount" resultType="int">
-		SELECT COUNT(*)
-		FROM QUIT
-	</select>
-	
 	<!-- 탈퇴 질문 등록 -->
 	<insert id="quitWrite">
 		INSERT INTO QUIT
@@ -287,11 +281,27 @@
 		)
 		VALUES
 		(
-			SEQ_NOTICE_NO.NEXTVAL,
+			SEQ_QUIT_NO.NEXTVAL,
 			#{content},
 			#{adminNo}
 		)
 	</insert>
+	
+	<!-- 고객센터 문의 목록 조회 -->
+	<select id="selectQuitList" resultType="QuitVo">
+		SELECT Q.NO, A.ID AS ADMIN_NO, Q.CONTENT, Q.DELETE_YN
+		FROM QUIT Q
+		INNER JOIN ADMIN A
+		ON Q.ADMIN_NO = A.NO
+		WHERE Q.DELETE_YN = 'N'
+	</select>
+	
+	<!-- FAQ 삭제 -->
+	<update id="deleteQuit">
+		UPDATE QUIT SET DELETE_YN = 'Y'
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>
 
 

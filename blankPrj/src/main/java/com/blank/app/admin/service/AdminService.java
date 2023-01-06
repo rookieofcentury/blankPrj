@@ -79,11 +79,11 @@ public interface AdminService {
 
 	public int updateHelp(HelpVo helpVo);
 
-	public int quitCount();
-
 	public int quitWrite(List<QuitVo> quitList);
 
 	public List<QuitVo> selectQuit();
+
+	public int deleteQuit(QuitVo quitVo);
 
 
 }

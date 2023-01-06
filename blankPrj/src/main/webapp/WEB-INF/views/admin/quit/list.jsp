@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>탈퇴 설문 관리</title>
 <link rel="stylesheet" href="/blank/resources/css/admin/quit/list.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
 	<div class="quit-board-content">
@@ -27,15 +30,18 @@
 
 			<div class="quit-board-middle">
 
-					<div class="quit-board-items">
+				
+				<div class="quit-board-items">
+					
+						<div></div><a href="/blank/admin/quitWrite"><button type='button' id="insert-btn">등록</button></a>
 
 						<div class="quit-items">
 							<div class="quit-title">번호</div>
 							<div class="quit-title">관리자</div>
 							<div class="quit-title">탈퇴사유</div>
-							<div class="quit-title">삭제</div>
+							<div class="quit-title"></div>
 						</div>
-						
+
 						<c:forEach items="${voList}" var="vo">
 						
 							<div class="quit-content">
@@ -45,12 +51,12 @@
 								</div>
 								<div name="adminNo">${vo.adminNo}</div>
 								<div name="content">${vo.content}</div>
-								<div><img src="/blank/resources/images/admin/delect.png" class="delect-img"/></div>
+								<div><input type="button" value="삭제" id="delete-quit-btn" onclick="quitDelete(${vo.no});"/></div>
 							</div>
 							
 						</c:forEach>
 						
-					</div>
+				</div>
 
 			</div>
 
@@ -59,5 +65,33 @@
 	</div>
 
 </body>
+
+<script>
+	// 탈퇴 질문 삭제
+	function quitDelete(voNo) {
+		console.log(voNo);
+
+		Swal.fire({
+			title: '해당 질문을 삭제하시겠어요?',
+			text: "삭제 후에는 복구할 수 없어요!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '삭제',
+			cancelButtonText: '취소'
+		}).then((result) => {
+			if (result.isConfirmed) {
+			var newForm = $('<form></form>');
+			newForm.attr("method","post");
+			newForm.attr("action","/blank/admin/quitDelete");
+			newForm.append($('<input/>', {type:'hidden', name:'no', value:voNo}));
+			newForm.appendTo('body');
+			newForm.submit();
+			}
+		})
+	}
+	
+</script>
 
 </html>

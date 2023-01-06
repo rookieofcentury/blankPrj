@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>블랭크 관리자</title>
 <link rel="stylesheet" href="/blank/resources/css/admin/admin/login.css">
+<link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
 </head>
 <body>
 
