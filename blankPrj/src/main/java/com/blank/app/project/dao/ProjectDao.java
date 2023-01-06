@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
+import com.blank.app.project.vo.itemVo;
 
 public interface ProjectDao {
 
@@ -29,7 +31,7 @@ public interface ProjectDao {
 
 	int updatePrj(SqlSessionTemplate sst, ProjectVo vo);
 
-	int writingCnt(SqlSessionTemplate sst, HashMap<String, Object> map);
+	int writingCnt(SqlSessionTemplate sst, ProjectVo vo);
 
 	int insertPrj(SqlSessionTemplate sst, HashMap<String, Object> map);
 
@@ -40,6 +42,22 @@ public interface ProjectDao {
 	int deleteLikePrj(SqlSessionTemplate sst, LikeProjectVo vo);
 
 	List<ProjectVo> selectMyPrj(SqlSessionTemplate sst, ProjectVo vo);
+
+	int examinationCnt(SqlSessionTemplate sst, ProjectVo vo);
+
+	List<ProjectVo> selectexamination(SqlSessionTemplate sst, ProjectVo vo);
+
+	int confirmCnt(SqlSessionTemplate sst, ProjectVo vo);
+
+	List<ProjectVo> selectconfirm(SqlSessionTemplate sst, ProjectVo vo);
+
+	int proceedCnt(SqlSessionTemplate sst, ProjectVo vo);
+
+	List<ProjectVo> selectproceed(SqlSessionTemplate sst, ProjectVo vo);
+
+	int updateSet(SqlSessionTemplate sst, HashMap<String, Object> map);
+
+	int followCheck(SqlSessionTemplate sst, LikeMemberVo vo);
 
 
 

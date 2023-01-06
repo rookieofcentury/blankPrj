@@ -11,6 +11,7 @@ import lombok.Data;
 public class ProjectVo {
 	
 	private String no;
+	private String mno;
 	private String news;
 	private String review;
 	private String creator;
@@ -22,15 +23,18 @@ public class ProjectVo {
 	private String summary;
 	private String time;
 	private String url;
+	private String story;
 	private String status;
 	private String deleteYn;
+	private String originName;
+	private String filePath;
 	private String changeName;
-	private List<MultipartFile> prjfile;
+	private MultipartFile prjfile;
 	
 	public boolean isEmpty() {
-		if(prjfile.get(0).isEmpty()) {return true;}
+		if(prjfile.isEmpty()) {return true;}
 		if(prjfile == null){return true;}
-		if(prjfile.size() == 0){return true;}
+		if(prjfile.getSize() == 0){return true;}
 		
 		return false;
 	}

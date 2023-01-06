@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,12 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 만든 프로젝트</title>
-<link rel="stylesheet" href="/blank/resources/css/created/status.css">
+<link rel="stylesheet" href="/blank/resources/css/created/proceed.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 </head>
 <body>
-
     <%@ include file = "/WEB-INF/views/common/header.jsp" %>
 
     <div id="container">
@@ -30,30 +29,6 @@
 
         <div class="myprj-list">
             <div class="list-content">
-                
-                <!-- <div class="myprj-status">작성 중 2</div>
-                <div class="list-box">
-                    <div class="prj-img"><img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"></div>
-                    <div class="prj-info">
-                        <div class="prj-content">
-                            <div class="content-info">
-                                <div>title</div>
-                                <div>summary</div>
-                            </div>
-                            <div>
-                                <div class="management-button">
-                                    <a href="/blank/project/created/list?p=3">관리</a>
-                                </div>
-                                <div class="delete-button">
-                                    <div class="delete-button">
-                                        <input type="hidden" id="s_name" value="3" name="hiddenNo" />삭제
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                </div>  -->
-            
             </div>
         </div>
     </div>
@@ -78,17 +53,16 @@
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 
     <script>
-    
 
     var list = '';
     $(document).ready(function() { 
         var alertMsg = '${msg}';
         console.log(alertMsg);
         if(alertMsg != '') {
-            list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(1)').text() + '인 프로젝트가 없습니다.' + '</h3>' + '</div>' + '</div>';
+            list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(5)').text() + '인 프로젝트가 없습니다.' + '</h3>' + '</div>' + '</div>';
             $(".list-content").append(list);
         }else{
-            list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(1)').text() + ' ' + "${resultcnt}" + '</h3>' + '</div>' ;
+            list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(5)').text() + ' ' + "${resultcnt}" + '</h3>' + '</div>' ;
             <c:forEach items="${myPrj}" var="myPrj">
 
                 var title2 = '${ myPrj.title }';
@@ -100,7 +74,7 @@
                 list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
                 list += '<div class="prj-info">'+'<div class="prj-content">';
                 list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
-                list += '<div>' + '<div class="management-button">' + '<a href="/blank/project/post?p=' + no + '">관리</a>'
+                list += '<div>' + '<div class="management-button">' + '<a href="/blank/project/created/list?p=' + no + '">관리</a>'
                     +'</div>'+'<div class="delete-button">' + '<input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />' + '삭제' + '</div>' + '</div>';  
                 list += '</div>'+'</div>'+'</div>';
 
@@ -108,6 +82,7 @@
                 $(".list-content").append(list);
             }
         }); 
+
        /* 삭제 ajax */
         function clickDelete() { 
        	 	$('#popup_layer').css('display', 'none');
@@ -140,5 +115,6 @@
     }
 
     </script>
+
 </body>
 </html>

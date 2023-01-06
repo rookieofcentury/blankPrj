@@ -6,10 +6,12 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
+import com.blank.app.project.vo.itemVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,18 +64,19 @@ public class ProjectDaoImpl implements ProjectDao{
 
 	@Override
 	public int updatePrj(SqlSessionTemplate sst, ProjectVo vo) {
-		return sst.update("projectMapper.updatePrj", vo);
+		int result = sst.update("projectMapper.updatePrj", vo);
+		log.warn("dao updatePrj : " + result);
+		return result;
 	}
 
 	@Override
-	public int writingCnt(SqlSessionTemplate sst, HashMap<String, Object> map) {
-		return sst.selectOne("projectMapper.writingCnt", map);
+	public int writingCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.writingCnt", vo);
 	}
 
 	@Override
 	public int insertPrj(SqlSessionTemplate sst, HashMap<String, Object> map) {
 		int result = sst.insert("projectMapper.insertPrj", map);
-		log.warn("플젝 새로 추가 + 플젝번호 : " + map );
 		return result;
 	}
 
@@ -88,8 +91,6 @@ public class ProjectDaoImpl implements ProjectDao{
 	/* 찜++ */
 	@Override
 	public int insertLikePrj(SqlSessionTemplate sst, LikeProjectVo vo) {
-		System.out.println("디에이옹 브이오" + vo);
-		
 		int result = sst.insert("projectMapper.insertLikePrj", vo);
 		log.warn("dao ++찜 조회" + result);
 		return result;
@@ -106,5 +107,49 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public List<ProjectVo> selectMyPrj(SqlSessionTemplate sst, ProjectVo vo) {
 		return sst.selectList("projectMapper.selectwritingPrj", vo);
+	}
+
+	@Override
+	public int examinationCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.examinationCnt", vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectexamination(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectList("projectMapper.selectexamination", vo);
+	}
+
+	@Override
+	public int confirmCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.confirmCnt", vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectconfirm(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectList("projectMapper.selectconfirm", vo);
+	}
+
+	@Override
+	public int proceedCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.proceedCnt", vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectproceed(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectList("projectMapper.selectproceed", vo);
+	}
+
+	@Override
+	public int updateSet(SqlSessionTemplate sst, HashMap<String, Object> map) {
+		int result = sst.update("projectMapper.updateSet", map);
+		log.warn("dao updateSet" + result);
+		return result;
+	}
+
+	@Override
+	public int followCheck(SqlSessionTemplate sst, LikeMemberVo vo) {
+		int result = sst.selectOne("projectMapper.followCheck", vo);
+		log.warn("dao followCheck : " + result);
+		return result;
 	}
 }

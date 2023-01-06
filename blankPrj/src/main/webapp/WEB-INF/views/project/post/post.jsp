@@ -18,13 +18,15 @@
 
 <!-- 제이쿼리 -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <!-- 날짜위젯 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>;
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 <!-- 
 <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
-<!--<script src = "${path}/ckeditor/ckeditor.js"></script> -->
+<script src = "${path}/ckeditor/ckeditor.js"></script> 
 <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 <script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script> -->
 
@@ -37,11 +39,11 @@
                 <div><h1>프로젝트 기획</h1></div>
             </div>
             <div class="editor-buttons">
-                <button type="button" class="buttons-storage">임시저장</button>
+                <button type="button" id="storage" class="buttons-storage">임시저장</button>
                 <button type="submit" class="buttons-request" >심사요청</button>
                 <div class="buttons-goout">
                     <img src="/blank/resources/images/project/icon_goout.png">
-                    <a href="/blank/project/created/list"></a>
+                    <a href="/blank/project/created/"></a>
                 </div>
             </div>
         </div>
@@ -51,7 +53,7 @@
     <div id="mem-full">
         
             <input type="radio" id="default-info" name="mem-navi" checked >
-            <label for="default-info" ><span id="icon1" class="material-symbols-outlined">기본정보</span>&nbsp;</label>
+            <label for="default-info" ><span id="icon1" class="material-symbols-outlined">기본정보</span></label>
             <input type="radio" id="option-create" name="mem-navi">
             <label for="option-create" ><span class="material-symbols-outlined md-24">옵션설계</span></label>
             <input type="radio" id="creator-info" name="mem-navi">
@@ -88,7 +90,7 @@
             <div class="content-img">
                 <div class="img-info">
                     <div>대표이미지</div>
-                    <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
+                    <div>프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있도록 이미지로 등록해 주세요.</div>
                 </div>
                 <div class="img-upload"><input multiple="multiple" type="file" name="prjfile"></div>
             </div>
@@ -121,11 +123,9 @@
                                     <select>
                                         <option value="prjTime">==시작시간 선택==</option>
                                          <c:forEach items="${time}" var="tt">
-                                        <option>${tt.time}시</option>
+                                        <option value="${tt.no}">${tt.time}시</option>
 										</c:forEach> 
-                                        
                                     </select>
-                                    <!-- <div>dd</div> -->
                                 </div>
                             </div>
                             <div class="date-period">
@@ -184,7 +184,7 @@
                 <div class="summary-write">
                     <div class="summary-text">
                         <!-- <input type="text" placeholder="내용 입력" name="summery"> -->
-                        <textarea placeholder="내용 입력" name="summery"></textarea>
+                        <textarea placeholder="내용 입력" name="summary"></textarea>
                     </div>
                     <p>100글자 남음</p>
                 </div>
@@ -238,7 +238,7 @@
                         <div class="content-box">
                             <div class="preview-item">
                                 <div class="preview-set">
-                                    <div>내가 만든 세트</div>
+                                    <div>내가 만든 아이템</div>
                                     <!-- <% if(1 < 2){%>
                                         <ul class="set-box">
                                             <li class="item-list">
@@ -354,9 +354,7 @@
                                     <div class="set-option">
                                         <select class="myitemList">
                                             <option>== 아 이 템 선 택 ==</option>
-                                            <!-- <option>사과 (블루,레드,그린)</option>
-                                            <option>토마토 (블루,레드)</option>
-                                            <option>가지</option> -->
+                                            <!-- <option>사과 (블루,레드,그린)</option>-->
                                         </select>
                                         <select class="myitemOption">
                                             <option>== 옵 션 선 택 ==</option>
@@ -364,7 +362,7 @@
                                     </div>
                                 </div>
                                 <ul class="selected">
-                                    <li>
+                                    <!--<li>
                                         <div>
                                             <div class="selected-item">사과</div>
                                             <div>
@@ -384,12 +382,12 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <ol type="1">
+                                         <ol type="1">
                                             <li class="selected-opt">민트</li>
-                                        </ol>
+                                        </ol> 
                                     </li>
                                     <li>
-                                    </li> 
+                                    </li> -->
                                 </ul>
                                 <div class="set-insert">
                                     <div class="info-name">세트명</div>
@@ -398,7 +396,7 @@
                                 <div class="set-insert">
                                     <div class="info-quantity">수량 설정</div>
                                     <div class="text-price">
-                                        <div><input type="number" name="limitedQuantity"></div>
+                                        <div><input type="number" name="setQuantity"></div>
                                         <div>개</div>
                                     </div>
                                 </div>
@@ -423,7 +421,7 @@
         </div>   
     </div>
 
-             
+
     <!-- 컨텐츠 내용 3 -->
     <div class="mp-main3 main">
 	<div id="container">
@@ -543,10 +541,11 @@
                 </div>
                 <div class="calculate-write">
                     <div><input type="text" placeholder="은행명 입력" name="bank"></div>
-                    <div><input type="text" placeholder="계좌번호 입력" name="accountNumber"></div>
+                    <div><input type="text" placeholder="계좌번호 입력" name="account"></div>
                     <p>특수 문자(-)없이 숫자만 입력해 주세요</p>
                     <div><input type="text" placeholder="예금주명 입력" name="depositor"></div>
                 </div>
+            </div>
             </div>
             </div>
             </div>
@@ -603,7 +602,7 @@
 
        //글자수 체크(제목)
        $('input[name="title"]').keyup(function(e) {
-        console.log($('.start-time option:selected').val());
+        //console.log($('.start-time option:selected').val());
            titleCheckReturn = false;
            var content = $(this).val();
            $('.title-write > p').text(40 - content.length + "글자 남음"); 
@@ -641,7 +640,6 @@
        });
        //목표금액 콤마 
        // $('input[name="price"]').filter(".comma").on("keyup", function(){
-       //     console.log("ss");
        //     $(this).val($(this).val().replace(/[^0-9]/g, "").toLocaleString());
        // });
    //     $(document).ready(function(){
@@ -655,7 +653,6 @@
 //        }
 //        //콤마찍기
 //        function comma(str) {
-//            console.log("ss");
 //            str = String(str);
 //        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
    //     }
@@ -663,7 +660,7 @@
 
        //펀딩일수 계산
        $("input[name='endDay']").on("focusout", function() {
-    	   console.log($("input[name='startDay']").val());
+    	   //console.log($("input[name='startDay']").val());
            //var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
            //var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
            var date1 = $("input[name='startDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
@@ -855,7 +852,7 @@
 
         //유효성 체크(계좌번호)
         var checkNumber = /^[0-9]*$/;
-        $('input[name="accountNumber"]').keyup(function(e) {
+        $('input[name="account"]').keyup(function(e) {
             let accountCheckReturn = false;
             var content = $(this).val();
             if(!regExp.test(content)){
@@ -906,31 +903,67 @@
         });
 
        //임시저장
-        var memberId = $("#memberId").val();
-        var memberPass = $("#memberPass").val();
+        var option =  $('.selected-item').text();
+        var option2 =  $('.selected-item').val();
+        console.log($('.selected-item').text());
+        console.log($('.selected-item').val());
+        // var param = {"option": option}
         
-        var param = {"memberId":memberId, "memberPass":memberPass}
-       $('.buttons-storage').click(function() {
-	       $.ajax({
-	    	   type: "",
+        // document.querySelector('#storage').addEventListener('click',function(){
+        //     const prj = document.querySelector('#postPrj');
+        //     const formData = new FormData(prj);
+        //     formData.append("k01","v01");
+        //     formData.append("k02","v02");
+        //     const httpRequest = new XMLHttpRequest();
+        //     httpRequest.onreadystatechange = () => {
+        //         if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        //             if (httpRequest.status === 200) {
+        //             }
+        //         }
+        //     };
+        // httpRequest.open('post', '/blank/project/savePrj');
+        // httpRequest.responseType = "json";
+        // httpRequest.send(formData);
+        // });
+
+        $('.buttons-storage').click(function() {
+            var form = $('#postPrj')[0];
+            var formData = new FormData(form);
+            alert("update");
+            // formData.append("k01","v01");
+            // formData.append("k02","v02");
+
+            // fetch("/blank/project/savePrj" , {
+            //     method : "POST" ,
+            //     body : formData
+            // })
+            // .then( resp => {return resp.json()} )
+            // .then( data => { console.log("data ::: "); console.log(data); } )
+            // ;
+            
+            $.ajax({
 	    	   url  : "/blank/project/savePrj",
-	    	   type : "POST",
-	    	   data : $("#postPrj").serialize(), random, 
-	    	   dataType: "json",
+                cache: false,
+                contentType: false,
+                processData: false ,
+	    	    type : "POST",
+	    	    data : //{
+                 formData,
+                 "option":option
+                //}
+                ,
+            //    dataType: "json",
 	    	   success : function(x){
 	    		   if(x == 1){
     		        alert('임시저장이 되었습니다.')
 	    	   		}
-	    	 }
-	       ,
+	    	 },
 	    	    error : function(x){
-	    	        console.log("받아온 리절트"+x);
-	    	        alert('에이잭스 에러!!!!!!!!!');
-	    	    } 
+	    	        console.log("받아온 리절트" + x);
+	    	    },
 	       })
-       })
-       /* var selectCate = $('#cate-option option:checked'); */
-       
+       });
+
         //온서브밋
        function checkAll(){
     	   console.log("성공?!");
@@ -977,17 +1010,18 @@
             $('textarea[name=addOption]').val("");
             //console.log(map);
         });
+
         /* select option에 집어넣기 (item) */   
         $('input[name=apply]').click(function(){
+        // $(document).on('click',$('input[name=apply]'),function(){
             if($(".item-name").text()){
                 $('input[id*="itemPopup"]+ label + div').css("display", "none");
-                //var words = optionName.split(',');
 
                 var allItem = document.querySelectorAll( '.itemBox' );
                 allItem.forEach(element => {
                 const itemName = element.querySelector('.item-name').innerHTML;
                 const itemOption = element.querySelector('.itemOption').innerHTML;
-                console.log(itemOption);
+                //console.log(itemOption);
 
                 var list = '';
                 //list += '<option>' + '== 아 이 템 선 택 == ' + '</option>';
@@ -1025,12 +1059,13 @@
             var option = $('.myitemOption option:selected').text();
             
             var list = '';
-            list += '<li>' + '<div>' + '<div class="selected-item">' + item + '</div>' + '<div>' + '<div class="quantity-box">';
+            list += '<li>' + '<div>' + '<div class="selected-item">' + item + ' ' + '(' + option + ')' + '</div>' + '<div>' + '<div class="quantity-box">';
             list += '<button>' + '<img src="/blank/resources/images/project/minus.svg">' + '</button>';
             list += '<input type="number" value="1" name="optionQuantity">' + '<button>' + '<img src="/blank/resources/images/project/plus.svg">' + '</button>' + '</div>';
             list += '<button class="delete-button">' + '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + 
                     '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' + '</svg>';
-            list += '</button>' + '</div>' + '</div>' + '<ol type="1">' + '<li class="selected-opt">' + option + '</li>' + '</ol>' + '</li>';
+            list += '</button>' + '</div>' + '</div>' ;
+            //'<ol type="1">' + '<li class="selected-opt">' + option + '</li>' + '</ol>' + '</li>';
             $(".selected").append(list);
         });
 
@@ -1054,25 +1089,32 @@
         }
     });
 
-    /*세트 저장*/
+    /*세트 append*/
     $('input[name=save]').click(function(){
-        if(!$('input[name=setName]').val().trim() == '' && !$('input[name=setPrice]').val().trim() == '' && !$('input[name=limitedQuantity]').val().trim() == ''){
-            console.log('아야오오');
+        if(!$('input[name=setName]').val().trim() == '' && !$('input[name=setPrice]').val().trim() == '' && !$('input[name=setQuantity]').val().trim() == ''){
             var list = '';
             list += '<li class="set-list">' + '<button type="button">' + '<div class="set-buttons">' + '<strong>' + $('input[name=setPrice]').val() + '원' + '</strong>' 
             list += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' +
                                                 '</svg>' + '</div>' + '<p class="set-name">' + $('input[name=setName]').val() + '</p>';
-            list += '<ul class="set-item">' + '<li>' + '사과' + ' x 1' + '</li>' + '</ul>'
+            list += '<ul class="set-item">' + '<li>' + $('.selected-item').text() + ' x 1' + '</li>' + '</ul>'
             list += '<div class="set-quantity">' + '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">' + '<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>'+ '</svg>';
-            list += '<div>' + '제한 수량' + '</div>' + '<div>' + $('input[name=limitedQuantity]').val() + '</div>' + '<div>' + '개' + '</div>' + '</div>' + '</button>'
+            list += '<div>' + '제한 수량' + '</div>' + '<div>' + $('input[name=setQuantity]').val() + '</div>' + '<div>' + '개' + '</div>' + '</div>' + '</button>'
             list += '<button type="button">' + '</button>' + '</li>';
             $(".mySet").append(list);
-            console.log('33');
             }else{
                 alert("모든 항목을 입력해 주세요");
             }
     });
 
+    jQuery.browser = {};
+		(function () {
+		    jQuery.browser.msie = false;
+		    jQuery.browser.version = 0;
+		    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+		        jQuery.browser.msie = true;
+		        jQuery.browser.version = RegExp.$1;
+		    }
+		})();
 
 </script>
 </body>
