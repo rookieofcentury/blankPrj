@@ -23,16 +23,17 @@
         ,P.TIME
         ,P.URL
         ,P.STATUS
+        ,M.NO MNO
         ,M.NICK CREATOR
-         ,P.SUMMARY
+        ,P.SUMMARY
         ,C.NAME AS CATEGORY
-        ,(SELECT COUNT(R.NO) FROM REVIEW R INNER JOIN PROJECT P ON P.NO = R.PROJECT WHERE P.NO = 1) AS REVIEW
-        ,(SELECT COUNT(N.NO) FROM NEWS N INNER JOIN PROJECT P ON P.NO = N.PRJ WHERE P.NO = 1) AS NEWS
+        ,(SELECT COUNT(R.NO) FROM REVIEW R INNER JOIN PROJECT P ON P.NO = R.PROJECT WHERE P.NO = #{p}) AS REVIEW
+        ,(SELECT COUNT(N.NO) FROM NEWS N INNER JOIN PROJECT P ON P.NO = N.PRJ WHERE P.NO = #{p}) AS NEWS
 		FROM PROJECT P
 		INNER JOIN MEMBER M ON P.CREATOR = M.NO
 		INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
 		WHERE P.NO = #{p}
-		GROUP BY P.NO ,P.TITLE ,P.PRICE ,P.START_DATE  ,P.END_DATE ,P.TIME ,P.URL ,P.STATUS, M.NICK, P.SUMMARY ,C.NAME
+		GROUP BY P.NO ,P.TITLE ,P.PRICE ,P.START_DATE  ,P.END_DATE ,P.TIME ,P.URL ,P.STATUS, M.NO, M.NICK, P.SUMMARY ,C.NAME
 	</select>
 	
 	<select id="selectTimeList" resultType="TimeVo">
@@ -116,16 +117,43 @@
 	<update id="updatePrj">
 	  	UPDATE PROJECT SET
 			TITLE = #{title},
+			CATEGORY = #{category},
 			PRICE = #{price},
-			START_DATE = #{startDate}
+			START_DATE = #{startDate},
+			TIME = #{time},
+			END_DATE = #{endDate},
+			URL = #{url},
+			SUMMARY = #{summary},
+			STORY = #{story},
+			ENROLL_DATE = SYSDATE
+		WHERE NO = #{p}
+  </update>
+  
+  <update id="updateSet">
+	  	UPDATE SET-ITEM SET
+			NO = #{no},
+			NAME = #{name},
+			QUANTITY = #{quantity},
+			PRICE = #{price},
+			OPTION = #{option},
+		WHERE PRJ_NO = #{p}
+  </update>
+  
+  
+  <update id="updateCreator">
+	  	UPDATE MEMBER SET
+			ACCOUNT = #{account},
+			BANK = #{bank},
+			DEPOSITOR = #{depositor},
+			INFO = #{info},
 		WHERE NO = #{no}
   </update>
   
-  <select id="writingCnt" resultType="int" parameterType="Map">
+  <select id="writingCnt" resultType="int">
 		SELECT COUNT(STATUS)
 		FROM PROJECT 
-		WHERE CREATOR = #{vo.creator}
-        AND STATUS = #{statusWriting}
+		WHERE CREATOR = #{creator}
+        AND STATUS = '작성중'
         AND DELETE_YN = 'N'
 	</select>
 	
@@ -158,9 +186,80 @@
         	,STATUS
         	,SUMMARY
 		FROM PROJECT 
-		WHERE CREATOR = #{vo.creator}
+		WHERE CREATOR = #{creator}
         AND STATUS = '작성중'
         AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="examinationCnt" resultType="int">
+		SELECT COUNT(STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '심사중'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectexamination" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '심사중'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="confirmCnt" resultType="int">
+		SELECT COUNT(STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '승인됨'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectconfirm" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '승인됨'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="proceedCnt" resultType="int">
+		SELECT COUNT(STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '승인됨'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectproceed" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '승인됨'
+        AND DELETE_YN = 'N'
+	</select>
+
+	<!-- follow check	 -->
+	<select id="followCheck" resultType="int">
+	SELECT COUNT(LIKE_MEMBER_NO)
+		FROM LIKE_MEMBER
+        WHERE M_NO = #{mNo}
+        AND LIKE_MEMBER_NO = #{likeMemberNo}
 	</select>
 	
 </mapper>

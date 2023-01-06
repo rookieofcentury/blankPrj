@@ -31,7 +31,7 @@
                     <div class="main-image">
                         <button type="button"><<</button>
 						<img src="/blank/resources/images/blank.png" alt="프로젝트썸네일">
-                        <button type="button">>></button>
+                        <button type="button"></button>
                     </div>
 					<div class="main-summary">
 						${prj.summary}
@@ -61,7 +61,7 @@
 						</div>
 						<div class="info-period">
 							<div class="period"><strong>펀딩기간</strong></div>
-							<div><fmt:formatDate value="${prj.startDate}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${prj.endDate}" pattern="yyyy-MM-dd"/></div>
+							<div><fmt:formatDate value="${prj.startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${prj.endDate}" pattern="yyyy-MM-dd"/></div>
 								<!-- ${prj.startDate}~${prj.endDate}</div> -->
 						</div>
 						<div class="info-payment">
@@ -137,7 +137,6 @@
 		/* 접속 시 플젝 찜하기 확인 */
 		$(document).ready(function() {
 			if('${loginMember.no}'){
-				console.log('로그인멤버 you');
 				$.ajax({
 					type: "",
 					url  : "/blank/project/mylikePrj",
@@ -146,9 +145,10 @@
 						"pno" : '${prj.no}'
 					},
 					success : function(x){
-						console.log(x);
 					if(x == 1){
-						$(this).attr('class','bi-heart-fill');
+						// $(this).attr('class','bi-heart-fill');
+						// i++;
+						$('i').eq(0).attr('class','bi-heart-fill');
 						i++;
 					}
 				},error : function(x){
@@ -208,6 +208,79 @@
 			}
 		});
 
+		/*팔로우 확인*/
+		$(document).ready(function() {
+			if('${loginMember.no}'){
+				console.log('로그인멤버 you');
+				$.ajax({
+					type: "",
+					url  : "/blank/project/followCheck",
+					type : "POST",
+					data : {
+						"creator" : '${prj.mno}'
+					},
+					success : function(x){
+					if(x == 1){
+						$('.name-follow').text('팔로잉');
+						$('.name-follow').css("color", "#fff");
+						$('.name-follow').css("background", "#567ace");
+					}
+				},error : function(x){
+					console.log("받아온 리절트"+x);
+				} 
+				})
+			}
+		});
+
+		/*팔로우*/
+		var str1 = $('.name-follow').text('팔로잉');
+		var str2 = '팔로잉'
+		console.log(str1);
+		console.log(str2);
+		$('.name-follow').on('click',function(){
+			if(!'${loginMember.no}'){
+				alert('로그인 후 이용해 주세요')
+			}else{
+            if(str1 === str2){
+				console.log("팔로잉 취소");
+				$.ajax({
+					type: "",
+					url  : "/blank/member/deleteMember",
+					type : "POST",
+					data : {
+						"creator" : '${prj.mno}'
+					},
+					success : function(x){
+					if(x == 1){
+						alert('팔로잉 취소~')
+						$('.name-follow').text('+ 팔로우');
+					}
+				},error : function(x){
+					console.log('팔로잉 취소 에러!!!!!!!!!');
+				} 
+				})
+            }else{
+				console.log("팔로잉 ++");
+				$.ajax({
+					type: "",
+					url  : "/blank/member/insertLikeMember",
+					type : "POST",
+					data : {
+						"creator" : '${prj.mno}'
+					},
+					success : function(x){
+					if(x == 1){
+						alert('팔로잉 완~')
+						$('.name-follow').text('팔로잉');
+					}
+				},error : function(x){
+					console.log('팔로잉 완 에러!!!!!!!!!');
+				} 
+				})
+			}
+			}
+		});
+		
 		/*옵션 선택*/
 		$('.card-option').click(function(){
 			$('.reward-card').css("border-width", "5px");

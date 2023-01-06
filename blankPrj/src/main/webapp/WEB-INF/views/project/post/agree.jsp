@@ -117,7 +117,7 @@
         function startBtn(){
             if($(".ckAll").is(":checked")) {
             let random = String(Math.floor(Math.random()*1000000)).padStart(6, "0");
-            console.log(random);
+            alert(random);
             $.ajax({
             url : "/blank/project/agree",
             method : "POST",   
@@ -125,7 +125,6 @@
                 "random" : random
             },
             success : function(x){
-                console.log(x);
                 location.href = "/blank/project/post?p=" + random;
             },error : function(){
                 console.log("동의 통신에러");

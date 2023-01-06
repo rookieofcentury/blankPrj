@@ -14,13 +14,14 @@ public class itemVo {
 	private String optionName;
 	
 	/*set item*/
-	private String no;
-	private String name;
-	private String quantity;
-	private String price;
+	private String setNo;
+	private String setName;
+	private String setQuantity;
+	private String setPrice;
+	private String option;
+	private String prjNo;
 	
 	/*range*/
 	private String rangeNo;
-	private String prjNo;
 
 }

@@ -9,10 +9,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blank.app.member.dao.MemberDao;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.project.dao.ProjectDao;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
+import com.blank.app.project.vo.itemVo;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -80,8 +82,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int writingCnt(HashMap<String, Object> map) {
-		return dao.writingCnt(sst,map);
+	public int writingCnt(ProjectVo vo) {
+		return dao.writingCnt(sst,vo);
 	}
 
 	@Override
@@ -98,10 +100,7 @@ public class ProjectServiceImpl implements ProjectService{
 	/*찜 ++*/
 	@Override
 	public int insertLikePrj(LikeProjectVo vo) {
-		System.out.println("서비스 브이오" + vo);
-		
 		int result = dao.insertLikePrj(sst,vo);
-		System.out.println("서비스 리절트 "+result);
 		return result;
 	}
 
@@ -110,10 +109,53 @@ public class ProjectServiceImpl implements ProjectService{
 	public int deleteLikePrj(LikeProjectVo vo) {
 		return dao.deleteLikePrj(sst,vo);
 	}
-
+	
+	/*작성중 조회*/
 	@Override
 	public List<ProjectVo> selectMyPrj(ProjectVo vo) {
 		return dao.selectMyPrj(sst, vo);
+	}
+
+	/*심사중 카운트*/
+	@Override
+	public int examinationCnt(ProjectVo vo) {
+		return dao.examinationCnt(sst, vo);
+	}
+
+	/*심사중 조회*/
+	@Override
+	public List<ProjectVo> selectexamination(ProjectVo vo) {
+		return dao.selectexamination(sst, vo);
+	}
+
+	@Override
+	public int confirmCnt(ProjectVo vo) {
+		return dao.confirmCnt(sst, vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectconfirm(ProjectVo vo) {
+		return dao.selectconfirm(sst, vo);
+	}
+
+	@Override
+	public int proceedCnt(ProjectVo vo) {
+		return dao.proceedCnt(sst, vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectproceed(ProjectVo vo) {
+		return dao.selectproceed(sst, vo);
+	}
+
+	@Override
+	public int updateSet(HashMap<String, Object> map) {
+		return dao.updateSet(sst, map);
+	}
+
+	@Override
+	public int followCheck(LikeMemberVo vo) {
+		return dao.followCheck(sst, vo);
 	}
 
 }

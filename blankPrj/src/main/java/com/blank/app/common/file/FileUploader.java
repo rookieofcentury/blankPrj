@@ -41,11 +41,11 @@ public class FileUploader {
 
 	}
 
-	//// 프로젝트 - 파일 업로드
+	// 프로젝트 - 파일 업로드
 	public static String upload(HttpServletRequest req, ProjectVo vo) {
 
-			String path = req.getSession().getServletContext().getRealPath("/resources/upload/goods/");
-			String originName = vo.getPrjfile().get(0).getOriginalFilename();
+			String path = req.getSession().getServletContext().getRealPath("/resources/upload/project/");
+			String originName = vo.getPrjfile().getOriginalFilename();
 			String ext = originName.substring(originName.lastIndexOf("."), originName.length());
 
 			String changeName = "prj_" + System.nanoTime() + ext;

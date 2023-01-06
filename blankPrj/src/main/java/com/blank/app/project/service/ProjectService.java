@@ -3,9 +3,11 @@ package com.blank.app.project.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
+import com.blank.app.project.vo.itemVo;
 
 public interface ProjectService {
 
@@ -27,7 +29,7 @@ public interface ProjectService {
 
 	int updatePrj(ProjectVo vo);
 
-	int writingCnt(HashMap<String, Object> map);
+	int writingCnt(ProjectVo vo);
 
 	int insertPrj(HashMap<String, Object> map);
 
@@ -39,5 +41,20 @@ public interface ProjectService {
 
 	List<ProjectVo> selectMyPrj(ProjectVo vo);
 
+	int examinationCnt(ProjectVo vo);
+
+	List<ProjectVo> selectexamination(ProjectVo vo);
+
+	int confirmCnt(ProjectVo vo);
+
+	List<ProjectVo> selectconfirm(ProjectVo vo);
+
+	int proceedCnt(ProjectVo vo);
+
+	List<ProjectVo> selectproceed(ProjectVo vo);
+
+	int updateSet(HashMap<String, Object> map);
+
+	int followCheck(LikeMemberVo vo);
 
 }

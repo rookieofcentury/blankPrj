@@ -643,9 +643,6 @@ textarea[name=addOption]{
     border: 1px solid #567ace;
     width: 500px;
 }
-/* *{
-    outline: #567ace;
-} */
 .item-option{
     width: 60%;
     display: flex;
@@ -861,7 +858,7 @@ strong+button{
     border-radius: 10px;
     width: 300px;
     height: 30%;
-    
+    text-align: center;
 }
 
 .set-option>span>input{

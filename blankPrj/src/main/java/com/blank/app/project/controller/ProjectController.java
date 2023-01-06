@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,11 +28,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.blank.app.common.file.FileUploader;
+import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.service.ProjectService;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
+import com.blank.app.project.vo.itemVo;
 import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
@@ -76,16 +80,12 @@ public class ProjectController {
 	@ResponseBody
 	public String likePlusPrj(HttpSession session, String pno, LikeProjectVo vo){
 		
-		System.out.println("plus 받아온 플젝넘버 : " + pno);
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setMNo(nick);
 		vo.setPrjNo(pno);
-		System.out.println("likeprjvo   " + vo);
 		
 		int likeVo = service.insertLikePrj(vo);
-		System.out.println("여기까지 왓나");
-		System.out.println("likevo" + likeVo);
 		if(likeVo != 1) {
 			return "0";
 		}
@@ -95,20 +95,37 @@ public class ProjectController {
 	/*찜하기 --*/
 	@PostMapping("likeMinusPrj")
 	@ResponseBody
-	public String likeMinusPrj(HttpSession session, String pno, LikeProjectVo vo){
+	public String likeMinusPrj(String pno, LikeProjectVo vo, HttpSession session){
 		
-		System.out.println("minus 받아온 플젝넘버 : " + pno);
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setMNo(nick);
 		vo.setPrjNo(pno);
 		
 		int likeVo = service.deleteLikePrj(vo);
-		System.out.println(likeVo);
 		if(likeVo != 1) {
 			return "0";
 		}
 		return "1";
+	}
+	
+	/*팔로우 확인*/
+	@PostMapping("followCheck")
+	@ResponseBody
+	public String followCheck(Model model, HttpSession session, String creator, LikeMemberVo vo){
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setMNo(nick);
+		vo.setLikeMemberNo(creator);
+		System.out.println("창작자 번호 : " + creator);
+		
+		int result = service.followCheck(vo);
+
+		if(result != 0) {
+			return "1";
+		}
+		return "0";
 	}
 	
 	@GetMapping("news")
@@ -146,10 +163,7 @@ public class ProjectController {
 			model.addAttribute("prjNo", random);
 		}
 		
-		if(result != 1) {
-			return "";
-		}
-		return vo.getNo();
+		return "result";
 	}
 	
 	@GetMapping("post/defaultInfo")
@@ -196,74 +210,106 @@ public class ProjectController {
 	
 	@GetMapping("created")
 	public String writing(HttpSession session, ProjectVo vo, Model model) {
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		int resultcnt = service.writingCnt(vo);
+		
+		if(resultcnt == 0) {
+			model.addAttribute("msg", "작성중인 프로젝트가 없습니다!");
+		}else {
+			List<ProjectVo> myPrj = service.selectMyPrj(vo);
+			model.addAttribute("resultcnt", resultcnt);
+			session.setAttribute("myPrj", myPrj);
+			//System.out.println(myPrj);
+		}
+		return "project/created/status";
+	}
+	
+//	@GetMapping("created/writing")
+//	@ResponseBody
+//	public String writing(String statusWriting, HttpSession session, ProjectVo vo, Model model) {	
 //		
 //		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 //		String nick = loginMember.getNo();
 //		vo.setCreator(nick);
 //		
-//		int resultcnt = service.writingCnt(vo);
-////		
-////		if(resultcnt == 0) {
-////			return 0+"";
-////		}else {
-////			List<ProjectVo> myPrj = service.selectMyPrj(map);
-////			session.setAttribute("myPrj", myPrj);
-////			//System.out.println(myPrj);
-////		}
-//		List<ProjectVo> myPrj = service.selectMyPrj(vo);
-//		model.addAttribute("writing", myPrj);
-		return "project/created/status";
-		
-	}
-	
-	@GetMapping("created/writing")
-	@ResponseBody
-	public String writing(String statusWriting, HttpSession session, ProjectVo vo, Model model) {	
-		
-		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
-		String nick = loginMember.getNo();
-		vo.setCreator(nick);
-		
-		//ProjectVo statusAll = service.selectStatusAll(vo);
-		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
-		//model.addAttribute("statusAll", statusAll);
-		
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("vo", vo);
-		map.put("statusWriting", statusWriting);
-		int resultcnt = service.writingCnt(map);
-		
-		if(resultcnt == 0) {
-			return 0+"";
-		}else {
-			List<ProjectVo> myPrj = service.selectMyPrj(map);
-			session.setAttribute("myPrj", myPrj);
-		}
-		String result = (String.valueOf(resultcnt));
-		return result;
-	}
+//		//ProjectVo statusAll = service.selectStatusAll(vo);
+//		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
+//		//model.addAttribute("statusAll", statusAll);
+//		
+//		HashMap<String,Object> map = new HashMap<String,Object>();
+//		map.put("vo", vo);
+//		map.put("statusWriting", statusWriting);
+//		int resultcnt = service.writingCnt(map);
+//		
+//		if(resultcnt == 0) {
+//			return 0+"";
+//		}else {
+//			List<ProjectVo> myPrj = service.selectMyPrj(map);
+//			session.setAttribute("myPrj", myPrj);
+//		}
+//		String result = (String.valueOf(resultcnt));
+//		return result;
+//	}
 	
 	@GetMapping("created/examination")
-	@ResponseBody
-	public String examination(String statusWriting, HttpSession session, ProjectVo vo, Model model) {	
+	public String examination(HttpSession session, ProjectVo vo, Model model) {	
 		
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setCreator(nick);
 		
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("vo", vo);
-		map.put("statusWriting", statusWriting);
-		int resultcnt = service.writingCnt(map);
+		int resultcnt = service.examinationCnt(vo);
 		
 		if(resultcnt == 0) {
-			return 0+"";
+			model.addAttribute("msg", "심사중인 프로젝트가 없습니다!");
 		}else {
-			List<ProjectVo> myPrj = service.selectMyPrj(map);
+			List<ProjectVo> myPrj = service.selectexamination(vo);
+			model.addAttribute("resultcnt", resultcnt);
 			session.setAttribute("myPrj", myPrj);
 		}
-		String result = (String.valueOf(resultcnt));
-		return result;
+		return "project/created/examination";
+	}
+	
+	@GetMapping("created/confirm")
+	public String confirm(HttpSession session, ProjectVo vo, Model model) {	
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		int resultcnt = service.confirmCnt(vo);
+		
+		if(resultcnt == 0) {
+			model.addAttribute("msg", "승인중인 프로젝트가 없습니다!");
+		}else {
+			List<ProjectVo> myPrj = service.selectconfirm(vo);
+			model.addAttribute("resultcnt", resultcnt);
+			session.setAttribute("myPrj", myPrj);
+		}
+		return "project/created/confirm";
+	}
+	
+	@GetMapping("created/proceed")
+	public String proceed(HttpSession session, ProjectVo vo, Model model) {	
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		int resultcnt = service.proceedCnt(vo);
+		
+		if(resultcnt == 0) {
+			model.addAttribute("msg", "진행중인 프로젝트가 없습니다!");
+		}else {
+			List<ProjectVo> myPrj = service.selectproceed(vo);
+			model.addAttribute("resultcnt", resultcnt);
+			session.setAttribute("myPrj", myPrj);
+		}
+		return "project/created/proceed";
 	}
 	
 	//프로젝트 삭제
@@ -273,7 +319,6 @@ public class ProjectController {
 		
 		int result = service.deletePrj(no);
 		if(result == 1) {
-			System.out.println(result);
 			String result2 = Integer.toString(result);
 			return result2;
 		}
@@ -288,6 +333,7 @@ public class ProjectController {
 	@GetMapping("post")
 	public String post(@RequestParam(name="p") int p, TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
 		
+		
 		List<HashMap<String, String>> category = service.selectCategory(map);
 		List<TimeVo> starttimeVo = service.selectStartime(timevo);
 		
@@ -296,7 +342,7 @@ public class ProjectController {
 		 
 		model.addAttribute("category", category);
 		model.addAttribute("time", starttimeVo);
-		return "project/post";
+		return "project/post/post";
 	}
 	
 //	@PostMapping("post")
@@ -315,29 +361,42 @@ public class ProjectController {
 	/* 임시저장 */
 	@PostMapping("savePrj")
 	@ResponseBody
-	public String savePrj(@RequestParam(name="p") int p, HttpSession session, ProjectVo vo, HttpServletRequest req) {
-		
-		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
-		String nick = loginMember.getNo();
-		vo.setCreator(nick);
-
-		//파일 저장
-		String changeName = "";
-		if(!vo.isEmpty()) {
-			changeName = (String) FileUploader.upload(req, vo);
-		}
-		vo.setChangeName(changeName);
-		
-		//insert 서비스 갔다오면 돼
-				
-//		int resultcnt = service.prjCnt(vo);
+	public String savePrj(ProjectVo prjVo, MemberVo MemberVo, itemVo itemVo, String option ) {
+//		public String savePrj(String p, itemVo itemVo, ProjectVo prjVo, MemberVo MemberVo, HttpSession session) {
+		System.out.println(prjVo);
+		System.out.println(MemberVo);
+		System.out.println(itemVo);
+		System.out.println(option);
+//		System.out.println(itemVo);
+//		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+//		String nick = loginMember.getNo();
+//		prjVo.setCreator(nick);
+//		prjVo.setNo(p);
+//
+//		//파일 저장
+//		String changeName = "";
+//		if(!prjVo.isEmpty()) {
+//			changeName = (String) FileUploader.upload(req, prjVo);
+//		}
+//		prjVo.setChangeName(changeName);
+//		
+//		HashMap<String,Object> map = new HashMap<String,Object>();
+//		map.put("itemVo", itemVo);
+//		map.put("p", p);
+//		
+//		System.out.println("보냇음");
+//		//file, form 먼저 보내기
+//		int resultcnt = service.updatePrj(prjVo);
+//		System.out.println("보냇음22");
 //		if(resultcnt > 0) {
-//			//update
-//			int updateResult = service.updatePrj(vo);
+//			//그 다음 set update
+//			int updateResult = service.updateSet(map);
+//			
+//			System.out.println("보냇음33");
 //			if(updateResult == 1) {
-//				return updateResult+"";
+//				return "1";
 //			}
-//			return 1+"";
+//			return "0";
 //		}
 //		else {
 //			//insert
@@ -345,9 +404,9 @@ public class ProjectController {
 //			if(result == 1) {
 //				return result+"";
 //			}
-			return "";
+//			return "";
 //		}
-		
+		return "1";
 	}
 	
 	

@@ -35,18 +35,18 @@
     white-space: nowrap;
     user-select: none;
 }
-.taps>div:first-child{
+.taps>div:nth-child(5){
     color: #fff;
     background: #567ace;
 }
-.writing>a{
+.proceed>a{
     color: #fff !important;
 }
-.taps>div:not(.taps>div:first-child){
+.taps>div:not(.taps>div:nth-child(5)){
     background: rgb(255, 255, 255);
     border: 1px solid #567ace;
 } 
-.taps>div>a:not(.writing>a){
+.taps>div>a:not(.proceed>a){
     color: #567ace !important;
 }
 .selected-tap{
