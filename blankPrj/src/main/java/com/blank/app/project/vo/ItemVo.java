@@ -3,7 +3,7 @@ package com.blank.app.project.vo;
 import lombok.Data;
 
 @Data
-public class itemVo {
+public class ItemVo {
 	
 	/*item*/
 	private String itemNo;

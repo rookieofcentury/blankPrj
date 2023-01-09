@@ -34,7 +34,7 @@ import com.blank.app.project.service.ProjectService;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
-import com.blank.app.project.vo.itemVo;
+import com.blank.app.project.vo.ItemVo;
 import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,12 @@ public class ProjectController {
 	public String project(Model model, @RequestParam(name="p") int p ) {
 		
 		ProjectVo prjVo = service.selectProject(p);
+		System.out.println(p);
+		List<ItemVo> itemVo = service.selectSet(p);
+		System.out.println(itemVo);
+		
 		model.addAttribute("prj", prjVo);
+		model.addAttribute("set", itemVo);
 		
 		return "project/detail/info";
 	}
@@ -330,150 +335,106 @@ public class ProjectController {
 		return "project/created/list";
 	}
 
+	/* 프로젝트 등록 (화면) */
 	@GetMapping("post")
-	public String post(@RequestParam(name="p") int p, TimeVo timevo, @RequestParam HashMap<String, String> map, Model model) {
-		
+	public String post(@RequestParam(name="p") String p, HttpSession session, TimeVo timevo, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, @RequestParam HashMap<String, String> map, Model model) {
 		
 		List<HashMap<String, String>> category = service.selectCategory(map);
 		List<TimeVo> starttimeVo = service.selectStartime(timevo);
+		
+		log.warn("pno : " + p);
+		
+		HashMap<String,Object> prjMap = new HashMap<String,Object>();
+		prjMap.put("prjVo", prjVo);
+		prjMap.put("p", p);
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		MemberVo.setNo(nick);
+		
+		itemVo.setPrjNo(p);
+		
+		ProjectVo prjInfo = service.selectPrjInfo(prjMap);
+//		MemberVo memberInfo = service.selectMemberInfo(MemberVo);
+//		ItemVo itemInfo = service.selectItemInfo(itemVo);
 		
 		//JsonObject jsonObj = JsonParser.parseString(timeVo).getAsJsonObject();
 		/*Gson gson = new Gson(); String timeVo = gson.toJson(starttimeVo);*/
 		 
 		model.addAttribute("category", category);
 		model.addAttribute("time", starttimeVo);
+		model.addAttribute("prjInfo", prjInfo);
+		
 		return "project/post/post";
 	}
-	
-//	@PostMapping("post")
-//	public String post(HttpSession session, ProjectVo vo) {
-//		
-//		String nick =(String)session.getAttribute("nick");
-//		vo.setCreator(nick);
-//		
-//		int result = service.tempPrj(vo);
-//		if(result != 1) {
-//			return "";
-//		}
-//		return "project/created/list";
-//	}
 	
 	/* 임시저장 */
 	@PostMapping("savePrj")
 	@ResponseBody
-	public String savePrj(ProjectVo prjVo, MemberVo MemberVo, itemVo itemVo, String option ) {
-//		public String savePrj(String p, itemVo itemVo, ProjectVo prjVo, MemberVo MemberVo, HttpSession session) {
+	public String savePrj(String title, MultipartFile prjfile, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
+		System.out.println(title);
 		System.out.println(prjVo);
 		System.out.println(MemberVo);
 		System.out.println(itemVo);
-		System.out.println(option);
-//		System.out.println(itemVo);
-//		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
-//		String nick = loginMember.getNo();
-//		prjVo.setCreator(nick);
-//		prjVo.setNo(p);
-//
-//		//파일 저장
-//		String changeName = "";
-//		if(!prjVo.isEmpty()) {
-//			changeName = (String) FileUploader.upload(req, prjVo);
-//		}
-//		prjVo.setChangeName(changeName);
-//		
-//		HashMap<String,Object> map = new HashMap<String,Object>();
-//		map.put("itemVo", itemVo);
-//		map.put("p", p);
-//		
-//		System.out.println("보냇음");
-//		//file, form 먼저 보내기
-//		int resultcnt = service.updatePrj(prjVo);
-//		System.out.println("보냇음22");
-//		if(resultcnt > 0) {
-//			//그 다음 set update
-//			int updateResult = service.updateSet(map);
-//			
-//			System.out.println("보냇음33");
-//			if(updateResult == 1) {
-//				return "1";
-//			}
-//			return "0";
-//		}
-//		else {
-//			//insert
-//			int result = service.tempPrj(vo);
-//			if(result == 1) {
-//				return result+"";
-//			}
-//			return "";
-//		}
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		prjVo.setCreator(nick);
+		prjVo.setNo(itemVo.getPrjNo());
+		MemberVo.setNo(nick);
+		
+		//파일 저장
+		String changeName = "";
+		if(!prjVo.isEmpty()) {
+			log.warn("ccc");
+			changeName = (String) FileUploader.upload(req, prjVo, prjfile);
+		}
+		prjVo.setChangeName(changeName);
+		
+		//file, form 먼저 보내기
+		System.out.println("보냇음");
+		int setResult = service.updateSet(itemVo);
+		if(setResult < 10) {
+			System.out.println("보냇음22");
+			int prjResult = service.updatePrj(prjVo);
+			
+			if(prjResult < 10) {
+				System.out.println("보냇음33");
+				int creatorResult = service.updateCreator(MemberVo);
+			}
+		}
 		return "1";
 	}
 	
+	/* 심사 요청*/
+	@PostMapping("post")
+	public String post(MultipartFile profile, Model model, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		prjVo.setCreator(nick);
+		prjVo.setNo(itemVo.getPrjNo());
+		MemberVo.setNo(nick);
+		
+		//파일 저장
+		String changeName = "";
+		if(!prjVo.isEmpty()) {
+			changeName = (String) FileUploader.upload(req, prjVo, profile);
+		}
+		prjVo.setChangeName(changeName);
+		
+		//int result = service.tempPrj(vo);
+		int setResult = service.updateSet(itemVo);
+		if(setResult > 1) {
+			int prjResult = service.updateExamination(prjVo);
+			
+			if(prjResult > 1) {
+				int creatorResult = service.updateCreator(MemberVo);
+			}
+		}
+		model.addAttribute("msg", "심사요청 완료!");
+		return "redirect:project/created/";
+	}
 	
-//	@PostMapping("/fileupload.do")
-//	@ResponseBody
-//	public String fileUpload(HttpServletRequest request, HttpServletResponse response,
-//			MultipartHttpServletRequest multiFile) throws IOException {
-//	
-//		//Json 객체 생성
-//		JsonObject json = new JsonObject();
-//		// Json 객체를 출력하기 위해 PrintWriter 생성
-//		PrintWriter printWriter = null;
-//		OutputStream out = null;
-//		//파일을 가져오기 위해 MultipartHttpServletRequest 의 getFile 메서드 사용
-//		MultipartFile file = multiFile.getFile("upload");
-//		//파일이 비어있지 않고(비어 있다면 null 반환)
-//		if (file != null) {
-//			// 파일 사이즈가 0보다 크고, 파일이름이 공백이 아닐때
-//			if (file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
-//				if (file.getContentType().toLowerCase().startsWith("image/")) {
-//
-//					try {
-//						//파일 이름 설정
-//						String fileName = file.getName();
-//						//바이트 타입설정
-//						byte[] bytes;
-//						//파일을 바이트 타입으로 변경
-//						bytes = file.getBytes();
-//						//파일이 실제로 저장되는 경로 
-//						String uploadPath = request.getServletContext().getRealPath("/resources/ckimage/");
-//						//저장되는 파일에 경로 설정
-//						File uploadFile = new File(uploadPath);
-//						if (!uploadFile.exists()) {
-//							uploadFile.mkdirs();
-//						}
-//						//파일이름을 랜덤하게 생성
-//						fileName = UUID.randomUUID().toString();
-//						//업로드 경로 + 파일이름을 줘서  데이터를 서버에 전송
-//						uploadPath = uploadPath + "/" + fileName;
-//						out = new FileOutputStream(new File(uploadPath));
-//						out.write(bytes);
-//						
-//						//클라이언트에 이벤트 추가
-//						printWriter = response.getWriter();
-//						response.setContentType("text/html");
-//						
-//						//파일이 연결되는 Url 주소 설정
-//						String fileUrl = request.getContextPath() + "/resources/ckimage/" + fileName;
-//						
-//						//생성된 jason 객체를 이용해 파일 업로드 + 이름 + 주소를 CkEditor에 전송
-//						json.addProperty("uploaded", 1);
-//						json.addProperty("fileName", fileName);
-//						json.addProperty("url", fileUrl);
-//						printWriter.println(json);
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					} finally {
-//						if(out !=null) {
-//							out.close();
-//						}
-//						if(printWriter != null) {
-//							printWriter.close();
-//						}
-//					}
-//				}
-//			}
-//		}
-//			return null;
-//	}
+	
 }

@@ -85,7 +85,7 @@
             <a href="/blank/project/review">후기 ${prj.review}</a>
         </div>
 		<div class="content-explanation">
-            <div class="explanation-project">아아 이곳은 프로젝트 소개입니다</div>
+            <div class="explanation-project">${prj.story}</div>
             <div class="explanation-side">
 				<div>프로젝트 신고하기</div>
                 <div class="side-creator">
@@ -102,31 +102,35 @@
 								<div class="name-follow">+ 팔로우</div>
 							</div>
 						</div>
-                        <div>전통의상을 전공한 창작자가 차근차근 만들어가는 생활한복 브랜드입니다아나아</div>
+                        <div>${prj.info}</div>
                     </div>
                 </div>
                 <div class="side-reward">
                     <div class="reward-select">리워드 선택
+					<c:forEach items="${set}" var="item">
                     <div class="reward-card">
-                        <div class="card-option">
+						<div class="card-option">
+							<input type="radio" id="check">
+							<label for="check">
                             <div class="option-title">
-                                <div class="title-price">29,000원</div>
-                                <div class="title-name">안경세트</div>
+                                <div class="title-price">${item.setPrice}</div>
+                                <div class="title-name">${item.setName}</div>
                             </div>
                             <ul>
-                                <li>안경</li>
-                                <li>고급가죽케이스</li>
-                                <li>안경닦이</li>
-                                <li>미니드라이브</li>
+								<li>${item.option}</li>
+								<!-- <li>고급가죽케이스</li>
+								<li>안경닦이</li>
+								<li>미니드라이브</li> -->
                             </ul>
-                            <div class="option-quantity">제한수량 200개</div>
+                            <div class="option-quantity">제한수량 ${item.setQuantity}개</div>
                             <div class="option-sell">총 60개 펀딩완료</div>
+						</label>
                         </div>
                     </div>
+					</c:forEach>
                     </div>
                 </div>
             </div>
-            
 		</div>
 	</div>
 	
@@ -282,10 +286,10 @@
 		});
 		
 		/*옵션 선택*/
-		$('.card-option').click(function(){
-			$('.reward-card').css("border-width", "5px");
-			$('.reward-card').css("border-color", "#567ace");
-		});
+		// $('.card-option').click(function(){
+		// 	$('.reward-card').css("border-width", "5px");
+		// 	$('.reward-card').css("border-color", "#567ace");
+		// });
 
 		/*금액 콤마찍기*/
 		var amount = '${ prj.price }'

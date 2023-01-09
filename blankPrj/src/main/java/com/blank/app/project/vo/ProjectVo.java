@@ -15,11 +15,13 @@ public class ProjectVo {
 	private String news;
 	private String review;
 	private String creator;
+	private String info;
 	private String category;
 	private String title;
 	private String price;
 	private Date startDate;
 	private Date endDate;
+	private Date deliveryDate;
 	private String summary;
 	private String time;
 	private String url;
@@ -39,5 +41,8 @@ public class ProjectVo {
 		return false;
 	}
 
+//
+//	public void setChangeName(ProjectVo changeName2) {
+//	}
 	
 }

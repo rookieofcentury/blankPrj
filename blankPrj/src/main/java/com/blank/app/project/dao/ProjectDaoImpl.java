@@ -11,7 +11,7 @@ import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
-import com.blank.app.project.vo.itemVo;
+import com.blank.app.project.vo.ItemVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -152,4 +152,38 @@ public class ProjectDaoImpl implements ProjectDao{
 		log.warn("dao followCheck : " + result);
 		return result;
 	}
+
+	@Override
+	public int updateCreator(SqlSessionTemplate sst, MemberVo memberVo) {
+		int result = sst.update("projectMapper.updateCreator", memberVo);
+		log.warn("dao updateCreator" + result);
+		return result;
+	}
+
+	@Override
+	public int updateSet(SqlSessionTemplate sst, ItemVo itemVo) {
+		int result = sst.update("projectMapper.updateSet", itemVo);
+		log.warn("dao updateSet" + result);
+		return result;
+	}
+
+	@Override
+	public ProjectVo selectPrjInfo(SqlSessionTemplate sst, HashMap<String, Object> prjMap) {
+		return sst.selectOne("projectMapper.selectPrjInfo", prjMap);
+	}
+
+	@Override
+	public List<ItemVo> selectSet(SqlSessionTemplate sst, int p) {
+		List<ItemVo> list = sst.selectList("projectMapper.selectSet", p);
+		System.out.println(list);
+		return list;
+	}
+
+	@Override
+	public int updateExamination(SqlSessionTemplate sst, ProjectVo prjVo) {
+		int result = sst.update("projectMapper.updateExamination", prjVo);
+		log.warn("dao updateExamination : " + result);
+		return result;
+	}
+
 }

@@ -8,8 +8,8 @@
 <title>프로젝트 등록</title>
 
 <link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="/blank/resources/css/project_post/post.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <!-- 웹에디터 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
@@ -31,16 +31,16 @@
 <script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script> -->
 
 <body>
-<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();" enctype="multipart/form-data">
+<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();" enctype="application/x-www-form-urlencoded">
 <div class="navi-menu">
         <div class="content-editor">
             <div class="editor-logo">
-                <img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''">
-                <div><h1>프로젝트 기획</h1></div>
+                <img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'">
+                <div><h1>프로젝트 등록</h1></div>
             </div>
             <div class="editor-buttons">
                 <button type="button" id="storage" class="buttons-storage">임시저장</button>
-                <button type="submit" class="buttons-request" >심사요청</button>
+                <button type="submit" class="buttons-request">심사요청</button>
                 <div class="buttons-goout">
                     <img src="/blank/resources/images/project/icon_goout.png">
                     <a href="/blank/project/created/"></a>
@@ -69,7 +69,7 @@
 				                  <div>프로젝트의 주제, 특징이 드러나는 제목을 붙여주세요.</div>
 				              </div>
 				              <div class="title-write">
-				                  <div><input type="text" placeholder="내용 입력" name="title"></div>
+				                  <div><input type="text" placeholder="내용 입력" name="title" ></div>
 				                  <p>40글자 남음</p>
 				              </div>
 				          </div>
@@ -81,7 +81,9 @@
                 <div class="category-select">
                     <select name="category" id="cate-option">
                         <c:forEach items="${category}" var="cate">
+                            
                         <option value="${cate.no}">${cate.name}</option>
+                            
 						</c:forEach>
                     </select>
                     <div></div>
@@ -100,7 +102,7 @@
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
                 <div class="price-box">
-                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price"> <!-- onkeyup="inputNumberFormat(this)" --></div>
+                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price">  <!-- onkeyup="inputNumberFormat(this)" --> </div>
                     <div>원</div>
                 </div>
             </div>
@@ -116,11 +118,11 @@
                                 <div class="start-day">
                                     <p>시작일</p>
                                     <!-- <div class="calendar-img"><img src="./calendar2-date.svg"></div> -->
-                                    <input name="startDay" autocomplete="off" readonly="readonly">
+                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" >
                                 </div>
                                 <div class="start-time">
                                     <p>시작시간</p>
-                                    <select>
+                                    <select name="time" id="time-option">
                                         <option value="prjTime">==시작시간 선택==</option>
                                          <c:forEach items="${time}" var="tt">
                                         <option value="${tt.no}">${tt.time}시</option>
@@ -137,7 +139,7 @@
                             <div class="date-end">
                                 <div class="end-day">
                                     <p>종료일</p>
-                                    <input name="endDay" autocomplete="off" readonly="readonly">
+                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  >
                                 </div>
                                 <div class="date-calculate">
                                     <div class="calculate-notice">
@@ -147,7 +149,7 @@
                                         </svg> 
                                         <p>정산일</p>
                                     </div>
-                                    <div>후원자 결제 종류 다음 날부터 7영업일</div>
+                                    <div>후원자 결제 종료 다음 날부터 7영업일</div>
                                 </div>
                             </div>
                         </li>
@@ -161,7 +163,7 @@
                 </div>
                 <div class="plan-write">
                     <div>
-                        <div><input name="deliver" autocomplete="off" readonly="readonly"></div>
+                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" ></div>
                     </div>
                 </div>
             </div>
@@ -172,7 +174,7 @@
                 </div>
                 <div class="url-write">
                     <div class="url-blank">www.blank.com/</div>
-                    <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url"></div>
+                    <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url" ></div>
                     <p>영문으로 최소 3자 이상 입력해 주세요</p>
                 </div>
             </div>
@@ -184,7 +186,7 @@
                 <div class="summary-write">
                     <div class="summary-text">
                         <!-- <input type="text" placeholder="내용 입력" name="summery"> -->
-                        <textarea placeholder="내용 입력" name="summary"></textarea>
+                        <textarea placeholder="내용 입력" name="summary"  ></textarea>
                     </div>
                     <p>100글자 남음</p>
                 </div>
@@ -213,7 +215,7 @@
                 <div class="story-editor">
                     <!-- <textarea id="editor4" name="editor4"></textarea> -->
                     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-                    <textarea name="editor" id="prj-content" required></textarea>
+                    <textarea name="story" id="prj-content" required></textarea>
                 </div>
             </div>    
             </div>
@@ -225,7 +227,7 @@
 	<div class="mp-main2 main">
         <div class="main2-header">
             <!-- <c:if test = "1>2">  </c:if>-->
-            <div><h2>아직 완성된 세트가 없어요ㅜㅅㅜ</h2></div>
+            <!-- <div><h2>아직 완성된 세트가 없어요ㅜㅅㅜ</h2></div> -->
             <div><h2>↓ 세트를 구성할 아이템을 추가해 주세요 ↓</h2></div>
             <!-- <div>아이템 추가</div> -->
         </div>
@@ -266,7 +268,7 @@
                                         <div class="post-set">
                                             <div class="set-notice">
                                                 <strong>아이템명</strong>
-                                                <div>아이템은 선물에 포함되는 구성 품목입니다. <br>세트를 구성할 아이템을 만들어 보세요.</div>
+                                                <div>아이템은 세트에 포함되는 구성 품목입니다. <br>세트를 구성할 아이템을 만들어 보세요.</div>
                                             </div>
                                             <div class="item-option">
                                                 <input placeholder="아이템을 입력해 주세요" name="itemName">
@@ -555,24 +557,34 @@
    <script>
 
    const config = {
-           dateFormat: 'yy-mm-dd',
-           changeMonth: true,
-           changeYear: true,
-           showOn: "both",
-           buttonImageOnly: true,
-           buttonImage: "/blank/resources/images/project/calendar2-date.svg",
-           buttonText: "Calendar",
-           
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            showOn: "both",
+            buttonImageOnly: true,
+            buttonImage: "/blank/resources/images/project/calendar2-date.svg",
+            buttonText: "Calendar",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
        }
 
        $(function() {
-           $( "input[name='startDay']" ).datepicker(config);
+           $( "input[name='startDate']" ).datepicker(config);
        });
        $(function() {
-           $( "input[name='endDay']" ).datepicker(config);
+           $( "input[name='endDate']" ).datepicker(config);
        });
        $(function() {
-           $( "input[name='deliver']" ).datepicker(config);
+           $( "input[name='deliveryDate']" ).datepicker(config);
        });
 
     //    $(document).ready(function() {
@@ -586,13 +598,20 @@
            });
        }); 
         */
-
        const editor = new toastui.Editor({
             el: document.querySelector('.story-editor'),
             previewStyle: 'vertical',
             height: '500px',
-            //initialValue: '안녕하세요. 코딩노잼입니다.'
+            initialEditType: 'markdown',
+            initialValue: '안녕하세요. 블랭크입니다.',
+            language : 'ko'
         });
+        // seeHtml = function(){
+		// 	alert(editor.getHTML());
+		// }
+		// seeMd = function(){
+		// 	alert(editor.getMarkdown());
+		// }
 
        //온 서브밋을 위한 변수 선언;
        let titleCheckReturn = false;
@@ -685,7 +704,7 @@
                }
        });
 
-       //주소 중복검사
+       //url 중복검사
        function emailDoubleCheck(){
 
            $.ajax({
@@ -721,14 +740,14 @@
            }); //ajax    
        };
        
-       //글자수 체크(주소)
+       //글자수 체크(url)
        $("input[name='url']").on("focusout", function() {
            var content = $(this).val();
            if (content.length < 3) {
                alert("3자 이상 입력해주세요.");
            }
        });
-       //유효성 체크(주소)
+       //유효성 체크(url)
        var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
        var checkEnglish = /[a-zA-Z]/;   
        var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; 
@@ -842,7 +861,7 @@
         $('input[name="bank"]').keyup(function(e) {
             let bankCheckReturn = false;
             var content = $(this).val();
-            if( check_kor.test(content) && !check_num.test(content) && !check_eng.test(content) && !check_spc.test(content) ) {
+            if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
                 return true;
             }else{
                 alert("한글만 입력 가능합니다. 다시 입력해주세요.");
@@ -855,7 +874,7 @@
         $('input[name="account"]').keyup(function(e) {
             let accountCheckReturn = false;
             var content = $(this).val();
-            if(!regExp.test(content)){
+            if(!checkNumber.test(content)){
                 alert("숫자만 입력 가능합니다. 다시 입력해주세요.");
                 return false;
             }
@@ -903,12 +922,6 @@
         });
 
        //임시저장
-        var option =  $('.selected-item').text();
-        var option2 =  $('.selected-item').val();
-        console.log($('.selected-item').text());
-        console.log($('.selected-item').val());
-        // var param = {"option": option}
-        
         // document.querySelector('#storage').addEventListener('click',function(){
         //     const prj = document.querySelector('#postPrj');
         //     const formData = new FormData(prj);
@@ -927,40 +940,49 @@
         // });
 
         $('.buttons-storage').click(function() {
-            var form = $('#postPrj')[0];
-            var formData = new FormData(form);
-            alert("update");
-            // formData.append("k01","v01");
-            // formData.append("k02","v02");
+            // var content = editor.getHTML();
+            // $('#prj-content').val(content);
+            console.log('ㅇㅇ');
+            var option = $('.selected-item').text();
 
-            // fetch("/blank/project/savePrj" , {
-            //     method : "POST" ,
-            //     body : formData
-            // })
-            // .then( resp => {return resp.json()} )
-            // .then( data => { console.log("data ::: "); console.log(data); } )
-            // ;
+            var price2 = $('input[name="price"]').val();
+            var title2 = $('input[name="title"]').val();
+            console.log(title2);
+    
+            let string = location.href.split('=');
+            let query = string[1];
             
+            const f = $('input[name="prjfile"]')[0];
+            const fileData = f.files[0];
+
+            var form = $('#postPrj')[0];
+            var formData = new FormData();
+
+            formData.append("title", title2);
+            // // formData.append("option", option);
+            // formData.append("prjNo", query);
+            // formData.append("story", editor.getHTML());
+            formData.append("prjfile" , fileData);
+            
+            alert("update");
+
             $.ajax({
-	    	   url  : "/blank/project/savePrj",
+                url  : "/blank/project/savePrj",
                 cache: false,
-                contentType: false,
-                processData: false ,
-	    	    type : "POST",
-	    	    data : //{
-                 formData,
-                 "option":option
-                //}
-                ,
-            //    dataType: "json",
-	    	   success : function(x){
+                // contentType : "application/x-www-form-urlencoded",
+                contentType : false,
+                processData: false , 
+                type : "POST",
+                data : formData,
+            // dataType: "json",
+	    	    success : function(x){
 	    		   if(x == 1){
-    		        alert('임시저장이 되었습니다.')
+    		        alert('임시저장 되었습니다.')
 	    	   		}
-	    	 },
+	    	    },
 	    	    error : function(x){
 	    	        console.log("받아온 리절트" + x);
-	    	    },
+	    	    }
 	       })
        });
 
@@ -972,21 +994,21 @@
        if(!urlCheckReturn){ alert('url이 입력되지 않았습니다'); return false;}
        if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
        
-       if(!nameCheckReturn){ alert('이름이 입력되지 않았습니다'); return false;}
+    //    if(!nameCheckReturn){ alert('이름이 입력되지 않았습니다'); return false;}
        if(!infoCheckReturn){ alert('소개가 입력되지 않았습니다.'); return false;}
        if(!bankCheckReturn){ alert('은행명이 입력되지 않았습니다'); return false;}
        if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
        if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
-       if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
-       if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
+    //    if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
+    //    if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
 
         return true;
        }
 
        /*심사요청 href*/
-       /* function requestBtn(){
-           location.href = "/blank/project/post/save";
-       } */
+    //     function requestBtn(){
+    //        location.href = "/blank/project/post/save";
+    //    } 
        
        let map = new Map([]);
        /*아이템 추가*/
@@ -1104,6 +1126,34 @@
             }else{
                 alert("모든 항목을 입력해 주세요");
             }
+    });
+
+    $(document).ready(function() {
+		// editor에 vo에 있는 content 내용 채우기
+		var prjStory = '${prjInfo.story}';
+		editor.setHTML(prjStory);
+
+		// 현재 DB에 있는 카테고리 조사해서 옵션 몇 개 넣을지 정하기
+		var cateLength = $('#cate-option option').length;
+		var prjCategory = '${prjInfo.category}';
+		
+		// DB의 행 개수만큼 jsp에 옵션 추가해 주기
+		for(let i = 0; i < cateLength; i++) {
+			if(prjCategory == $('#cate-option option:eq(' + i + ')').val()) {
+				$('#cate-option option:eq(' + i + ')').attr("selected", true);
+			}
+		}
+
+        // 현재 DB에 있는 시작시간 조사해서 옵션 몇 개 넣을지 정하기
+        var timeLength = $('#time-option option').length;
+		var prjTime = '${prjInfo.time}';
+		
+		// DB의 행 개수만큼 jsp에 옵션 추가해 주기
+		for(let i = 0; i < timeLength; i++) {
+			if(prjTime == $('#time-option option:eq(' + i + ')').val()) {
+				$('#time-option option:eq(' + i + ')').attr("selected", true);
+			}
+		}
     });
 
     jQuery.browser = {};

@@ -6,10 +6,11 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.blank.app.member.vo.LikeMemberVo;
+import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
-import com.blank.app.project.vo.itemVo;
+import com.blank.app.project.vo.ItemVo;
 
 public interface ProjectDao {
 
@@ -59,6 +60,14 @@ public interface ProjectDao {
 
 	int followCheck(SqlSessionTemplate sst, LikeMemberVo vo);
 
+	int updateCreator(SqlSessionTemplate sst, MemberVo memberVo);
 
+	int updateSet(SqlSessionTemplate sst, ItemVo itemVo);
+
+	ProjectVo selectPrjInfo(SqlSessionTemplate sst, HashMap<String, Object> prjMap);
+
+	List<ItemVo> selectSet(SqlSessionTemplate sst, int p);
+
+	int updateExamination(SqlSessionTemplate sst, ProjectVo prjVo);
 
 }

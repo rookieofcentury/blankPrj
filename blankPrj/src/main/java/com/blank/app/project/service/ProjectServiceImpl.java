@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.member.vo.LikeMemberVo;
+import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.dao.ProjectDao;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
-import com.blank.app.project.vo.itemVo;
+import com.blank.app.project.vo.ItemVo;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -35,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService{
 		return category;
 	}
 
-	//플젝 상세페이지
+	//플젝 상세페이지 (플젝 조회)
 	@Override
 	public ProjectVo selectProject(int p) {
 		return dao.selectProject(sst,p);
@@ -157,5 +158,32 @@ public class ProjectServiceImpl implements ProjectService{
 	public int followCheck(LikeMemberVo vo) {
 		return dao.followCheck(sst, vo);
 	}
+
+	@Override
+	public int updateCreator(MemberVo memberVo) {
+		return dao.updateCreator(sst,memberVo);
+	}
+
+	@Override
+	public int updateSet(ItemVo itemVo) {
+		return dao.updateSet(sst,itemVo);
+	}
+
+	@Override
+	public ProjectVo selectPrjInfo(HashMap<String, Object> prjMap) {
+		return dao.selectPrjInfo(sst, prjMap);
+	}
+	
+	//플젝 상세페이지 (아이템 조회)
+	@Override
+	public List<ItemVo> selectSet(int p) {
+		return dao.selectSet(sst,p);
+	}
+
+	@Override
+	public int updateExamination(ProjectVo prjVo) {
+		return dao.updateExamination(sst,prjVo);
+	}
+
 
 }
