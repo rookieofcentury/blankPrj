@@ -63,8 +63,8 @@
 		<websocket:mapping handler="chatBean" path="/chat/server"/>
 	</websocket:handlers> -->
 	
-	<!-- 네이버로그인 빈 등록  -->
-	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverLoginBO" class="com.blank.app.member.naver.NaverLoginBO" />
+	 <!-- 네이버로그인 빈 등록  -->
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가
+	<beans:bean id="naverLoginBO" class="com.blank.app.member.naver.NaverLoginBO" /> -->
 	
 </beans:beans>

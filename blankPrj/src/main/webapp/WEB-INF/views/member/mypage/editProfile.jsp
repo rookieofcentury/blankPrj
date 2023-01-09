@@ -21,7 +21,7 @@
 						<div><h2>회원 정보 수정</h2></div>
 						<div class="member-profile">
 							<div>프로필 사진</div>
-							<div><img id="View" src="/blank/resources/upload/member/${loginMember.profile}" alt="이미지 미리보기" /></div>
+							<div><img id="View" src="/blank/resources/upload/member/${loginMember.profile}" alt="프로필 사진" /></div>
 							<div>
 								<form action="/blank/member/mypage/plus-profile" name="profile" id="profile-form" method="post" enctype="multipart/form-data">
 									<!-- <label for="input-profile" class="filebox"> 업로드 </label> -->

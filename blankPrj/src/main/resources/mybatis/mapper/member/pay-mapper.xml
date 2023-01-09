@@ -49,4 +49,28 @@
 	FROM PAY
 	WHERE M_NO = #{mNo}
 	</select>
+	
+	<select id="selectPrjByNo" resultType="ProjectVo">
+	
+		SELECT 
+		P.NO,
+		M.NICK AS CREATOR,
+		C.NAME AS CATEGORY,
+		P.TITLE,
+		P.PRICE,
+		P.START_DATE,
+		P.END_DATE,
+		P.SUMMARY,
+		P.TIME,
+		P.URL
+
+
+ 		FROM PROJECT P
+		JOIN PRJ_CATEGORY  C
+		ON C.NO = P.CATEGORY
+		JOIN MEMBER M
+		ON M.NO = P.CREATOR
+		
+		WHERE P.NO = #{pNo}
+	</select>
 </mapper>

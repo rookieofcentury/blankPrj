@@ -35,8 +35,8 @@ public class MemberDaoImpl implements MemberDao {
 	//이메일 중복체크 
 	@Override
 	public int doubleCheckByEmail(SqlSessionTemplate sst, String email) {
-		// TODO Auto-generated method stub
 		int result = sst.selectOne("doubleCheckMapper.selectCntByEmail" , email);
+	
 		return result; 
 	}
 	
@@ -50,13 +50,23 @@ public class MemberDaoImpl implements MemberDao {
 	//휴대전화 중복체크 
 	@Override
 	public int doubleCheckByPhone(SqlSessionTemplate sst, String phone) {
+	
 		int result = sst.selectOne("doubleCheckMapper.selectCntByPhone" , phone);
+	
 		return result; 
 	}
 	
 	@Override
 	public int updatePwd(SqlSessionTemplate sst, MemberVo vo) {
-		return sst.update("memberMapper.updatePwd", vo);
+		int result = sst.update("memberMapper.updatePwd", vo);
+		
+		return result;
+	}
+	
+	public int updatePwdByNo(SqlSessionTemplate sst, MemberVo vo) {
+		int result = sst.update("memberMapper.updatePwdByNo", vo);
+		
+		return result;
 	}
 
 	@Override
@@ -165,6 +175,11 @@ public class MemberDaoImpl implements MemberDao {
 	public MemberVo selectMemberOneByNo(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.selectOne("memberMapper.selectOneMemberByNo", vo);
 		
+	}
+
+	@Override
+	public String selectEmailByPhone(SqlSessionTemplate sst, String phone) {
+		return sst.selectOne("memberMapper.selectEmailByPhone", phone);
 	}
 
 	

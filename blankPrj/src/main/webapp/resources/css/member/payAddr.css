@@ -232,7 +232,6 @@ input[id="popup"]:checked + label + div{
   font-size: 25px;
   text-align: center;
 }
-
 .card{
   width: 71px;
 }
@@ -299,7 +298,7 @@ input[class=card]{
   box-sizing: border-box;
   border : 1px solid rgb(230, 230, 230);
   color: #3D3D3D;
-  margin: 20px 0px;
+  margin: 10px 0px;
   padding: 10px;
 }
 .addr-top{
@@ -406,4 +405,7 @@ input[id="addr-pop"]:checked + label + div{
   color: #fff;
   font-size: 14px;
   
+}
+.addr-down > div{
+  margin-bottom: 8px;
 }

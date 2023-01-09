@@ -1,6 +1,7 @@
 package com.blank.app.member.service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.dao.MemberDao;
+import com.blank.app.member.naver.NaverMessageApi;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
@@ -17,6 +19,7 @@ import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.report.vo.ReportVo;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Service
 @Slf4j
@@ -30,6 +33,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private MemberDao dao;
+	
+	@Autowired
+	private NaverMessageApi naverMessage;
 	
 	@Override
 	public int join(MemberVo vo) {
@@ -60,11 +66,13 @@ public class MemberServiceImpl implements MemberService{
 
 	}
 
-	//아이디 중복체크 에이젝스 
+	//이메일  중복체크 에이젝스 
 	@Override
 	public int doubleCheckByEmail(String email) {
 		
-		return dao.doubleCheckByEmail(sst, email);
+		int result = dao.doubleCheckByEmail(sst, email);
+		
+		return result;
 	}
 
 	@Override
@@ -75,13 +83,26 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updatePwd(MemberVo vo) {
 		vo.encode(enc);
-		return dao.updatePwd(sst, vo);
+		int result = dao.updatePwd(sst, vo);
+		
+		return result;
+	}
+	
+	@Override
+	public int updatePwdByNo(MemberVo vo) {
+		vo.encode(enc);
+		
+		int result = dao.updatePwdByNo(sst, vo);
+		
+	
+		return result;
 	}
 
 	@Override
 	public int doubleCheckByPhone(String phone) {
-		
-		return dao.doubleCheckByNick(sst, phone);
+		System.out.println("서비스 폰 "+ phone);
+		int result = dao.doubleCheckByPhone(sst, phone);
+		return result;
 	}
 
 
@@ -204,6 +225,30 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return 0;
+	}
+
+	public String sendRandomMessage(String tel) {
+	    
+	    
+	    Random rand = new Random();
+	    
+	    String numStr = "";
+	    
+	    for (int i = 0; i < 6; i++) {
+	        String ran = Integer.toString(rand.nextInt(10));
+	        numStr += ran;
+	    }
+	    System.out.println("회원가입 문자 인증 => " + numStr);
+
+	    System.out.println("넘어가는 번호 " + tel);
+	    naverMessage.sendSMS(tel, numStr);
+
+	    return numStr;
+	}
+
+	@Override
+	public String findEmail(String phone) {
+		return dao.selectEmailByPhone(sst, phone);
 	}
 
 

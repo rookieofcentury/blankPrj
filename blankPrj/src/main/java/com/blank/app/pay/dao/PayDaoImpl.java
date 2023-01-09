@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ProjectVo;
 
 @Repository
 public class PayDaoImpl implements PayDao{
@@ -23,6 +24,12 @@ public class PayDaoImpl implements PayDao{
 	public int cardCount(SqlSessionTemplate sst, String mNo) {
 		
 		return sst.selectOne("payMapper.countCard", mNo);
+	}
+
+
+	@Override
+	public ProjectVo selectPrjByNo(SqlSessionTemplate sst, String pNo) {
+		return sst.selectOne("payMapper.selectPrjByNo", pNo);
 	}
 
 	

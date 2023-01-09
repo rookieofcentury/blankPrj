@@ -99,7 +99,10 @@
 												<div>${list.name}&nbsp;(${list.phone})</div>
 												<div><input type="submit" class="btn delete" value="삭제"></div>
 											</div>
-											<div class="addr-down">(${list.addrNo})&nbsp;${list.addr}</div>
+											<div class="addr-down">
+												<div>(${list.addrNo})&nbsp;${list.addr}</div>
+												<div>${list.addrDt}</div>
+											</div>
 										</div>
 									</form>
 								</c:forEach>
@@ -282,8 +285,8 @@
 							<input type="text" id="sample6_address" placeholder="주소" class="width100" name="addr1"><br>
 						</div>
 						<div>
-							<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="width50" name="addr2">
-							<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="width50" name="addr3">
+							<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="width50" name="addrDt">
+							<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="width50" name="addr2">
 							<input type="hidden" name="addr">
 						</div>
 						<div>
