@@ -48,10 +48,6 @@
             	
             </div>
             
-            <div>
-            	<a href="/blank/help/main" id="back-btn"><button type='button' class="back-btn">메인으로 돌아가기</button></a>
-            </div>
-            
         </header>
             
         <main>

@@ -13,6 +13,7 @@ import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.FaqVo;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
+import com.blank.app.chatbot.vo.ChatbotVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.quit.vo.QuitVo;
@@ -227,9 +228,51 @@ public class AdminDaoImpl implements AdminDao{
 		return sst.selectList("adminMapper.selectQuitList");
 	}
 
+	//탈퇴 설문 삭제
 	@Override
 	public int deleteQuit(SqlSessionTemplate sst, QuitVo quitVo) {
 		return sst.update("adminMapper.deleteQuit", quitVo);
+	}
+
+	//챗봇 목록 조회
+	@Override
+	public List<ChatbotVo> selectChatbotList(SqlSessionTemplate sst) {
+		return sst.selectList("adminMapper.selectChatbotList");
+	}
+
+	//챗봇 질의응답 등록
+	@Override
+	public int chatbotWrite(SqlSessionTemplate sst, ChatbotVo chatbotVo) {
+		return sst.insert("adminMapper.chatbotWrite", chatbotVo);
+	}
+
+	//챗봇 질의응답 삭제
+	@Override
+	public int deleteChatbot(SqlSessionTemplate sst, ChatbotVo chatbotVo) {
+		return sst.update("adminMapper.deleteChatbot", chatbotVo);
+	}
+
+	//탈퇴 답변 전체 수 카운트
+	@Override
+	public int quitCount(SqlSessionTemplate sst) {
+		return sst.selectOne("adminMapper.quitCount");
+	}
+
+	//탈퇴 답변 목록 조회
+	@Override
+	public List<MemberVo> selectQuitList(SqlSessionTemplate sst, PageVo pageVo) {
+		
+		int offset = (pageVo.getCurrentPage() - 1) * pageVo.getBoardLimit();
+		int limit = pageVo.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return sst.selectList("adminMapper.selectQuit", rb);
+	}
+
+	//통계 데이터 조회
+	@Override
+	public List<Map<String, String>> selectStats(SqlSessionTemplate sst) {
+		return sst.selectList("adminMapper.selectStats");
 	}
 	
 }

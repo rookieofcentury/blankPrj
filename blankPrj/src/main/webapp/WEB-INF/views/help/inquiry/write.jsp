@@ -37,11 +37,12 @@
 		            
 					<div class="inquiry-title">내용</div>
 					<div class="content-input">
-						<input
+						<textarea name="content" id="content-input" cols="90" rows="18" placeholder="이곳에 내용을 작성하세요."></textarea>
+						<!-- <input
 							type="text"
 							id="content-input"
 							name="content"
-							placeholder="이곳에 내용을 작성하세요.">
+							placeholder="이곳에 내용을 작성하세요."> -->
 						<input type="hidden" name="memberNo" value="${loginMember.no}">
 		            </div>
 

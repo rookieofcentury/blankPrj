@@ -81,7 +81,7 @@
 	
 	<!-- 회원 목록 조회 -->
 	<select id="selectMemberList" resultType="MemberVo">
-		SELECT NO, NICK, SUBSTR(PHONE, 1, 3) || '-' || SUBSTR(PHONE, 4, 4) || '-' || SUBSTR(PHONE, 8) AS PHONE, EMAIL, TO_CHAR(POINT,'fm999,999,999,999') AS POINT, BANK, ACCOUNT, DEPOSITOR, STATUS
+		SELECT NO, NICK, PHONE, EMAIL, TO_CHAR(POINT,'fm999,999,999,999') AS POINT, BANK, ACCOUNT, DEPOSITOR, STATUS
 		FROM MEMBER
 		WHERE STATUS = 'Y'
 		<if test=" keyword != null and keyword != '' ">
@@ -287,7 +287,7 @@
 		)
 	</insert>
 	
-	<!-- 고객센터 문의 목록 조회 -->
+	<!-- 탈퇴 질문 목록 조회 -->
 	<select id="selectQuitList" resultType="QuitVo">
 		SELECT Q.NO, A.ID AS ADMIN_NO, Q.CONTENT, Q.DELETE_YN
 		FROM QUIT Q
@@ -296,11 +296,70 @@
 		WHERE Q.DELETE_YN = 'N'
 	</select>
 	
-	<!-- FAQ 삭제 -->
+	<!-- 탈퇴 질문 삭제 -->
 	<update id="deleteQuit">
 		UPDATE QUIT SET DELETE_YN = 'Y'
 		WHERE NO = #{no}
 	</update>
+	
+	<!-- 챗봇 질의응답 등록 -->
+	<insert id="chatbotWrite">
+		INSERT INTO CHATBOT
+		(
+			NO,
+			FIX_Q,
+			FIX_A,
+			ADMIN_NO
+		)
+		VALUES
+		(
+			SEQ_QUIT_NO.NEXTVAL,
+			#{fixQ},
+			#{fixA},
+			#{adminNo}
+		)
+	</insert>
+	
+	<!-- 챗봇 목록 조회 -->
+	<select id="selectChatbotList" resultType="ChatbotVo">
+		SELECT C.NO, A.ID AS ADMIN_NO, C.FIX_Q, C.FIX_A, C.DELETE_YN
+		FROM CHATBOT C
+		INNER JOIN ADMIN A
+		ON C.ADMIN_NO = A.NO
+		WHERE C.DELETE_YN = 'N'
+	</select>
+	
+	<!-- 챗봇 질의응답 삭제 -->
+	<update id="deleteChatbot">
+		UPDATE CHATBOT SET DELETE_YN = 'Y'
+		WHERE NO = #{no}
+	</update>
+	
+	<!-- 탈퇴 답변 수 카운드 -->
+	<select id="quitCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE STATUS = 'N'
+	</select>
+	
+	<!-- 탈퇴 답변 목록 조회 -->
+	<select id="selectQuit" resultType="MemberVo">
+		SELECT M.NO, M.NICK, Q.CONTENT AS QUIT_NO, M.QUIT_VAR
+		FROM MEMBER M
+		LEFT JOIN QUIT Q
+		ON M.QUIT_NO = Q.NO
+		WHERE M.STATUS = 'N'
+		ORDER BY NO DESC
+	</select>
+	
+	<select id="selectStats" resultType="Map">
+		SELECT Q.CONTENT AS QUIT_NO, COUNT(*) AS CNT
+        FROM MEMBER M
+        JOIN QUIT Q
+        ON M.QUIT_NO = Q.NO
+        WHERE STATUS = 'N'
+        GROUP BY Q.CONTENT
+	</select>
 	
 </mapper>
 

@@ -11,6 +11,7 @@ import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.FaqVo;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
+import com.blank.app.chatbot.vo.ChatbotVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.quit.vo.QuitVo;
@@ -84,6 +85,18 @@ public interface AdminService {
 	public List<QuitVo> selectQuit();
 
 	public int deleteQuit(QuitVo quitVo);
+
+	public List<ChatbotVo> selectChatbot();
+
+	public int chatbotWrite(List<ChatbotVo> chatbotList);
+
+	public int deleteChatbot(ChatbotVo chatbotVo);
+
+	public int quitCount();
+
+	public List<MemberVo> selectQuitList(PageVo pageVo);
+
+	public List<Map<String, String>> selectStats();
 
 
 }

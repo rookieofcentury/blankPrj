@@ -14,6 +14,7 @@ import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.FaqVo;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
+import com.blank.app.chatbot.vo.ChatbotVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.quit.vo.QuitVo;
@@ -198,18 +199,59 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return result;
-		
 	}
 
-	//탈퇴 설문 목록
+	//탈퇴 설문 목록 조회
 	@Override
 	public List<QuitVo> selectQuit() {
 		return admindao.selectQuitList(sst);
 	}
 
+	//탈퇴 설문 삭제
 	@Override
 	public int deleteQuit(QuitVo quitVo) {
 		return admindao.deleteQuit(sst, quitVo);
+	}
+
+	//챗봇 목록 조회
+	@Override
+	public List<ChatbotVo> selectChatbot() {
+		return admindao.selectChatbotList(sst);
+	}
+
+	//챗봇 질의응답 등록
+	@Override
+	public int chatbotWrite(List<ChatbotVo> chatbotList) {
+		int result = 0;
+		for(ChatbotVo chatbotVo : chatbotList) {
+			result = admindao.chatbotWrite(sst, chatbotVo);
+		}
+		
+		return result;
+	}
+
+	//챗봇 질의응답 삭제
+	@Override
+	public int deleteChatbot(ChatbotVo chatbotVo) {
+		return admindao.deleteChatbot(sst, chatbotVo);
+	}
+
+	//탈퇴 답변 수 카운트
+	@Override
+	public int quitCount() {
+		return admindao.quitCount(sst);
+	}
+
+	//탈퇴 답변 목록 조회
+	@Override
+	public List<MemberVo> selectQuitList(PageVo pageVo) {
+		return admindao.selectQuitList(sst, pageVo);
+	}
+
+	//통계 데이터 조회
+	@Override
+	public List<Map<String, String>> selectStats() {
+		return admindao.selectStats(sst);
 	}
 
 

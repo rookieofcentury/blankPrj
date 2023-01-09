@@ -1,3 +1,8 @@
+a {
+    text-decoration-line: none;
+    color: rgb(71, 71, 71);
+}
+
 .faq-header{
     margin-left: 21%;
     margin-right: 18%;
@@ -25,17 +30,6 @@
 
 #now-category{
     color: rgba(86, 122, 206, 1);
-}
-
-.back-btn{
-    height: 30px;
-    color: rgb(74, 74, 74);
-    margin-top: 6%;
-    margin-left: 76%;
-    border: 1px solid rgba(197, 197, 197, 1);
-    border-radius: 15px;
-    background-color: white;
-    cursor: pointer;
 }
 
 main{
