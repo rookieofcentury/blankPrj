@@ -41,8 +41,7 @@
                 <div>
                     <form action="/blank/goods/search" method="get">
 						<div class="flex search-box">
-							<input type="text" class="input-hidden" name="searchGoods"
-								placeholder="검색어를 입력해 주세요.">
+							<input type="text" class="input-hidden" name="goodsKeyword" placeholder="검색어를 입력해 주세요.">
 							<button class="material-symbols-outlined">search</button>
 						</div>
 					</form>

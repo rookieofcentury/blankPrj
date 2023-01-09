@@ -23,6 +23,7 @@ html {
 #header-container {
 	width: 70vw;
 	margin: auto;
+	position: relative;
 }
 
 .header-menu-container {
@@ -110,6 +111,11 @@ html {
 }
 
 /* 호버 효과 */
+a {
+	text-decoration: none;
+	color: #343434;
+}
+
 .header-menu-container a:not(.menu-item) {
 	position: relative;
 	text-decoration: none;
@@ -201,7 +207,10 @@ html {
     display: none;
 }
 .menu-detail-area {
-	position: relative;
+	position: absolute;
+	z-index: 20;
+	background-color: white;
+	padding-top: 15px;
 }
 .menu-detail-area a {
 	text-decoration: none;

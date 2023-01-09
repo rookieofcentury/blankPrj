@@ -509,10 +509,16 @@ option:hover {
 .fa-comment-dots {
 	color: #9F9F9F;
 }
-.review-like button {
-    border: none;
-    background: none;
+
+/* 좋아요 버튼 */
+.review-like label {
     cursor: pointer;
+}
+.likeCheck {
+    display: none;
+}
+.likeCheck:checked + label {
+    color: red;
 }
 
 #review-write-btn {
@@ -554,4 +560,20 @@ input[name=goodsCnt] {
     color: #ffc400;
     overflow: hidden;
     pointer-events: none;
+}
+
+/* 페이징 */
+.review-page-area {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.page {
+    padding: 10px 15px;
+    border: 1px solid #D9D9D9;
+    background-color: white;
+    font-size: 14px;
+    border-radius: 25px;
+    cursor: pointer;
 }

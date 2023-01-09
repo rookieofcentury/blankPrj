@@ -311,7 +311,7 @@
             R.CONTENT,
             SUBSTR(R.ENROLL_DATE, 1, 14) AS ENROLL_DATE,
             R.DELETE_YN,
-            H.COUNT
+            H.COUNT AS "LIKE"
         FROM GOODS_REVIEW R
         INNER JOIN MEMBER M
         ON M.NO = R.WRITER
@@ -334,6 +334,10 @@
 		</if>
 	</select>
 	
+	<select id="getIsLikeLm" resultType="String">
+		SELECT COUNT(*) FROM GOODS_REVIEW_HEART WHERE NO = #{vo.no} AND M_NO = #{mno}
+	</select>
+	
 	<!-- 이 굿즈 번호로 조회했을 때 리뷰 몇 개나 있나요? -->
 	<select id ="selectReviewCntbyGNo" resultType="int">
 		SELECT COUNT(*) FROM GOODS_REVIEW
@@ -345,6 +349,71 @@
 		SELECT COUNT(*) AS REVIEW_CNT, TRUNC(AVG(SCORE),1)/2 AS REVIEW_SCORE
 		FROM GOODS_REVIEW
 		WHERE GOODS = #{no}
+	</select>
+	
+	<!-- 리뷰 좋아요 추가 -->
+	<insert id="insertReviewLike">
+		INSERT INTO GOODS_REVIEW_HEART
+		VALUES
+			(#{no}, #{mno})
+	</insert>
+	
+	<!-- 리뷰 좋아요 삭제 -->
+	<delete id="deleteReviewLike">
+		DELETE FROM GOODS_REVIEW_HEART
+		WHERE NO = #{no} AND M_NO = #{mno}
+	</delete>
+	
+	<!-- 회원번호로 주소 찾기 -->
+	<select id="selectAddressByNo" resultType="java.util.HashMap">
+		SELECT ADDR_NO AS ADDRESS1, ADDR AS ADDRESS2
+		FROM ADDRESS
+		WHERE M_NO = #{no}
+	</select>
+	
+	<select id="searchGoodsList" resultType="com.blank.app.goods.vo.GoodsVo">
+		SELECT
+			G.NO ,
+			C.NAME AS CATEGORY ,
+			G.NAME ,
+			G.PRICE ,
+			G.STOCK ,
+			G.CONTENT ,
+			G.ENROLL_DATE ,
+			E.TITLE AS EXHIBITION ,
+			G.DELETE_YN
+		FROM GOODS G
+		INNER JOIN GOODS_CATEGORY C
+			ON C.NO = G.CATEGORY
+		LEFT OUTER JOIN GOODS_EXHIBITION E
+			ON E.NO = G.EXHIBITION
+		WHERE G.DELETE_YN = 'N'
+		<if test=" category != null and category != '' ">
+			AND C.NO = #{category}
+		</if>
+		<if test=" keyword != null and keyword != '' ">
+			AND G.NAME LIKE '%${keyword}%'
+		</if>
+		<if test=" standard != null and standard == 'new' ">
+			ORDER BY G.ENROLL_DATE DESC 
+		</if>
+		<if test=" standard != null and standard == 'high' ">
+			ORDER BY G.PRICE DESC
+		</if>
+		<if test=" standard != null and standard == 'low' ">
+			ORDER BY G.PRICE
+		</if>
+	</select>
+	
+	<select id="searchListCount" resultType="int">
+		SELECT COUNT(*) FROM GOODS G
+		WHERE DELETE_YN = 'N'
+		<if test=" category != null and category != '' ">
+			AND CATEGORY = #{category}
+		</if>
+		<if test=" keyword != null and keyword != '' ">
+			AND NAME LIKE '%${keyword}%'
+		</if>
 	</select>
 	
 </mapper>

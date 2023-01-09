@@ -15,16 +15,16 @@ window.onload = function() {
     var link = document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
-    link.href = '/blank/resources/images/member/blank.ico';
+    link.href = '/blank/resources/images/blank.ico';
     document.getElementsByTagName('head')[0].appendChild(link);
 }();
 
 $('#expand-cate').change(function() {
     if($('#expand-cate').is(":checked")) {
-        $('.menu-detail-box').show("400", function() {
+        $('.menu-detail-box').show("200", function() {
             $(this).css("display", "grid");
         });
     } else {
-        $('.menu-detail-box').hide("400");
+        $('.menu-detail-box').hide("200");
     }
 })

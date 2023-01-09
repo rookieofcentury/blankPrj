@@ -50,4 +50,14 @@ public interface GoodsService {
 
 	List<Map<String, Object>> findReviewTotal(int no);
 
+	int reviewLike(String no, String mno);
+
+	int reviewLikeCancel(String no, String mno);
+
+	Map<String, String> getAddressByNo(String no);
+
+	int searchListCount(Map<String, String> map);
+
+	List<GoodsVo> searchGoodsList(Map<String, String> map, PageVo pageVo);
+
 }

@@ -136,8 +136,13 @@
                         <div class="review-list-area">
 
                         </div>
-                        <div>
-                            페이지네이션
+                        <div class="review-page-area">
+                            <c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
+                                <div class="page">${num}</div>    
+                            </c:forEach>
+                            <c:if test="${pageVo.listCount == 0}">
+                                <div class="page">1</div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -232,32 +237,47 @@
 
     // 바로 구매 버튼
     $('#buy-now').click(function() {
-        Swal.fire({
-            title: '바로 구매하시겠어요?',
-            text: "다른 상품들이 많이 기다리고 있어요!",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#567ACE',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '바로 구매',
-            cancelButtonText: '취소'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                
-                var noArr = new Array();
-                var noVal = $('input[name=no]').val();
-                noArr.push(noVal);
-                $('#payment-form').submit();
+        var nick = '${loginMember.nick}';
+        if(nick == '') {
+            Swal.fire({
+                title: '로그인이 필요합니다!',
+                text: '로그인 창으로 이동합니다.',
+                icon: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#567ACE',
+                confirmButtonText: '이동하기'
+            }).then((result) => {
+                location.href='/blank/member/login'
+            })
+        } else {
+            Swal.fire({
+                title: '바로 구매하시겠어요?',
+                text: "다른 상품들이 많이 기다리고 있어요!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#567ACE',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '바로 구매',
+                cancelButtonText: '취소'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    var noArr = new Array();
+                    var noVal = $('input[name=no]').val();
+                    noArr.push(noVal);
+                    $('#payment-form').submit();
 
-            }
-        })
+                }
+            })
+        }
     })
 </script>
 <script>
     
     // 리뷰 작성 버튼 눌렀을 때 로그인 안 됐으면 로그인 먼저, 아닐 시 modal 창 열리기
     $('#review-write-btn').click(function() {
-        if('${loginMember}.nick == null') {
+        var nick = '${loginMember.nick}';
+        if(nick == '') {
             Swal.fire({
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
@@ -352,6 +372,10 @@
         reviewList();
     })
 
+    $('.page').click(function() {
+        reviewList($(this).text());
+    })
+
     // 리뷰 리스트 ajax
     function reviewList() {
         $.ajax({
@@ -360,19 +384,22 @@
             data: {
                 no: '${goods.no}',
                 p: "1",
-                standard: $('input[name=standard]:checked').val()
+                standard: $('input[name=standard]:checked').val(),
+                mno: '${loginMember.no}'
             },
             success: function(data) {
                 var temp = "";
                 $('.review-list-area').empty();
                 $(data).each(function() {
+                    let checked = "";
+                    if(parseInt(this.isLikeLm) > 0) {
+                        checked = "checked";
+                    }
                     temp += `<div class="review-item">
                             <div class="review-item-left">
-                            <div class="review-score"><span class="score-star">★★★★★<span style="width: `+ this.score * 10 + `%">★★★★★</span>
-                            </span></div>
-                                <div class="review-like"><button><i class="fa-solid fa-heart fa-lg"></i></button><span>`+ this.like +`</span></div>
-                                <div class="review-content">` + this.content + `
-                                </div>
+                            <div class="review-score"><span class="score-star">★★★★★<span style="width: `+ this.score * 10 + `%">★★★★★</span></span></div>
+                            <div class="review-like">&nbsp;&nbsp;&nbsp;<input type="checkbox" class="likeCheck" id="likeCheck` + this.no + `" onchange="reviewLike(this, `+ this.no +`); cntUp(this)" ` + checked + `><label for="likeCheck` + this.no + `"><i class="fa-solid fa-heart"></i></label><span>`+ this.like +`</span></div>
+                                <div class="review-content">` + this.content + `</div>
                                 <div class="review-writer">
                                     <div>`+ this.writer +`</div>
                                     <div><span> | </span></div>
@@ -383,7 +410,7 @@
                                 <img src="" alt="">
                             </div>
                             <div class="review-item-more">
-    
+                                <span class="material-symbols-outlined">more_vert</span>
                             </div>
                         </div>`;
                 })
@@ -391,8 +418,109 @@
                     temp += `<div class="review-item"><div class="review-content">아직 남겨진 리뷰가 없습니다. 리뷰를 작성해 보세요!</div></div>`
                 }
                 $('.review-list-area').append(temp);
+                var nick = '${loginMember.nick}';
+                if(nick == '') {
+                    $('.likeCheck').prop("disabled", true);
+                }
             }
         })
     }
+
+    // 리뷰 리스트 ajax - 페이징
+    function reviewList(p) {
+        $.ajax({
+            url: "/blank/goods/review/list",
+            method: "POST",
+            data: {
+                no: '${goods.no}',
+                p: p,
+                standard: $('input[name=standard]:checked').val(),
+                mno: '${loginMember.no}'
+            },
+            success: function(data) {
+                var temp = "";
+                $('.review-list-area').empty();
+                $(data).each(function() {
+                    let checked = "";
+                    if(parseInt(this.isLikeLm) > 0) {
+                        checked = "checked";
+                    }
+                    temp += `<div class="review-item">
+                            <div class="review-item-left">
+                            <div class="review-score"><span class="score-star">★★★★★<span style="width: `+ this.score * 10 + `%">★★★★★</span></span></div>
+                                <div class="review-like">&nbsp;&nbsp;&nbsp;<input type="checkbox" class="likeCheck" id="likeCheck` + this.no + `" onchange="reviewLike(this, `+ this.no +`); cntUp(this)" ` + checked + `><label for="likeCheck` + this.no + `"><i class="fa-solid fa-heart"></i></label><span>`+ this.like +`</span></div>
+                                <div class="review-content">` + this.content + `</div>
+                                <div class="review-writer">
+                                    <div>`+ this.writer +`</div>
+                                    <div><span> | </span></div>
+                                    <div>`+ this.enrollDate +`</div>
+                                </div>
+                            </div>
+                            <div class="review-item-pic">
+                                <img src="" alt="">
+                            </div>
+                            <div class="review-item-more">
+                                <span class="material-symbols-outlined">more_vert</span>
+                            </div>
+                        </div>`;
+                })
+                if(data.length == 0) {
+                    temp += `<div class="review-item"><div class="review-content">아직 남겨진 리뷰가 없습니다. 리뷰를 작성해 보세요!</div></div>`
+                }
+                $('.review-list-area').append(temp);
+                var nick = '${loginMember.nick}';
+                if(nick == '') {
+                    $('.likeCheck').prop("disabled", true);
+                }
+            }
+        })
+    }
+
+    // 리뷰 좋아요 버튼 add, cancel
+    function reviewLike(object, no) {
+        if($(object).is(":checked")) {
+            $.ajax({
+                url: "/blank/goods/review/like/add",
+                method: "POST",
+                data: {
+                    no: no,
+                    mno: '${loginMember.no}'
+                },
+                success: function(data) {
+                    console.log(data);
+                },
+                fail: function() {
+                    console.log(fail);
+                }
+            })
+        } else {
+            $.ajax({
+                url: "/blank/goods/review/like/cancel",
+                method: "POST",
+                data: {
+                    no: no,
+                    mno: '${loginMember.no}'
+                },
+                success: function(data) {
+                    console.log(data);
+                },
+                fail: function() {
+                    console.log(fail);
+                }
+            })
+        }
+    }
+
+
+    // 좋아요 숫자 up
+    function cntUp(object) {
+        var text = $(object).next().next().text();
+        if($(object).is(":checked")) {
+            $(object).next().next().text(parseInt(text) + 1);
+        } else {
+            $(object).next().next().text(parseInt(text) - 1);
+        }
+    }
+
 </script>
 </html>

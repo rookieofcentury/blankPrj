@@ -75,15 +75,15 @@
             <div id="page-area">
 				
                 <c:if test="${pageVo.startPage != 1}">
-                    <a href="/blank/admin/goods/list?p=${pageVo.startPage - 1}"></a>
+                    <a href="/blank/admin/goods/list?p=${pageVo.startPage - 1}&category=${category}&keyword=${keyword}"></a>
                 </c:if>
 
                 <c:forEach var="num" begin="${pageVo.startPage}" end="${pageVo.endPage}" >
-                    <a href="/blank/admin/goods/list?p=${num}">${num}</a>
+                    <a href="/blank/admin/goods/list?p=${num}&category=${category}&keyword=${keyword}">${num}</a>
                 </c:forEach>
-
+                
                 <c:if test="${pageVo.endPage != pageVo.maxPage}">
-                    <a href="/blank/admin/goods/list?p=${pageVo.endPage + 1}"></a>
+                    <a href="/blank/admin/goods/list?p=${pageVo.endPage + 1}&category=${category}&keyword=${keyword}"></a>
                 </c:if>
 
             </div>

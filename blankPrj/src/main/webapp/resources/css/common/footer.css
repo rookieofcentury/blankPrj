@@ -15,6 +15,9 @@
 	border-top: 1px solid #E0E0E0;
 	color: #6F6F6F;
 }
+.footer-container a {
+	color: #6F6F6F;
+}
 
 .blank-client-container {
 	box-sizing: border-box;

@@ -18,5 +18,6 @@ public class ReviewVo {
 	private String content;
 	private int like;
 	private String enrollDate;
+	private String isLikeLm;
 
 }
