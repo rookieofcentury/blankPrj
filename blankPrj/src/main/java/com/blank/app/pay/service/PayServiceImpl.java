@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.blank.app.pay.dao.PayDao;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ProjectVo;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -32,5 +33,10 @@ public class PayServiceImpl implements PayService {
 	public int cardCount(String mNo) {
 		
 		return dao.cardCount(sst, mNo);
+	}
+
+	@Override
+	public ProjectVo selectPrjByNo(String pNo) {
+		return dao.selectPrjByNo(sst, pNo);
 	}
 }

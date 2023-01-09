@@ -225,6 +225,20 @@
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
 		</dependency>
+		<!-- 문자메세지 발송 -->
+		<dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20220924</version>
+      </dependency>
+		
+		<!-- 카카오톡 알림  -->
+		<dependency>
+		  <groupId>net.nurigo</groupId>
+		  <artifactId>sdk</artifactId>
+		  <version>4.2.7</version>
+		</dependency>
+		
 		
 	</dependencies>
     <build>

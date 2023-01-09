@@ -27,6 +27,8 @@ public interface MemberDao {
 
 	public int updatePwd(SqlSessionTemplate sst, MemberVo vo);
 
+	public int updatePwdByNo(SqlSessionTemplate sst, MemberVo vo);
+	
 	int doubleCheckByPhone(SqlSessionTemplate sst, String phone);
 
 	public int updateEmailByNo(SqlSessionTemplate sst, MemberVo vo);
@@ -66,6 +68,8 @@ public interface MemberDao {
 	public int delectAddr(SqlSessionTemplate sst, AddressVo vo);
 
 	public MemberVo selectMemberOneByNo(SqlSessionTemplate sst, MemberVo vo);
+
+	public String selectEmailByPhone(SqlSessionTemplate sst, String phone);
 
 
 }

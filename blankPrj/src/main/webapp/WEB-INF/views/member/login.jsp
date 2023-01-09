@@ -62,7 +62,7 @@
                 </div>
                 <div class="flex">
                     <div><a>카카오로 로그인</a></div>
-                    <div><a href="member/naverLogin">네이버로 로그인</a></div>
+                    <div><a href="${url}">네이버로 로그인</a></div>
                 </div>
             </form>
         </div>

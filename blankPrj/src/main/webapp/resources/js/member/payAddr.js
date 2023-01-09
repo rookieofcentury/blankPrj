@@ -142,9 +142,8 @@ $('#addr-plus').click(function(){
 
 function putAddr(){
   let addr1 = $('input[name=addr1]').val();
-  let addr2 = $('input[name=addr1]').val();
-  let addr3 = $('input[name=addr1]').val();
-  let addr = addr1 + addr2+ addr3
+  let addr2 = $('input[name=addr2]').val();
+  let addr = addr1 + addr2
 
   $('input[name=addr]').val(addr)
 

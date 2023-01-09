@@ -63,6 +63,12 @@ public interface MemberService {
 
 	public int checkPwd(MemberVo vo);
 
+	public int updatePwdByNo(MemberVo vo);
+
+	public String sendRandomMessage(String phone);
+
+	public String findEmail(String phone);
+
 
 
 

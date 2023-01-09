@@ -17,7 +17,7 @@ public class MailSendService {
 	private JavaMailSenderImpl mailSender;
 	
 	
-		public int makeRandomNumber() {
+		public static int makeRandomNumber() {
 			// 난수의 범위 111111 ~ 999999 (6자리 난수)
 			
 			int checkNum = (int)(Math.random()*999998+1);
@@ -28,7 +28,8 @@ public class MailSendService {
 		
 		
 		//이메일 보낼 양식! 
-		public String joinEmail(String email) {
+		public String sendMail(String email) {
+			
 			int num = makeRandomNumber();
 			System.out.println(num);
 			String setFrom = "smtp.gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력 

@@ -41,7 +41,13 @@
 	<update id="updatePwd">
 		UPDATE MEMBER 
 		SET PWD1 = #{pwd1} 
-		WHERE No = #{no}
+		WHERE EMAIL = #{email}
+	</update>
+	
+	<update id="updatePwdByNo">
+		UPDATE MEMBER 
+		SET PWD1 = #{pwd1} 
+		WHERE NO = #{no}
 	</update>
 	
 	<update id="updateEmail">
@@ -85,7 +91,8 @@
 		    M_NO,
 		    NAME,       
 		    ADDR_NO,     
-		    ADDR,        
+		    ADDR,     
+		    ADDR_DT,   
 		    PHONE
 	)
 	VALUES
@@ -95,6 +102,7 @@
     		#{name},
     		#{addrNo},
     		#{addr},
+    		#{addrDt},
     		#{phone}
     )
 	
@@ -207,5 +215,11 @@
 		SELECT PWD1 FROM MEMBER
 		WHERE NO = #{no}
 		
+	</select>
+	
+	<select id="selectEmailByPhone" resultType="String">
+		SELECT EMAIL FROM MEMBER
+		WHERE PHONE = #{phone}	
+
 	</select>
 </mapper>

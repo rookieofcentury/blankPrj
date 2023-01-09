@@ -10,5 +10,6 @@ public class AddressVo {
 	private String name;
 	private String addrNo;
 	private String addr;
+	private String addrDt;
 	private String phone;
 }

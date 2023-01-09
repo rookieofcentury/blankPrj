@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/blank/resources/css/pay/payProject.css">
+<link rel="stylesheet" href="/blank/resources/css/pay/supportProject.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	    <%@ include file = "/WEB-INF/views/common/header.jsp" %>
@@ -14,12 +15,12 @@
             <div class="grid project-content border">
                 <div>프로젝트 사진</div>
                 <div class="project-info-detail">
-                    <div>카테고리</div>
-                    <div>프로젝트 제목</div>
+                    <div>${PrjVo.category}</div>
+                    <div>${PrjVo.title}</div>
                     <div class="project-info-number">
-                        <div>금액</div>
-                        <div>퍼센트</div>
-                        <div>남은기간</div>
+                        <div>${PrjVo.price}</div>
+                        <div>퍼센트</div> 
+                        <div class="red">남은기간 : </div>
                     </div>
                 </div>
             </div>
@@ -52,4 +53,6 @@
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 	
 </body>
+<script src="/blank/resources/js/pay/supportProject.js"></script>
+
 </html>
