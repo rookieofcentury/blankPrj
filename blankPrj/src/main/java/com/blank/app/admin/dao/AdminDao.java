@@ -12,6 +12,7 @@ import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.FaqVo;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
+import com.blank.app.chatbot.vo.ChatbotVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.quit.vo.QuitVo;
@@ -84,6 +85,18 @@ public interface AdminDao {
 	public List<QuitVo> selectQuitList(SqlSessionTemplate sst);
 
 	public int deleteQuit(SqlSessionTemplate sst, QuitVo quitVo);
+
+	public List<ChatbotVo> selectChatbotList(SqlSessionTemplate sst);
+
+	public int chatbotWrite(SqlSessionTemplate sst, ChatbotVo chatbotVo);
+
+	public int deleteChatbot(SqlSessionTemplate sst, ChatbotVo chatbotVo);
+
+	public int quitCount(SqlSessionTemplate sst);
+
+	public List<MemberVo> selectQuitList(SqlSessionTemplate sst, PageVo pageVo);
+
+	public List<Map<String, String>> selectStats(SqlSessionTemplate sst);
 
 	
 }

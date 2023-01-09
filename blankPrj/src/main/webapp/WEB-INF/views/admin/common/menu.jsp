@@ -56,7 +56,7 @@
             <h1><img src="/blank/resources/images/admin/chatbot-admin.png">챗봇 관리</h1>
             <ul>
                 <li>
-                    <a href="">Q&A 등록</a>
+                    <a href="/blank/admin/chatbot">Q&A 등록</a>
                 </li>
             </ul>
         </div>
@@ -78,7 +78,7 @@
                     <a href="/blank/admin/quit">설문 문항</a>
                 </li>
                 <li>
-                    <a href="">통계</a>
+                    <a href="/blank/admin/stats">통계</a>
                 </li>
             </ul>
         </div>

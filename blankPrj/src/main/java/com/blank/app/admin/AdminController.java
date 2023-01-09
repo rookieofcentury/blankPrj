@@ -1,6 +1,7 @@
 package com.blank.app.admin;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.common.Pagination;
@@ -25,6 +27,7 @@ import com.blank.app.admin.vo.AdminVo;
 import com.blank.app.admin.vo.FaqVo;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.admin.vo.NoticeVo;
+import com.blank.app.chatbot.vo.ChatbotVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.quit.vo.QuitVo;
@@ -100,7 +103,6 @@ public class AdminController {
 		}
 
 		session.setAttribute("selectMember", selectMember);
-		session.setAttribute("memberVo", memberVo);
 
 		return "admin/member/edit";
 	}
@@ -159,7 +161,6 @@ public class AdminController {
 		}
 
 		session.setAttribute("selectProject", selectProject);
-		session.setAttribute("projectVo", projectVo);
 
 		return "admin/project/detail";
 	}
@@ -231,7 +232,6 @@ public class AdminController {
 		}
 
 		session.setAttribute("selectReport", selectReport);
-		session.setAttribute("reportVo", reportVo);
 
 		return "admin/deProject/check";
 	}
@@ -318,7 +318,6 @@ public class AdminController {
 		}
 
 		session.setAttribute("selectNotice", selectNotice);
-		session.setAttribute("noticeVo", noticeVo);
 
 		return "admin/notice/detail";
 	}
@@ -390,7 +389,6 @@ public class AdminController {
 		}
 
 		session.setAttribute("selectFaq", selectFaq);
-		session.setAttribute("faqVo", faqVo);
 
 		return "admin/faq/edit";
 	}
@@ -487,7 +485,6 @@ public class AdminController {
 		HelpVo selectHelp = adminService.selectHelp(helpVo);
 
 		session.setAttribute("selectHelp", selectHelp);
-		session.setAttribute("helpVo", helpVo);
 
 		return "admin/help/write";
 	}
@@ -507,13 +504,75 @@ public class AdminController {
 		return "redirect:help";
 	}
 	
+	// 챗봇 목록
+	@GetMapping("chatbot")
+	public String chatbot(Model model, HttpSession session) {
+		
+		List<ChatbotVo> voList = adminService.selectChatbot();
+		
+		session.setAttribute("voList", voList);
+		model.addAttribute("voList", voList);
+		
+		return "admin/chatbot/list";
+	}
+	
+	// 챗봇 질의응답 작성(화면)
+	@GetMapping("chatbotWrite")
+	public String chatbotWrite() {
+		return "admin/chatbot/write";
+	}
+	
+	// 챗봇 질의응답 작성
+	@PostMapping("chatbotWrite")
+	public String chatbotWrite(String[] adminNo, String[] fixQ, String[] fixA, Model model, HttpSession session) {
+
+		ChatbotVo chatbotVo = null;
+		
+		List<ChatbotVo> chatbotList = new ArrayList<ChatbotVo>();
+		
+		for(int i = 0; i < adminNo.length; i++) {
+			
+			chatbotVo = new ChatbotVo();
+			
+			chatbotVo.setAdminNo(adminNo[i]);
+			chatbotVo.setFixQ(fixQ[i]);
+			chatbotVo.setFixA(fixA[i]);
+			
+			chatbotList.add(chatbotVo);
+			
+		}
+		
+		int result = adminService.chatbotWrite(chatbotList);
+		
+		if (result != 1) {
+			return "error";
+		}
+		
+		session.setAttribute("chatbotVo", chatbotVo);
+		model.addAttribute("chatbotVo", chatbotVo);
+		
+		return "redirect:chatbot";
+
+	}
+	
+	// 챗봇 질의응답 삭제
+	@PostMapping("chatbotDelete")
+	public String chatbotDelete(ChatbotVo chatbotVo) {
+
+		int result = adminService.deleteChatbot(chatbotVo);
+
+		if (result != 1) {
+			return "error";
+		}
+
+		return "redirect:chatbot";
+	}
+	
 	// 탈퇴 설문 목록
 	@GetMapping("quit")
 	public String quit(Model model, HttpSession session) {
 		
 		List<QuitVo> voList = adminService.selectQuit();
-
-		System.out.println("목록:"+voList);
 		
 		session.setAttribute("voList", voList);
 		model.addAttribute("voList", voList);
@@ -570,6 +629,39 @@ public class AdminController {
 		}
 
 		return "redirect:quit";
+	}
+	
+	// 통계 (화면)
+	@GetMapping("stats")
+	public String stats(HttpServletRequest req, HttpSession session, String p) {
+		
+		if (p == null) {
+			p = "1";
+		}
+
+		int quitCount = adminService.quitCount();
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 5;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(quitCount, currentPage, pageLimit, boardLimit);
+
+		List<MemberVo> voList = adminService.selectQuitList(pageVo);
+
+		session.setAttribute("voList", voList);
+		session.setAttribute("quitCount", quitCount);
+		session.setAttribute("pageVo", pageVo);
+		
+		return "admin/quit/stats";
+	}
+	
+	// 통계 데이터 조회
+	@GetMapping("result")
+	@ResponseBody
+	public List<Map<String, String>> result() {
+			
+		List<Map<String, String>> map = adminService.selectStats();
+		
+		return map;
 	}
 	
 }

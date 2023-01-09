@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chatbotMapper">
+
+	<select id="selectList" resultType="ChatbotVo">
+		SELECT NO, FIX_Q, DELETE_YN
+		FROM CHATBOT
+		WHERE DELETE_YN = 'N'
+		ORDER BY NO ASC
+	</select>
+
+	<select id="selectAnswer" resultType="String">
+		SELECT FIX_A
+		FROM CHATBOT
+		WHERE NO = #{no}
+	</select>
+	
+</mapper>

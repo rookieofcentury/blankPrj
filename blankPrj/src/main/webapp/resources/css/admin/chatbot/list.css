@@ -1,10 +1,3 @@
-textarea {
-    resize: none;
-    overflow-y: hidden;
-    height: auto;
-    padding: 10px;
-}
-
 .quit-board-content{
     /* border: 1px solid red; */
     width: 1625px;
@@ -54,7 +47,6 @@ textarea {
 }
 
 .quit-board-items{
-    /* border: 1px solid blue; */
     margin-left: 15%;
     margin-right: 15%;
     margin-top: 6%;
@@ -64,7 +56,6 @@ textarea {
     /* border: 1px solid red; */
     border: 1px solid rgba(197, 197, 197, 1);
     border-radius: 8px 8px 0px 0px;
-    border-bottom: none;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 2fr 1fr;
     text-align: center;
@@ -74,23 +65,21 @@ textarea {
     color: rgb(62, 62, 62);
 }
 
-.quit-content div{
-    line-height: 35px;
-    font-size: 15px;
-    color: rgb(62, 62, 62);
-    text-align: center;
-}
-
-.quit-content:nth-child(-n+5){
+.quit-content{
+    border: 1px solid rgba(197, 197, 197, 1);;
     border-top: none;
 }
 
-.quit-content div:nth-last-child(1){
-    border-radius: 0px 0px 8px 0px;
+.quit-content div{
+    line-height: 35px;
+    font-size: 18px;
+    color: rgb(62, 62, 62);
+    border: none;
+    text-align: center;
 }
 
-.quit-content div:nth-last-child(5){
-    border-radius: 0px 0px 0px 8px;
+.quit-content div:nth-child(5n){
+    border: none;
 }
 
 .quit-items div:nth-child(1){
@@ -110,12 +99,6 @@ textarea {
     display: block;
     margin: 0 auto;
     margin-top: 10px;
-    font-size: 15px;
-}
-
-.quit-content div:nth-child(5n){
-    border: none;
-    border-top: 1px solid rgba(197, 197, 197, 1);
 }
 
 .quit-items .quit-title{
@@ -123,40 +106,25 @@ textarea {
 }
 
 .quit-content{
-    border: 1px solid rgba(197, 197, 197, 1);
-    border-radius: 0px 0px 8px 8px;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 2fr 1fr;
 }
 
 .quit-content div{
     border-right: 1px solid rgba(197, 197, 197, 1);
-    border-top: 1px solid rgba(197, 197, 197, 1);
     background-color: white;
+    font-size: 15px;
 }
 
-.quit-content div input[type="text"]{
-    width: 98%;
+#delete-quit-btn{
+    color: gray;
     border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 30px;
 }
 
-.delect-img{
-    width: 15px;
-    height: 18px;
-    margin-left: 45%;
-    cursor: pointer;
-    padding-right: 100%;
-}
-
-#add-btn{
-    margin-left: 48%;
-    margin-top: 10px;
-    border: 1px solid rgba(197, 197, 197, 1);
-    border-radius: 15px;
-    width: 60px;
-    height: 30px;
-    color: rgb(62, 62, 62);
-    font-weight: bold;
-    background-color: rgba(218, 218, 218, 1);
-    cursor: pointer;
+#delete-quit-btn:hover{
+    color: rgb(0, 76, 255);
 }

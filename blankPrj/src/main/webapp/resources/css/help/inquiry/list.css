@@ -1,3 +1,8 @@
+a {
+    text-decoration-line: none;
+    color: rgb(71, 71, 71);
+}
+
 #waiting{
 	color: rgba(86, 122, 206, 1);
 }

@@ -22,6 +22,8 @@
       <typeAlias type="com.blank.app.member.vo.AddressVo" alias="AddrVo"/>
       <typeAlias type="com.blank.app.project.vo.LikeProjectVo" alias="LikeProjectVo"/>
       <typeAlias type="com.blank.app.quit.vo.QuitVo" alias="QuitVo"/>
+      <typeAlias type="com.blank.app.chatbot.vo.ChatbotVo" alias="ChatbotVo"/>
+      <typeAlias type="com.blank.app.project.vo.ItemVo" alias="ItemVo"/>
    </typeAliases>
 
 </configuration>
