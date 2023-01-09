@@ -49,7 +49,7 @@
                     </c:if>
 
                     <c:forEach items="${cartList}" var="item">
-                        <tr>
+                        <tr class="cart-item-area">
                             <td><input type="checkbox" name="no" class="chBox" id="${item.no}" value="${item.no}"><label for="${item.no}"></label></td>
                             <td class="img-area"><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt=""></td>
                             <td class="name-area">
@@ -137,8 +137,8 @@
 
     /* 선택 상품 주문 */
     $('#order-select').click(function() {
-        console.log('${loginMember.nick} == null');
-        if('${loginMember.nick} == null') {
+        var nick = '${loginMember.nick}';
+        if(nick == '') {
             Swal.fire({
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
@@ -164,7 +164,8 @@
 
     /* 전체 상품 주문 */
     $('#order-all').click(function() {
-        if('${loginMember.nick == null}') {
+        var nick = '${loginMember.nick}';
+        if(nick == '') {
             Swal.fire({
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
@@ -175,7 +176,7 @@
             }).then((result) => {
                 location.href='/blank/member/login'
             })
-        } else if('${empty cart}') {
+        } else if($('.cart-item-area') == null) {
             Swal.fire({
                 title: '장바구니가 비어 있습니다!',
                 confirmButtonColor: '#567ACE'

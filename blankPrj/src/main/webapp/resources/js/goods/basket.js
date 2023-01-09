@@ -89,18 +89,17 @@
     /* 상품 총 금액 계산 함수 */
     function productPrice() {
         var itemPrice = $('.item-price'); // 상품 총 금액
-        console.log(itemPrice);
 
         var priceArr = new Array();
         itemPrice.each(function(index, item) {
             priceArr.push(item);
         })
-        console.log(priceArr[0]);
+
         var total = 0;
         $.each(priceArr, function(index, item) {
             total += parseInt($(this).text());
-            console.log(parseInt($(this).text()));
         })
+        
         var productPrice = $('#product-price');
         productPrice.val(total);
     }
@@ -171,9 +170,11 @@
 
     /* 모두 체크 버튼 누르면 다 체크되고, 다시 누르면 해제되게 */
     $('#all-check').click(function() {
-        $('input[type=checkbox]').attr('checked', function() {
-        	return !$(this).attr('checked');
-        });
+        if($('#all-check').is(":checked")) {
+            $('input[type=checkbox]').attr('checked', true);
+        } else {
+            $('input[type=checkbox]').attr('checked', false);
+        }
     })
 
     /* 개수 바뀔 때마다 session의 Map 바꿔 주기 */

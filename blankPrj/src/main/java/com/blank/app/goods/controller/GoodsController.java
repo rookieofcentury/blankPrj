@@ -31,6 +31,12 @@ import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
+import com.blank.app.member.vo.MemberVo;
+
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @RequestMapping("goods")
 @Controller
@@ -73,6 +79,52 @@ public class GoodsController {
 		return "goods/main";
 
 	}
+	
+	// 굿즈 검색
+	@RequestMapping("/search")
+	public String goodsSearch(String category, String goodsKeyword, String p, String standard, Model model) {
+	
+		if(p == null) {
+			p = "1";
+		}
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", goodsKeyword);
+		map.put("standard", standard);
+		
+		int listCount = gs.searchListCount(map);
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 12;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+		
+		List<GoodsVo> list = gs.searchGoodsList(map, pageVo);
+		
+		// 위 list에서 no(번호)만 담긴 리스트 생성
+		List<String> noList = new ArrayList<String>();
+
+		// for문 돌려서 각각 이미지 List 생성해 주기
+		for (int i = 0; i < list.size(); i++) {
+			String no = list.get(i).getNo();
+			noList.add(no);
+
+			for (String n : noList) {
+				List<String> thumbnail = gs.findThumbnail(Integer.parseInt(n));
+				list.get(i).setThumbnail(thumbnail);
+			}
+		}
+	
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+		model.addAttribute("goodsList", list);
+		model.addAttribute("category", category);
+		model.addAttribute("keyword", goodsKeyword);
+		model.addAttribute("standard", standard);
+		
+		return "goods/search";
+		
+	}
 
 	// 굿즈 상세 화면 도출
 	@RequestMapping("/detail")
@@ -92,6 +144,7 @@ public class GoodsController {
 
 	}
 	
+	// 이 굿즈에 리뷰 총 몇 개임?
 	@PostMapping("/review/cnt")
 	@ResponseBody
 	public List<Map<String, Object>> reviewCnt(int no) {
@@ -102,10 +155,40 @@ public class GoodsController {
 		
 	}
 	
+	// 리뷰 좋아요 추가
+	@PostMapping("/review/like/add")
+	@ResponseBody
+	public String reviewLike(String no, String mno) {
+		
+		int result = gs.reviewLike(no, mno);
+		
+		if(result == 0) {
+			return "실패";
+		}
+		
+		return "좋아요 성공";
+		
+	}
+	
+	// 리뷰 좋아요 삭제
+	@PostMapping("/review/like/cancel")
+	@ResponseBody
+	public String reviewLikeCancel(String no, String mno) {
+		
+		int result = gs.reviewLikeCancel(no, mno);
+		
+		if(result == 0) {
+			return "실패";
+		}
+		
+		return "좋아요 취소 성공";
+		
+	}
+	
 	// ajax로 list 받아서 넘기기
 	@PostMapping("/review/list")
 	@ResponseBody
-	public List<ReviewVo> reviewList(int no, String p, String standard, String mno) {
+	public List<ReviewVo> reviewList(int no, String p, String standard, String mno, HttpSession session) {
 		
 		if(p == null) {
 			p = "1";
@@ -119,6 +202,9 @@ public class GoodsController {
 		
 		// 리뷰 리스트 정보 받기
 		List<ReviewVo> voList = gs.reviewListbyGNo(no, pageVo, mno, standard);
+		
+		session.setAttribute("listCount", listCount);
+		session.setAttribute("pageVo", pageVo);
 		
 		return voList;
 		
@@ -286,6 +372,17 @@ public class GoodsController {
 		return "goods/payment";
 
 	}
+	
+	// 주소 받아 오기
+	@PostMapping("/payment/address")
+	@ResponseBody
+	public Map<String, String> getAddress(String no, HttpSession session) {
+		
+		Map<String, String> map = gs.getAddressByNo(no);
+		
+		return map;
+		
+	}
 
 	// 굿즈 결제 완료
 	@PostMapping("/order")
@@ -311,6 +408,7 @@ public class GoodsController {
 
 	}
 	
+	// 화면 (주문)
 	@GetMapping("/order")
 	public String order() {
 		return "goods/order";
@@ -322,6 +420,36 @@ public class GoodsController {
 
 		return "goods/stockalert";
 
+	}
+	
+	@PostMapping("/stockalert")
+	@ResponseBody
+	public String stockalert(HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		
+		String phone = loginMember.getPhone().replace("-", "");
+		
+		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력", "https://api.solapi.com");
+		// Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
+		Message message = new Message();
+		message.setFrom("01043524860");
+		message.setTo(phone);
+		message.setText("SMS는 한글 45자, 영자 90자까지 입력할 수 있습니다.");
+
+		try {
+		  // send 메소드로 ArrayList<Message> 객체를 넣어도 동작합니다!
+		  messageService.send(message);
+		} catch (NurigoMessageNotReceivedException exception) {
+		  // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
+		  System.out.println(exception.getFailedMessageList());
+		  System.out.println(exception.getMessage());
+		} catch (Exception exception) {
+		  System.out.println(exception.getMessage());
+		}		
+		
+		return "";
+		
 	}
 	
 	/* import 날짜 바꿔 주기 */

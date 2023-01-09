@@ -140,5 +140,41 @@ public class GoodsDaoImpl implements GoodsDao {
 		return sst.selectList("goodsMapper.selectTotalListbyGNo", no);
 	}
 
+	// 리뷰 좋아요 추가
+	public int insertReviewLike(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.insert("goodsMapper.insertReviewLike", map);
+	}
+
+	// 리뷰 좋아요 취소
+	public int deleteReviewLike(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.delete("goodsMapper.deleteReviewLike", map);
+	}
+
+	// 회원번호로 주소 찾기
+	public Map<String, String> selectAddressByNo(SqlSessionTemplate sst, String no) {
+		return sst.selectMap("goodsMapper.selectAddressByNo", no);
+	}
+
+	// 좋아요 여부 받기
+	public String getIsLikeLm(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.selectOne("goodsMapper.getIsLikeLm", map);
+	}
+
+	// search 결과 값
+	public int searchListCount(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("goodsMapper.searchListCount", map);
+	}
+
+	@Override
+	public List<GoodsVo> searchGoodsList(SqlSessionTemplate sst, Map<String, String> map, PageVo pv) {
+		
+		int offset = (pv.getCurrentPage() - 1) * pv.getBoardLimit();
+		int limit = pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return sst.selectList("goodsMapper.searchGoodsList", map, rb);
+		
+	}
+
 
 }

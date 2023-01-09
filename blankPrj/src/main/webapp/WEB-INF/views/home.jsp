@@ -17,7 +17,7 @@
         <div id="banner">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                  <div data-hash="slide1" class="swiper-slide">Slide 1</div>
+                  <div data-hash="slide1" class="swiper-slide"><img src="/blank/resources/images/banner/banner4.png" alt=""></div>
                   <div data-hash="slide2" class="swiper-slide">Slide 2</div>
                   <div data-hash="slide3" class="swiper-slide">Slide 3</div>
                   <div data-hash="slide4" class="swiper-slide">Slide 4</div>

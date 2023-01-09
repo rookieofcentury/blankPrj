@@ -31,7 +31,7 @@
                 <div class="notice-box-title">고객 지원</div>
                 <div>평일 09:00 18:00 (13:00 14:00 제외)</div>
                 <div class="flex footer-ask-btn">
-                    <span>1:1 문의</span>
+                    <a href="/blank/chatbot/main"><span>1:1 문의</span></a>
                 </div>
             </div>
         </div>

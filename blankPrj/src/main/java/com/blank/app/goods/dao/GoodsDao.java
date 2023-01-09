@@ -77,4 +77,22 @@ public interface GoodsDao {
 	// 리뷰 개수, 스코어
 	List<Map<String, Object>> selectTotalListbyGNo(SqlSessionTemplate sst, int no);
 
+	// 리뷰 좋아요 추가
+	int insertReviewLike(SqlSessionTemplate sst, Map<String, String> map);
+
+	// 리뷰 좋아요 취소
+	int deleteReviewLike(SqlSessionTemplate sst, Map<String, String> map);
+
+	// 해당 회원 주소 찾기
+	Map<String, String> selectAddressByNo(SqlSessionTemplate sst, String no);
+
+	// 좋아요 여부 받기
+	String getIsLikeLm(SqlSessionTemplate sst, Map<String, Object> map2);
+
+	// search 결과 값
+	int searchListCount(SqlSessionTemplate sst, Map<String, String> map);
+
+	// search 굿즈 리스트
+	List<GoodsVo> searchGoodsList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
+
 }

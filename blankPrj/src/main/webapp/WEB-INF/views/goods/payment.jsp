@@ -70,11 +70,11 @@
                             <span class="warning">상품의 옵션 및 수량 변경, 주문 취소는 장바구니에서 진행해 주세요.</span>
                             <div>
                                 상품 구매 금액
-                                <input type="text" name="price" class="price" id="product-price" readonly> 원
+                                <input type="text" name="price" class="price val" id="product-price" readonly> 원
                                 + 배송비
-                                <input type="text" name="delivery" class="price" id="del-fee" readonly> 원
+                                <input type="text" name="delivery" class="price val" id="del-fee" readonly> 원
                                 = 합계 :
-                                <input type="text" class="price" id="total-price" readonly>
+                                <input type="text" class="price val spot" id="total-price" readonly>
                                 원
                             </div>
                         </div>
@@ -88,12 +88,12 @@
                     <div><input type="text" name="name" required></div>
                     <div>휴대폰 번호</div>
                     <div><input type="text" name="phone" id="phone" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" oninput="autoHyphen(this)" maxlength="13" required></div>
-                    <div class="client-checkbox"><input type="checkbox" id="name-phone-check"> 내 정보에서 받아 오기</div>
+                    <div class="client-checkbox"><input type="checkbox" id="name-phone-check"><label for="name-phone-check" class="flex"><span class="material-symbols-outlined">check_circle</span></label>내 정보에서 받아 오기</div>
                     <div class="address-area">주소</div>
                     <div class="address-search"><input type="text" name="address1" required><div class="search-btn">검색</div></div>
                     <div><input type="text" name="address2" required></div>
                     <div><input type="text" name="address3" required></div>
-                    <div class="client-checkbox"><input type="checkbox" id="address-check"> 내 정보에서 받아 오기</div>
+                    <div class="client-checkbox"><input type="checkbox" id="address-check"><label for="address-check" class="flex"><span class="material-symbols-outlined">check_circle</span></label>내 정보에서 받아 오기</div>
                     <div>배송 메시지</div>
                     <div><input type="text" name="message" placeholder="20자 내로 작성해 주세요."></div>
                 </div>
@@ -111,7 +111,7 @@
                         <div><input type="text" name="totalprice" id="payment-price" readonly></div>
                         <div>원</div>
                 </div>
-                <div class="warning-ment"><input type="checkbox" required> 위 주문서 내용을 확인하였으며, 결제에 동의합니다.</div>
+                <div class="warning-ment"><input type="checkbox" id="required-button"><label for="required-button" class="flex"><span class="material-symbols-outlined">check_circle</span>위 주문서 내용을 확인하였으며, 결제에 동의합니다.</label></div>
                 <div><button id="pay-button" type="button" onclick="requestPay();">결제하기</button></div>
             </div>
             <input type="hidden" name="impUid">
@@ -133,33 +133,34 @@
     /* 이름, 휴대 전화 번호 정보 받기 */
     $('#name-phone-check').change(function() {
         if($('#name-phone-check').is(":checked")) {
-            if('${loginMember.nick}' == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: '불러오기 실패',
-                    text: '저장된 정보가 없습니다. 등록 후 이용해 주세요.'
-                })
-            } else {
-                $('input[name=name]').val('${loginMember.nick}');
-                $('input[name=phone]').val('${loginMember.phone}');
-            }
+            $('input[name=phone]').val('${loginMember.phone}');
         }
     })
     
     /* 주소 정보 받기 */
     $('#address-check').change(function() {
         if($('#address-check').is(":checked")) {
-            if('${loginMember.addrA}' == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: '불러오기 실패',
-                    text: '저장된 정보가 없습니다. 등록 후 이용해 주세요.'
-                })
-            } else {
-                $('input[name=address1]').val('${loginMember.addrA}');
-                $('input[name=address2]').val('${loginMember.addrB}');
-                $('input[name=address3]').val('${loginMember.addrC}');
-            }
+            $.ajax({
+                url: "/blank/goods/payment/address",
+                method: "POST",
+                data: {
+                    no: '${loginMember.no}'
+                },
+                success: function(data) {
+                    if(data != 'success') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '불러오기 실패',
+                            text: '저장된 정보가 없습니다. 등록 후 이용해 주세요.',
+                            confirmButtonColor: '#567ACE'
+                        })
+                    } else {
+                        $('input[name=address1]').val('${address1}');
+                        $('input[name=address2]').val('${address2}');
+                        $('input[name=address3]').val('${address3}');
+                    }
+                }
+            })
         }
     })
 
@@ -172,20 +173,21 @@
     var now = today.getFullYear() + today.getMonth() + today.getDate();
 
     function requestPay() {
-        IMP.init('imp04887484');
-        IMP.request_pay({
-        pg: "html5_inicis",
-        pay_method: "card",
-        merchant_uid : now + new Date().getTime(),
-        name : '블랭크',
-        amount : $('#payment-price').val(),
-        buyer_email : '${loginMember.email}',
-        buyer_name : '${loginMember.nick}',
-        buyer_tel : '${loginMember.phone}',
-        buyer_addr : '${loginMember.addrB} ' + '${loginMember.addrC}',
-        buyer_postcode : '${loginMember.addrA}'
-        }, function (rsp) { // callback
-            if (rsp.success) {
+        if($('#required-button').is(':checked')) {
+            IMP.init('imp04887484');
+            IMP.request_pay({
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid : now + new Date().getTime(),
+            name : '블랭크',
+            amount : $('#payment-price').val(),
+            buyer_email : '${loginMember.email}',
+            buyer_name : '${loginMember.nick}',
+            buyer_tel : '${loginMember.phone}',
+            buyer_addr : $('input[name=address2]').val() + $('input[name=address3]').val(),
+            buyer_postcode : $('input[name=address1]').val()
+            }, function (rsp) { // callback
+                if (rsp.success) {
                     $('input[name=impUid]').val(rsp.imp_uid);
                     $('input[name=payMethod]').val(rsp.pay_method);
                     $('input[name=payDate]').val(rsp.paid_at);
@@ -193,14 +195,23 @@
                     $('input[name=status]').val(rsp.status);
                     $('input[name=payment]').val(rsp.pg_provider);
                     $('#order-form').submit();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: '결제에 실패하였습니다.',
-                    text: '에러내용 : ' + rsp.error_msg
-                })
-            }
-        });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '결제에 실패하였습니다.',
+                        text: '에러내용 : ' + rsp.error_msg,
+                        confirmButtonColor: '#567ACE'
+                    })
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: '잠깐!',
+                text: '주문서 내용을 다시 확인해 주세요.',
+                confirmButtonColor: '#567ACE'
+            })
+        }
     }
 
 </script>

@@ -175,13 +175,58 @@ public class GoodsServiceImpl implements GoodsService {
 		map.put("mno", mno);
 		map.put("standard", standard);
 		
-		return dao.selectReviewListbyGNo(sst, map, pageVo);
+		List<ReviewVo> list = dao.selectReviewListbyGNo(sst, map, pageVo);
+		for(ReviewVo vo : list) {
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("vo", vo);
+			map2.put("mno", mno);
+			
+			String i = dao.getIsLikeLm(sst, map2);
+			vo.setIsLikeLm(i);
+		}
+		
+		return list;
 		
 	}
 
 	// 리뷰 개수, 리뷰 스코어
 	public List<Map<String, Object>> findReviewTotal(int no) {
 		return dao.selectTotalListbyGNo(sst, no);
+	}
+
+	// 리뷰 좋아요 추가
+	public int reviewLike(String no, String mno) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("mno", mno);
+
+		return dao.insertReviewLike(sst, map);
+	}
+
+	// 리뷰 좋아요 취소
+	public int reviewLikeCancel(String no, String mno) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("mno", mno);
+
+		return dao.deleteReviewLike(sst, map);
+	}
+
+	// 해당 회원 주소 찾기
+	public Map<String, String> getAddressByNo(String no) {
+		return dao.selectAddressByNo(sst, no);
+	}
+
+	// search 결과값
+	public int searchListCount(Map<String, String> map) {
+		return dao.searchListCount(sst, map);
+	}
+
+	// 굿즈 검색
+	public List<GoodsVo> searchGoodsList(Map<String, String> map, PageVo pageVo) {
+		return dao.searchGoodsList(sst, map, pageVo);
 	}
 
 

@@ -74,7 +74,7 @@ public class AdminGoodsController {
 		
 	}
 
-	// 굿즈 등록 (화면)
+	// 굿즈 리스트 (화면)
 	@GetMapping("/list")
 	public String list(Model model, HttpServletRequest req, String p) {
 		
@@ -101,6 +101,8 @@ public class AdminGoodsController {
 		model.addAttribute("listCount", listCount);
 		model.addAttribute("pageVo", pageVo);
 		model.addAttribute("list", list);
+		model.addAttribute("category", category);
+		model.addAttribute("keyword", keyword);
 		
 		return "admin/goods/list";
 
