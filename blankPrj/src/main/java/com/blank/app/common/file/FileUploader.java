@@ -1,10 +1,13 @@
 package com.blank.app.common.file;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -42,7 +45,7 @@ public class FileUploader {
 	}
 
 	// 프로젝트 - 파일 업로드
-	public static String upload(HttpServletRequest req, ProjectVo vo) {
+	public static String upload(HttpServletRequest req, ProjectVo vo, MultipartFile profile) throws IllegalStateException, IOException {
 
 			String path = req.getSession().getServletContext().getRealPath("/resources/upload/project/");
 			String originName = vo.getPrjfile().getOriginalFilename();
@@ -51,10 +54,15 @@ public class FileUploader {
 			String changeName = "prj_" + System.nanoTime() + ext;
 	
 			File target = new File(path + changeName);
+			profile.transferTo(target);
 	
-
-		return changeName;
-
+//			ProjectVo insertVo = new ProjectVo();
+//			insertVo.setChangeName(changeName);
+//			insertVo.setOriginName(originName);
+//			insertVo.setFilePath(path);
+			
+//		return insertVo;
+			return changeName;
 	}
 
 }

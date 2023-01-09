@@ -6,6 +6,7 @@
 
 	<resultMap type="HashMap" id="cateName">
 		<id column="name" property="name" />
+		<id column="no" property="no" />
 	</resultMap> 
 	
 	<select id="selectCategory" resultType="HashMap" resultMap="cateName">
@@ -22,9 +23,10 @@
         ,P.END_DATE
         ,P.TIME
         ,P.URL
-        ,P.STATUS
+        ,P.STORY
         ,M.NO MNO
         ,M.NICK CREATOR
+        ,M.INFO INFO
         ,P.SUMMARY
         ,C.NAME AS CATEGORY
         ,(SELECT COUNT(R.NO) FROM REVIEW R INNER JOIN PROJECT P ON P.NO = R.PROJECT WHERE P.NO = #{p}) AS REVIEW
@@ -33,9 +35,16 @@
 		INNER JOIN MEMBER M ON P.CREATOR = M.NO
 		INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
 		WHERE P.NO = #{p}
-		GROUP BY P.NO ,P.TITLE ,P.PRICE ,P.START_DATE  ,P.END_DATE ,P.TIME ,P.URL ,P.STATUS, M.NO, M.NICK, P.SUMMARY ,C.NAME
+		GROUP BY P.NO ,P.TITLE ,P.PRICE ,P.START_DATE ,P.END_DATE ,P.TIME ,P.URL ,P.STORY, M.NO, M.NICK, M.INFO, P.SUMMARY ,C.NAME
 	</select>
 	
+	<select id="selectSet" resultType="ItemVo">
+		SELECT 
+		 SET_NAME, "OPTION", SET_PRICE, SET_QUANTITY
+		 FROM SET_ITEM
+		 WHERE PRJ_NO = #{p}
+ 	</select>
+ 
 	<select id="selectTimeList" resultType="TimeVo">
 		SELECT *
 		FROM START_TIME
@@ -122,30 +131,61 @@
 			START_DATE = #{startDate},
 			TIME = #{time},
 			END_DATE = #{endDate},
+			DELIVERY_DATE = #{deliveryDate},
 			URL = #{url},
 			SUMMARY = #{summary},
 			STORY = #{story},
-			ENROLL_DATE = SYSDATE
-		WHERE NO = #{p}
+			ENROLL_DATE = SYSDATE,
+			CHANGE_NAME = #{changeName}
+		WHERE NO = #{no}
   </update>
   
-  <update id="updateSet">
-	  	UPDATE SET-ITEM SET
-			NO = #{no},
-			NAME = #{name},
-			QUANTITY = #{quantity},
+  <update id="updateExamination">
+	  	UPDATE PROJECT SET
+			TITLE = #{title},
+			CATEGORY = #{category},
 			PRICE = #{price},
-			OPTION = #{option},
-		WHERE PRJ_NO = #{p}
+			START_DATE = #{startDate},
+			TIME = #{time},
+			END_DATE = #{endDate},
+			DELIVERY_DATE = #{deliveryDate},
+			URL = #{url},
+			SUMMARY = #{summary},
+			STORY = #{story},
+			ENROLL_DATE = SYSDATE,
+			CHANGE_NAME = #{changeName},
+			STATUS = '심사중'
+		WHERE NO = #{no}
   </update>
   
+ <!--<update id="updateSet">
+	  	UPDATE SET_ITEM SET
+			NO = #{setNo},
+			NAME = #{setName},
+			QUANTITY = #{setQuantity},
+			PRICE = #{setPrice},
+			ITEM = #{option}
+		WHERE PRJ_NO = #{prjNo}
+  </update> --> 
+  
+  <insert id="updateSet">
+  INSERT INTO SET_ITEM(SET_NO ,SET_NAME, "OPTION", SET_PRICE, SET_QUANTITY, PRJ_NO) 
+  	VALUES (
+	   SEQ_SET_ITEM_NO.NEXTVAL, 
+	   #{setName},
+	   #{option}, 
+	   #{setPrice},
+	   #{setQuantity}, 
+	   #{prjNo}
+   )
+  </insert>
   
   <update id="updateCreator">
 	  	UPDATE MEMBER SET
 			ACCOUNT = #{account},
 			BANK = #{bank},
 			DEPOSITOR = #{depositor},
-			INFO = #{info},
+			INFO = #{info}
 		WHERE NO = #{no}
   </update>
   
@@ -260,6 +300,23 @@
 		FROM LIKE_MEMBER
         WHERE M_NO = #{mNo}
         AND LIKE_MEMBER_NO = #{likeMemberNo}
+	</select>
+	
+	<select id="selectPrjInfo" resultType="ProjectVo" parameterType="Map">
+		SELECT  
+        	TITLE
+        	,CATEGORY
+        	,CHANGE_NAME
+        	,PRICE
+        	,START_DATE
+        	,DELIVERY_DATE
+        	,TIME
+        	,END_DATE
+        	,URL
+        	,SUMMARY
+        	,STORY
+		FROM PROJECT 
+		WHERE NO = #{p}
 	</select>
 	
 </mapper>

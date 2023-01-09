@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.blank.app.member.vo.LikeMemberVo;
+import com.blank.app.member.vo.MemberVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
-import com.blank.app.project.vo.itemVo;
+import com.blank.app.project.vo.ItemVo;
 
 public interface ProjectService {
 
@@ -56,5 +57,15 @@ public interface ProjectService {
 	int updateSet(HashMap<String, Object> map);
 
 	int followCheck(LikeMemberVo vo);
+
+	int updateCreator(MemberVo memberVo);
+
+	int updateSet(ItemVo itemVo);
+
+	ProjectVo selectPrjInfo(HashMap<String, Object> prjMap);
+
+	List<ItemVo> selectSet(int p);
+
+	int updateExamination(ProjectVo prjVo);
 
 }

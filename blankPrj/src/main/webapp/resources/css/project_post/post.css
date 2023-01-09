@@ -10,31 +10,34 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    }
-    #mem-full{
-        --width: 100vw;
-        height: 780px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: 1fr 10fr;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        box-sizing: border-box;
-        gap: 0;
-		padding :0 15%;
-    }
-   #label-center{
+	letter-spacing: -0.05em;
+	font-family: Pretendard-Regular;
+}
+#mem-full{
+    --width: 100vw;
+    height: 780px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 10fr;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    gap: 0;
+    padding :0 15%;
+    margin-top: 50px;
+}
+#label-center{
     display: flex;
     justify-content: center;
-   }
-    #mem-header{
-    	height : 80px
-    }
-    input[type="radio"]{
-        display: none;    
-    } 
- input[name="mem-navi"] + label{
+}
+#mem-header{
+    height : 80px
+}
+input[type="radio"]{
+    display: none;    
+} 
+input[name="mem-navi"] + label{
     cursor: pointer;
     border-bottom: 1px solid #AFAFAF;
 }    
@@ -45,7 +48,7 @@ input[name="mem-navi"]:checked + label > span{
     }  
     input[name="mem-navi"]:hover{
         color: #567ace;
-    cursor: pointer;
+        cursor: pointer;
     }
     .main{
         width: 100%;
@@ -126,7 +129,7 @@ input[name="mem-navi"]:checked + label > span{
     margin: 0px auto;
 }
 .content-editor{
-    padding: 15px 0px 10px;
+    padding: 30px 0px 10px;
     height: 80px;
     align-items: center;
     display: flex;
@@ -258,7 +261,7 @@ div[class*=-info]+div:not(.set-info, .category-select, .price-box, .story-write,
     border-radius: 10px;
     width: 80%;
 }
-input{
+/* input{
     outline: none;
     border: none;
     font-weight: 400;
@@ -267,7 +270,7 @@ input{
     --text-align: inherit;
     size: 600px;
     width: 100%;
-}
+} */
 div[class*=-write] p:not(.calculate-notice>p){
     width: 100%;
     margin: 5px 0px 0px 3px;
@@ -398,7 +401,7 @@ li:nth-child(1)::after{
     position: relative;
     width: 100%;
 }
-input[name='deliver'], input[name='startDay']{
+input[name='deliveryDate'], input[name='startDate']{
     width: 80%;
     height: 28px;
     margin-top: 0;
@@ -407,7 +410,7 @@ input[name='deliver'], input[name='startDay']{
     padding-left: 10px;
     cursor: pointer;
 }
-input[name='endDay']{
+input[name='endDate']{
     width: 68%;
     height: 28px;
     margin-top: 0;
@@ -416,7 +419,7 @@ input[name='endDay']{
     padding-left: 10px;
     cursor: pointer;
 }
-input[name='deliver']{
+input[name='deliveryDate']{
     width: 40%;
 }
 .calculate-notice{
@@ -607,7 +610,7 @@ input[id*="itemPopup"]:checked + label + div{
     width: 100px;
     height: 35px;
     text-align: center;
-    padding-top: 6px;
+    padding-top: 8px;
     margin-right: 20px;
     font-size: 14px;
 }
@@ -623,7 +626,7 @@ input[id*="itemPopup"]:checked + label + div{
     width: 100px;
     height: 35px;
     text-align: center;
-    padding-top: 4px;
+    padding-top: 6px;
     margin-right: 20px;
     font-size: 14px;
     font-weight: 400;
@@ -1102,7 +1105,7 @@ input[name=save], input[name=apply], input[name=itemSave]{
 div[class*=text-]>div:last-child{
     padding: 2px 0 0 5px;
 }
-input[name=setName], input[name=limitedQuantity], input[name=setPrice]{
+input[name=setName], input[name=setQuantity], input[name=setPrice]{
     outline: none;
     padding-left: 5px;
     padding-right: 5px;
@@ -1318,4 +1321,9 @@ ul{
 }
 #close{
     padding: 20px;
+}
+
+/*달력*/
+.ui-datepicker .ui-datepicker-title{
+    display: flex;
 }
