@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/chatbot/main.css">
-<link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
+<link rel="shortcut icon" href="/blank/resources/images/blank.ico">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 </head>
 <body>
@@ -43,10 +43,21 @@
         </c:forEach>
         <div class="add-target"></div>
         <div class="answer-target"></div>
+        
+        <div class="result-target"></div>
+
+        <div id="result">
+
+
+        </div>	
+
     </main>
 	
     <footer>
-    
+        <div class="send-btn">
+            <input type="text" class="msg">
+            <button id="send-btn">전송</button>
+        </div>
     </footer>
 
 	
@@ -65,7 +76,7 @@
         const newDiv = document.createElement('div');
 		newDiv.innerHTML = "<span class='user-talk'>"+fixQ+"</span>";
         
-        newDiv.className='user-talk-btn';
+        newDiv.className = 'user-talk-btn';
         
         addTarget.appendChild(newDiv);
         
@@ -81,10 +92,10 @@
                 const newDiv1 = document.createElement('div');
 		        newDiv1.innerHTML = "<img src='/blank/resources/images/chatbot/chatbot(1).png' class='chatbot-icon'><span class='chat-answer'>"+data+"</span>";
                 const newDiv2 = document.createElement('div');
-		        newDiv2.innerHTML = "<span class='chat-answer'>실시간 상담 연결</span>";
+		        newDiv2.innerHTML = "<span class='chat-answer' onclick='connect();'>실시간 상담 연결</span>";
 
-                newDiv1.className='admin-answer-btn';
-                newDiv2.className='admin-counsel';
+                newDiv1.className = 'admin-answer-btn';
+                newDiv2.className = 'admin-counsel';
 
                 addTarget.appendChild(newDiv1);
                 addTarget.appendChild(newDiv2);
@@ -95,6 +106,87 @@
         });
 
     }
+    
+	let webSocket = null;
+
+	function connect(){
+		//웹소켓 생성
+		webSocket = new WebSocket("ws://127.0.0.1:8888/blank/chat/server");
+		//alert('연결');
+        
+        let sendNo = ${loginMember.no};
+        let receNo = 0;
+        let message = $('.msg').val();
+
+        //채팅방 생성
+        $.ajax({
+            url : "/blank/chat/chatRoom",
+            method : "post",
+            data:{
+                "sendNo" : sendNo,
+                "receNo" : receNo
+            },
+            success : function(result){
+                alert(result);
+                const reTarget = document.querySelector('.result-target')
+                
+                const newDiv = document.createElement('div');
+                newDiv.innerHTML = result;
+                
+                newDiv.className = 'chat-result';
+                
+                reTarget.appendChild(newDiv);
+            },
+            error:function(){
+                alert('실패');
+		    }
+        });
+
+        console.log(message);
+        sendMsg(sendNo, receNo, message);
+
+
+		//(수신)웹소켓이 메세지 받았을 때 동작할 함수 지정
+		webSocket.onmessage = function(event){	//event : 메세지 이벤트
+			const result = document.querySelector("#result");
+			$(result).append("<div class='user-talk-btn'><span class='user-talk'>" + event.data + "</span><div>");
+		};
+		
+	}
+	
+	//전송버튼 클릭하면 동작
+	function sendMsg(sendNo, receNo, message){
+
+		//발신
+		// let message = document.querySelector("#msg").value;
+        // webSocket.send(message);
+        
+        console.log(sendNo);
+        console.log(receNo);
+        console.log(message);
+        
+        $.ajax({
+            url : "/blank/chat/send",
+            method : "post",
+            data:{
+                "sendNo" : sendNo,
+                "receNo" : receNo,
+                "message" : message
+            },
+            success : function(data){
+                alert(data);
+            },
+            error:function(){
+                alert('실패');
+		    }
+        });
+		
+        document.querySelector("#msg").value = "";
+        
+	}
+	
+	
+    
 </script>
 
 </html>

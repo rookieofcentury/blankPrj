@@ -352,6 +352,7 @@
 		ORDER BY NO DESC
 	</select>
 	
+	<!-- 통계 결과 조회 -->
 	<select id="selectStats" resultType="Map">
 		SELECT Q.CONTENT AS QUIT_NO, COUNT(*) AS CNT
         FROM MEMBER M

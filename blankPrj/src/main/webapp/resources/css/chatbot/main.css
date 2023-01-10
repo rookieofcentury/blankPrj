@@ -20,13 +20,12 @@ header div{
 
 main{
     width: 420px;
-    height: 650px;
+    height: 590px;
     margin-left: 40%;
     margin-right: 40%;
     border: 1px solid rgb(200, 200, 200);
     border-top: none;
     overflow:auto;
-    border-radius: 0px 0px 20px 20px;
 }
 
 #title{
@@ -143,28 +142,33 @@ a {
     margin-left: 5px;
 }
 
+#result{
+    display: grid;
+    float: right;
+    justify-items: right;
+}
+
 .user-talk{
-    border: 1px solid rgb(200, 200, 200);
-    border-radius: 15px;
-    text-align: center;
-    background-color: rgba(50, 149, 240, 1);
     color: white;
-    padding: 5px;
+    border: 1px solid rgb(200, 200, 200);
+    background-color: rgba(50, 149, 240, 1);
+    border-radius: 15px;
     display:inline-block;
+    max-width:290px;
+    text-align: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 5px;
 }
 
 .user-talk-btn{
-    margin-left: 75%;
-    margin-top: 10px;
+    float: right;
+    margin-right: 20px;
 }
-
-/* .answer-target{
-    display: grid;
-    grid-template-columns: 1fr 9fr;
-} */
 
 .admin-answer-btn{
     margin-left: 5px;
+    margin-bottom: 2px;
 }
 
 .admin-counsel{
@@ -181,5 +185,49 @@ a {
     margin-left: 5px;
     margin-top: 5px;
     padding: 5px;
-    display:inline-block;
+}
+
+.answer-target{
+    margin-top: 7%;
+}
+
+.chat-result{
+    text-align: center;
+    font-size: 12px;
+    margin: 10px;
+}
+
+footer{
+    border: 1px solid rgb(200, 200, 200);
+    background-color: rgb(239, 239, 239);
+    border-top: none;
+    width: 420px;
+    height: 50px;
+    margin-left: 40%;
+    padding-top: 12px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.send-btn{
+    border: 1px solid rgb(200, 200, 200);
+    background-color: white;
+    border-radius: 20px;
+    width: 390px;
+    padding: 5px;
+    margin-left: 8px;
+}
+
+.send-btn input{
+    border: none;
+    outline: none;
+    margin-left: 6px;
+    font-size: 14px;
+    width: 325px;
+}
+
+#send-btn{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    line-height: 20px;
 }
