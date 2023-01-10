@@ -1,5 +1,7 @@
 package com.blank.app.goods.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +21,15 @@ public class ReviewVo {
 	private int like;
 	private String enrollDate;
 	private String isLikeLm;
+	private String fileName;
+	private MultipartFile reviewFile;
+	
+	public boolean isEmpty() {
+		if(reviewFile.isEmpty()) {return true;}
+		if(reviewFile == null){return true;}
+		if(reviewFile.getSize() == 0){return true;}
+		
+		return false;
+	}
 
 }

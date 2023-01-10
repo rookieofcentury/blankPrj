@@ -14,6 +14,7 @@ import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
+import com.blank.app.member.vo.AddressVo;
 
 @Repository
 public class GoodsDaoImpl implements GoodsDao {
@@ -40,6 +41,11 @@ public class GoodsDaoImpl implements GoodsDao {
 	@Override
 	public int insertReview(SqlSessionTemplate sst, ReviewVo vo) {
 		return sst.insert("goodsMapper.insertReview", vo);
+	}
+	
+	// 리뷰 파일 삽입하기
+	public int insertReviewFile(SqlSessionTemplate sst, ReviewVo vo) {
+		return sst.insert("goodsMapper.insertReviewFile", vo);
 	}
 
 	// admin 페이지 goods list Count - countGoods
@@ -151,8 +157,8 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 
 	// 회원번호로 주소 찾기
-	public Map<String, String> selectAddressByNo(SqlSessionTemplate sst, String no) {
-		return sst.selectMap("goodsMapper.selectAddressByNo", no);
+	public AddressVo selectAddressByNo(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("goodsMapper.selectAddressByNo", no);
 	}
 
 	// 좋아요 여부 받기
@@ -165,7 +171,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		return sst.selectOne("goodsMapper.searchListCount", map);
 	}
 
-	@Override
+	// 굿즈 검색 결과
 	public List<GoodsVo> searchGoodsList(SqlSessionTemplate sst, Map<String, String> map, PageVo pv) {
 		
 		int offset = (pv.getCurrentPage() - 1) * pv.getBoardLimit();
@@ -174,6 +180,31 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		return sst.selectList("goodsMapper.searchGoodsList", map, rb);
 		
+	}
+
+	// 주소지 변경
+	public int updateAddress(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.update("goodsMapper.updateAddress", map);
+	}
+
+	// 굿즈 재고 알림 등록
+	public int insertStockAlert(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.insert("goodsMapper.insertStockAlert", map);
+	}
+
+	// 재고 알림 등록 여부
+	public int selectStockAlert(SqlSessionTemplate sst, Map<String, Object> map) {
+		return sst.selectOne("goodsMapper.selectStockAlert", map);
+	}
+
+	// 전화번호 목록 도출
+	public List<String> selectPhoneList(SqlSessionTemplate sst, String no) {
+		return sst.selectList("goodsMapper.selectPhoneList", no);
+	}
+
+	// 전화번호 목록 삭제
+	public int deletePhoneList(SqlSessionTemplate sst, String no) {
+		return sst.delete("goodsMapper.deletePhoneList", no);
 	}
 
 

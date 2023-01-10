@@ -230,6 +230,7 @@ thead>tr:nth-child(2)>th {
 
 .calendar-body>tr>td {
     height: 73px;
+    width: 93.47px;
     background-color: white;
     border: 1px solid #A3A3A3;
     padding: 10px;
@@ -243,5 +244,8 @@ thead>tr:nth-child(2)>th {
 .flex {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 5px;
+}
+.flex:has(img) {
+    justify-content: space-between;
 }

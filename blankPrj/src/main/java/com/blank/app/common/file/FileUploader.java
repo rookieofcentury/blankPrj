@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.goods.vo.ReviewVo;
 import com.blank.app.project.vo.ProjectVo;
 
 public class FileUploader {
@@ -45,24 +46,34 @@ public class FileUploader {
 	}
 
 	// 프로젝트 - 파일 업로드
-	public static String upload(HttpServletRequest req, ProjectVo vo, MultipartFile profile) throws IllegalStateException, IOException {
+	public static String upload(HttpServletRequest req, ProjectVo vo) throws IllegalStateException, IOException {
 
-			String path = req.getSession().getServletContext().getRealPath("/resources/upload/project/");
-			String originName = vo.getPrjfile().getOriginalFilename();
-			String ext = originName.substring(originName.lastIndexOf("."), originName.length());
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload/project/");
+		String originName = vo.getPrjfile().getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."), originName.length());
 
-			String changeName = "prj_" + System.nanoTime() + ext;
+		String changeName = "prj_" + System.nanoTime() + ext;
+
+		File target = new File(path + changeName);
+		vo.getPrjfile().transferTo(target);
 	
-			File target = new File(path + changeName);
-			profile.transferTo(target);
+		return changeName;
+	}
 	
-//			ProjectVo insertVo = new ProjectVo();
-//			insertVo.setChangeName(changeName);
-//			insertVo.setOriginName(originName);
-//			insertVo.setFilePath(path);
-			
-//		return insertVo;
-			return changeName;
+	// 리뷰 - 파일 업로드
+	public static String upload(HttpServletRequest req, ReviewVo vo) throws IllegalStateException, IOException {
+		
+		String path = req.getSession().getServletContext().getRealPath("/resources/upload/review/");
+		String originName = vo.getReviewFile().getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."), originName.length());
+
+		String changeName = "review_" + System.nanoTime() + ext;
+
+		File target = new File(path + changeName);
+		vo.getReviewFile().transferTo(target);
+		
+		return changeName;
+		
 	}
 
 }

@@ -23,4 +23,19 @@ $(document).ready(function() {
 
     //resize 
     window.resizeTo( strWidth, strHeight );
+
+    $('#address-check').click(function() {
+        if($('#address-check').is(':checked')) {
+            $('#stock-form').submit();
+            Swal.fire({
+                icon: 'success',
+                title: '등록에 성공하였습니다.',
+                text: '문자를 확인해 주세요!',
+                confirmButtonColor: '#567ACE'
+            }).then((result) => {
+                window.close();
+            })
+        }
+    })
+
 });

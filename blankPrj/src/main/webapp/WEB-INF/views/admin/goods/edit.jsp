@@ -62,7 +62,7 @@
 	                </div>
 
 	                <div class="edit-title">재고</div>
-	                <div>
+	                <div class="stock-area">
 	                    <input type="number" name="stock" value="${vo.stock}"> <span> 개</span>
 	                </div>
 
@@ -174,6 +174,35 @@
 })
 
 	
+</script>
+<script>
+
+	// 재고 업데이트 문자 보낼 때
+	$(document).ready(function() {
+		if($('input[name=stock]').val() == 0) {
+			$('.stock-area').append('<div id="stockalert-btn">재입고 문자 보내기</div>');
+			$('#stockalert-btn').click(function() {
+				$.ajax({
+					url: "/blank/admin/goods/stockAlert",
+					method: "post",
+					data: {
+						no: '${vo.no}',
+						name: '${vo.name}'
+					},
+					success: function(data) {
+						Swal.fire({
+							icon: 'success',
+							title: '발신 성공',
+							text: '문자가 발신되었습니다!',
+							confirmButtonColor: '#567ACE'
+						})
+					}
+				})
+				$(this).css("display", "none");
+			})
+		}
+	})
+
 </script>
 <script src="/blank/resources/js/admin/goods/edit.js"></script>
 </html>

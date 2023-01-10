@@ -6,10 +6,13 @@
 <meta charset="UTF-8">
 <title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/stockalert.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-    
+    <form action="/blank/goods/stockalert" method="post" id="stock-form">
     <div class="wrap">
         
         <div class="container">
@@ -62,11 +65,11 @@
                     · 위탁업무 내용 : 공공 I-PIN, GPKI 인증
                     · 개인정보 보유 및 이용 기간 : 행정자치부에서는 이미 보유하고 있는 개인정보이기 때문에 별도로 저장하지 않음
                                             </textarea>
-            <div><label><input type="checkbox">동의하고 계속 진행합니다.</label></div>
-
+            <div class="agree-area"><input type="checkbox" id="address-check"><label for="address-check" class="flex"><span class="material-symbols-outlined">check_circle</span>내 정보에서 받아 오기</label></div>
         </div>
 
     </div>
+    </form>
 
 </body>
 <script src="/blank/resources/js/goods/stockalert.js"></script>

@@ -63,7 +63,7 @@
                         <c:if test="${goods.stock == 0}">
                             <div class="no-stock-info flex">현재 재고가 없어 주문할 수 없는 상품입니다.</div>
                             <div class="btn-area">
-                                <div class="btn-white stock-alert flex" onclick="callAlert();"><i class="fa-sharp fa-solid fa-bell"></i>&nbsp;&nbsp;재입고 알림 받기</div>
+                                <div class="btn-white stock-alert flex"><i class="fa-sharp fa-solid fa-bell"></i>&nbsp;&nbsp;재입고 알림 받기</div>
                                 <div class="btn-white share-btn" id="share-btn" onclick="Kakao.Share.createScrapButton();"><i class="fa-solid fa-share-nodes"></i></div>
                             </div>
                         </c:if>
@@ -151,44 +151,48 @@
         
     </div>
     
-    <div class="modal">
-        <div class="modal-container">
-            <div><button id="x-button"><i class="fa-solid fa-xmark"></i></button></div>
-            <div class="modal-goods-info">
-                <div class="goods-review-img">
-                    <img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt="img">
+    <form id="fileForm" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="goods" value="${goods.no}">
+        <input type="hidden" name="writer" value="${loginMember.no}">
+        <div class="modal">
+            <div class="modal-container">
+                <div><button id="x-button"><i class="fa-solid fa-xmark"></i></button></div>
+                <div class="modal-goods-info">
+                    <div class="goods-review-img">
+                        <img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt="img">
+                    </div>
+                    <div>
+                        <span>${goods.name}</span>
+                        <span>&#x20A9; <span>${goods.price}</span></span>
+                        <span>리뷰 <span class="review-total-cnt"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span class="review-total-score"></span></span>
+                    </div>
                 </div>
-                <div>
-                    <span>${goods.name}</span>
-                    <span>&#x20A9; <span>${goods.price}</span></span>
-                    <span>리뷰 <span class="review-total-cnt"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span class="review-total-score"></span></span>
+                <div class="review-modal-score">
+                    <span>상품은 어떠셨나요?</span>
+                    <span class="star">
+                            ★★★★★
+                        <span>★★★★★</span>
+                        <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10" required>
+                    </span>
                 </div>
-            </div>
-            <div class="review-modal-score">
-                <span>상품은 어떠셨나요?</span>
-                <span class="star">
-                        ★★★★★
-                    <span>★★★★★</span>
-                    <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10" required>
-                </span>
-            </div>
-            <div class="review-modal-content">
-                <textarea name="content" id="content-area" cols="30" rows="10" placeholder="자세한 후기는 다른 고객의 구매에 많은 도움이 되며, 오해의 소지가 있는 내용을 작성 시 검토 후 비공개 조치될 수 있습니다. 반품/환불 문의는 1:1 문의로 가능합니다."></textarea>
-                <span id="countReview">0 자 / 최대 200 자</span>
-            </div>
-            <div class="review-modal-pic">
-                <div>
-                    <span>사진 등록</span>
-                    <span>0 장 / 최대 2 장</span>
+                <div class="review-modal-content">
+                    <textarea name="content" id="content-area" cols="30" rows="10" placeholder="자세한 후기는 다른 고객의 구매에 많은 도움이 되며, 오해의 소지가 있는 내용을 작성 시 검토 후 비공개 조치될 수 있습니다. 반품/환불 문의는 1:1 문의로 가능합니다."></textarea>
+                    <span id="countReview">0 자 / 최대 200 자</span>
                 </div>
-                <div>
-                    <label id="input-file-button" for="input-file"> + </label>
-                    <input type="file" id="input-file" onchange="readURL(this);">
-                    <button id="submit-button">작성하기</button>
+                <div class="review-modal-pic">
+                    <div>
+                        <span>사진 등록</span>
+                        <span>0 장 / 최대 1 장</span>
+                    </div>
+                    <div>
+                        <label id="input-file-button" for="input-file"> + </label>
+                        <input multiple="multiple" type="file" id="input-file" name="reviewFile" onchange="readURL(this);">
+                        <label id="submit-button">작성하기</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 </body>
 <script src="/blank/resources/js/goods/detail.js"></script>
@@ -282,11 +286,13 @@
                 title: '로그인이 필요합니다!',
                 text: '로그인 창으로 이동합니다.',
                 icon: 'info',
-                showCancelButton: false,
+                showCancelButton: true,
                 confirmButtonColor: '#567ACE',
                 confirmButtonText: '이동하기'
             }).then((result) => {
-                location.href='/blank/member/login'
+                if(result.isConfirmed) {
+                    location.href='/blank/member/login'
+                }
             })
         } else {
             $('.modal').css("top", $(window).scrollTop());
@@ -307,16 +313,16 @@
             cancelButtonText: '취소'
         }).then((result) => {
             if (result.isConfirmed) {
-                
+                var form = $('#fileForm')[0];
+                var formData = new FormData(form);
                 $.ajax({
                     url: "/blank/goods/review/write",
+                    enctype: 'multipart/form-data',
                     method: "POST",
-                    data: {
-                        goods: '${goods.no}',
-                        writer: '${loginMember.no}',
-                        content: $('#content-area').val(),
-                        score: $('input[name=score]').val()
-                    },
+                    data: formData,
+                    processData: false,	// 필수
+                    contentType: false,	// 필수
+                    cache: false,
                     success: function(data) {
                         $('#content-area').val("");
                         $('input[name=score]').val(0);
@@ -395,6 +401,10 @@
                     if(parseInt(this.isLikeLm) > 0) {
                         checked = "checked";
                     }
+                    let checked2 = "";
+                    if(this.fileName != null) {
+                        checked2 = "<img src='/blank/resources/upload/review/" + this.fileName + "' alt=''>";
+                    }
                     temp += `<div class="review-item">
                             <div class="review-item-left">
                             <div class="review-score"><span class="score-star">★★★★★<span style="width: `+ this.score * 10 + `%">★★★★★</span></span></div>
@@ -406,9 +416,9 @@
                                     <div>`+ this.enrollDate +`</div>
                                 </div>
                             </div>
-                            <div class="review-item-pic">
-                                <img src="" alt="">
-                            </div>
+                            <div class="review-item-pic">`
+                             + checked2 +
+                            `</div>
                             <div class="review-item-more">
                                 <span class="material-symbols-outlined">more_vert</span>
                             </div>
@@ -445,6 +455,10 @@
                     if(parseInt(this.isLikeLm) > 0) {
                         checked = "checked";
                     }
+                    let checked2 = "";
+                    if(this.fileName != null) {
+                        checked2 = "<img src='/blank/resources/upload/review/" + this.fileName + "' alt=''>";
+                    }
                     temp += `<div class="review-item">
                             <div class="review-item-left">
                             <div class="review-score"><span class="score-star">★★★★★<span style="width: `+ this.score * 10 + `%">★★★★★</span></span></div>
@@ -456,9 +470,9 @@
                                     <div>`+ this.enrollDate +`</div>
                                 </div>
                             </div>
-                            <div class="review-item-pic">
-                                <img src="" alt="">
-                            </div>
+                            <div class="review-item-pic">`
+                             + checked2 +   
+                            `</div>
                             <div class="review-item-more">
                                 <span class="material-symbols-outlined">more_vert</span>
                             </div>
@@ -522,5 +536,46 @@
         }
     }
 
+</script>
+<script>
+    // DB에 이미 등록된 회원이거나 로그인하지 않았으면 재고 팝업 안 띄우게
+    $('.stock-alert').click(function() {
+        var nick = '${loginMember.nick}';
+        if(nick == '') {
+            Swal.fire({
+                title: '로그인이 필요합니다!',
+                text: '로그인 창으로 이동합니다.',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#567ACE',
+                confirmButtonText: '이동하기'
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    location.href='/blank/member/login'
+                }
+            })
+        } else {
+            $.ajax({
+                url: "/blank/goods/stockAlert/check",
+                method: "post",
+                data: {
+                    no: '${goods.no}',
+                    phone: '${loginMember.phone}'
+                },
+                success: function(data) {
+                    if(data == 'false') {
+                        callAlert();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '이미 등록된 회원입니다.',
+                            text: '재고가 들어올 때까지 기다려 주세요!',
+                            confirmButtonColor: '#567ACE'
+                        })
+                    }
+                }
+            })
+        }
+    })
 </script>
 </html>

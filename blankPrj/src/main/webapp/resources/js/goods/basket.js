@@ -200,3 +200,10 @@
     $(window).scroll(function(){
         cartInfo.css("top", $(this).scrollTop());
     });
+
+    /* 배송비 안내 문구 */
+    $('.error').hover(function() {
+        $('.info-ment').css("display", "flex");
+    }, function() {
+        $('.info-ment').css("display", "none");
+    })

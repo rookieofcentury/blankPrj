@@ -66,25 +66,44 @@
 	<insert id="insertReview">
 	
 		INSERT INTO GOODS_REVIEW
-		(
-			NO ,
-			GOODS ,
-			WRITER ,
-			SCORE ,
-			CONTENT ,
-			ENROLL_DATE ,
-			DELETE_YN
-		)
-		VALUES
-		(
-			SEQ_GOODS_REVIEW_NO.NEXTVAL ,
-			#{goods} ,
-			#{writer} ,
-			#{score} ,
-			#{content} ,
-			SYSDATE ,
-			'N'
-		)
+			(
+				NO ,
+				GOODS ,
+				WRITER ,
+				SCORE ,
+				CONTENT ,
+				ENROLL_DATE ,
+				DELETE_YN
+			)
+			VALUES
+			(
+				SEQ_GOODS_REVIEW_NO.NEXTVAL ,
+				#{goods} ,
+				#{writer} ,
+				#{score} ,
+				#{content} ,
+				SYSDATE ,
+				'N'
+			)
+	
+	</insert>
+	
+	<insert id="insertReviewFile">
+	
+		INSERT INTO GOODS_REVIEW_ATTACHMENT
+				(
+					NO ,
+					REVIEW ,
+					FILE_NAME ,
+					ENROLL_DATE
+				)
+			VALUES
+				(
+					SEQ_GOODS_REVIEW_ATTACHMENT_NO.NEXTVAL,
+					SEQ_GOODS_REVIEW_NO.CURRVAL,
+					#{fileName},
+					SYSDATE
+				)
 	
 	</insert>
 	
@@ -311,11 +330,13 @@
             R.CONTENT,
             SUBSTR(R.ENROLL_DATE, 1, 14) AS ENROLL_DATE,
             R.DELETE_YN,
-            H.COUNT AS "LIKE"
+            H.COUNT AS "LIKE",
+            A.FILE_NAME
         FROM GOODS_REVIEW R
         INNER JOIN MEMBER M
         ON M.NO = R.WRITER
         LEFT OUTER JOIN (SELECT NO, COUNT(*) AS COUNT FROM GOODS_REVIEW_HEART GROUP BY NO) H ON R.NO = H.NO
+        LEFT OUTER JOIN GOODS_REVIEW_ATTACHMENT A ON A.REVIEW = R.NO
 		WHERE GOODS = #{no}
 		<if test=" mno != null and mno != '' ">
 		AND M.NO = #{mno}
@@ -365,12 +386,27 @@
 	</delete>
 	
 	<!-- 회원번호로 주소 찾기 -->
-	<select id="selectAddressByNo" resultType="java.util.HashMap">
-		SELECT ADDR_NO AS ADDRESS1, ADDR AS ADDRESS2
+	<select id="selectAddressByNo" resultType="com.blank.app.member.vo.AddressVo">
+		SELECT ADDR_NO, ADDR, ADDR_DT
 		FROM ADDRESS
 		WHERE M_NO = #{no}
+		AND ROWNUM = 1
 	</select>
 	
+	<!-- 주소 업데이트 -->
+	<update id="updateAddress">
+		UPDATE GOODS_DELIVERY
+		SET
+			NAME = #{name},
+			PHONE = #{phone},
+			ADDRESS1 = #{address1},
+			ADDRESS2 = #{address2},
+			ADDRESS3 = #{address3},
+			MESSAGE = #{message}
+		WHERE NO = #{no}
+	</update>
+	
+	<!-- 검색 결과 list -->
 	<select id="searchGoodsList" resultType="com.blank.app.goods.vo.GoodsVo">
 		SELECT
 			G.NO ,
@@ -405,6 +441,7 @@
 		</if>
 	</select>
 	
+	<!-- 검색 결과값 몇 개 있음? -->
 	<select id="searchListCount" resultType="int">
 		SELECT COUNT(*) FROM GOODS G
 		WHERE DELETE_YN = 'N'
@@ -415,5 +452,34 @@
 			AND NAME LIKE '%${keyword}%'
 		</if>
 	</select>
+	
+	<!-- 재고 알림 추가 -->
+	<insert id="insertStockAlert">
+		INSERT INTO GOODS_ALERT
+		(
+			NO, M_PHONE
+		)
+		VALUES
+		(
+			#{no}, #{phone}
+		)
+	</insert>
+	
+	<!-- 이 번호 알림 등록해 두었는지 -->
+	<select id="selectStockAlert" resultType="int">
+		SELECT COUNT(*) FROM GOODS_ALERT
+		WHERE NO = #{no} AND M_PHONE = #{phone}
+	</select>
+	
+	<!-- 재입고 알림을 위해 전화번호 한번에 받기 -->
+	<select id="selectPhoneList" resultType="String">
+		SELECT REPLACE(M_PHONE, '-', '') FROM GOODS_ALERT
+		WHERE NO = #{no}
+	</select>
+	
+	<delete id="deletePhoneList">
+		DELETE FROM GOODS_ALERT
+		WHERE NO = #{no}
+	</delete>
 	
 </mapper>
