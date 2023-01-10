@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class ProjectController {
 	public String project(Model model, @RequestParam(name="p") int p ) {
 		
 		ProjectVo prjVo = service.selectProject(p);
-		System.out.println(p);
+		System.out.println(prjVo);
 		List<ItemVo> itemVo = service.selectSet(p);
 		System.out.println(itemVo);
 		
@@ -355,7 +356,7 @@ public class ProjectController {
 		itemVo.setPrjNo(p);
 		
 		ProjectVo prjInfo = service.selectPrjInfo(prjMap);
-//		MemberVo memberInfo = service.selectMemberInfo(MemberVo);
+		MemberVo memberInfo = service.selectMemberInfo(MemberVo);
 //		ItemVo itemInfo = service.selectItemInfo(itemVo);
 		
 		//JsonObject jsonObj = JsonParser.parseString(timeVo).getAsJsonObject();
@@ -364,30 +365,31 @@ public class ProjectController {
 		model.addAttribute("category", category);
 		model.addAttribute("time", starttimeVo);
 		model.addAttribute("prjInfo", prjInfo);
+		model.addAttribute("memberInfo", memberInfo);
 		
 		return "project/post/post";
 	}
 	
 	/* 임시저장 */
-	@PostMapping("savePrj")
+	@PostMapping(value = "savePrj", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String savePrj(String title, MultipartFile prjfile, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
-		System.out.println(title);
-		System.out.println(prjVo);
+//	public String savePrj(@RequestParam Map<String,String> map,HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
+		public String savePrj(ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
 		System.out.println(MemberVo);
 		System.out.println(itemVo);
 		
+//		System.out.println(map);
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		prjVo.setCreator(nick);
 		prjVo.setNo(itemVo.getPrjNo());
+		System.out.println(prjVo);
 		MemberVo.setNo(nick);
 		
 		//파일 저장
 		String changeName = "";
 		if(!prjVo.isEmpty()) {
-			log.warn("ccc");
-			changeName = (String) FileUploader.upload(req, prjVo, prjfile);
+			changeName = (String) FileUploader.upload(req, prjVo);
 		}
 		prjVo.setChangeName(changeName);
 		
@@ -408,8 +410,9 @@ public class ProjectController {
 	
 	/* 심사 요청*/
 	@PostMapping("post")
-	public String post(MultipartFile profile, Model model, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
+	public String prjPost(Model model, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
 		
+		System.out.println("심사요청");
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		prjVo.setCreator(nick);
@@ -419,7 +422,7 @@ public class ProjectController {
 		//파일 저장
 		String changeName = "";
 		if(!prjVo.isEmpty()) {
-			changeName = (String) FileUploader.upload(req, prjVo, profile);
+			changeName = (String) FileUploader.upload(req, prjVo);
 		}
 		prjVo.setChangeName(changeName);
 		

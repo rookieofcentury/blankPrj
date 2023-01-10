@@ -186,4 +186,9 @@ public class ProjectDaoImpl implements ProjectDao{
 		return result;
 	}
 
+	@Override
+	public MemberVo selectMemberInfo(SqlSessionTemplate sst, MemberVo memberVo) {
+		return sst.selectOne("projectMapper.selectMemberInfo", memberVo);
+	}
+
 }

@@ -68,4 +68,6 @@ public interface ProjectService {
 
 	int updateExamination(ProjectVo prjVo);
 
+	MemberVo selectMemberInfo(MemberVo memberVo);
+
 }

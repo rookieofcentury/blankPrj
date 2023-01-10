@@ -29,9 +29,7 @@
 			<div class="content-introduction">
 				<div class="introduction-main">
                     <div class="main-image">
-                        <button type="button"><<</button>
-						<img src="/blank/resources/images/blank.png" alt="프로젝트썸네일">
-                        <button type="button"></button>
+						<img src="/blank/resources/upload/project/${prj.changeName}" alt="프로젝트썸네일">
                     </div>
 					<div class="main-summary">
 						${prj.summary}
@@ -61,8 +59,9 @@
 						</div>
 						<div class="info-period">
 							<div class="period"><strong>펀딩기간</strong></div>
-							<div><fmt:formatDate value="${prj.startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${prj.endDate}" pattern="yyyy-MM-dd"/></div>
-								<!-- ${prj.startDate}~${prj.endDate}</div> -->
+							<div>
+								 ${prj.startDate} ~ ${prj.endDate}
+							</div>
 						</div>
 						<div class="info-payment">
 							<div class="payment"><strong>결제</strong></div>
@@ -102,16 +101,20 @@
 								<div class="name-follow">+ 팔로우</div>
 							</div>
 						</div>
-                        <div>${prj.info}</div>
+                        <div>${prj.creatorInfo}</div>
                     </div>
                 </div>
                 <div class="side-reward">
                     <div class="reward-select">리워드 선택
 					<c:forEach items="${set}" var="item">
-                    <div class="reward-card">
+						
+					<div class="reward-card">
+					<input type="radio" id="2" value="${item.setNo}" name="range">
+					<label for="2" >
+
 						<div class="card-option">
-							<input type="radio" id="check">
-							<label for="check">
+							<!-- <input type="radio" id="check">
+							<label for="check"> -->
                             <div class="option-title">
                                 <div class="title-price">${item.setPrice}</div>
                                 <div class="title-name">${item.setName}</div>
@@ -124,14 +127,18 @@
                             </ul>
                             <div class="option-quantity">제한수량 ${item.setQuantity}개</div>
                             <div class="option-sell">총 60개 펀딩완료</div>
-						</label>
                         </div>
-                    </div>
+						
+					</label>
+					
+					</div>
 					</c:forEach>
                     </div>
                 </div>
+
             </div>
 		</div>
+		
 	</div>
 	
 	<%@ include file = "/WEB-INF/views/common/footer.jsp" %>
@@ -285,16 +292,28 @@
 			}
 		});
 		
-		/*옵션 선택*/
-		// $('.card-option').click(function(){
-		// 	$('.reward-card').css("border-width", "5px");
-		// 	$('.reward-card').css("border-color", "#567ace");
-		// });
-
 		/*금액 콤마찍기*/
 		var amount = '${ prj.price }'
 		var wantPrice = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		
+		/* 옵션 선택효과*/
+		// var chkList = document.querySelectorAll("input[name=range]:checked");
+		// chkList.forEach(function (ch) {
+			// 	console.log(ch.value);
+			// });
+		var rangeVal = $('input:radio[name=range]:checked').val();
+		$('input:radio[name=range]').is(':checked') == false{
+			$('.reward-card').css("border-width", "5px");
+			$('.reward-card').css("border-color", "#567ace");
+		}
+
+		/* 후원 클릭 */
+		$('.buttons-funding').click(function(){
+			if($('input:radio[name=range]').is(':checked') == false){
+				alert("리워드를 선택해 주세요!");
+			}
+		});
+
     </script>
 </body>
 </html>

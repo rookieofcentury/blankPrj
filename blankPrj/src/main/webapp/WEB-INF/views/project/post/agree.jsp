@@ -25,12 +25,12 @@
                     <div class="buttons-goout"><img src="/blank/resources/images/project/icon_goout.png"></div>
                 </div>
             </div>
-            <div class="content-menu">
+            <!-- <div class="content-menu">
                 <div>약관 정보</div>
                 <div>기본 정보</div>
                 <div>옵션 설계</div>
                 <div>창작자 정보</div>
-            </div>
+            </div> -->
         </div>
         <div class="content-write">
             <h2>프로젝트를 진행 시 이런 준비가 필요해요</h2>

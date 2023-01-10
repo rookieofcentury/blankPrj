@@ -70,4 +70,6 @@ public interface ProjectDao {
 
 	int updateExamination(SqlSessionTemplate sst, ProjectVo prjVo);
 
+	MemberVo selectMemberInfo(SqlSessionTemplate sst, MemberVo memberVo);
+
 }
