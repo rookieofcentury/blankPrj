@@ -31,7 +31,7 @@
 <script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script> -->
 
 <body>
-<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();" enctype="application/x-www-form-urlencoded">
+<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();">
 <div class="navi-menu">
         <div class="content-editor">
             <div class="editor-logo">
@@ -52,7 +52,7 @@
 <div id="mem-header"></div>
     <div id="mem-full">
         
-            <input type="radio" id="default-info" name="mem-navi" checked >
+            <input type="radio" id="default-info" name="mem-navi" checked>
             <label for="default-info" ><span id="icon1" class="material-symbols-outlined">기본정보</span></label>
             <input type="radio" id="option-create" name="mem-navi">
             <label for="option-create" ><span class="material-symbols-outlined md-24">옵션설계</span></label>
@@ -69,7 +69,7 @@
 				                  <div>프로젝트의 주제, 특징이 드러나는 제목을 붙여주세요.</div>
 				              </div>
 				              <div class="title-write">
-				                  <div><input type="text" placeholder="내용 입력" name="title" ></div>
+				                  <div><input type="text" placeholder="내용 입력" name="title" value='<c:out value="${prjInfo.title}"/> '></div>
 				                  <p>40글자 남음</p>
 				              </div>
 				          </div>
@@ -94,7 +94,7 @@
                     <div>대표이미지</div>
                     <div>프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있도록 이미지로 등록해 주세요.</div>
                 </div>
-                <div class="img-upload"><input multiple="multiple" type="file" name="prjfile"></div>
+                <div class="img-upload"><input type="file" name="prjfile" id="input-prjfile" value='<c:out value="${prjInfo.changeName}"/> '></div>
             </div>
             <div class="content-price">
                 <div class="price-info">
@@ -102,7 +102,7 @@
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
                 <div class="price-box">
-                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price">  <!-- onkeyup="inputNumberFormat(this)" --> </div>
+                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price" value='<c:out value="${prjInfo.price}"/> '>  <!-- onkeyup="inputNumberFormat(this)" --> </div>
                     <div>원</div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                                 <div class="start-day">
                                     <p>시작일</p>
                                     <!-- <div class="calendar-img"><img src="./calendar2-date.svg"></div> -->
-                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" >
+                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.startDate}"/> '>
                                 </div>
                                 <div class="start-time">
                                     <p>시작시간</p>
@@ -139,7 +139,7 @@
                             <div class="date-end">
                                 <div class="end-day">
                                     <p>종료일</p>
-                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  >
+                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='<c:out value="${prjInfo.endDate}"/> '>
                                 </div>
                                 <div class="date-calculate">
                                     <div class="calculate-notice">
@@ -163,7 +163,7 @@
                 </div>
                 <div class="plan-write">
                     <div>
-                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" ></div>
+                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.deliveryDate}"/> '></div>
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="url-write">
                     <div class="url-blank">www.blank.com/</div>
-                    <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url" ></div>
+                    <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url" value='<c:out value="${prjInfo.url}"/> '></div>
                     <p>영문으로 최소 3자 이상 입력해 주세요</p>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                 <div class="summary-write">
                     <div class="summary-text">
                         <!-- <input type="text" placeholder="내용 입력" name="summery"> -->
-                        <textarea placeholder="내용 입력" name="summary"  ></textarea>
+                        <textarea placeholder="내용 입력" name="summary" value='<c:out value="${prjInfo.summary}"/> '></textarea>
                     </div>
                     <p>100글자 남음</p>
                 </div>
@@ -454,7 +454,7 @@
                     <div>창작자님의 이력과 간단한 소개를 써주세요.</div>
                 </div>
                 <div class="creator-write">
-                    <div><input type="text" placeholder="내용 입력" name="introduce"></div>
+                    <div><input type="text" placeholder="내용 입력" name="info" value='<c:out value="${memberInfo.info}"/> '></div>
                     <p>40글자 남음</p>
                 </div>
             </div>
@@ -506,8 +506,8 @@
                                     <ul>
                                         <li>프로젝트가 성공적으로 종료되면 종료일 기준 약 10영업일 이내에 바로정산(1차 정산)이 시작됩니다.</li>
                                         <li>바로정산 단계에서는 최종 금액의 일부가 먼저 지급됩니다.</li>
-                                    </ul>
-                                    <ol type="1">
+                                    
+                                    <ol type="1" class="popup-ol">
                                         <li>최종 결제 금액이 1,000만 원 미만<br>
                                             최종 결제 금액에서 블랭크 중개 수수료, 결제(카드사 수수료 등) 수수료를 제외한 금액의 80%가 지급됩니다.
                                         </li>
@@ -515,18 +515,20 @@
                                             최종 결제 금액에서 블랭크 중개 수수료, 결제(카드사 수수료 등) 수수료를 제외한 금액의 60%가 지급됩니다.
                                         </li>
                                     </ol>
-                                    <div>리워드 발송과 펀딩금 반환이 완료되면 최종 펀딩 금액이 확정됩니다.<br>
-                                    최종 펀딩 금액 확정 5영업일 이내에 최종정산(2차 정산)이 진행됩니다.</div>
+                                        <li>리워드 발송과 펀딩금 반환이 완료되면 최종 펀딩 금액이 확정됩니다.</li>
+                                        <li>최종 펀딩 금액 확정 5영업일 이내에 최종정산(2차 정산)이 진행됩니다.</li>
+                                    </ul>
                                     <br>
                                     <strong>이렇게 알려 드려요</strong>
                                     <ul>
                                         <li>바로정산과 최종정산이 시작되면 정산 내역서와 함께 정산에 대한 안내가 메일로 발송됩니다.</li>
                                     </ul>
                                 </div>
-                                <div>
+                                <div class="close-button">
                                     <input type="checkbox" id="policy-check">
                                     <label for="policy-check">정산 정책을 확인하였습니다.</label>
-                                    팝업닫기</div> 
+                                    <!-- <div>팝업닫기</div>  -->
+                                </div>
                             </div>
                             </div>
                         <div>
@@ -542,10 +544,10 @@
                     <div>펀딩 성공시 정산금을 수령할 계좌정보를 입력해 주세요.</div>
                 </div>
                 <div class="calculate-write">
-                    <div><input type="text" placeholder="은행명 입력" name="bank"></div>
-                    <div><input type="text" placeholder="계좌번호 입력" name="account"></div>
+                    <div><input type="text" placeholder="은행명 입력" name="bank" value='<c:out value="${memberInfo.bank}"/> '></div>
+                    <div><input type="text" placeholder="계좌번호 입력" name="account" value='<c:out value="${memberInfo.account}"/> '></div>
                     <p>특수 문자(-)없이 숫자만 입력해 주세요</p>
-                    <div><input type="text" placeholder="예금주명 입력" name="depositor"></div>
+                    <div><input type="text" placeholder="예금주명 입력" name="depositor" value='<c:out value="${memberInfo.depositor}"/> '></div>
                 </div>
             </div>
             </div>
@@ -829,8 +831,7 @@
         });
     
          //글자수 체크(소개)
-        $('input[name="introduce"]').keyup(function(e) {
-            let infoCheckReturn = false;
+        $('input[name="info"]').keyup(function(e) {
             var content = $(this).val();
             $('.creator-write > p').text(40 - content.length + "글자 남음"); 
             document.querySelector(".creator-write > p").style.color = "red";
@@ -838,11 +839,13 @@
                 alert("최대 40글자까지 입력 가능합니다.");
                 $(this).val(content.substring(0, 40));
                 $('.creator-write > p').text("0글자 남음");
+            }else{
+                infoCheckReturn = true;
             }
         });
         //유효성 체크(소개)
         var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
-        $("input[name='introduce']").on("focusout", function() {
+        $("input[name='info']").on("focusout", function() {
         var x = $(this).val();
             if (x.length > 0) {
                 if (x.match(replaceKorean)) {
@@ -859,26 +862,24 @@
         var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
         var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
         $('input[name="bank"]').keyup(function(e) {
-            let bankCheckReturn = false;
             var content = $(this).val();
             if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
-                return true;
+                bankCheckReturn = true;
             }else{
                 alert("한글만 입력 가능합니다. 다시 입력해주세요.");
-                return false;
+                bankCheckReturn = false;
             }
         });
 
         //유효성 체크(계좌번호)
         var checkNumber = /^[0-9]*$/;
         $('input[name="account"]').keyup(function(e) {
-            let accountCheckReturn = false;
             var content = $(this).val();
             if(!checkNumber.test(content)){
                 alert("숫자만 입력 가능합니다. 다시 입력해주세요.");
-                return false;
+                accountCheckReturn = false;
             }
-            return true;
+            accountCheckReturn = true;
         });
 
         //유효성 체크(예금주)
@@ -887,13 +888,12 @@
         var checkEmoji = /[~!@#$%^&*()_+|<>?:{}]/; 
         var checkKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
         $('input[name="depositor"]').keyup(function(e) {
-            let depositorCheckReturn = false;
             var content = $(this).val();
             if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
-                return true;
+                depositorCheckReturn = true;
             }else{
                 alert("한글만 입력 가능합니다. 다시 입력해주세요.");
-                return false;
+                depositorCheckReturn = false;
             }
         });
 
@@ -924,56 +924,75 @@
        //임시저장
         // document.querySelector('#storage').addEventListener('click',function(){
         //     const prj = document.querySelector('#postPrj');
-        //     const formData = new FormData(prj);
-        //     formData.append("k01","v01");
-        //     formData.append("k02","v02");
+        //     var formData = new FormData(prj);
+
+        //     console.log(prj);
+
+        //     let string = location.href.split('=');
+        //     let query = string[1];
+
+        //     var option = $('.selected-item').text();
+
+        //     const f = $('input[name="prjfile"]')[0];
+        //     const fileData = f.files[0];
+
+        //     var title = $('input[name="title"]').val();
+
+        //     formData.append("wiwiwiwi", title);
+        //     formData.append("prjNo", query);
+        //     formData.append("story", editor.getHTML());
+        //     formData.append("option", option);
+        //     // formData.append("prjfile" , fileData);
+
         //     const httpRequest = new XMLHttpRequest();
         //     httpRequest.onreadystatechange = () => {
         //         if (httpRequest.readyState === XMLHttpRequest.DONE) {
         //             if (httpRequest.status === 200) {
+        //                 const x = httpRequest.response;
+        //                 if(x == 1){
+        //                     alert('임시저장 되었습니다.')
+        //                 }
         //             }
         //         }
         //     };
-        // httpRequest.open('post', '/blank/project/savePrj');
-        // httpRequest.responseType = "json";
-        // httpRequest.send(formData);
+        //     httpRequest.open('post', '/blank/project/savePrj');
+        //     httpRequest.responseType = "json";
+        //     httpRequest.send(formData);
         // });
 
         $('.buttons-storage').click(function() {
             // var content = editor.getHTML();
             // $('#prj-content').val(content);
-            console.log('ㅇㅇ');
             var option = $('.selected-item').text();
 
             var price2 = $('input[name="price"]').val();
-            var title2 = $('input[name="title"]').val();
-            console.log(title2);
     
             let string = location.href.split('=');
             let query = string[1];
             
-            const f = $('input[name="prjfile"]')[0];
-            const fileData = f.files[0];
+            // const f = $('input[name="prjfile"]')[0];
+            // const fileData = f.files[0];
 
             var form = $('#postPrj')[0];
-            var formData = new FormData();
+            var formData = new FormData(form);
 
-            formData.append("title", title2);
-            // // formData.append("option", option);
-            // formData.append("prjNo", query);
-            // formData.append("story", editor.getHTML());
-            formData.append("prjfile" , fileData);
+            // formData.append("title", title2);
+            formData.append("option", option);
+            formData.append("prjNo", query);
+            formData.append("story", editor.getHTML());
+            // formData.append("prjfile" , fileData);
             
             alert("update");
 
             $.ajax({
                 url  : "/blank/project/savePrj",
+                type : "POST",
+                data : formData,
                 cache: false,
                 // contentType : "application/x-www-form-urlencoded",
                 contentType : false,
                 processData: false , 
-                type : "POST",
-                data : formData,
+                enctype : "multipart/form-data",
             // dataType: "json",
 	    	    success : function(x){
 	    		   if(x == 1){
@@ -1155,6 +1174,21 @@
 			}
 		}
     });
+
+    $(function() {
+        $("#input-prjfile").on('change', function(){
+        readURL(this);
+        });
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('.img-upload').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     jQuery.browser = {};
 		(function () {

@@ -15,34 +15,30 @@ public class ProjectVo {
 	private String news;
 	private String review;
 	private String creator;
-	private String info;
+	private String creatorInfo;
 	private String category;
 	private String title;
 	private String price;
-	private Date startDate;
-	private Date endDate;
-	private Date deliveryDate;
+	private String startDate;
+	private String endDate;
+	private String deliveryDate;
 	private String summary;
 	private String time;
 	private String url;
 	private String story;
 	private String status;
 	private String deleteYn;
-	private String originName;
-	private String filePath;
+//	private String originName;
+//	private String filePath;
 	private String changeName;
 	private MultipartFile prjfile;
 	
 	public boolean isEmpty() {
-		if(prjfile.isEmpty()) {return true;}
 		if(prjfile == null){return true;}
+		if(prjfile.isEmpty()) {return true;}
 		if(prjfile.getSize() == 0){return true;}
 		
 		return false;
 	}
 
-//
-//	public void setChangeName(ProjectVo changeName2) {
-//	}
-	
 }

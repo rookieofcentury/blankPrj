@@ -185,5 +185,10 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.updateExamination(sst,prjVo);
 	}
 
+	@Override
+	public MemberVo selectMemberInfo(MemberVo memberVo) {
+		return dao.selectMemberInfo(sst, memberVo);
+	}
+
 
 }

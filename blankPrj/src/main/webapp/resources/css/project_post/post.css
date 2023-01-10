@@ -271,7 +271,7 @@ div[class*=-info]+div:not(.set-info, .category-select, .price-box, .story-write,
     size: 600px;
     width: 100%;
 } */
-div[class*=-write] p:not(.calculate-notice>p){
+div[class*=-write] p:not(.calculate-notice>p, .story-notice p){
     width: 100%;
     margin: 5px 0px 0px 3px;
     font-size: 12px !important;
@@ -443,6 +443,9 @@ input[name='deliveryDate']{
 .story-notice{
     display: flex;
 }
+.story-notice p{
+    padding-bottom: 0;
+}
 .story-write{
     border: 1px solid #567ace;
     border-radius: 10px;
@@ -457,8 +460,11 @@ input[name='deliveryDate']{
     line-height: 24px !important;
     padding-left: 20px;
 }
-.story-notice>svg{
+.story-notice>P{
     padding-top: 5px;
+}
+.story-notice>svg{
+    margin-top: 10px;
 }
 .story-editor{
     width: 80%;
@@ -948,7 +954,7 @@ strong+button{
     border: 1px solid rgb(189, 189, 189);
     background: rgb(255, 255, 255);
 }
-input[type="checkbox"]{
+/* input[type="checkbox"]{
     visibility: hidden;
     z-index: 1;
     position: absolute;
@@ -957,7 +963,7 @@ input[type="checkbox"]{
     height: 0px;
     top: 90%;
     margin: -1px 0px 0px;
-}
+} */
 .select-option>input{
     position: absolute;
     z-index: 3;
@@ -1241,10 +1247,10 @@ div[class*=-write] p{
     border: none;
     cursor: pointer;
 }
-.policy-agree{
+/* .policy-agree{
     --padding-top: 7px;
     height: 25px;
-}
+} */
 .agree{
     border: 5px solid #567ace;
     font-weight: 700;
@@ -1271,7 +1277,12 @@ ul{
 #prj-content {
     display: none;
 }
-
+.bi-check-lg{
+    padding-top: 5px;
+}
+.popup-ol{
+    padding-left: 20px;
+}
 /*정책 모달창*/
 .background {
     position: fixed;
@@ -1305,12 +1316,11 @@ ul{
     border: 1px solid #567ace;
     box-shadow: 0 2px 7px #567ace(0, 0, 0, 0.3);
     border-radius: 10px;
-    --margin-top: -50px;
-    --margin-left: -100px;
+    padding: 20px;
 
 /* 임시 지정 */
-    width: 540px;
-    --height: 100px;
+    width: 650px;
+    line-height: 150%;
 
 /* 초기에 약간 아래에 배치 */
     transform: translate(-50%, -40%);
@@ -1323,6 +1333,9 @@ ul{
     padding: 20px;
 }
 
+.close-button{
+    padding-top: 20px;
+}
 /*달력*/
 .ui-datepicker .ui-datepicker-title{
     display: flex;

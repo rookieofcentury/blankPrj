@@ -5,14 +5,6 @@ import lombok.Data;
 @Data
 public class ItemVo {
 	
-	/*item*/
-	private String itemNo;
-	private String itemName;
-	
-	/*option*/
-	private String optionNo;
-	private String optionName;
-	
 	/*set item*/
 	private String setNo;
 	private String setName;
@@ -21,7 +13,4 @@ public class ItemVo {
 	private String option;
 	private String prjNo;
 	
-	/*range*/
-	private String rangeNo;
-
 }
