@@ -206,6 +206,26 @@ public class GoodsDaoImpl implements GoodsDao {
 	public int deletePhoneList(SqlSessionTemplate sst, String no) {
 		return sst.delete("goodsMapper.deletePhoneList", no);
 	}
+	
+	// 리뷰 번호로 리뷰 찾기
+	public ReviewVo findReviewByNo(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("goodsMapper.findReviewByNo", no);
+	}
+
+	// 리뷰 삭제
+	public int deleteReview(SqlSessionTemplate sst, String no) {
+		return sst.delete("goodsMapper.deleteReview", no);
+	}
+
+	// 리뷰 수정
+	public int editReview(SqlSessionTemplate sst, ReviewVo vo) {
+		return sst.insert("goodsMapper.editReview", vo);
+	}
+
+	// 리뷰 첨부 파일 삭제
+	public int deleteAtt(SqlSessionTemplate sst, String no) {
+		return sst.delete("goodsMapper.deleteAtt", no);
+	}
 
 
 }

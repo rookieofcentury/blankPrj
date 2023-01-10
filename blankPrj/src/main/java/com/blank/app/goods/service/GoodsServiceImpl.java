@@ -266,6 +266,50 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.deletePhoneList(sst, no);
 	}
 
+	// 리뷰 찾기
+	public ReviewVo findReviewByNo(String no, String mno) {
+		
+		ReviewVo vo = new ReviewVo();
+		vo.setNo(no);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vo", vo);
+		map.put("mno", mno);
+		
+		ReviewVo review = dao.findReviewByNo(sst, no);
+		String i = dao.getIsLikeLm(sst, map);
+		review.setIsLikeLm(i);
+		
+		return review;
+	}
+
+	// 리뷰 삭제
+	public int reviewDelete(String no) {
+		return dao.deleteReview(sst, no);
+	}
+
+	// 리뷰 수정
+	@Transactional
+	public int reviewEdit(ReviewVo vo) {
+		
+		int result = dao.editReview(sst, vo);
+		int result2 = 2;
+				
+		String file = vo.getFileName();
+		
+		if(file != null) {
+			result2 = dao.insertReviewFile(sst, vo);
+		}
+		
+		return result * result2;
+		
+	}
+
+	// 첨부파일 삭제
+	public int deleteAtt(String no) {
+		return dao.deleteAtt(sst, no);
+	}
+
 
 
 }

@@ -114,4 +114,16 @@ public interface GoodsDao {
 	// 전화번호 목록 삭제
 	int deletePhoneList(SqlSessionTemplate sst, String no);
 
+	// 리뷰 번호로 리뷰 찾기
+	ReviewVo findReviewByNo(SqlSessionTemplate sst, String no);
+
+	// 리뷰 삭제
+	int deleteReview(SqlSessionTemplate sst, String no);
+
+	// 리뷰 수정
+	int editReview(SqlSessionTemplate sst, ReviewVo vo);
+
+	// 리뷰 첨부 파일 삭제
+	int deleteAtt(SqlSessionTemplate sst, String no);
+
 }

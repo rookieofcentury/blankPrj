@@ -20,9 +20,10 @@ $(document).ready(function() {
         strWidth = $('.wrap').outerWidth() + strMenuWidth;
         strHeight = $('.wrap').outerHeight() + strMenuHeight;
     }
-
-    //resize 
+    
+    // resize
     window.resizeTo( strWidth, strHeight );
+});
 
     $('#address-check').click(function() {
         if($('#address-check').is(':checked')) {
@@ -38,4 +39,13 @@ $(document).ready(function() {
         }
     })
 
-});
+    $('textarea').scroll(function() {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(this).prop('scrollHeight');
+    
+        if (scrollTop + 135 >= scrollHeight) {
+            console.log("top");
+            $("#address-check").attr("disabled", false);
+            $(".agree-area label").css("color", "black");
+        }
+    });
