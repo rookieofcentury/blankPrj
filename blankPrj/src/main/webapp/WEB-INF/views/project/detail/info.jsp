@@ -39,14 +39,14 @@
 					<div class="sub-status">
 						<div class="status-price">
 							<div class="price-total"><strong>23,270,500</strong>원</div>
-							<div class="price-fundingrate">1760%</div>
+							<div class="price-fundingrate">${prj.percent}%</div>
 						</div>
 						<div class="status-period">
 							<div><strong>18</strong>일</div>
 							<div>남음</div>
 						</div>
 						<div class="status-supporter">
-							<div>후원자</div>
+							<div>후원자 </div>
 							<div><strong>88</strong></div>
 							<div>명</div>
 						</div>
@@ -109,14 +109,12 @@
 					<c:forEach items="${set}" var="item">
 						
 					<div class="reward-card">
-					<input type="radio" id="2" value="${item.setNo}" name="range">
-					<label for="2" >
+					<input type="radio" id="${item.setNo}" value="${item.setNo}" name="range">
+					<label for="${item.setNo}">
 
 						<div class="card-option">
-							<!-- <input type="radio" id="check">
-							<label for="check"> -->
                             <div class="option-title">
-                                <div class="title-price">${item.setPrice}</div>
+                                <div class="title-price">${item.setPrice}원</div>
                                 <div class="title-name">${item.setName}</div>
                             </div>
                             <ul>
@@ -301,16 +299,44 @@
 		// chkList.forEach(function (ch) {
 			// 	console.log(ch.value);
 			// });
-		var rangeVal = $('input:radio[name=range]:checked').val();
-		$('input:radio[name=range]').is(':checked') == false{
-			$('.reward-card').css("border-width", "5px");
-			$('.reward-card').css("border-color", "#567ace");
-		}
+		// $('input:radio[name=range]').is(':checked') == false{
+		// 	var rangeVal = $('input:radio[name=range]:checked').val();
+		// 	console.log(rangeVal);
+		// 	$('.reward-card').css("border-width", "5px");
+		// 	$('.reward-card').css("border-color", "#567ace");
+		// };
+
+		$(document).ready(function() {
+			var chkList = $("input[name=range]:checked");
+			console.log(chkList);
+			if(chkList == true){
+				alert("cic")
+				$('chkList').parent().css("border-width", "5px");
+				$('chkList').parent().css("border-color", "#567ace");
+			}
+		});
 
 		/* 후원 클릭 */
 		$('.buttons-funding').click(function(){
 			if($('input:radio[name=range]').is(':checked') == false){
 				alert("리워드를 선택해 주세요!");
+			}else{
+				var rangeVal = $('input:radio[name=range]:checked').val();
+				let string = location.href.split('=');
+            	let prjNo = string[1];
+
+				$.ajax({
+                url : "/blank/project/pay",
+                method : "POST",   
+                data :   {
+                    "setNo" : rangeVal,
+                },
+                success : function(x){
+                    location.href = "/blank/pay?pNo=" + prjNo + "&setNo=" + rangeVal;
+                },error : function(){
+                    console.log("후원 통신에러");
+                }
+            	});
 			}
 		});
 

@@ -364,8 +364,10 @@ hr:last-of-type{
 }
 /* input[type="radio"]{
     display: none;    
-}  */
+}  
     
-/* input[type="radio"]:checked + label > div:first-child{
+input:checked {
+	color : blue;
     border :2px solid #567ace;
-}   */
+}  */
+ 

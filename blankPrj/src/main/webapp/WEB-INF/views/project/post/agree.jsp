@@ -117,18 +117,17 @@
         function startBtn(){
             if($(".ckAll").is(":checked")) {
             let random = String(Math.floor(Math.random()*1000000)).padStart(6, "0");
-            alert(random);
             $.ajax({
-            url : "/blank/project/agree",
-            method : "POST",   
-            data :   {
-                "random" : random
-            },
-            success : function(x){
-                location.href = "/blank/project/post?p=" + random;
-            },error : function(){
-                console.log("동의 통신에러");
-            }
+                url : "/blank/project/agree",
+                method : "POST",   
+                data :   {
+                    "random" : random
+                },
+                success : function(x){
+                    location.href = "/blank/project/post?p=" + random;
+                },error : function(){
+                    console.log("동의 통신에러");
+                }
             });
             } else{
                 alert('미동의 시 프로젝트를 진행할 수 없습니다.')

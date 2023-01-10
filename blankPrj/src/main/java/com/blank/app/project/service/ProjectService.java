@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
@@ -69,5 +70,7 @@ public interface ProjectService {
 	int updateExamination(ProjectVo prjVo);
 
 	MemberVo selectMemberInfo(MemberVo memberVo);
+
+	int selectSum(int p);
 
 }

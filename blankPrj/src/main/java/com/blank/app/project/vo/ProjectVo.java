@@ -28,8 +28,9 @@ public class ProjectVo {
 	private String story;
 	private String status;
 	private String deleteYn;
-//	private String originName;
-//	private String filePath;
+	private int percent;
+	private String calDate; // 남은기간 계산 
+	private String payDate;
 	private String changeName;
 	private MultipartFile prjfile;
 	

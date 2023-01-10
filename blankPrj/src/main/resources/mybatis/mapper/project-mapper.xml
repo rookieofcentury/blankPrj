@@ -41,7 +41,7 @@
 	
 	<select id="selectSet" resultType="ItemVo">
 		SELECT 
-		 SET_NAME, "OPTION", SET_PRICE, SET_QUANTITY
+		 SET_NO, SET_NAME, "OPTION", SET_PRICE, SET_QUANTITY, PRJ_NO
 		 FROM SET_ITEM
 		 WHERE PRJ_NO = #{p}
  	</select>
@@ -323,6 +323,10 @@
 	<select id="selectMemberInfo" resultType="memberVo">
 		SELECT BANK, DEPOSITOR, ACCOUNT, INFO FROM MEMBER 
 		WHERE NO = #{no}
+	</select>
+	
+	<select id="selectSum" resultType="int">
+		 SELECT SUM(PRICE) FROM PAY_LIST WHERE P_NO = #{p}
 	</select>
 	
 </mapper>

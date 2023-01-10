@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.blank.app.common.file.FileUploader;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.project.service.ProjectService;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -48,13 +49,19 @@ public class ProjectController {
 	@Autowired
 	private ProjectService service;
 	
+	/*프로젝트 조회*/
 	@GetMapping
 	public String project(Model model, @RequestParam(name="p") int p ) {
 		
 		ProjectVo prjVo = service.selectProject(p);
-		System.out.println(prjVo);
 		List<ItemVo> itemVo = service.selectSet(p);
-		System.out.println(itemVo);
+		
+		int fundingSum = service.selectSum(p);
+		int goal = Integer.parseInt(prjVo.getPrice());
+		
+		int division = Math.floorDiv(fundingSum,goal);
+		int percent = division * 100;
+		prjVo.setPercent(percent);
 		
 		model.addAttribute("prj", prjVo);
 		model.addAttribute("set", itemVo);
@@ -435,9 +442,14 @@ public class ProjectController {
 				int creatorResult = service.updateCreator(MemberVo);
 			}
 		}
-		model.addAttribute("msg", "심사요청 완료!");
-		return "redirect:project/created/";
+		//model.addAttribute("msg", "심사요청 완료!");
+		return "redirect:/project/created/";
 	}
 	
-	
+	/*결제*/
+	@PostMapping("pay")
+	@ResponseBody
+	public String pay(String no) {
+		return "1";
+	}
 }

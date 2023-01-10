@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
@@ -71,5 +72,7 @@ public interface ProjectDao {
 	int updateExamination(SqlSessionTemplate sst, ProjectVo prjVo);
 
 	MemberVo selectMemberInfo(SqlSessionTemplate sst, MemberVo memberVo);
+
+	int selectSum(SqlSessionTemplate sst, int p);
 
 }

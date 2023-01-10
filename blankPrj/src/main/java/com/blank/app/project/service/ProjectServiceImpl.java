@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.project.dao.ProjectDao;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -188,6 +189,11 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public MemberVo selectMemberInfo(MemberVo memberVo) {
 		return dao.selectMemberInfo(sst, memberVo);
+	}
+
+	@Override
+	public int selectSum(int p) {
+		return dao.selectSum(sst,p);
 	}
 
 
