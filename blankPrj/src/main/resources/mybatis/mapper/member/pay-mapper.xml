@@ -73,4 +73,9 @@
 		
 		WHERE P.NO = #{pNo}
 	</select>
+	
+	<select id="selectSetByNo" resultType="ItemVo">
+		SELECT * FROM SET_ITEM
+		WHERE SET_NO = #{setNo}
+	</select>
 </mapper>

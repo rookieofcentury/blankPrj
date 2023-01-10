@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.blank.app.pay.dao.PayDao;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ItemVo;
 import com.blank.app.project.vo.ProjectVo;
 
 @Service
@@ -38,5 +39,10 @@ public class PayServiceImpl implements PayService {
 	@Override
 	public ProjectVo selectPrjByNo(String pNo) {
 		return dao.selectPrjByNo(sst, pNo);
+	}
+
+	@Override
+	public ItemVo selectSetByNo(String setNo) {
+		return dao.selectSetByNo(sst, setNo);
 	}
 }

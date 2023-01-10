@@ -15,7 +15,7 @@
 
 	<div id="wrap">
         <div id="find-header">
-            <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''"></div>
+            <div><img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'"></div>
             <div><h1>이메일 찾기</h1></div>
         </div>
         <div id="find-container">
