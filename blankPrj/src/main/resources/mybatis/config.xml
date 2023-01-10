@@ -24,6 +24,8 @@
       <typeAlias type="com.blank.app.quit.vo.QuitVo" alias="QuitVo"/>
       <typeAlias type="com.blank.app.chatbot.vo.ChatbotVo" alias="ChatbotVo"/>
       <typeAlias type="com.blank.app.project.vo.ItemVo" alias="ItemVo"/>
+      <typeAlias type="com.blank.app.chat.vo.ChatVo" alias="ChatVo"/>
+      <typeAlias type="com.blank.app.chatMessage.vo.ChatMessageVo" alias="ChatMessageVo"/>
    </typeAliases>
 
 </configuration>
