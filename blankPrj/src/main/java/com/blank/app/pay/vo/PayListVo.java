@@ -8,12 +8,14 @@ public class PayListVo {
 	private String no;
 	private String mNo;
 	private String pNo;
+	private String title;
 	private String setNo;
 	private String payNo;
 	private String addrNo;
 	private String price;
 	private String reserveDate;
 	private String payDate;
+	private String changeName;
 	private String status;
 	
 

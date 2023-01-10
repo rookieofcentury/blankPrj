@@ -26,6 +26,7 @@
       <typeAlias type="com.blank.app.project.vo.ItemVo" alias="ItemVo"/>
       <typeAlias type="com.blank.app.chat.vo.ChatVo" alias="ChatVo"/>
       <typeAlias type="com.blank.app.chatMessage.vo.ChatMessageVo" alias="ChatMessageVo"/>
+      <typeAlias type="com.blank.app.pay.vo.PayListVo" alias="PayListVo"/>
    </typeAliases>
 
 </configuration>

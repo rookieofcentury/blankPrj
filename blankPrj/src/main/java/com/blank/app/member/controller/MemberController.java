@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -32,12 +31,12 @@ import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 import com.github.scribejava.core.model.OAuth2AccessToken;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -280,10 +279,19 @@ public class MemberController {
 	public String mypagePayProject(HttpSession session, Model model) {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		
+		//프로젝트 결제내역에서 가져오자
+		String mNo = loginMember.getNo();
+		
 		if(loginMember == null) {
 			model.addAttribute("msg", "로그인 후 이용가능합니다.");
 			return "home";
 		}
+		
+		List<PayListVo> voList = service.selectPayListByNo(mNo);
+		
+		System.out.println(voList);
+		model.addAttribute("payList",voList);
+		
 		return "member/mypage/payProject";
 	}
 	

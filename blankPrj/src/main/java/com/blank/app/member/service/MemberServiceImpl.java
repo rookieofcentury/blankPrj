@@ -14,6 +14,7 @@ import com.blank.app.member.naver.NaverMessageApi;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.report.vo.ReportVo;
@@ -254,6 +255,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public AddressVo selectAddrOne(String addrNo) {
 		return dao.selectAddrOne(sst, addrNo);
+	}
+
+	@Override
+	public List<PayListVo> selectPayListByNo(String mNo) {
+		return dao.selectPayListByNo(sst, mNo);
 	}
 
 

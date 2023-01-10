@@ -14,16 +14,17 @@
 	    <%@ include file = "/WEB-INF/views/common/header.jsp" %>
     <div class="wrap">
         <div class="pay-container grid">
-            <form action="">
+            <form action="/blank/pay" method="post" >
                 <div class="grid project-content border">
-                    <div>프로젝트 사진</div>
+                    <div class="prj-img-box"><img src="/blank/resources/upload/project/${prjVo.changeName}"></div>
                     <div class="project-info-detail">
-                        <div>${PrjVo.category}</div>
-                        <div>${PrjVo.title}</div>
+                        <input type="hidden" name="pNo" value="${prjVo.no}">
+                        <div>${prjVo.category}</div>
+                        <div>${prjVo.title}</div>
                         <div class="project-info-number">
-                            <div><strong>${PrjVo.price}</strong>|</div>
+                            <div><strong>${prjVo.price}</strong>|</div>
                             <div>퍼센트|</div> 
-                            <div class="red">남은기간 : </div>
+                            <div class="red">남은기간 : ${prjVo.calDate}</div>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,13 @@
                     <div class="project-pay-content"> 
                         <div>후원 정보</div>
                         <div class="user-info">
-                            ㅇㅇㅇ
+                            <div>
+                                <input type="hidden" name="setNo" value="${setVo.setNo}">
+                                <span>${setVo.setName}</span>
+                                <span>${setVo.setQuantity}</span>
+                                <span>${setVo.setPrice}</span>
+                                <span>${setVo.option}</span>
+                            </div>
                         </div>
                         <div>후원자 정보</div>
                         <div class="project-pay-info">
@@ -42,12 +49,12 @@
                         </div>
                         <div>배송지 정보</div>
                         <div class="addr-info">
-                            <input type="hidden" name="addrNo">
+                            <input type="hidden" name="addrNo" >
                             <div id="addr-result">
                                     
                             </div>
                             <div>
-                                    <input type="button" name="addrChange" value="변경">
+                                <input type="button" name="addrChange" value="변경">
                             </div>
                         </div>
                         <div>결제 수단</div>
@@ -64,13 +71,16 @@
                     <div id="project-pay-check">
                         <div class="final-pay-check border">
                             <div>최종결제금액</div>
+                            <div><input type="text" name="price" value="${setVo.setPrice}" readonly></div>
                             <div>최종결제일자</div>
+                            <div><input type="text" name="payDate" value="${prjVo.endDate}" readonly></div>
+
                         </div>
                         <div class="border">
                             <div class="no-pay">프로젝트가 무산되거나 중단된 경우, 예약된 결제는 자동으로 취소됩니다.</div>
                             <div><input type="checkbox" id="info-check"><label for="info-check">개인정보 제 3자 제공동의(필수)</label><a>내용보기</a></div>
                             <div><input type="checkbox" id="pay-check"><label for="pay-check">후원 시 유의사항</label><a>내용보기</a></div>
-                            <div><button class="pay-btn">후원하기</button></div>
+                            <div><input type="submit" class="pay-btn" value="후원하기"></div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +110,7 @@
                         <c:if test="${fn:length(addrVoList) != 0}">
                             <c:forEach items="${addrVoList}" var="list" varStatus="status">
                                 <label>
-                                    <input type="radio" id="${list.no}" name="addr" value="${list.no}" <c:if test="${status.first}">checked</c:if>   >
+                                    <input type="radio" id="${list.no}" name="addr" value="${list.no}"  <c:if test="${status.first}">checked</c:if> >
                                     <div class="addr-container">
                                         <div>${list.name}&nbsp;</div>
                                         <div>[${list.addrNo}]&nbsp;${list.addr}&nbsp;${list.addrDt}</div>
@@ -112,7 +122,7 @@
                     </div>
                 </div>
                 <div>
-                    <div><input type="submit" name="selectAddr" value="선택"></div>
+                    <div><input type="button" name="selectAddr" value="선택"></div>
                 </div>
                 
 			</div>
@@ -133,18 +143,18 @@
                         <c:if test="${fn:length(payVoList) != 0}">
 							<c:forEach items="${payVoList}" var="list" varStatus="status">
 										<label class="card-info-detail">
-                                            <input type="radio" id="${list.no}" name="card" <c:if test="${status.first}">checked</c:if> >
+                                            <input type="radio" id="${list.no}" name="card" value="${list.no}" <c:if test="${status.first}">checked</c:if>>
                                             <div class="card-detail-container">
                                                 <div>
                                                     <c:choose>
                                                         <c:when test="${list.cardType == 1}">
-                                                            <img src="/blank/resources/images/pay/SH_CARD.png">
+                                                            <img src="/blank/resources/images/pay/SH_CARD.png" class="card-img">
                                                         </c:when>
                                                         <c:when test="${list.cardType == 2}">
-                                                            <img src="/blank/resources/images/pay/HD_CARD.png">
+                                                            <img src="/blank/resources/images/pay/HD_CARD.png" class="card-img">
                                                         </c:when>
                                                         <c:when test="${list.cardType == 3}">
-                                                            <img src="/blank/resources/images/pay/BC_CARD.png">
+                                                            <img src="/blank/resources/images/pay/BC_CARD.png" class="card-img">
                                                         </c:when>
                                                     </c:choose>
                                                 </div>
@@ -174,7 +184,7 @@
 						</c:if>
                     </div>
                 <div>
-                    <div><input type="submit" name="selectCard" value="선택"></div>
+                    <div><input type="button" name="selectCard" value="선택" ></div>
                 </div>
                 
 			</div>

@@ -6,6 +6,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.report.vo.ReportVo;
@@ -70,6 +71,8 @@ public interface MemberService {
 	public String findEmail(String phone);
 
 	public AddressVo selectAddrOne(String addrNo);
+
+	public List<PayListVo> selectPayListByNo(String mNo);
 
 
 
