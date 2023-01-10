@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.project.vo.TimeVo;
@@ -64,8 +65,8 @@ public class ProjectDaoImpl implements ProjectDao{
 
 	@Override
 	public int updatePrj(SqlSessionTemplate sst, ProjectVo vo) {
+		log.warn("dao updatePrj : " + vo);
 		int result = sst.update("projectMapper.updatePrj", vo);
-		log.warn("dao updatePrj : " + result);
 		return result;
 	}
 
@@ -155,8 +156,8 @@ public class ProjectDaoImpl implements ProjectDao{
 
 	@Override
 	public int updateCreator(SqlSessionTemplate sst, MemberVo memberVo) {
+		log.warn("dao updateCreator" + memberVo);
 		int result = sst.update("projectMapper.updateCreator", memberVo);
-		log.warn("dao updateCreator" + result);
 		return result;
 	}
 
@@ -189,6 +190,11 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public MemberVo selectMemberInfo(SqlSessionTemplate sst, MemberVo memberVo) {
 		return sst.selectOne("projectMapper.selectMemberInfo", memberVo);
+	}
+
+	@Override
+	public int selectSum(SqlSessionTemplate sst, int p) {
+		return sst.selectOne("projectMapper.selectSum", p);
 	}
 
 }

@@ -31,7 +31,7 @@
 <script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script> -->
 
 <body>
-<form action="/blank/project/post" method="post" id="postPrj" onsubmit="return checkAll();">
+<form action="/blank/project/post" method="post" id="postPrj" enctype="multipart/form-data" onsubmit="return checkAll();">
 <div class="navi-menu">
         <div class="content-editor">
             <div class="editor-logo">
@@ -41,9 +41,8 @@
             <div class="editor-buttons">
                 <button type="button" id="storage" class="buttons-storage">임시저장</button>
                 <button type="submit" class="buttons-request">심사요청</button>
-                <div class="buttons-goout">
+                <div class="buttons-goout" onclick="location.href='/blank/project/created/'">
                     <img src="/blank/resources/images/project/icon_goout.png">
-                    <a href="/blank/project/created/"></a>
                 </div>
             </div>
         </div>
@@ -69,7 +68,7 @@
 				                  <div>프로젝트의 주제, 특징이 드러나는 제목을 붙여주세요.</div>
 				              </div>
 				              <div class="title-write">
-				                  <div><input type="text" placeholder="내용 입력" name="title" value='<c:out value="${prjInfo.title}"/> '></div>
+				                  <div><input type="text" placeholder="내용 입력" name="title" value='<c:out value="${prjInfo.title}"/>'></div>
 				                  <p>40글자 남음</p>
 				              </div>
 				          </div>
@@ -81,9 +80,7 @@
                 <div class="category-select">
                     <select name="category" id="cate-option">
                         <c:forEach items="${category}" var="cate">
-                            
                         <option value="${cate.no}">${cate.name}</option>
-                            
 						</c:forEach>
                     </select>
                     <div></div>
@@ -94,7 +91,10 @@
                     <div>대표이미지</div>
                     <div>프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있도록 이미지로 등록해 주세요.</div>
                 </div>
-                <div class="img-upload"><input type="file" name="prjfile" id="input-prjfile" value='<c:out value="${prjInfo.changeName}"/> '></div>
+                <div class="img-upload">
+                    <img id="img-view" src="/blank/resources/upload/project/${prjInfo.changeName}" alt="플젝 사진" />
+                    <input type="file" name="prjfile" id="input-prjfile" value='<c:out value="${prjInfo.changeName}"/> '>
+                </div>
             </div>
             <div class="content-price">
                 <div class="price-info">
@@ -102,7 +102,7 @@
                     <div>프로젝트를 완수하기 위해 필요한 금액을 설정해주세요.</div>
                 </div>
                 <div class="price-box">
-                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price" value='<c:out value="${prjInfo.price}"/> '>  <!-- onkeyup="inputNumberFormat(this)" --> </div>
+                    <div class="price-write"><input type="number" placeholder="최소 50만원 이상의 금액을 입력해 주세요" name="price" value='<c:out value="${prjInfo.price}"/>'>  <!-- onkeyup="inputNumberFormat(this)" --> </div>
                     <div>원</div>
                 </div>
             </div>
@@ -118,12 +118,12 @@
                                 <div class="start-day">
                                     <p>시작일</p>
                                     <!-- <div class="calendar-img"><img src="./calendar2-date.svg"></div> -->
-                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.startDate}"/> '>
+                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.startDate}"/>'>
                                 </div>
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select name="time" id="time-option">
-                                        <option value="prjTime">==시작시간 선택==</option>
+                                        <option value="${tt.no}">==시작시간 선택==</option>
                                          <c:forEach items="${time}" var="tt">
                                         <option value="${tt.no}">${tt.time}시</option>
 										</c:forEach> 
@@ -139,7 +139,7 @@
                             <div class="date-end">
                                 <div class="end-day">
                                     <p>종료일</p>
-                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='<c:out value="${prjInfo.endDate}"/> '>
+                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='<c:out value="${prjInfo.endDate}"/>'>
                                 </div>
                                 <div class="date-calculate">
                                     <div class="calculate-notice">
@@ -163,7 +163,7 @@
                 </div>
                 <div class="plan-write">
                     <div>
-                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.deliveryDate}"/> '></div>
+                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.deliveryDate}"/>'></div>
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="url-write">
                     <div class="url-blank">www.blank.com/</div>
-                    <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url" value='<c:out value="${prjInfo.url}"/> '></div>
+                    <div class="url-text"><input type="text" placeholder="URL을 입력해 주세요" name="url" value='<c:out value="${prjInfo.url}"/>'></div>
                     <p>영문으로 최소 3자 이상 입력해 주세요</p>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                 <div class="summary-write">
                     <div class="summary-text">
                         <!-- <input type="text" placeholder="내용 입력" name="summery"> -->
-                        <textarea placeholder="내용 입력" name="summary" value='<c:out value="${prjInfo.summary}"/> '></textarea>
+                        <textarea placeholder="내용 입력" name="summary" value='<c:out value="${prjInfo.summary}"/>'></textarea>
                     </div>
                     <p>100글자 남음</p>
                 </div>
@@ -234,7 +234,7 @@
         <!-- 아이템 추가 모달창 -->
         <div id="label-center">
             <input type="checkbox" id="itemPopup">
-            <label for="itemPopup" >아이템 추가</label>
+            <label for="itemPopup">아이템 추가</label>
             <div>
                 <div>
                         <div class="content-box">
@@ -454,7 +454,7 @@
                     <div>창작자님의 이력과 간단한 소개를 써주세요.</div>
                 </div>
                 <div class="creator-write">
-                    <div><input type="text" placeholder="내용 입력" name="info" value='<c:out value="${memberInfo.info}"/> '></div>
+                    <div><input type="text" placeholder="내용 입력" name="info" value='<c:out value="${memberInfo.info}"/>'></div>
                     <p>40글자 남음</p>
                 </div>
             </div>
@@ -544,10 +544,10 @@
                     <div>펀딩 성공시 정산금을 수령할 계좌정보를 입력해 주세요.</div>
                 </div>
                 <div class="calculate-write">
-                    <div><input type="text" placeholder="은행명 입력" name="bank" value='<c:out value="${memberInfo.bank}"/> '></div>
-                    <div><input type="text" placeholder="계좌번호 입력" name="account" value='<c:out value="${memberInfo.account}"/> '></div>
+                    <div><input type="text" placeholder="은행명 입력" name="bank" value='<c:out value="${memberInfo.bank}"/>'></div>
+                    <div><input type="text" placeholder="계좌번호 입력" name="account" value='<c:out value="${memberInfo.account}"/>'></div>
                     <p>특수 문자(-)없이 숫자만 입력해 주세요</p>
-                    <div><input type="text" placeholder="예금주명 입력" name="depositor" value='<c:out value="${memberInfo.depositor}"/> '></div>
+                    <div><input type="text" placeholder="예금주명 입력" name="depositor" value='<c:out value="${memberInfo.depositor}"/>'></div>
                 </div>
             </div>
             </div>
@@ -1189,6 +1189,10 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $('.buttons-request').click(function(){
+        alert('심사요청 완료!')
+    });
 
     jQuery.browser = {};
 		(function () {
