@@ -22,11 +22,11 @@
                         <div class="goods-search-box"><input type="text" name="goodsKeyword" value="${keyword}"><button class="material-symbols-outlined">search</button></div>
                         <select name="category" id="category-box">
                             <option value="" selected>== 선택 ==</options>
-                            <option value="1">리빙/가전</option>
-                            <option value="2">패션잡화</option>
-                            <option value="3">문구류</option>
-                            <option value="4">오피스</option>
-                            <option value="5">디지털</option>
+                            <option class="category" value="1">리빙/가전</option>
+                            <option class="category" value="2">패션잡화</option>
+                            <option class="category" value="3">문구류</option>
+                            <option class="category" value="4">오피스</option>
+                            <option class="category" value="5">디지털</option>
                         </select>
                     </div>
                     <div class="standard-area">
@@ -39,7 +39,7 @@
             <div class="result-ment">검색 결과 총 <span>${listCount}</span> 개의 굿즈가 있습니다.</div>
             <div class="search-result-area">
                 <c:forEach items="${goodsList}" var="item">
-                    <div class="result-item">
+                    <div class="result-item" onclick="location.href='/blank/goods/detail?no=${item.no}'">
                         <div class="result-img"><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt="alt"></div>
                         <div class="result-category">${item.category}</div>
                         <div class="result-name">
@@ -82,7 +82,7 @@
     })
 
     /* 카테고리 누르면 바로 submit */
-    $('#category-box option').click(function() {
+    $('#category-box').change(function() {
         console.log("this");
         var keyword = '${keyword}';
         $('input[name=goodsKeyword]').val(keyword);

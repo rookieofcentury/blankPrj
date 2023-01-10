@@ -14,7 +14,11 @@
         if(input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#input-file-button').after("<div class=\"review-modal-pic-preview\"><img src=" + e.target.result + "></div>")
+                if($('.review-modal-pic-preview').length == 0) {
+                    $('#input-file-button').after("<div class=\"review-modal-pic-preview\"><img src=" + e.target.result + "></div>")
+                } else {
+                    $('.review-modal-pic-preview img').attr("src", e.target.result);
+                }
             };
             reader.readAsDataURL(input.files[0]);
         }

@@ -49,3 +49,36 @@ body {
     width: 59px;
     height: 47px;
 }
+
+.agree-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #A3A3A3;
+}
+
+.agree-area input[type=checkbox] {
+    display: none;
+}
+
+.agree-area .material-symbols-outlined {
+    font-size: 20px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 24
+}
+
+input[type=checkbox]:checked + span {
+    color: #567ACE;
+}
+/* input[type=checkbox]:checked + label {
+} */
+.agree-area label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

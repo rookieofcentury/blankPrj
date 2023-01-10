@@ -13,6 +13,7 @@ import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
+import com.blank.app.member.vo.AddressVo;
 
 @Repository
 public interface GoodsDao {
@@ -84,7 +85,7 @@ public interface GoodsDao {
 	int deleteReviewLike(SqlSessionTemplate sst, Map<String, String> map);
 
 	// 해당 회원 주소 찾기
-	Map<String, String> selectAddressByNo(SqlSessionTemplate sst, String no);
+	AddressVo selectAddressByNo(SqlSessionTemplate sst, String no);
 
 	// 좋아요 여부 받기
 	String getIsLikeLm(SqlSessionTemplate sst, Map<String, Object> map2);
@@ -94,5 +95,23 @@ public interface GoodsDao {
 
 	// search 굿즈 리스트
 	List<GoodsVo> searchGoodsList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
+
+	// review 파일 등록
+	int insertReviewFile(SqlSessionTemplate sst, ReviewVo vo);
+
+	// 주소지 변경
+	int updateAddress(SqlSessionTemplate sst, Map<String, Object> map);
+
+	// 굿즈 재고 알림 등록
+	int insertStockAlert(SqlSessionTemplate sst, Map<String, Object> map);
+
+	// 재고 알림 등록 여부
+	int selectStockAlert(SqlSessionTemplate sst, Map<String, Object> map);
+
+	// 전화번호 목록 도출
+	List<String> selectPhoneList(SqlSessionTemplate sst, String no);
+
+	// 전화번호 목록 삭제
+	int deletePhoneList(SqlSessionTemplate sst, String no);
 
 }

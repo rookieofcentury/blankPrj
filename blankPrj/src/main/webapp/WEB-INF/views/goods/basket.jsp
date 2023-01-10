@@ -84,7 +84,7 @@
                         <span class="bold">상품 금액</span>
                         <div class="price">
                             <c:if test="${empty cart}">
-                                <input type="text" class="price-area val spot" value="">
+                                <input type="text" class="price-area val spot" value="" readonly>
                             </c:if>
                             <c:if test="${!empty cart}">
                                 <input type="text" class="price-area val spot" id="product-price" readonly>
@@ -93,10 +93,19 @@
                         </div>
                     </div>
                     <div>
-                        <span class="bold">배송비</span>
+                        <div>
+                            <span class="bold del-fee-ment">
+                                <span>배송비</span>
+                                <span class="material-symbols-outlined error">error</span>
+                                <div class="info-ment">
+                                    <div>기본 요금: 3,000 원</div>
+                                    <div>70,000 원 이상 구매 무료</div>
+                                </div>
+                            </span>
+                        </div>
                         <div class="price">
                             <c:if test="${empty cart}">
-                                <input type="text" class="price-area val spot" value="">
+                                <input type="text" class="price-area val spot" value="" readonly>
                             </c:if>
                             <c:if test="${!empty cart}">
                                 <input type="text" class="price-area val" id="del-fee" readonly>
@@ -109,7 +118,7 @@
                         <span class="bold">총계</span>
                         <div class="price">
                             <c:if test="${empty cart}">
-                                <input type="text" class="price-area val spot empty" value="EMPTY">
+                                <input type="text" class="price-area val spot empty" value="EMPTY" readonly>
                             </c:if>
                             <c:if test="${!empty cart}">
                                 <input type="text" class="price-area val spot" id="total-price" readonly>
@@ -147,7 +156,9 @@
                 confirmButtonColor: '#567ACE',
                 confirmButtonText: '이동하기'
             }).then((result) => {
-                location.href='/blank/member/login'
+                if(result.isConfirmed) {
+                    location.href='/blank/member/login'
+                }
             })
         } else {
             if($("input[class=chBox]:checked").length >= 1) {
@@ -174,9 +185,11 @@
                 confirmButtonColor: '#567ACE',
                 confirmButtonText: '이동하기'
             }).then((result) => {
-                location.href='/blank/member/login'
+                if(result.isConfirmed) {
+                    location.href='/blank/member/login'
+                }
             })
-        } else if($('.cart-item-area') == null) {
+        } else if($('.cart-item-area').length == 0) {
             Swal.fire({
                 title: '장바구니가 비어 있습니다!',
                 confirmButtonColor: '#567ACE'

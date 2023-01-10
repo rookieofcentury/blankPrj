@@ -1,5 +1,6 @@
 package com.blank.app.goods.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -23,14 +25,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.common.Pagination;
+import com.blank.app.common.file.FileUploader;
 import com.blank.app.goods.service.GoodsService;
 import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
+import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 
 import net.nurigo.sdk.NurigoApp;
@@ -128,7 +133,7 @@ public class GoodsController {
 
 	// 굿즈 상세 화면 도출
 	@RequestMapping("/detail")
-	public String goodsDetail(@RequestParam int no, Model model) {
+	public String goodsDetail(@RequestParam int no, HttpSession session) {
 
 		// detail 정보 받아 오기
 		GoodsVo vo = gs.detail(no);
@@ -138,7 +143,7 @@ public class GoodsController {
 		vo.setThumbnail(thumbnail);
 		
 		// jsp로 데이터 보내 주기
-		model.addAttribute("goods", vo);
+		session.setAttribute("goods", vo);
 
 		return "goods/detail";
 
@@ -302,11 +307,24 @@ public class GoodsController {
 	// 굿즈 리뷰 작성 후 띄울 alert message
 	@ResponseBody
 	@PostMapping("/review/write")
-	public String reviewWrite(ReviewVo vo) {
+	public String reviewWrite(ReviewVo vo, HttpServletRequest req) throws IllegalStateException, IOException {
+		
+		System.out.println(vo);
+		
+		if(vo.getReviewFile() != null) {
+			boolean isEmpty = vo.getReviewFile().isEmpty();			
+		}
+		
+		// 파일 저장
+		String file = null;
+		if (!vo.isEmpty()) {
+			file = FileUploader.upload(req, vo);
+			vo.setFileName(file);
+		}
 
 		int result = gs.reviewWrite(vo);
 
-		if (result != 1) {
+		if (result == 0) {
 			return "fail";
 		}
 		
@@ -376,11 +394,31 @@ public class GoodsController {
 	// 주소 받아 오기
 	@PostMapping("/payment/address")
 	@ResponseBody
-	public Map<String, String> getAddress(String no, HttpSession session) {
+	public AddressVo getAddress(String no, HttpSession session) {
 		
-		Map<String, String> map = gs.getAddressByNo(no);
+		AddressVo vo = gs.getAddressByNo(no);
+	
+		return vo;
+
+	}
+	
+	// 주소 변경하기
+	@PostMapping("/payment/address/change")
+	@ResponseBody
+	public int changeAddress(String no, String name, String phone, String address1, String address2, String address3, String message, HttpSession session) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("name", name);
+		map.put("phone", phone);
+		map.put("address1", address1);
+		map.put("address2", address2);
+		map.put("address3", address3);
+		map.put("message", message);
 		
-		return map;
+		int result = gs.addressChange(map);
+		
+		return result;
 		
 	}
 
@@ -388,67 +426,137 @@ public class GoodsController {
 	@PostMapping("/order")
 	public String paymentComplete(PaymentVo pay, HttpSession session, Model model) {
 		
+		// payDate 문자열로 바꿔 주기
 		String dateStr = getTimestampToDate(pay.getPayDate());
 		pay.setPayDate(dateStr);
 		pay.setNo(null);
 		
 		List<CartVo> orderList = (List<CartVo>) session.getAttribute("orderList");
 		int result = gs.insertOrder(orderList, pay);
-		
+				
 		if(result == 0) {
 			return "error";
 		}
 		
-		PaymentVo vo = gs.selectPaymentVoByNo(pay);
+		PaymentVo vo = new PaymentVo();
+
+		if(result == 1) {
+			vo = gs.selectPaymentVoByNo(pay);
+			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+			loginMember.setPoint(Integer.toString(Integer.parseInt(loginMember.getPoint()) - Integer.parseInt(pay.getUsepoint())));
+		}		
 		
-		model.addAttribute("pay", vo);
 		session.removeAttribute("cart");
 
-		return "goods/order";
+		return "goods/order?no=" + vo.getNo();
 
 	}
 	
-	// 화면 (주문)
 	@GetMapping("/order")
-	public String order() {
+	public String order(PaymentVo pay, Model model) {
+		
+		PaymentVo vo = gs.selectPaymentVoByNo(pay);
+		
+		// 8 개 무작위로 받아와서 리스트 생성
+		List<GoodsVo> voList = gs.selectMainGoodsList();
+
+		// 위 list에서 no(번호)만 담긴 리스트 생성
+		List<String> noList = new ArrayList<String>();
+
+		// for문 돌려서 각각 이미지 List 생성해 주기
+		for (int i = 0; i < voList.size(); i++) {
+			String no = voList.get(i).getNo();
+			noList.add(no);
+
+			for (String n : noList) {
+				List<String> thumbnail = gs.findThumbnail(Integer.parseInt(n));
+				voList.get(i).setThumbnail(thumbnail);
+			}
+		}
+		
+		List<GoodsVo> fourList = new ArrayList<GoodsVo>();
+		
+		for (int k = 0; k < 4; k++) {
+			GoodsVo goods = voList.get(k);
+			fourList.add(goods);
+		}
+
+		// jsp로 데이터 보내 주기
+		model.addAttribute("pay", vo);
+		model.addAttribute("fourList", fourList);
+		
 		return "goods/order";
 	}
+	
 
 	// 굿즈 재고 알림 약관 동의 화면 도출
 	@GetMapping("/stockalert")
-	public String stockalert() {
+	public String stockalert(HttpSession session) {
 
 		return "goods/stockalert";
 
 	}
 	
+	// 재고 알림 등록 시 문자 보내기
 	@PostMapping("/stockalert")
 	@ResponseBody
-	public String stockalert(HttpSession session) {
+	public String sendStockalert(HttpSession session) {
 		
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		GoodsVo vo = (GoodsVo) session.getAttribute("goods");
 		
+		// 문자 보내기 위해 전화번호 - 제거해 주기
 		String phone = loginMember.getPhone().replace("-", "");
 		
-		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("API 키 입력", "API 시크릿 키 입력", "https://api.solapi.com");
-		// Message 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
+		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("NCSODJ86EEF5BO6Z", "RRSKDJP9NP5WPHBH8JJUBO2SX5I6I7KC", "https://api.solapi.com");
 		Message message = new Message();
 		message.setFrom("01043524860");
 		message.setTo(phone);
-		message.setText("SMS는 한글 45자, 영자 90자까지 입력할 수 있습니다.");
-
-		try {
-		  // send 메소드로 ArrayList<Message> 객체를 넣어도 동작합니다!
-		  messageService.send(message);
-		} catch (NurigoMessageNotReceivedException exception) {
-		  // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
-		  System.out.println(exception.getFailedMessageList());
-		  System.out.println(exception.getMessage());
-		} catch (Exception exception) {
-		  System.out.println(exception.getMessage());
-		}		
+		message.setText("[BLANK] " + vo.getName() + "의 재고 알림이 등록되었습니다!");
 		
-		return "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no", vo.getNo());
+		map.put("phone", loginMember.getPhone());
+		
+		// DB 다녀오기
+		int result = gs.insertStockAlert(map);
+
+		// DB insert 성공하면 문자 전송
+		if(result == 1) {
+			
+			try {
+				messageService.send(message);
+			} catch (NurigoMessageNotReceivedException exception) {
+				// 발송에 실패한 메시지 목록 확인
+				System.out.println(exception.getFailedMessageList());
+				System.out.println(exception.getMessage());
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+
+		}
+		
+		if(result == 0) {return "fail";}
+		
+		return "success";
+		
+	}
+	
+	@PostMapping("/stockAlert/check")
+	@ResponseBody
+	public String checkStockAlert(String no, String phone) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("phone", phone);
+		
+		int result = gs.selectStockAlert(map);
+		
+		if(result == 0) {
+			return "false";			
+		} else {
+			return "true";
+		}
 		
 	}
 	

@@ -76,7 +76,28 @@
                 <div>에디터가 골라 주는<br>이 달의 블랭크!</div>
                 <div class="flex">더 보러 가기</div>
             </div>
-            <div></div>
+            <div class="editor-item-area">
+                <div class="editor-item" onclick="location.href='/blank/goods/detail?no=15'">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
+                    <span class="padding-left item-name">케리아</span>
+                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                </div>
+                <div class="editor-item">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
+                    <span class="padding-left item-name">케리아</span>
+                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                </div>
+                <div class="editor-item">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
+                    <span class="padding-left item-name">케리아</span>
+                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                </div>
+                <div class="editor-item">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
+                    <span class="padding-left item-name">케리아</span>
+                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                </div>
+            </div>
         </div>
         <div class="exhibition-area">
             <div class="exhibition-item">

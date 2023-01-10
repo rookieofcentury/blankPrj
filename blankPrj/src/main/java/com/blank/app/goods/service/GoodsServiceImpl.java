@@ -17,6 +17,7 @@ import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
+import com.blank.app.member.vo.AddressVo;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -53,8 +54,19 @@ public class GoodsServiceImpl implements GoodsService {
 
 	// 리뷰 작성
 	@Override
+	@Transactional
 	public int reviewWrite(ReviewVo vo) {
-		return dao.insertReview(sst, vo);
+		
+		int result = dao.insertReview(sst, vo);
+		int result2 = 2;
+		
+		String file = vo.getFileName();
+		
+		if(file != null) {
+			result2 = dao.insertReviewFile(sst, vo);
+		}
+		
+		return result * result2;
 	}
 
 	// admin 쪽 goodsList 불러올 때 전체 개수 조회
@@ -215,8 +227,13 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	// 해당 회원 주소 찾기
-	public Map<String, String> getAddressByNo(String no) {
+	public AddressVo getAddressByNo(String no) {
 		return dao.selectAddressByNo(sst, no);
+	}
+
+	// 주소지 변경
+	public int addressChange(Map<String, Object> map) {
+		return dao.updateAddress(sst, map);
 	}
 
 	// search 결과값
@@ -228,6 +245,27 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsVo> searchGoodsList(Map<String, String> map, PageVo pageVo) {
 		return dao.searchGoodsList(sst, map, pageVo);
 	}
+
+	// 굿즈 재고 알림 등록
+	public int insertStockAlert(Map<String, Object> map) {
+		return dao.insertStockAlert(sst, map);
+	}
+
+	// 재고 알림 등록 여부
+	public int selectStockAlert(Map<String, Object> map) {
+		return dao.selectStockAlert(sst, map);
+	}
+
+	// 재고 문자 보낼 전화번호 목록 가지고 오기
+	public List<String> selectPhoneList(String no) {
+		return dao.selectPhoneList(sst, no);
+	}
+
+	// 재고 문자 보내고 delete 해 주기
+	public int deletePhoneList(String no) {
+		return dao.deletePhoneList(sst, no);
+	}
+
 
 
 }

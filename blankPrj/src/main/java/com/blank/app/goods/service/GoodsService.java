@@ -12,6 +12,7 @@ import com.blank.app.goods.vo.CartVo;
 import com.blank.app.goods.vo.GoodsVo;
 import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.goods.vo.ReviewVo;
+import com.blank.app.member.vo.AddressVo;
 
 @Service
 public interface GoodsService {
@@ -54,10 +55,20 @@ public interface GoodsService {
 
 	int reviewLikeCancel(String no, String mno);
 
-	Map<String, String> getAddressByNo(String no);
+	AddressVo getAddressByNo(String no);
 
 	int searchListCount(Map<String, String> map);
 
 	List<GoodsVo> searchGoodsList(Map<String, String> map, PageVo pageVo);
+
+	int addressChange(Map<String, Object> map);
+
+	int insertStockAlert(Map<String, Object> map);
+
+	int selectStockAlert(Map<String, Object> map);
+
+	List<String> selectPhoneList(String no);
+
+	int deletePhoneList(String no);
 
 }

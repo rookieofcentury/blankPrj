@@ -26,8 +26,13 @@ import com.blank.app.admin.vo.NoticeVo;
 import com.blank.app.common.file.FileUploader;
 import com.blank.app.goods.service.GoodsService;
 import com.blank.app.goods.vo.GoodsVo;
+import com.blank.app.member.vo.MemberVo;
 
 import lombok.extern.java.Log;
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Controller
 @RequestMapping("admin/goods")
@@ -167,6 +172,46 @@ public class AdminGoodsController {
 		
 		return "redirect:list";
 
+	}
+	
+	@PostMapping("/stockAlert")
+	@ResponseBody
+	public String stockAlert(String no, String name) {
+		
+		// DB 가서 전화번호 List 가져오기
+		List<String> list = gs.selectPhoneList(no);
+		
+		List<Message> messageList = new ArrayList<Message>();
+		
+		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize("NCSODJ86EEF5BO6Z", "RRSKDJP9NP5WPHBH8JJUBO2SX5I6I7KC", "https://api.solapi.com");
+
+		for(String x : list) {
+			Message message = new Message();
+			message.setFrom("01043524860");
+			message.setTo(x);
+			message.setText("[BLANK] " + name + "의 재고가 들어왔습니다! 블랭크로 쇼핑하러 오세요! ﻿╰(*´︶`*)╯♡");
+			messageList.add(message);
+		}
+		
+		// 등록된 거 있을 때만
+		if(list.size() > 0) {
+			
+			try {
+				messageService.send(messageList);
+			} catch (NurigoMessageNotReceivedException exception) {
+				// 발송에 실패한 메시지 목록 확인
+				System.out.println(exception.getFailedMessageList());
+				System.out.println(exception.getMessage());
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+			
+			int result = gs.deletePhoneList(no);
+
+		}
+
+		return "발신 성공";
+		
 	}
 
 }

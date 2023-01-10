@@ -147,7 +147,8 @@
                     no: '${loginMember.no}'
                 },
                 success: function(data) {
-                    if(data != 'success') {
+                    console.log(data);
+                    if(data == '') {
                         Swal.fire({
                             icon: 'error',
                             title: '불러오기 실패',
@@ -155,9 +156,9 @@
                             confirmButtonColor: '#567ACE'
                         })
                     } else {
-                        $('input[name=address1]').val('${address1}');
-                        $('input[name=address2]').val('${address2}');
-                        $('input[name=address3]').val('${address3}');
+                        $('input[name=address1]').val(data.addrNo);
+                        $('input[name=address2]').val(data.addr);
+                        $('input[name=address3]').val(data.addrDt);
                     }
                 }
             })
