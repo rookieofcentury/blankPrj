@@ -8,7 +8,6 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
-import com.blank.app.member.vo.QuitAnswerVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.LikeProjectVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -70,6 +69,8 @@ public interface MemberDao {
 	public MemberVo selectMemberOneByNo(SqlSessionTemplate sst, MemberVo vo);
 
 	public String selectEmailByPhone(SqlSessionTemplate sst, String phone);
+
+	public AddressVo selectAddrOne(SqlSessionTemplate sst, String addrNo);
 
 
 }

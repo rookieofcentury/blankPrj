@@ -18,6 +18,7 @@ import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.service.PayService;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.vo.ItemVo;
 import com.blank.app.project.vo.ProjectVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class PayController {
 		
 		//화면을 보여줄 때 
 		@GetMapping("")
-		public String payProject(HttpSession session, String pNo,String setNo,Model model) {
+		public String payProject(HttpSession session, String pNo,String setNo, Model model) {
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			System.out.println(pNo);
@@ -47,18 +48,21 @@ public class PayController {
 			
 			//화면에 보여줄 때 프로젝트랑 세트 번호 가져와야한다 ~ 
 			ProjectVo Prjvo = payService.selectPrjByNo(pNo);
+			ItemVo setVo = payService.selectSetByNo(setNo);
 			
 			//후원자 정보도 가져와야함!
 			String mNo = loginMember.getNo();
+			
 			//후원자 카드정보도 주소정보도!
 			List<PayVo> loginPayVoList = memberService.selectPayByNo(mNo);
 			List<AddressVo> loginAddrVoList = memberService.selectAddrByNo(mNo);
-			System.out.println(loginPayVoList);
-			System.out.println(loginAddrVoList);
+
 			
 			model.addAttribute("PrjVo", Prjvo);
+			model.addAttribute("setVo", setVo);
 			model.addAttribute("MemberVo", loginMember);
-			
+			model.addAttribute("addrVoList", loginAddrVoList);
+			model.addAttribute("payVoList", loginPayVoList);
 			
 			return "pay/supportProject";
 		}

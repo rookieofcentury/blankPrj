@@ -64,7 +64,7 @@
 	
 	<update id="updatePhone">
 		UPDATE MEMBER
-		SET NICK = #{phone}
+		SET PHONE = #{phone}
 		WHERE NO = ${no}
 	</update>
 	
@@ -221,5 +221,11 @@
 		SELECT EMAIL FROM MEMBER
 		WHERE PHONE = #{phone}	
 
+	</select>
+	
+	<select id="selectAddrOne" resultType="AddrVo">
+		SELECT * FROM ADDRESS
+		WHERE NO = {addrNo}
+	
 	</select>
 </mapper>

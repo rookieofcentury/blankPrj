@@ -69,6 +69,8 @@ public interface MemberService {
 
 	public String findEmail(String phone);
 
+	public AddressVo selectAddrOne(String addrNo);
+
 
 
 

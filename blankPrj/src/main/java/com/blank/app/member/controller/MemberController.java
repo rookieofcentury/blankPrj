@@ -3,13 +3,13 @@ package com.blank.app.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.blank.app.admin.service.AdminService;
 import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.naver.NaverLoginBO;
-import com.blank.app.member.naver.NaverMessageApi;
 import com.blank.app.member.service.MailSendService;
 import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.AddressVo;
@@ -34,8 +34,10 @@ import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
+import com.blank.app.quit.vo.QuitVo;
 import com.blank.app.report.vo.ReportVo;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,7 +54,8 @@ public class MemberController {
 	@Autowired
 	private NaverLoginBO naverLoginBO;
 	
-	
+	@Autowired
+	private AdminService adminService;
 	
 	
 	private String apiResult = null;
@@ -74,11 +77,9 @@ public class MemberController {
 	//진짜 로그인!
 	@PostMapping("member/login")
 	public String login(MemberVo vo, HttpSession session, String save, HttpServletResponse resp, Model model) {
-		log.warn("화면 브이"+vo);
 	
 		MemberVo loginMember = service.login(vo);
-		
-		log.warn("로그인멤버~ "+loginMember);
+
 		
 		if(loginMember == null) {
 			model.addAttribute("msg", "로그인 실패하였습니다.");
@@ -111,7 +112,21 @@ public class MemberController {
 	
 	//회원탈퇴 화면 
 	@GetMapping("member/quit")
-	public String quit() {
+	public String quit(Model model, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		if(loginMember == null) {
+			model.addAttribute("msg", "로그인 후 이용가능합니다.");
+			return "home";
+		}
+		
+		//화면 보여줄 때 탈퇴 선택지 보여줘야한다.
+		List<QuitVo> voList = adminService.selectQuit();
+		
+		System.out.println(voList);
+		
+		model.addAttribute("quitVoList", voList);
+		
 		return "member/quit";
 	}
 	
@@ -128,7 +143,6 @@ public class MemberController {
 		
 		//탈퇴 진행 안되으
 		if(answerResult == 0) {
-			
 			model.addAttribute("msg", "회원탈퇴에 실패하였습니다.");
 			return "redirect:/blank";
 			
@@ -445,7 +459,7 @@ public class MemberController {
 			
 			//핸드폰 업데이트 했으니 세션을 갈아주자 
 			if(updateResult == 1) {
-				loginMember.setNick(phone);
+				loginMember.setPhone(phone);
 				session.setAttribute("loginmember", loginMember);
 				log.warn("############세션 업데이트 된 데이터 "+loginMember);
 				return updateResult+"";
@@ -792,6 +806,7 @@ public class MemberController {
 			
 			
 		}
+		
 		
 		
 }

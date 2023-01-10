@@ -251,5 +251,10 @@ public class MemberServiceImpl implements MemberService{
 		return dao.selectEmailByPhone(sst, phone);
 	}
 
+	@Override
+	public AddressVo selectAddrOne(String addrNo) {
+		return dao.selectAddrOne(sst, addrNo);
+	}
+
 
 }

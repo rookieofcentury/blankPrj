@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +32,11 @@
 							<div>틸퇴사유</div>	
 							<div>
 								<select name="quitNo" id="aNum">
-									<option value="1">서비스가 만족스럽지 않아요</option>
-									<option value="2">사이트가 구려요</option>
-									<option value="3">찾는 펀딩이 열리지 않아요</option>
-									<option value="4">사기꾼이 있어요</option>
-									<option value="5">파이널 아즈앙</option>
+								<c:forEach items="${quitVoList}" var="list">
+								
+									<option value="${list.no}">${list.content}</option>
+									
+								</c:forEach>
 								</select>
 							</div>
 						</div>

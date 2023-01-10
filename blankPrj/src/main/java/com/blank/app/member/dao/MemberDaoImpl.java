@@ -182,6 +182,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("memberMapper.selectEmailByPhone", phone);
 	}
 
+	@Override
+	public AddressVo selectAddrOne(SqlSessionTemplate sst, String addrNo) {
+		return sst.selectOne("memberMapper.selectAddrOne", addrNo);
+	}
+
 	
 	
 	

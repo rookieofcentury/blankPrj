@@ -1,26 +1,19 @@
 .wrap{
     width: 70vw;
-    height: 600px;
     margin: auto;
 }
 .border{
-    border: 1px solid var(--main-color);
+    border: 1px solid #c1bdbd;
     padding: 20px;
     margin: 10px;
 }
 .grid{
     display: grid;
 }
-.pay-container{
-    height: 100%;
-    grid-template-rows: 2fr 5fr;
-}
+
 .pay-content{
     grid-template-columns: 5fr 3fr;
     width: 100%;
-}
-.info{
-    height: 50px;
 }
 .project-content{
     grid-template-columns: 3fr 7fr;
@@ -28,6 +21,7 @@
 .project-info-number{
     display: flex;
     flex-direction: row;
+    gap: 15px;
 }
 .project-info-detail{
     display: flex;
@@ -48,4 +42,307 @@
 .red{
     border-color: red;
     color: red;
+}
+.project-info-detail> div:nth-child(1){
+    font-size: 13px;
+    color: var(--main-color);
+}
+.project-info-detail> div:nth-child(2){
+    font-size: 25px;
+    color: black;
+}
+
+
+
+
+
+/* 주소 모달창  */
+.hidden{
+    /* visibility: hidden; */
+}
+input[id="addr-pop"]{
+    display: none;
+  }
+  input[id="addr-pop"] + label{
+    display: inline-block;
+    padding: 20px;
+    background-color: var(--main-color);
+    color: #fff;
+  }
+  
+  input[id="addr-pop"] + label + div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+  }
+  input[id="addr-pop"] + label + div > div{
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+    z-index: 2;
+  }
+  
+  
+  input[id="addr-pop"] + label + div > div > label{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transform: translate(-40%, -40%);
+    padding: 20px;
+    background-color: red;
+    border-radius: 100%;
+    z-index: 1;
+  }
+  
+  input[id="addr-pop"] + label + div > label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1;
+  }
+  input[id="addr-pop"] + label + div{
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s;
+  }
+  input[id="addr-pop"]:checked + label + div{
+    opacity: 1;
+    visibility: visible;
+    
+  }
+  input[name=addr]{
+    display: none;
+  }
+  
+  .addr-container{
+    border: 1px solid var(--gray);
+    padding: 10px;
+    min-height: 80px;
+    margin: 10px 0px;
+  }
+  
+input[type=radio]:checked + div{
+    background-color: #7b99e030
+}
+input[type=radio]:hover + div{
+      background-color: #7b99e030
+
+}
+.pop-container{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px auto;
+    padding: 10px
+}
+.addr-title{
+    font-size: 30px;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[name=selectAddr]{
+    height: 40px;
+    width: 80px;
+    background-color: var(--main-color);
+    color: #fff;
+    border-color: var(--main-color);
+    border-width: 1px;
+    box-shadow: none;
+}
+.project-pay-content>div:nth-child(even){
+    border: 1px solid var(--gray); 
+    padding: 10px;
+    min-height: 100px;
+}
+.project-pay-content>div{
+    margin-bottom: 30px;
+}
+.project-pay-content{
+    margin: 10px;
+}
+#project-pay-check{
+    margin-top: 30px;
+}
+.project-pay-content>div:nth-child(odd){
+    font-size: 18px;
+    color: #3d3d3d;
+    font-weight: bold;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+.project-pay-info{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-content: space-evenly;
+  font-weight: 200;
+  
+}
+.project-pay-info > div:nth-child(even){
+    color: #616060
+}
+.addr-info{
+    display: flex;
+    justify-content: space-between;
+}
+.card-info{
+    display: flex;
+    justify-content: space-between;
+}
+input[name=addrChange]{
+    height: 40px;
+    width: 80px;
+    background-color: #fff;
+    color: var(--main-color);
+    border-color: var(--main-color);
+    border-width: 1px;
+    box-shadow: none;
+    margin-top: 10px;
+}
+
+
+
+
+
+/* 카드모달창 */
+
+img{
+    width: 150px;
+    height: 100px;
+}
+.hidden{
+    /* visibility: hidden; */
+}
+input[id="card-pop"]{
+    display: none;
+}
+input[id="card-pop"] + label{
+display: inline-block;
+padding: 20px;
+background-color: var(--main-color);
+color: #fff;
+}
+
+input[id="card-pop"] + label + div{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 100;
+}
+input[id="card-pop"] + label + div > div{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 500px;
+height: 600px;
+background-color: #fff;
+z-index: 2;
+}
+
+
+input[id="card-pop"] + label + div > div > label{
+position: absolute;
+top: 0%;
+right: 0%;
+transform: translate(-40%, -40%);
+padding: 20px;
+background-color: red;
+border-radius: 100%;
+z-index: 1;
+}
+
+input[id="card-pop"] + label + div > label{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.9);
+z-index: 1;
+}
+input[id="card-pop"] + label + div{
+opacity: 0;
+visibility: hidden;
+transition: all 1s;
+}
+input[id="card-pop"]:checked + label + div{
+opacity: 1;
+visibility: visible;
+
+}
+input[name=card]{
+display: none;
+}
+.card-title{
+    font-size: 30px;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[name=selectCard]{
+    height: 40px;
+    width: 80px;
+    background-color: var(--main-color);
+    color: #fff;
+    border-color: var(--main-color);
+    border-width: 1px;
+    box-shadow: none;
+}
+
+.project-pay-info > div:nth-child(even){
+    background-color: #red  ;
+
+    color: #616060
+}
+.card-info{
+    display: flex;
+    justify-content: space-between;
+}
+input[name=cardChange]{
+    height: 40px;
+    width: 80px;
+    background-color: #fff;
+    color: var(--main-color);
+    border-color: var(--main-color);
+    border-width: 1px;
+    box-shadow: none;
+    margin-top: 10px;
+}
+.card-content{
+    width: 100%;
+}
+.card-info-detail{
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+}
+.card-info-detail>div:nth-child(3){
+    margin-bottom: 10px
+}
+.card-detail-container{ 
+    min-height: 100px;
+    padding: 10px;
+    gap: 10px;
+    border: 1px solid var(--gray);
+    display: flex;
+    align-items: flex-end;
+}
+.card-margin{
+    margin-bottom: 10px;
 }
