@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
 <link rel="stylesheet" href="/blank/resources/css/common/header.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
@@ -31,10 +33,9 @@
 					<div class="flex id-area" onclick="location.href='/blank/member/login'"><span class="material-symbols-outlined">account_circle</span>로그인</div>
 				</c:if>
 				<div class="search-area">
-					<form action="/blank/project/search" method="get">
+					<form action="/blank/project/search" method="get" onsubmit="return checkKeyword();">
 						<div class="flex search-box">
-							<input type="text" class="input-hidden" name="searchPrj"
-								placeholder="검색어를 입력해 주세요.">
+							<input type="text" class="input-hidden" name="keyword" placeholder="검색어를 입력해 주세요.">
 							<button class="material-symbols-outlined">search</button>
 						</div>
 					</form>
@@ -48,16 +49,16 @@
 					<label for="expand-cate"><span>카테고리</span></label>
 				</div>
 				<div>
-					<a href=""><span>인기</span></a>
+					<a href="/blank/project/search?standard=popular"><span>인기</span></a>
 				</div>
 				<div>
-					<a href=""><span>신규</span></a>
+					<a href="/blank/project/search?standard=new"><span>신규</span></a>
 				</div>
 				<div>
-					<a href=""><span>마감임박</span></a>
+					<a href="/blank/project/search?standard=endDate"><span>마감임박</span></a>
 				</div>
 				<div>
-					<a href=""><span>공개예정</span></a>
+					<a href="/blank/project/search?standard=open"><span>공개예정</span></a>
 				</div>
 				<div>
 					<a href="/blank/goods"><span>굿즈</span></a>
@@ -66,14 +67,14 @@
 			<input type="checkbox" id="expand-cate">
 			<div class="menu-detail-area">
 				<ul class="menu-detail-box">
-					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">checkroom</span>의류</a></li>
-					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">design_services</span>디자인문구</a></li>
-					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">scene</span>홈/리빙</a></li>
-					<li class="flex"><a href="" class="menu-item"><span><i class="fa-solid fa-glasses fa-lg fa-fw"></i></span>패션/잡화</a></li>
-					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">restaurant</span>푸드</a></li>
-					<li class="flex"><a href="" class="menu-item"><span><i class="fa-solid fa-palette fa-lg fa-fw"></i></span>예술</a></li>
-					<li class="flex"><a href="" class="menu-item"><span><i class="fa-solid fa-ghost fa-lg fa-fw"></i></span>캐릭터/굿즈</a></li>
-					<li class="flex"><a href="" class="menu-item"><span class="material-symbols-outlined">pets</span>반려동물</a></li>
+					<li class="flex"><a href="/blank/project/search?category=1" class="menu-item"><span class="material-symbols-outlined">checkroom</span>의류</a></li>
+					<li class="flex"><a href="/blank/project/search?category=2" class="menu-item"><span class="material-symbols-outlined">design_services</span>디자인문구</a></li>
+					<li class="flex"><a href="/blank/project/search?category=3" class="menu-item"><span class="material-symbols-outlined">scene</span>홈/리빙</a></li>
+					<li class="flex"><a href="/blank/project/search?category=4" class="menu-item"><span><i class="fa-solid fa-glasses fa-lg fa-fw"></i></span>패션/잡화</a></li>
+					<li class="flex"><a href="/blank/project/search?category=5" class="menu-item"><span class="material-symbols-outlined">restaurant</span>푸드</a></li>
+					<li class="flex"><a href="/blank/project/search?category=6" class="menu-item"><span><i class="fa-solid fa-palette fa-lg fa-fw"></i></span>예술</a></li>
+					<li class="flex"><a href="/blank/project/search?category=7" class="menu-item"><span><i class="fa-solid fa-ghost fa-lg fa-fw"></i></span>캐릭터/굿즈</a></li>
+					<li class="flex"><a href="/blank/project/search?category=8" class="menu-item"><span class="material-symbols-outlined">pets</span>반려동물</a></li>
 				</ul>
 			</div>
 		</div>

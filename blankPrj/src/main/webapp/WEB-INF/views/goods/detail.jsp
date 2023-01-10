@@ -182,7 +182,7 @@
                 <div class="review-modal-pic">
                     <div>
                         <span>사진 등록</span>
-                        <span>0 장 / 최대 1 장</span>
+                        <span><label id="file-cnt">0</label> 장 / 최대 1 장</span>
                     </div>
                     <div>
                         <label id="input-file-button" for="input-file"> + </label>
@@ -378,6 +378,7 @@
         reviewList();
     })
 
+    // 페이지 누르면 페이지마다 list 바뀌게
     $('.page').click(function() {
         reviewList($(this).text());
     })
@@ -420,7 +421,7 @@
                              + checked2 +
                             `</div>
                             <div class="review-item-more">
-                                <span class="material-symbols-outlined">more_vert</span>
+                                <span class="material-symbols-outlined" onclick="callReview(` + this.no + `)">more_vert</span>
                             </div>
                         </div>`;
                 })
@@ -474,7 +475,7 @@
                              + checked2 +   
                             `</div>
                             <div class="review-item-more">
-                                <span class="material-symbols-outlined">more_vert</span>
+                                <span class="material-symbols-outlined" onclick="callReview(` + this.no + `)">more_vert</span>
                             </div>
                         </div>`;
                 })
@@ -524,7 +525,6 @@
             })
         }
     }
-
 
     // 좋아요 숫자 up
     function cntUp(object) {

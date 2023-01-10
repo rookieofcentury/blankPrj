@@ -77,7 +77,7 @@
                 <div class="flex">더 보러 가기</div>
             </div>
             <div class="editor-item-area">
-                <div class="editor-item" onclick="location.href='/blank/goods/detail?no=15'">
+                <div class="editor-item" onclick="location.href='/blank/goods/detail?no=14'">
                     <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
                     <span class="padding-left item-name">케리아</span>
                     <span class="padding-left item-price"><label>89,000</label> 원</span>

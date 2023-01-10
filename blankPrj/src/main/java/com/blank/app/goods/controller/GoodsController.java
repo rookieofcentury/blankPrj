@@ -149,6 +149,65 @@ public class GoodsController {
 
 	}
 	
+	// 리뷰 화면 도출
+	@GetMapping("/review")
+	public String review(String no, Model model, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		String mno = loginMember.getNo();
+		
+		ReviewVo vo = gs.findReviewByNo(no, mno);
+		
+		model.addAttribute("review", vo);
+		
+		return "goods/review";
+		
+	}
+	
+	// 리뷰 수정
+	@RequestMapping("/review/edit")
+	public String reviewEdit(ReviewVo vo) {
+		
+		int result = gs.reviewEdit(vo);
+		
+		if(result == 0) {
+			return "";
+		}
+		
+		return "goods/review?no=" + vo.getNo();
+		
+	}
+	
+	// 리뷰 수정 - 파일 삭제
+	@RequestMapping("/review/attachment/delete")
+	@ResponseBody
+	public String deleteReviewAtt(String no) {
+		
+		int result = gs.deleteAtt(no);
+		
+		if(result == 0) {
+			return "실패";
+		}
+		
+		return "성공";
+		
+	}
+	
+	// 리뷰 삭제
+	@RequestMapping("/review/delete")
+	@ResponseBody
+	public String reviewDelete(String no) {
+		
+		int result = gs.reviewDelete(no);
+		
+		if(result == 1) {
+			return "성공";
+		} else {
+			return "실패";
+		}
+		
+	}
+	
 	// 이 굿즈에 리뷰 총 몇 개임?
 	@PostMapping("/review/cnt")
 	@ResponseBody
@@ -448,7 +507,7 @@ public class GoodsController {
 		
 		session.removeAttribute("cart");
 
-		return "goods/order?no=" + vo.getNo();
+		return "redirect:goods/order?no=" + vo.getNo();
 
 	}
 	

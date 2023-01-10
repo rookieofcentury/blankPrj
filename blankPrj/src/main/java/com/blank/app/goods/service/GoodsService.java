@@ -71,4 +71,12 @@ public interface GoodsService {
 
 	int deletePhoneList(String no);
 
+	ReviewVo findReviewByNo(String no, String mno);
+
+	int reviewDelete(String no);
+
+	int reviewEdit(ReviewVo vo);
+
+	int deleteAtt(String no);
+
 }

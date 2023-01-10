@@ -211,7 +211,6 @@ input[name=delivery-form-btn]:checked + label {
     padding: 20px;
 	gap: 20px;
 	width: 25%;
-    height: 50%;
 }
 .goods-item>div:nth-child(2) {
 	display: flex;

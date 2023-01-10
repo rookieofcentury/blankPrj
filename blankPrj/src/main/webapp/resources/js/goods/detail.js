@@ -80,3 +80,21 @@
 		$('.goods-cnt-box').text(prevCntInput.val());
 		calcPrice(prevCntInput);
     })
+
+	/* 파일 등록되면 label 바뀜 */
+	$('input[name=reviewFile]').change(function() {
+		console.log($(this).val());
+		var text = "0";
+		if($(this).val() != null) {
+			text = "1";
+		}
+		$('#file-cnt').text(text);
+	})
+
+	/* 리뷰 상세 보기 */
+	function callReview(no) {
+		var url = "/blank/goods/review?no=" + no;
+		var name = "BLANK REVIEW";
+		var option = "width = 100%, height = 100%, location = yes, top = 500, left = 400"
+		window.open(url, name, option);
+	}

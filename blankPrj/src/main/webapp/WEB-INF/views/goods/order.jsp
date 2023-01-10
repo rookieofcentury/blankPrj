@@ -4,9 +4,7 @@
 <head>
 	<title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/goods/order.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 
@@ -61,7 +59,7 @@
                 <div>
                     <div class="title-area">
                         <span class="title">배송 정보</span>
-                        <input type="checkbox" name="delivery-form-btn" id="delivery-change-btn"><label for="delivery-change-btn" id="change-btn">변경</label>
+                        <input type="checkbox" name="delivery-form-btn" id="delivery-change-btn"><label for="delivery-change-btn" id="change-btn">변경</label><button>취소</button>
                     </div>
                     <div class="delivery-info">
                         <div>받는 분</div>
@@ -186,5 +184,21 @@
 		var option = "width = 100%, height = 100%, location = yes"
 		window.open(url, name, option);
 	}
+</script>
+<script>
+    function cancelPay() {
+    $.ajax({
+        url: "/blank/goods/order/cancel",
+        method: "POST",
+        data: {
+            merchant_uid: '${pay.metchantUid}',
+            cancel_request_amount: '${pay.totalPrice}',
+            reason: '${}',
+        },
+        success: {
+
+        }
+    })
+  }
 </script>
 </html>

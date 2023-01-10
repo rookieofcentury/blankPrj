@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% session.removeAttribute("msg"); %>
 <html>
 <head>
 	<title>Blank</title>
 <link rel="stylesheet" href="/blank/resources/css/common/main.css">
 <link rel="stylesheet" href="/blank/resources/css/common/swiper.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
@@ -31,7 +34,7 @@
             <div class="focus-content">
                 <div>
                     <span class="blank-title">주목할 만한 프로젝트</span>
-                    <span>기준시 2022-12-07 21:38 PM (GMT+9)</span>
+                    <span>기준시 <label id="now-time"></label></span>
                 </div>
                 <div class="focus-project-list">
                     <div class="focus-project-item">
@@ -190,7 +193,11 @@
                 <div class="new-project-item">
                     <div class="image-box"><img src="" alt="item-pic"></div>
                     <div>
-                        <span>카테고리ㅣ창작자명</span>
+                        <span>
+                            <span>카테고리</span>
+                            <span>|</span>
+                            <span>창작자명</span>
+                        </span>
                         <span>418 % 달성</span>
                     </div>
                     <div>저는한줄프로젝트입니다</div>
@@ -216,6 +223,17 @@
 
 <script>
     $("document").ready(function () {
+        var alertMsg = '${msg}';
+        if(alertMsg != '') {
+            Swal.fire(
+            '안내 메시지',
+            alertMsg,
+            'info'
+            )
+        }
+        var now = new Date();
+        $('#now-time').text(now.getFullYear() + "-" + now.getMonth()+1 + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + " (GMT+9)");
+
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 'auto',
             spaceBetween: 30,

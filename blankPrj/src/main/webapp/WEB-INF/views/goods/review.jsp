@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +14,12 @@
             <div class="modal-container">
                 <div class="modal-goods-info">
                     <div>
-                        <img src="" alt="img">
+                        <img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt="img">
                     </div>
                     <div>
-                        <span>무릎담요</span>
-                        <span>24,000</span>
-                        <span>리뷰 <span>3</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span>5.0</span></span>
+                        <span>${goods.name}</span>
+                        <span>&#x20A9; <span>${goods.price}</span></span>
+                        <span>리뷰 <span class="review-total-cnt"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span class="review-total-score"></span></span>
                     </div>
                 </div>
                 <div class="review-modal-score">
@@ -38,7 +37,7 @@
                 <div class="review-modal-pic">
                     <div>
                         <span>사진 등록</span>
-                        <span>0 장 / 최대 2 장</span>
+                        <span>0 장 / 최대 1 장</span>
                     </div>
                     <div>
                         <label id="input-file-button" for="input-file"> + </label>

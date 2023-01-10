@@ -355,8 +355,12 @@
 		</if>
 	</select>
 	
+	<!-- 내가 like 찍었어? -->
 	<select id="getIsLikeLm" resultType="String">
-		SELECT COUNT(*) FROM GOODS_REVIEW_HEART WHERE NO = #{vo.no} AND M_NO = #{mno}
+		SELECT COUNT(*) FROM GOODS_REVIEW_HEART WHERE NO = #{vo.no}
+		<if test=" mno != null and mno != '' ">
+		AND M_NO = #{mno}
+		</if>
 	</select>
 	
 	<!-- 이 굿즈 번호로 조회했을 때 리뷰 몇 개나 있나요? -->
@@ -477,9 +481,51 @@
 		WHERE NO = #{no}
 	</select>
 	
+	<!-- 문자 보낸 전화번호 행 삭제 -->
 	<delete id="deletePhoneList">
 		DELETE FROM GOODS_ALERT
 		WHERE NO = #{no}
+	</delete>
+	
+	<!-- 번호로 리뷰 한 개 찾기 -->
+	<select id="findReviewByNo" resultType="com.blank.app.goods.vo.ReviewVo">
+		SELECT
+            R.NO,
+            R.GOODS,
+            M.NICK AS WRITER,
+            R.SCORE,
+            R.CONTENT,
+            SUBSTR(R.ENROLL_DATE, 1, 14) AS ENROLL_DATE,
+            R.DELETE_YN,
+            H.COUNT AS "LIKE",
+            A.FILE_NAME
+        FROM GOODS_REVIEW R
+        INNER JOIN MEMBER M
+        ON M.NO = R.WRITER
+        LEFT OUTER JOIN (SELECT NO, COUNT(*) AS COUNT FROM GOODS_REVIEW_HEART GROUP BY NO) H ON R.NO = H.NO
+        LEFT OUTER JOIN GOODS_REVIEW_ATTACHMENT A ON A.REVIEW = R.NO
+		WHERE R.NO = #{no}
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview">
+		DELETE FROM GOODS_REVIEW
+		WHERE NO = #{no}
+	</delete>
+	
+	<!-- 리뷰 수정 -->
+	<update id="editReview">
+		UPDATE GOODS_REVIEW
+		SET
+			SCORE = #{score},
+			CONTENT = #{content},
+		WHERE NO = #{no}
+	</update>
+	
+	<!-- 리뷰 첨부파일 삭제 -->
+	<delete id="deleteAtt">
+		DELETE FROM GOODS_REVIEW_ATTACHMENT
+		WHERE REVIEW = #{no}
 	</delete>
 	
 </mapper>

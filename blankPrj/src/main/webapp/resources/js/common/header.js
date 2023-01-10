@@ -28,3 +28,17 @@ $('#expand-cate').change(function() {
         $('.menu-detail-box').hide("200");
     }
 })
+
+// 띄어쓰기만 있으면 검색 불가
+function checkKeyword() {
+    if(($('input[name=keyword]').val()).replace(/ /g,"") == '') {
+        Swal.fire({
+            title: '검색하실 수 없습니다!',
+            text: '검색어는 1자 이상 입력해 주세요.',
+            icon: 'error',
+            confirmButtonColor: '#567ACE'
+        })
+        $('input[name=keyword]').val("");
+        return false;
+    }
+}

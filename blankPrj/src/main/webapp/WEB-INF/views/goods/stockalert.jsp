@@ -19,7 +19,7 @@
 
             <div><img src="/blank/resources/images/blank.png" alt="" class="logo"></div>
             <div>블랭크 재입고 알림은 카카오톡 알림톡을 이용해 전달됩니다.</div>
-            <textarea name="" id="privacy-scroll" disabled>1. 개인정보의 수집항목 및 수집방법 
+            <textarea id="privacy-scroll" disabled>1. 개인정보의 수집항목 및 수집방법 
             통계청 나라통계사이트에서는 기본적인 회원 서비스 제공을 위한 필수정보로 실명인증정보와 가입정보로 구분하여 다음의 정보를 수집하고 있습니다. 필수정보를 입력해주셔야 회원 서비스 이용이 가능합니다.
             
                 가. 수집하는 개인정보의 항목 
@@ -65,7 +65,7 @@
                     · 위탁업무 내용 : 공공 I-PIN, GPKI 인증
                     · 개인정보 보유 및 이용 기간 : 행정자치부에서는 이미 보유하고 있는 개인정보이기 때문에 별도로 저장하지 않음
                                             </textarea>
-            <div class="agree-area"><input type="checkbox" id="address-check"><label for="address-check" class="flex"><span class="material-symbols-outlined">check_circle</span>내 정보에서 받아 오기</label></div>
+            <div class="agree-area"><input type="checkbox" id="address-check" disabled><label for="address-check" class="flex"><span class="material-symbols-outlined">check_circle</span>상기 내용을 꼼꼼히 확인했으며, 약관에 동의합니다.</label></div>
         </div>
 
     </div>
