@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blank.app.pay.dao.PayDao;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ItemVo;
 import com.blank.app.project.vo.ProjectVo;
@@ -44,5 +45,10 @@ public class PayServiceImpl implements PayService {
 	@Override
 	public ItemVo selectSetByNo(String setNo) {
 		return dao.selectSetByNo(sst, setNo);
+	}
+
+	@Override
+	public int insertPayList(PayListVo vo) {
+		return dao.insertPayList(sst, vo);
 	}
 }

@@ -17,11 +17,13 @@ import com.blank.app.member.service.MemberService;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.service.PayService;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ItemVo;
 import com.blank.app.project.vo.ProjectVo;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @RequestMapping("pay")
@@ -37,15 +39,18 @@ public class PayController {
 		//화면을 보여줄 때 
 		@GetMapping("")
 		public String payProject(HttpSession session, String pNo,String setNo, Model model) {
+			
+			
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			System.out.println(pNo);
+			System.out.println(setNo);
 			
 			if(loginMember == null) {
 				model.addAttribute("msg", "로그인 후 이용가능합니다.");
 				return "home";
 			}
-			
+		
 			//화면에 보여줄 때 프로젝트랑 세트 번호 가져와야한다 ~ 
 			ProjectVo Prjvo = payService.selectPrjByNo(pNo);
 			ItemVo setVo = payService.selectSetByNo(setNo);
@@ -56,15 +61,46 @@ public class PayController {
 			//후원자 카드정보도 주소정보도!
 			List<PayVo> loginPayVoList = memberService.selectPayByNo(mNo);
 			List<AddressVo> loginAddrVoList = memberService.selectAddrByNo(mNo);
-
 			
-			model.addAttribute("PrjVo", Prjvo);
+			
+			System.out.println(setVo);
+			
+			model.addAttribute("prjVo", Prjvo);
 			model.addAttribute("setVo", setVo);
-			model.addAttribute("MemberVo", loginMember);
 			model.addAttribute("addrVoList", loginAddrVoList);
 			model.addAttribute("payVoList", loginPayVoList);
 			
 			return "pay/supportProject";
+			
+		}
+		
+		//프로젝트 후원 진짜! 
+		@PostMapping("")
+		public String payProjectReal(HttpSession session, PayListVo vo, Model model) {
+			
+			log.warn("화면에서 받은 결제 관련 " + vo);
+			
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+
+			
+			vo.setMNo(loginMember.getNo());
+			
+			
+			
+			if(loginMember == null) {
+				model.addAttribute("msg", "로그인 후 이용가능합니다.");
+				return "home";
+			}
+		
+			int result = payService.insertPayList(vo);
+			
+			if(result == 1) {
+				
+				return "member/mypage/payProject";
+			}else {
+				return "#";
+			}
+			
 		}
 		
 		

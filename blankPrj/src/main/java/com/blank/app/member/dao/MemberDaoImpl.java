@@ -9,6 +9,7 @@ import com.blank.app.admin.vo.HelpVo;
 import com.blank.app.member.vo.AddressVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
+import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
 import com.blank.app.project.vo.ProjectVo;
 import com.blank.app.report.vo.ReportVo;
@@ -185,6 +186,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public AddressVo selectAddrOne(SqlSessionTemplate sst, String addrNo) {
 		return sst.selectOne("memberMapper.selectAddrOne", addrNo);
+	}
+
+	@Override
+	public List<PayListVo> selectPayListByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectList("payMapper.selectPayListByNo", mNo);
 	}
 
 	

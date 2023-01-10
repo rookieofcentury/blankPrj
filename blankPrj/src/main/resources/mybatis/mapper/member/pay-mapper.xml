@@ -54,15 +54,15 @@
 	
 		SELECT 
 		P.NO,
+		P.CHANGE_NAME,
 		M.NICK AS CREATOR,
 		C.NAME AS CATEGORY,
 		P.TITLE,
 		P.PRICE,
-		P.START_DATE,
-		P.END_DATE,
+		(P.END_DATE)-(TRUNC(SYSDATE))  AS CAL_DATE,
+		TO_CHAR((P.END_DATE+1), 'YYYY-MM-DD') AS PAY_DATE,
 		P.SUMMARY,
-		P.TIME,
-		P.URL
+		P.DELIVERY_DATE
 
 
  		FROM PROJECT P
@@ -70,12 +70,49 @@
 		ON C.NO = P.CATEGORY
 		JOIN MEMBER M
 		ON M.NO = P.CREATOR
-		
+
 		WHERE P.NO = #{pNo}
 	</select>
 	
 	<select id="selectSetByNo" resultType="ItemVo">
 		SELECT * FROM SET_ITEM
 		WHERE SET_NO = #{setNo}
+	</select>
+	
+	<insert id="insertPayList">
+		 INSERT INTO PAY_LIST (
+		        NO
+		        , M_NO
+		        , P_NO
+		        , SET_NO
+		        , PAY_NO
+		        , ADDR_NO
+		        , PRICE
+		        , PAY_DATE
+        )
+        VALUES(
+        PAY_LIST_NO_SEQ.NEXTVAL ,
+		        #{mNo}
+		        , #{pNo}
+		        , #{setNo}
+		        , #{payNo}
+		        , #{addrNo}
+		        , #{price}
+				, #{payDate}
+		)
+	</insert>
+	
+	<select id="selectPayListByNo" resultType="PayListVo">
+	
+		SELECT PL.NO , PL.M_NO, PL.P_NO, PL.SET_NO, PL.PAY_NO, PL.ADDR_NO,
+        TO_CHAR(PL.RESERVE_DATE,'YYYY-MM-DD'), TO_CHAR(PL.PAY_DATE,'YYYY-MM-DD'),
+        P.CHANGE_NAME, P.TITLE 
+        
+        FROM PAY_LIST PL
+        JOIN PROJECT P
+        ON P.NO = PL.P_NO
+
+        WHERE M_NO = #{mNo}
+		
 	</select>
 </mapper>

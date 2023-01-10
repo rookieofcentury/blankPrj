@@ -17,6 +17,7 @@
 }
 .project-content{
     grid-template-columns: 3fr 7fr;
+    min-height: 300px;
 }
 .project-info-number{
     display: flex;
@@ -51,14 +52,16 @@
     font-size: 25px;
     color: black;
 }
-
+.prj-img-box{
+    padding: 20px 20px 20px 0px;
+}
 
 
 
 
 /* 주소 모달창  */
 .hidden{
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 input[id="addr-pop"]{
     display: none;
@@ -121,10 +124,10 @@ input[id="addr-pop"]{
     visibility: visible;
     
   }
-  input[name=addr]{
+ input[name=addr]{
     display: none;
   }
-  
+
   .addr-container{
     border: 1px solid var(--gray);
     padding: 10px;
@@ -212,19 +215,19 @@ input[name=addrChange]{
     box-shadow: none;
     margin-top: 10px;
 }
-
+.img{
+    width: 200px;
+    height: 200px;
+}
 
 
 
 
 /* 카드모달창 */
 
-img{
+.card-img{
     width: 150px;
     height: 100px;
-}
-.hidden{
-    /* visibility: hidden; */
 }
 input[id="card-pop"]{
     display: none;
@@ -306,9 +309,8 @@ input[name=selectCard]{
 }
 
 .project-pay-info > div:nth-child(even){
-    background-color: #red  ;
 
-    color: #616060
+    color: #616060;
 }
 .card-info{
     display: flex;

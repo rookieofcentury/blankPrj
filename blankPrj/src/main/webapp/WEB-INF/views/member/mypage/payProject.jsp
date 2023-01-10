@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,42 +28,22 @@
 				<div id="contents">
 					<div id="contents__list">
 						<div id="contents__item" class="content-first">
-							<div class="project-info">
-								<div>프로젝트사진</div>
-								<div>
-									<div>후원일</div>
-									<div>프로젝트명</div>
-									<div>후원내역</div>
+							<c:forEach items="${addrVoList}" var="list" varStatus="status">
+								<div class="project-info">
+	
+									<div><img src="/blank/resources/upload/project/${list.changeName}"></div>
+									<div>
+										<div>${list.payDate}</div>
+										<div>프로젝트명</div>
+										<div>후원내역</div>
+									</div>
+									<div>
+										<div>17,800원 결제예정</div>
+										<div>결제예정일</div>
+									</div>
 								</div>
-								<div>
-									<div>17,800원 결제예정</div>
-									<div>결제예정일</div>
-								</div>
-							</div>
-							<div class="project-info">
-								<div>프로젝트사진</div>
-								<div>
-									<div>후원일</div>
-									<div>프로젝트명</div>
-									<div>후원내역</div>
-								</div>
-								<div>
-									<div>17,800원 결제예정</div>
-									<div>결제예정일</div>
-								</div>
-							</div>
-							<div class="project-info">
-								<div>프로젝트사진</div>
-								<div>
-									<div>후원일</div>
-									<div>프로젝트명</div>
-									<div>후원내역</div>
-								</div>
-								<div>
-									<div>17,800원 결제예정</div>
-									<div>결제예정일</div>
-								</div>
-							</div>
+                            </c:forEach>
+							
 						</div>
 						<div id="contents__item" class="content-second">
 							<div class="project-info">
