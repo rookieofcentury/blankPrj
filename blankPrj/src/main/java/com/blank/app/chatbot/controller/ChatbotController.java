@@ -24,12 +24,13 @@ public class ChatbotController {
 	private ChatbotService chatbotService;
 	
 	@GetMapping("main")
-	public String main(Model model, HttpSession session) {
+	public String main(Model model, HttpSession session, String no) {
 		
 		List<ChatbotVo> voList = chatbotService.selectList();
 		
 		session.setAttribute("voList", voList);
 		model.addAttribute("voList", voList);
+		model.addAttribute("no", no);
 		
 		return "chatbot/main";
 	}
