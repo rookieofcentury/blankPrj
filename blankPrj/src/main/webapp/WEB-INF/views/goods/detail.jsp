@@ -462,7 +462,7 @@
                 no: '${goods.no}',
                 p: p,
                 standard: $('input[name=standard]:checked').val(),
-                mno: '${loginMember.no}'
+                mno: null
             },
             success: function(data) {
                 var temp = "";
