@@ -46,7 +46,7 @@
                             <c:forEach items="${orderList}" var="item">
                                 <tr class="cart-product">
                                     <td>${item.no}</td>
-                                    <input type="hidden" name="no" value="${item.no}">
+                                    <input type="hidden" name="itemno" value="${item.no}">
                                     <td><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt="" class="product-img"></td>
                                     <td class="name-option">
                                         <span class="name">${item.name}</span>

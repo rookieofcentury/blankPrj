@@ -19,6 +19,7 @@ import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.service.PayService;
 import com.blank.app.pay.vo.PayListVo;
 import com.blank.app.pay.vo.PayVo;
+import com.blank.app.project.service.ProjectService;
 import com.blank.app.project.vo.ItemVo;
 import com.blank.app.project.vo.ProjectVo;
 
@@ -36,9 +37,12 @@ public class PayController {
 		@Autowired
 		private MemberService memberService;
 		
+		@Autowired
+		private ProjectService prjService;
+		
 		//화면을 보여줄 때 
 		@GetMapping("")
-		public String payProject(HttpSession session, String pNo,String setNo, Model model) {
+		public String payProject(HttpSession session, @RequestParam String pNo,@RequestParam String setNo, Model model) {
 			
 			
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
@@ -52,8 +56,19 @@ public class PayController {
 			}
 		
 			//화면에 보여줄 때 프로젝트랑 세트 번호 가져와야한다 ~ 
-			ProjectVo Prjvo = payService.selectPrjByNo(pNo);
+			ProjectVo prjvo = payService.selectPrjByNo(pNo);
+
 			ItemVo setVo = payService.selectSetByNo(setNo);
+			
+//			//퍼센트 정보 가져오자 
+//			int p = Integer.parseInt(pNo);
+//			int fundingSum = prjService.selectSum(p);
+//			int goal = Integer.parseInt(Prjvo.getPrice());
+//			
+//			int division = Math.floorDiv(fundingSum,goal);
+//			int percent = division * 100;
+//			
+//			Prjvo.setPercent(percent);
 			
 			//후원자 정보도 가져와야함!
 			String mNo = loginMember.getNo();
@@ -64,8 +79,9 @@ public class PayController {
 			
 			
 			System.out.println(setVo);
+	
 			
-			model.addAttribute("prjVo", Prjvo);
+			model.addAttribute("prjVo", prjvo);
 			model.addAttribute("setVo", setVo);
 			model.addAttribute("addrVoList", loginAddrVoList);
 			model.addAttribute("payVoList", loginPayVoList);
@@ -76,27 +92,30 @@ public class PayController {
 		
 		//프로젝트 후원 진짜! 
 		@PostMapping("")
-		public String payProjectReal(HttpSession session, PayListVo vo, Model model) {
-			
+		public String payProjectReal(String price , HttpSession session, PayListVo vo, Model model) {
+			System.out.println(price);
 			log.warn("화면에서 받은 결제 관련 " + vo);
 			
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 
 			
-			vo.setMNo(loginMember.getNo());
-			
-			
-			
 			if(loginMember == null) {
 				model.addAttribute("msg", "로그인 후 이용가능합니다.");
 				return "home";
 			}
+			
+			vo.setMNo(loginMember.getNo());
+			
+			
+			
 		
 			int result = payService.insertPayList(vo);
 			
 			if(result == 1) {
+				//성공했을 때 세트 수량 -1 
+				//prjService.minusCnt(vo.getSetNo());
 				
-				return "member/mypage/payProject";
+				return "redirect:/member/mypage/payProject";
 			}else {
 				return "#";
 			}

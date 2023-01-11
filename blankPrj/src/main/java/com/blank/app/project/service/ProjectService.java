@@ -73,9 +73,10 @@ public interface ProjectService {
 
 	int selectSum(int p);
 
-	int minusCnt(String setNo);
+  int minusCnt(String setNo);
 
 	int selectCalDate(int p);
 
 	int selectFundingQuantity(int p);
+  
 }

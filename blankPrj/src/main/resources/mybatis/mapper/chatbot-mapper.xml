@@ -17,4 +17,15 @@
 		WHERE NO = #{no}
 	</select>
 	
+	<select id="selectMsgList" resultType="ChatMessageVo">
+		SELECT SEND_NO, RECE_NO, CONTENT, WRITE_DATE
+		FROM CHAT_MESSAGE
+		<if test="loginNo == 0">
+			WHERE SEND_NO = ${no} OR RECE_NO = ${no}
+		</if>
+		<if test="loginNo != 0">
+			WHERE SEND_NO = ${loginNo} OR RECE_NO = ${loginNo}
+		</if>
+	</select>
+	
 </mapper>

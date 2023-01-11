@@ -22,6 +22,7 @@
 			<c:forEach items="${voList}" var="vo">
 				<div>${vo.sendNo}</div>
 				<div>${vo.content}</div>
+				<div>${vo.writeDate}</div>
 				<div><a href="/blank/chatbot/main?no=${vo.sendNo}" name="no">입장</a></div>
 			</c:forEach>		
 		</div>

@@ -57,10 +57,15 @@ public class NoticeController {
 	
 	//[회원] 공지사항 상세페이지
 	@GetMapping("detail")
-	public String detail(NoticeVo noticeVo, HttpSession session) {
+	public String detail(NoticeVo noticeVo, HttpSession session, String no) {
 		
 		NoticeVo selectNotice = noticeService.selectOne(noticeVo);
 
+//		List<String, String> pageList = noticeService.selectPageList();
+		
+		//이전페이지 다음페이지 조회
+//		List<Map<String, String>> pageList = noticeService.selectPageList();
+		
 		if (selectNotice == null) {
 			return "error";
 		}

@@ -107,6 +107,25 @@
 	
 	</insert>
 	
+	<insert id="editReviewFile">
+	
+		INSERT INTO GOODS_REVIEW_ATTACHMENT
+				(
+					NO ,
+					REVIEW ,
+					FILE_NAME ,
+					ENROLL_DATE
+				)
+			VALUES
+				(
+					SEQ_GOODS_REVIEW_ATTACHMENT_NO.NEXTVAL,
+					#{no},
+					#{fileName},
+					SYSDATE
+				)
+	
+	</insert>
+	
 	<select id="goodsCnt" resultType="int">
 		SELECT COUNT(*) FROM GOODS G
 		WHERE DELETE_YN = 'N'
@@ -306,11 +325,11 @@
 			INNER JOIN GOODS_DELIVERY D
 			ON P.NO = D.NO
 		WHERE
-		<if test=" no != null and no != '' ">
-			P.NO = #{no}
-		</if>
 		<if test=" payDate != null and payDate != '' and consumer != null and consumer != '' ">
 			P.PAY_DATE = #{payDate} AND P.CONSUMER = #{consumer}
+		</if>
+		<if test=" no != null and no != '' ">
+			P.NO = #{no}
 		</if>
 	</select>
 	
@@ -357,10 +376,7 @@
 	
 	<!-- 내가 like 찍었어? -->
 	<select id="getIsLikeLm" resultType="String">
-		SELECT COUNT(*) FROM GOODS_REVIEW_HEART WHERE NO = #{vo.no}
-		<if test=" mno != null and mno != '' ">
-		AND M_NO = #{mno}
-		</if>
+		SELECT COUNT(*) FROM GOODS_REVIEW_HEART WHERE NO = #{vo.no} AND M_NO = #{mno}
 	</select>
 	
 	<!-- 이 굿즈 번호로 조회했을 때 리뷰 몇 개나 있나요? -->
@@ -518,7 +534,7 @@
 		UPDATE GOODS_REVIEW
 		SET
 			SCORE = #{score},
-			CONTENT = #{content},
+			CONTENT = #{content}
 		WHERE NO = #{no}
 	</update>
 	

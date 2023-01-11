@@ -25,6 +25,7 @@
     display: flex;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 #nav > ul > li{
     text-align: center;
@@ -33,6 +34,7 @@
     text-align: center;
     margin: 20px;
     cursor: pointer; 
+    font-size: 20px;
 }
 .line {
     display: block;
@@ -42,6 +44,8 @@
     background-color: #8ca8e9;
     box-shadow: 0 0px 6px 1px var(--main-color);
     transition: .6s ease-out;
+    bottom: 0;
+    left: 0;
 }
 
 #contents, .line {
@@ -60,10 +64,14 @@
   border: 3px solid black;
 }
 .project-info{
-  height: 100px;
-  border: 1px solid var(--gray);
+  height: 107px;
+  border-bottom: 1px solid var(--gray);
   display: grid;
   grid-template-columns: 2fr 5fr 2fr;
+  align-items: center;
+}
+.project-info > div{
+  padding: 10px;
 }
 .content-first{
  
@@ -71,4 +79,10 @@
 .content-second{
   
 }
-
+input{
+  outline: none;
+}
+.prj-img{
+  width: 80px;
+  height: 80px;
+}

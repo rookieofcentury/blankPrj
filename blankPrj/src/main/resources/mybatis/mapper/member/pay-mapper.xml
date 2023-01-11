@@ -106,13 +106,15 @@
 	
 		SELECT PL.NO , PL.M_NO, PL.P_NO, PL.SET_NO, PL.PAY_NO, PL.ADDR_NO,
         TO_CHAR(PL.RESERVE_DATE,'YYYY-MM-DD'), TO_CHAR(PL.PAY_DATE,'YYYY-MM-DD'),
-        P.CHANGE_NAME, P.TITLE 
+        P.CHANGE_NAME, P.TITLE , PL.PRICE, PL.PAY_DATE
         
         FROM PAY_LIST PL
         JOIN PROJECT P
         ON P.NO = PL.P_NO
+       
 
         WHERE M_NO = #{mNo}
+        ORDER BY PL.RESERVE_DATE DESC
 		
 	</select>
 </mapper>
