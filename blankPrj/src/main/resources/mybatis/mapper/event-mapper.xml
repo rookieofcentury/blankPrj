@@ -24,7 +24,7 @@
 			SET
 				POINT = POINT + 500
 		</if>
-		<if test=" att == 30 ">
+		<if test=" att  == 30 ">
 			SET
 				POINT = POINT + 3000
 		</if>
@@ -32,7 +32,7 @@
 			SET
 				POINT = POINT + 45000
 		</if>
-		<if test=" att != 0 and att > 0 ">
+		<if test=" att != null and att != 7 and att != 30 and att != 365 ">
 			SET
 				POINT = POINT + 10
 		</if>

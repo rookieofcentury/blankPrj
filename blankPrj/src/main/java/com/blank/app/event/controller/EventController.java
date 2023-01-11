@@ -50,7 +50,7 @@ public class EventController {
 		List<String> list = es.selectAttList(vo.getNo());
 		int totalAtt = es.selectTotalAtt(vo.getNo());
 		
-		int perfectAtt = myPerfectAttendance(isCheck, vo);
+		int perfectAtt = myPerfectAttendance(vo);
 		
 		// 특정 일자 날짜 조회
 //		String dec31 = "2022/12/31";
@@ -75,7 +75,7 @@ public class EventController {
 	public String attendanceOn(String no, HttpSession session) {
 		
 		MemberVo vo = (MemberVo) session.getAttribute("loginMember");
-		int i = (int) session.getAttribute("perfectAtt");
+		int i = myPerfectAttendance(vo);
 		
 		int point;
 		
@@ -103,14 +103,14 @@ public class EventController {
 	}
 	
 	// 연속 출석 날짜 구하기!
-	public int myPerfectAttendance(boolean isCheck, MemberVo vo) {
+	public int myPerfectAttendance(MemberVo vo) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		
 		int i = 1;
 		
 		// 날짜 계속 조회
-		while(isCheck) {
+		while(true) {
 			
 			Date oneday = new Date(); // 오늘 날짜 조회하고
 			Date oneyesterday = new Date();

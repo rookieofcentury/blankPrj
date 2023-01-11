@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,34 +33,37 @@
                         </select>
                     </div>
                     <div class="standard-area">
-                        <label class="standard"><input type="radio" name="standard" value="newOrder"><span>최신등록순</span></label>
+                        <label class="standard"><input type="radio" name="standard" value="startDate"><span>최신등록순</span></label>
                         <label class="standard"><input type="radio" name="standard" value="endDate"><span>마감임박순</span></label>
                         <label class="standard"><input type="radio" name="standard" value="high"><span>목표높은순</span></label>
                         <label class="standard"><input type="radio" name="standard" value="low"><span>목표낮은순</span></label>
                     </div>
                 </div>
+                <input type="hidden" name="keyword">
             </form>
             <div class="result-ment">검색 결과 총 <span>${listCount}</span> 개의 프로젝트가 있습니다.</div>
             <div class="search-result-area">
-                <div class="result-item">
-                    <div class="result-img"><img src="/blank/resources/upload/goods/${item.thumbnail[0]}" alt="alt"></div>
-                    <div class="result-category">
-                        <div>카테고리${item.category}</div>
-                        <div>|</div>
-                        <div>창작자${item.creator}</div>
-                    </div>
-                    <div class="result-name">
-                        <div class="item-name">[메이플스토리] 귀염보스 몬스터들이 다시 돌아왔다!무드등,키링,그립톡까지!${item.title}</div>
-                    </div>
-                    <div class="result-summary">메이플스토리 몬스터들이 돌아왔다! 더 강력하고 새로운 귀여움으로 무장한 몬스터들의 심장폭격! [버섯집무드등]&[주스워터볼키링]에 이어 [워터볼그립톡]까지!!</div>
-                    <div class="result-for">
-                        <div class="percent-price">
-                            <div class="result-percent">811%</div>
-                            <div class="result-price"><span>${item.price}3,119,000</span>원</div>
+                <c:forEach items="${ProjectList}" var="item">
+                    <div class="result-item">
+                        <div class="result-img"><img src="/blank/resources/upload/project/${item.changeName}"></div>
+                        <div class="result-category">
+                            <div>${item.category}</div>
+                            <div>|</div>
+                            <div>${item.creator}</div>
                         </div>
-                        <div class="result-now">1일 남음</div>
+                        <div class="result-name">
+                            <div class="item-name">${item.title}</div>
+                        </div>
+                        <div class="result-summary">${item.summary}</div>
+                        <div class="result-for">
+                            <div class="percent-price">
+                                <div class="result-percent">811%</div>
+                                <div class="result-price"><span><fmt:formatNumber pattern="###,###,###" value="${item.price}"/></span>원</div>
+                            </div>
+                            <div class="result-now">1일 남음</div>
+                        </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
             <div class="search-page-area flex">
 
@@ -90,7 +94,7 @@
         var keyword = '${keyword}';
         console.log(keyword);
         $('input[name=keyword]').val(keyword);
-        $('#goods-search-form').submit();
+        $('#project-search-form').submit();
     })
 
     /* 카테고리 누르면 바로 submit */
@@ -98,7 +102,7 @@
         console.log("this");
         var keyword = '${keyword}';
         $('input[name=keyword]').val(keyword);
-        $('#goods-search-form').submit();
+        $('#project-search-form').submit();
     })
 
     $(document).ready(function() {
@@ -115,6 +119,8 @@
                 $(item).attr("selected", true);
             }
         })
+        var keyword = '${keyword}';
+        $('input[name=keyword]').val(keyword);
     })
 </script>
 </script>
