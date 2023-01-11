@@ -541,6 +541,7 @@ public class GoodsController {
 
 	}
 	
+	// 주문 완료 화면
 	@GetMapping("/order")
 	public String order(PaymentVo pay, Model model) {
 		
