@@ -74,6 +74,8 @@ public interface MemberService {
 
 	public List<PayListVo> selectPayListByNo(String mNo);
 
+	public int updateDefault(String no);
+
 
 
 

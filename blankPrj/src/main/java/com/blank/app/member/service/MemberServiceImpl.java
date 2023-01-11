@@ -262,5 +262,10 @@ public class MemberServiceImpl implements MemberService{
 		return dao.selectPayListByNo(sst, mNo);
 	}
 
+	@Override
+	public int updateDefault(String no) {
+		return dao.updateDefault(sst, no);
+	}
+
 
 }
