@@ -47,7 +47,7 @@
 						</div>
 						<div class="status-supporter">
 							<div>후원자</div>
-							<div> </div>
+							<div>&nbsp;</div>
 							<div><strong>${prj.fundingQuantity}</strong></div>
 							<div>명</div>
 						</div>

@@ -9,6 +9,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+<!-- alert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
 </head>
 <body>
 
@@ -124,7 +129,12 @@
                 }
             });
             } else{
-                alert('미동의 시 프로젝트를 진행할 수 없습니다.')
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "미동의 시 프로젝트를 진행할 수 없습니다",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
             }
         };
 

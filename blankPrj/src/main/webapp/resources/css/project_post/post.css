@@ -217,7 +217,7 @@ ol{
     display: flex;
     flex-wrap: wrap;
     padding-top: 100px;
-    margin: 0 0 50px 140px;
+    margin: 0 0 50px 160px;
     width: 70vw;
 }
 .content{
@@ -1205,6 +1205,9 @@ div[class*=-write] p{
 }
 .calculate-write div:first-child{
     margin-bottom: 5px;
+}
+.calculate-write p{
+    margin: 0 0 10px 0 !important;
 }
 .content-email>div:last-child{
     display: flex;

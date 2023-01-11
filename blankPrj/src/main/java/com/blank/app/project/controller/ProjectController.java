@@ -65,12 +65,13 @@ public class ProjectController {
 		prjVo.setFundingSum(fundingPrice);
 		
 		//달성률
-		int division = Math.floorMod(fundingSum,goal);
+//		int division = Math.floorMod(fundingSum,goal);
+		int division = Math.floorDiv(fundingSum,goal);
 //		int division = Math.floorMod(300,1000);
 //		System.out.println(division);
 		
-//		int percent = division * 100;
-		int percent = division / 10;
+		int percent = division * 100;
+//		int percent = division / 10;
 //		System.out.println(percent);
 		
 		prjVo.setPercent(percent);
@@ -405,6 +406,7 @@ public class ProjectController {
 	@ResponseBody
 //	public String savePrj(@RequestParam Map<String,String> map,HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
 		public String savePrj(ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
+		System.out.println(prjVo);
 		System.out.println(MemberVo);
 		System.out.println(itemVo);
 		
