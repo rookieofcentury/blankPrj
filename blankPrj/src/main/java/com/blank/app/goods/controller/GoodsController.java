@@ -154,7 +154,12 @@ public class GoodsController {
 	public String review(String no, Model model, HttpSession session) {
 		
 		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-		String mno = loginMember.getNo();
+		
+		String mno = "0";
+		
+		if(loginMember != null) {
+			mno = loginMember.getNo();			
+		}
 		
 		ReviewVo vo = gs.findReviewByNo(no, mno);
 		
@@ -164,9 +169,35 @@ public class GoodsController {
 		
 	}
 	
-	// 리뷰 수정
-	@RequestMapping("/review/edit")
-	public String reviewEdit(ReviewVo vo) {
+	// 리뷰 수정 화면
+	@GetMapping("/review/edit")
+	public String reviewEdit(String no, Model model, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		String mno = loginMember.getNo();
+		
+		ReviewVo vo = gs.findReviewByNo(no, mno);
+		
+		model.addAttribute("review", vo);
+		
+		return "goods/reviewEdit";
+		
+	}
+	
+	// 리뷰 수정 (찐)
+	@PostMapping("/review/edit")
+	public String reviewEdit(ReviewVo vo, HttpServletRequest req) throws IllegalStateException, IOException {
+		
+		if(vo.getReviewFile() != null) {
+			boolean isEmpty = vo.getReviewFile().isEmpty();			
+		}
+		
+		// 파일 저장
+		String file = null;
+		if (!vo.isEmpty()) {
+			file = FileUploader.upload(req, vo);
+			vo.setFileName(file);
+		}
 		
 		int result = gs.reviewEdit(vo);
 		
@@ -174,7 +205,7 @@ public class GoodsController {
 			return "";
 		}
 		
-		return "goods/review?no=" + vo.getNo();
+		return "redirect:/goods/review?no=" + vo.getNo();
 		
 	}
 	
@@ -488,7 +519,6 @@ public class GoodsController {
 		// payDate 문자열로 바꿔 주기
 		String dateStr = getTimestampToDate(pay.getPayDate());
 		pay.setPayDate(dateStr);
-		pay.setNo(null);
 		
 		List<CartVo> orderList = (List<CartVo>) session.getAttribute("orderList");
 		int result = gs.insertOrder(orderList, pay);
@@ -497,17 +527,17 @@ public class GoodsController {
 			return "error";
 		}
 		
-		PaymentVo vo = new PaymentVo();
-
-		if(result == 1) {
-			vo = gs.selectPaymentVoByNo(pay);
-			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
-			loginMember.setPoint(Integer.toString(Integer.parseInt(loginMember.getPoint()) - Integer.parseInt(pay.getUsepoint())));
-		}		
+		PaymentVo vo = gs.selectPaymentVoByNo(pay);
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+		
+		String usepoint = pay.getUsepoint();
+		if(usepoint != "0") {
+			loginMember.setPoint(Integer.toString(Integer.parseInt(loginMember.getPoint()) - Integer.parseInt(usepoint)));			
+		}
 		
 		session.removeAttribute("cart");
 
-		return "redirect:goods/order?no=" + vo.getNo();
+		return "redirect:/goods/order?no=" + vo.getNo();
 
 	}
 	

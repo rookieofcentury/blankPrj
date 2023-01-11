@@ -24,7 +24,7 @@
     <div class="wrap">
         
         <div class="container">
-            <div class="goods-category"><a href="/blank/goods"><i class="fa-solid fa-house"></i></a> 생활용품</div>
+            <div class="goods-category"><a href="/blank/goods"><i class="fa-solid fa-house"></i></a> <span class="goodsCate" onclick="goSearch();">${goods.category}</span></div>
             <div class="goods-info">
                 <div>${goods.name}</div>
                 <div>
@@ -152,8 +152,8 @@
     </div>
     
     <form id="fileForm" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="goods" value="${goods.no}">
         <input type="hidden" name="writer" value="${loginMember.no}">
+        <input type="hidden" name="goods" value="${goods.no}">
         <div class="modal">
             <div class="modal-container">
                 <div><button id="x-button"><i class="fa-solid fa-xmark"></i></button></div>
@@ -202,6 +202,22 @@
 	  container: '#share-btn',
 	  requestUrl: 'http://localhost:8888/blank/goods/detail',
 	});
+
+    // 카테고리별 이동
+    function goSearch() {
+        var gCate = $('.goodsCate').text();
+        if(gCate == "리빙/가전") {
+            location.href='/blank/goods/search?category=1';
+        } else if(gCate == "패션잡화") {
+            location.href='/blank/goods/search?category=2';
+        } else if(gCate == "문구류") {
+            location.href='/blank/goods/search?category=3';
+        } else if(gCate == "오피스") {
+            location.href='/blank/goods/search?category=4';
+        } else {
+            location.href='/blank/goods/search?category=5';
+        }
+    }
 
     // 장바구니 추가
     function addBasket() {

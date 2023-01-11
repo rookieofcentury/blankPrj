@@ -122,6 +122,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 결제 내역 찾기
 	public PaymentVo selectPaymentVoByNo(SqlSessionTemplate sst, PaymentVo pay) {
+		System.out.println("dao : " + pay);
 		return sst.selectOne("goodsMapper.selectPaymentVoByNo", pay);
 	}
 
@@ -225,6 +226,11 @@ public class GoodsDaoImpl implements GoodsDao {
 	// 리뷰 첨부 파일 삭제
 	public int deleteAtt(SqlSessionTemplate sst, String no) {
 		return sst.delete("goodsMapper.deleteAtt", no);
+	}
+
+	// 리뷰 첨부 파일 수정
+	public int editReviewFile(SqlSessionTemplate sst, ReviewVo vo) {
+		return sst.insert("goodsMapper.editReviewFile", vo);
 	}
 
 

@@ -205,7 +205,16 @@
     padding: 50px 30px;
     gap: 20px;
     width: 50%;
+    height: 720px;
+}
+.exhibition-item>div {
+    overflow: hidden;
+}
+.exhibition-item>div img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
 }
 .exhibition-item>div:nth-child(1) {
     display: flex;
@@ -232,6 +241,14 @@
 }
 .exhibition-item>div:nth-child(4)>span:nth-child(2) {
     color: var(--gray);
+}
+.onexhibit {
+    cursor: pointer;
+    background-color: #d9d9d9;
+    opacity: 0.5;
+    color: #343434;
+    font-size: 14px;
+    line-height: 200%;
 }
 
 /* 배너 및 스와이퍼 */

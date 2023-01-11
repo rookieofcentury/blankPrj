@@ -225,11 +225,12 @@
     $("document").ready(function () {
         var alertMsg = '${msg}';
         if(alertMsg != '') {
-            Swal.fire(
-            '안내 메시지',
-            alertMsg,
-            'info'
-            )
+            Swal.fire({
+                title: '안내 메시지',
+                text: alertMsg,
+                icon: 'info',
+                confirmButtonColor: '#567ACE'
+            })
         }
         var now = new Date();
         $('#now-time').text(now.getFullYear() + "-" + now.getMonth()+1 + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + " (GMT+9)");

@@ -1,4 +1,4 @@
-	$('#content-area').keyup(function (e){
+    $('#content-area').keyup(function (e){
         var content = $(this).val();
         $('#countReview').html(content.length + " 자 / 최대 200 자");
 

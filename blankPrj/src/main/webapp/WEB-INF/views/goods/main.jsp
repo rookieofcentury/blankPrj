@@ -74,7 +74,7 @@
             <div>
                 <div>Editor Picks</div>
                 <div>에디터가 골라 주는<br>이 달의 블랭크!</div>
-                <div class="flex">더 보러 가기</div>
+                <div class="flex" onclick="callexhibition();">더 보러 가기</div>
             </div>
             <div class="editor-item-area">
                 <div class="editor-item" onclick="location.href='/blank/goods/detail?no=14'">
@@ -82,48 +82,48 @@
                     <span class="padding-left item-name">케리아</span>
                     <span class="padding-left item-price"><label>89,000</label> 원</span>
                 </div>
-                <div class="editor-item">
-                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
-                    <span class="padding-left item-name">케리아</span>
-                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                <div class="editor-item" onclick="location.href='/blank/goods/detail?no=4'">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_28469111329400.jpg" alt=""></div>
+                    <span class="padding-left item-name">무릎담요</span>
+                    <span class="padding-left item-price"><label>24,000</label> 원</span>
                 </div>
-                <div class="editor-item">
-                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
-                    <span class="padding-left item-name">케리아</span>
-                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                <div class="editor-item" onclick="location.href='/blank/goods/detail?no=8'">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_29853234377300.jpg" alt=""></div>
+                    <span class="padding-left item-name">뚜슬리 슬리퍼</span>
+                    <span class="padding-left item-price"><label>18,900</label> 원</span>
                 </div>
-                <div class="editor-item">
-                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_35988641008900.jpg" alt=""></div>
-                    <span class="padding-left item-name">케리아</span>
-                    <span class="padding-left item-price"><label>89,000</label> 원</span>
+                <div class="editor-item" onclick="location.href='/blank/goods/detail?no=12'">
+                    <div class="editor-image-box"><img src="/blank/resources/upload/goods/goods_30642279960800.jpg" alt=""></div>
+                    <span class="padding-left item-name">하이라이트 점착지</span>
+                    <span class="padding-left item-price"><label>3,960</label> 원</span>
                 </div>
             </div>
         </div>
         <div class="exhibition-area">
             <div class="exhibition-item">
-                <div>이미지</div>
+                <div><img src="/blank/resources/images/exhibition/diary0.jpg" alt=""></div>
                 <div>
-                    <div>이미지1</div>
-                    <div>이미지2</div>
-                    <div>기획전 바로 가기 ></div>
+                    <div><img src="/blank/resources/images/exhibition/diary1.jpg" alt=""></div>
+                    <div><img src="/blank/resources/images/exhibition/diary2.jpg" alt=""></div>
+                    <div class="onexhibit flex" onclick="callexhibition();">기획전<br>바로 가기 ></div>
                 </div>
                 <div>2023 년을 빈손으로 맞이할 수는 없죠!</div>
                 <div>
                     <span>한 해를 맞이할 다이어리 문구류 모음전</span>
-                    <span>2022.12.03 - 2022.12.31</span>
+                    <span>2022.12.23 - 2023.01.28</span>
                 </div>
             </div>
             <div class="exhibition-item">
-                <div>이미지</div>
+                <div><img src="https://www.shutterstock.com/ko/blog/wp-content/uploads/sites/17/2018/12/shutterstock_764435446.jpg"></div>
                 <div>
-                    <div>이미지1</div>
-                    <div>이미지2</div>
-                    <div>기획전 바로 가기 ></div>
+                    <div><img src="https://www.elandrs.com/upload/prd/img/836/600/2110808836_0000003.jpg"></div>
+                    <div><img src="https://a.storyblok.com/f/112937/568x464/e81e7f792b/12-_christmas_traditions_from_around_the_world_square1.jpg"></div>
+                    <div class="onexhibit flex" onclick="callexhibition();">기획전<br>바로 가기 ></div>
                 </div>
                 <div>연말 맞이 선물하기 딱 좋은 블랭크 굿즈</div>
                 <div>
                     <span>선물 고민하지 마시고 여기로 ♥</span>
-                    <span>2022.12.03 - 2022.12.31</span>
+                    <span>2022.12.05 - 2023.01.15</span>
                 </div>
             </div>
         </div>
@@ -154,6 +154,15 @@
         });
         swiper.autoplay.start();
     });
+
+    function callexhibition() {
+        Swal.fire({
+            title: '준비 중!',
+            text: '준비 중입니다.',
+            icon: 'info',
+            confirmButtonColor: '#567ACE'
+        })
+    }
 </script>
 </body>
 </html>

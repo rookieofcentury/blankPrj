@@ -126,4 +126,7 @@ public interface GoodsDao {
 	// 리뷰 첨부 파일 삭제
 	int deleteAtt(SqlSessionTemplate sst, String no);
 
+	// 리뷰 첨부 파일 수정
+	int editReviewFile(SqlSessionTemplate sst, ReviewVo vo);
+
 }
