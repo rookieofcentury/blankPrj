@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% session.removeAttribute("msg"); %>
 <html>
 <head>
@@ -36,72 +37,22 @@
                     <span>기준시 <label id="now-time"></label></span>
                 </div>
                 <div class="focus-project-list">
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
+                    <c:forEach items="${randomList}" var="item">
+                        <div class="focus-project-item">
+                            <div class="image-box"><img src="/blank/resources/upload/project/${item.changeName}"></div>
+                            <div>
+                                <span>${item.category}ㅣ${item.creator}</span>
+                                <span>418 % 달성</span>
+                            </div>
+                            <div>${item.title}</div>
                         </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
-                    <div class="focus-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>
-                            <span>카테고리ㅣ창작자명</span>
-                            <span>418 % 달성</span>
-                        </div>
-                        <div>저는한줄프로젝트입니다</div>
-                    </div>
+                    </c:forEach>
                 </div>
-                <div>1 2 3 4</div>
+                <div class="page-area">
+                    <div class="page">1</div>    
+                    <div class="page">2</div>    
+                    <div class="page">3</div>    
+                </div>
             </div>
             <div class="popular-content">
                 <div class="popular-content-title">
@@ -114,93 +65,34 @@
                     </div>
                 </div>
                 <div class="popular-project">
-                    <div class="popular-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>1</div>
-                        <div class="popular-project-item-subtitle">
-                            <div>카테고리ㅣ창작자명</div>
-                            <div>프로젝트명입니다대충이렇게길게</div>
-                            <div>512% 달성</div>
+                    <c:forEach items="${popularList}" var="item">
+                        <c:set var="i" value="${i+1}"/>
+                        <div class="popular-project-item">
+                            <div class="image-box"><img src="/blank/resources/upload/project/${item.changeName}" alt="item-pic"></div>
+                            <div>${i}</div>
+                            <div class="popular-project-item-subtitle">
+                                <div>${item.category}ㅣ${item.creator}</div>
+                                <div>${item.title}</div>
+                                <div>512% 달성</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="popular-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>1</div>
-                        <div class="popular-project-item-subtitle">
-                            <div>카테고리ㅣ창작자명</div>
-                            <div>프로젝트명입니다대충이렇게길게</div>
-                            <div>512% 달성</div>
-                        </div>
-                    </div>
-                    <div class="popular-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>1</div>
-                        <div class="popular-project-item-subtitle">
-                            <div>카테고리ㅣ창작자명</div>
-                            <div>프로젝트명입니다대충이렇게길게</div>
-                            <div>512% 달성</div>
-                        </div>
-                    </div>
-                    <div class="popular-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>1</div>
-                        <div class="popular-project-item-subtitle">
-                            <div>카테고리ㅣ창작자명</div>
-                            <div>프로젝트명입니다대충이렇게길게</div>
-                            <div>512% 달성</div>
-                        </div>
-                    </div>
-                    <div class="popular-project-item">
-                        <div class="image-box"><img src="" alt="item-pic"></div>
-                        <div>1</div>
-                        <div class="popular-project-item-subtitle">
-                            <div>카테고리ㅣ창작자명</div>
-                            <div>프로젝트명입니다대충이렇게길게</div>
-                            <div>512% 달성</div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
         <div class="content new-content">
             <div class="blank-title">신규 프로젝트</div>
             <div class="new-project-list">
-                <div class="new-project-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>카테고리ㅣ창작자명</span>
-                        <span>418 % 달성</span>
+                <c:forEach items="${newList}" var="item" varStatus="index" begin="0" end="4" step="1">
+                    <div class="new-project-item">
+                        <div class="image-box"><img src="/blank/resources/upload/project/${item.changeName}" alt="item-pic"></div>
+                        <div>
+                            <span>${item.category}ㅣ${item.creator}</span>
+                            <span>418 % 달성</span>
+                        </div>
+                        <div>${item.title}</div>
                     </div>
-                    <div>저는한줄프로젝트입니다</div>
-                </div>
-                <div class="new-project-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>카테고리ㅣ창작자명</span>
-                        <span>418 % 달성</span>
-                    </div>
-                    <div>저는한줄프로젝트입니다</div>
-                </div>
-                <div class="new-project-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>카테고리ㅣ창작자명</span>
-                        <span>418 % 달성</span>
-                    </div>
-                    <div>저는한줄프로젝트입니다</div>
-                </div>
-                <div class="new-project-item">
-                    <div class="image-box"><img src="" alt="item-pic"></div>
-                    <div>
-                        <span>
-                            <span>카테고리</span>
-                            <span>|</span>
-                            <span>창작자명</span>
-                        </span>
-                        <span>418 % 달성</span>
-                    </div>
-                    <div>저는한줄프로젝트입니다</div>
-                </div>
+                </c:forEach>
             </div>
         </div>
         <div class="blank-project-info">
@@ -251,10 +143,25 @@
             },
         });
         swiper.autoplay.start();
+        getMainList(1);
     });
 
     function getAtt() {
         $('#attendance-btn').click();
+    }
+
+    function getMainList(param) {
+        $.ajax({
+            url: "/blank/getRandom",
+            method: "POST",
+            data: {
+                p: param
+            },
+            success: function(data) {
+                console.log("불러오기 success");
+            }
+
+        })
     }
 </script>
 </body>
