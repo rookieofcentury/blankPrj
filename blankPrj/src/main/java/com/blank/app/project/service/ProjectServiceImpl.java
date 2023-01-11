@@ -196,5 +196,20 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.selectSum(sst,p);
 	}
 
+	@Override
+	public int minusCnt(String setNo) {
+		return dao.minusCnt(sst,setNo);
+	}
+
+	@Override
+	public int selectCalDate(int p) {
+		return dao.selectCalDate(sst,p);
+	}
+
+	@Override
+	public int selectFundingQuantity(int p) {
+		return dao.selectFundingQuantity(sst,p);
+	}
+
 
 }
