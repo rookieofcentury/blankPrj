@@ -34,6 +34,7 @@ public class ProjectVo {
 	private String calDate; // 남은기간 계산 
 	private String payDate;
 	private String changeName;
+	private String like;
 	private MultipartFile prjfile;
 	private List<ItemVo> items;
 	

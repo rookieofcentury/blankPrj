@@ -67,16 +67,14 @@ public class ProjectController {
 		prjVo.setFundingSum(fundingPrice);
 		
 		//달성률
-//		int division1 = Math.floorMod(fundingSum,goal);
-		int division1 = Math.floorMod(300,1000);
-		int division = Math.floorDiv(300,1000);
+		int division = Math.floorMod(fundingSum,goal);
+//		int division = Math.floorDiv(300,1000);
 		
 //		int division = Math.floorMod(300,1000);
-		System.out.println("1" + division1);
 		System.out.println(division);
 		
 		int percent1 = division * 100;
-		int percent = division / 10;
+		int percent = division / 10000;
 		System.out.println(percent1);
 		System.out.println(percent);
 		
