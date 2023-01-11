@@ -32,7 +32,7 @@
                 <div class="project-search">
                 
                     <select class="category" name="category">
-                        <option value="title">제목</option>
+                        <option value="t.title">제목</option>
                         <option value="m.nick">작성자</option>
                     </select
                     ><input type="text" name="keyword">

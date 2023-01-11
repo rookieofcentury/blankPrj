@@ -27,12 +27,21 @@
 				<img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'">
 			</div>
 			<div class="member-area">
-				<c:if test="${loginMember != NULL}">
+			
+			    <c:if test="${loginMember.no == 0}">
+	               <div class="mypage-area">
+	                  <div class="mypage-btn afterLogin flex" onclick="location.href='/blank/chat/list'">고객의 소리</div>
+	                  <div class="logout-btn afterLogin flex" onclick="location.href='/blank/member/logout'"><span class="material-symbols-outlined">logout</span></div>
+	               </div>
+	            </c:if>
+			
+				<c:if test="${loginMember != NULL && loginMember.no != 0}">
 					<div class="mypage-area">
 						<div class="mypage-btn afterLogin flex" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
 						<div class="logout-btn afterLogin flex" onclick="location.href='/blank/member/logout'"><span class="material-symbols-outlined">logout</span></div>
 					</div>
 				</c:if>
+
 				<c:if test="${loginMember == NULL}">
 					<div class="flex id-area" onclick="location.href='/blank/member/login'"><span class="material-symbols-outlined">account_circle</span>로그인</div>
 				</c:if>

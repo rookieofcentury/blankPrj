@@ -13,7 +13,7 @@
 <body>
 
     <header>
-        <div> 블랭크 고객센터 </div>
+        <div> <a onclick="goBack();">&lt;</a> 블랭크 고객센터 </div>
     </header>
 
 	<main> 
@@ -77,6 +77,11 @@
 </body>
 
 <script>
+
+    function goBack(){
+        window.history.back();
+    }
+
     function ask(qNo, fixQ){
     
         const hidden = document.querySelectorAll('.question-item-btn');
