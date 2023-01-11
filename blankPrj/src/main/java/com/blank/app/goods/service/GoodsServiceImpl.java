@@ -161,6 +161,8 @@ public class GoodsServiceImpl implements GoodsService {
 	// 주문 화면 도출에 필요한 no 받아 오기
 	public PaymentVo selectPaymentVoByNo(PaymentVo pay) {
 		
+		System.out.println("service : " + pay);
+		
 		PaymentVo vo = dao.selectPaymentVoByNo(sst, pay);
 		
 		if(vo.getStatus().equals("P")) {
@@ -298,7 +300,7 @@ public class GoodsServiceImpl implements GoodsService {
 		String file = vo.getFileName();
 		
 		if(file != null) {
-			result2 = dao.insertReviewFile(sst, vo);
+			result2 = dao.editReviewFile(sst, vo);
 		}
 		
 		return result * result2;

@@ -59,7 +59,7 @@
                 <div>
                     <div class="title-area">
                         <span class="title">배송 정보</span>
-                        <input type="checkbox" name="delivery-form-btn" id="delivery-change-btn"><label for="delivery-change-btn" id="change-btn">변경</label><button>취소</button>
+                        <input type="checkbox" name="delivery-form-btn" id="delivery-change-btn"><label for="delivery-change-btn" id="change-btn">변경</label>
                     </div>
                     <div class="delivery-info">
                         <div>받는 분</div>
@@ -181,24 +181,8 @@
     function callReceipt() {
 		var url = "${pay.receiptUrl}";
 		var name = "영수증 보기";
-		var option = "width = 100%, height = 100%, location = yes"
+		var option = "width = 414px, height = 513px, location = yes"
 		window.open(url, name, option);
 	}
-</script>
-<script>
-    function cancelPay() {
-    $.ajax({
-        url: "/blank/goods/order/cancel",
-        method: "POST",
-        data: {
-            merchant_uid: '${pay.metchantUid}',
-            cancel_request_amount: '${pay.totalPrice}',
-            reason: '${}',
-        },
-        success: {
-
-        }
-    })
-  }
 </script>
 </html>

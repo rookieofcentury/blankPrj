@@ -1,54 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Blank</title>
-<link rel="stylesheet" href="/blank/resources/css/goods/review.css">
+<link rel="stylesheet" href="/blank/resources/css/goods/reviewDetail.css">
+<script src="https://kit.fontawesome.com/77ad8525ff.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 
-    <div class="modal">
-        <form action="/blank/goods/review/write" method="POST">
-            <div class="modal-container">
-                <div class="modal-goods-info">
-                    <div>
-                        <img src="/blank/resources/upload/goods/${goods.thumbnail[0]}" alt="img">
-                    </div>
-                    <div>
-                        <span>${goods.name}</span>
-                        <span>&#x20A9; <span>${goods.price}</span></span>
-                        <span>리뷰 <span class="review-total-cnt"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 <span class="review-total-score"></span></span>
-                    </div>
-                </div>
-                <div class="review-modal-score">
-                    <span>상품은 어떠셨나요?</span>
-                    <span class="star">
-                       	 ★★★★★
-                        <span>★★★★★</span>
-                        <input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-                    </span>
-                </div>
-                <div class="review-modal-content">
-                    <textarea name="content" id="content-area" cols="30" rows="10" placeholder="자세한 후기는 다른 고객의 구매에 많은 도움이 되며, 오해의 소지가 있는 내용을 작성 시 검토 후 비공개 조치될 수 있습니다. 반품/환불 문의는 1:1 문의로 가능합니다."></textarea>
-                    <span id="countReview">0 자 / 최대 200 자</span>
-                </div>
-                <div class="review-modal-pic">
-                    <div>
-                        <span>사진 등록</span>
-                        <span>0 장 / 최대 1 장</span>
-                    </div>
-                    <div>
-                        <label id="input-file-button" for="input-file"> + </label>
-                        <input type="file" id="input-file" onchange="readURL(this);">
-                        <input type="submit" value="작성하기" id="submit-button">
-                    </div>
-                </div>
+    <div class="wrap">
+        <div class="modal-container">
+            <div class="name-date-area">
+                <span class="review-writer">${review.writer}</span>
+                <span>|</span>
+                <span>${review.enrollDate}</span>
             </div>
-        </form>
+            <div class="goods-info-area">
+                <div class="goods-info-box">
+                    <div>${goods.name}</div>
+                    <div>&#x20A9; ${goods.price}</div>
+                </div>
+                <c:if test="${loginMember.nick == review.writer}">
+                    <div class="btn-area">
+                        <button onclick="editReview();">수정</button>
+                        <button onclick="deleteReview();">삭제</button>
+                    </div>
+                </c:if>
+            </div>
+            <div class="review-modal-score">
+                <span class="star">
+                        ★★★★★
+                    <span class="star-jjin">★★★★★</span>
+                    <input type="hidden" name="hiddenNo" value="${review.no}">
+                    <input type="hidden" name="hiddenMno" value="${loginMember.no}">
+                    <input type="hidden" name="hiddenScore" value="${review.score}">
+                    <input type="hidden" name="hiddenLike" value="${review.isLikeLm}">
+                </span>
+                <div class="review-like">
+                    <input type="checkbox" class="likeCheck" id="likeCheck" onchange="reviewLike(this, '${review.no}'); cntUp(this);">
+                    <label for="likeCheck"><i class="fa-solid fa-heart"></i></label><span>${review.like}</span></div>
+            </div>
+            <div class="review-modal-content">
+                <div class="content-area">${review.content}</div>
+            </div>
+            <div class="review-img">
+                <img src="/blank/resources/upload/review/${review.fileName}" onerror="this.parentNode.style.display='none';">
+            </div>
+        </div>
     </div>
     
 </body>
-<script src="/blank/resources/js/goods/review.js"></script>
+<script src="/blank/resources/js/goods/reviewDetail.js"></script>
 </html>
