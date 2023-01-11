@@ -2,12 +2,14 @@ package com.blank.app.project.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.blank.app.admin.common.PageVo;
 import com.blank.app.member.dao.MemberDao;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
@@ -211,5 +213,13 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.selectFundingQuantity(sst,p);
 	}
 
+	// 프로젝트 검색 결과 총 몇 개?
+	public int searchListCount(Map<String, String> map) {
+		return dao.searchListCount(sst, map);
+	}
 
+	// 검색 결과 VoList 불러오기
+	public List<ProjectVo> searchPrjList(Map<String, String> map, PageVo pageVo) {
+		return dao.searchPrjList(sst, map, pageVo);
+	}
 }

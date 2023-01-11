@@ -2,10 +2,13 @@ package com.blank.app.project.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.blank.app.admin.common.PageVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayListVo;
@@ -212,4 +215,20 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sst.selectOne("projectMapper.selectFundingQuantity", p);
 	}
 
+	// 검색 결과 도합 몇 개인지
+		public int searchListCount(SqlSessionTemplate sst, Map<String, String> map) {
+			return sst.selectOne("projectMapper.searchListCount", map);
+		}
+
+	// 검색 결과 VoList 도출
+	public List<ProjectVo> searchPrjList(SqlSessionTemplate sst, Map<String, String> map, PageVo pv) {
+		
+		int offset = (pv.getCurrentPage() - 1) * pv.getBoardLimit();
+		int limit = pv.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return sst.selectList("projectMapper.searchPrjList", map, rb);
+		
+	}
+		
 }

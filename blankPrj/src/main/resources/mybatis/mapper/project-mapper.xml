@@ -330,7 +330,7 @@
 	</select>
 	
 	<update id="minusCnt">
-        UPDATE SET_ITEM SET SET_QUANTITY = SET_QUANTITY - 1 WHERE SET_NO = #{setNo};
+        UPDATE SET_ITEM SET SET_QUANTITY = SET_QUANTITY - 1 WHERE SET_NO = #{setNo}
 	</update> 
 	
 	<select id="selectCalDate" resultType="int">
@@ -341,4 +341,55 @@
       SELECT COUNT(*) FROM PAY_LIST WHERE P_NO = #{p}
 	</select>
 	
+	<!-- 검색 결과 총 몇 개 -->
+	<select id="searchListCount" resultType="int">
+		SELECT COUNT(*) FROM PROJECT
+		WHERE DELETE_YN = 'N'
+		<if test=" category != null and category != '' ">
+			AND CATEGORY = #{category}
+		</if>
+		<if test=" keyword != null and keyword != '' ">
+			AND TITLE LIKE '%${keyword}%'
+		</if>
+	</select>
+	
+	<!-- 검색 결과 도출 달성율 미완성 -->
+	<select id="searchPrjList" resultType="ProjectVo">
+		SELECT 
+	        P.NO
+	        ,P.TITLE
+	        ,P.PRICE
+	        ,P.START_DATE
+	        ,P.END_DATE
+	        ,P.TIME
+	        ,P.URL
+	        ,P.STORY
+	        ,M.NO MNO
+	        ,M.NICK CREATOR
+	        ,P.SUMMARY
+	        ,C.NAME AS CATEGORY
+	        ,P.CHANGE_NAME
+			FROM PROJECT P
+			INNER JOIN MEMBER M ON P.CREATOR = M.NO
+			INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
+			WHERE P.DELETE_YN = 'N'
+			<if test=" category != null and category != '' ">
+				AND P.CATEGORY = #{category}
+			</if>
+			<if test=" keyword != null and keyword != '' ">
+				AND P.TITLE LIKE '%${keyword}%'
+			</if>
+			<if test=" standard != null and standard == 'endDate' ">
+				ORDER BY P.END_DATE
+			</if>
+			<if test=" standard != null and standard == 'startDate' ">
+				ORDER BY P.START_DATE DESC
+			</if>
+			<if test=" standard != null and standard == 'high' ">
+				ORDER BY P.PRICE DESC
+			</if>
+			<if test=" standard != null and standard == 'low' ">
+				ORDER BY P.PRICE
+			</if>
+	</select>
 </mapper>

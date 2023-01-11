@@ -2,9 +2,11 @@ package com.blank.app.project.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.blank.app.admin.common.PageVo;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
 import com.blank.app.pay.vo.PayListVo;
@@ -80,5 +82,9 @@ public interface ProjectDao {
 	int selectCalDate(SqlSessionTemplate sst, int p);
 
 	int selectFundingQuantity(SqlSessionTemplate sst, int p);
+
+	int searchListCount(SqlSessionTemplate sst, Map<String, String> map);
+
+	List<ProjectVo> searchPrjList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
 
 }
