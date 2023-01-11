@@ -33,10 +33,9 @@ public class HelpController {
 	
 	//고객센터 메인(화면)
 	@GetMapping("main")
-	public String main(HttpServletRequest req, HttpSession session, String p) {
+	public String main(HttpSession session, String category, String keyword, String p) {
 		
-		String category = req.getParameter("category");
-		String keyword = req.getParameter("keyword");
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 
 		if (p == null) {
 			p = "1";
@@ -51,6 +50,7 @@ public class HelpController {
 		Map<String, String> map = new HashMap<>();
 		map.put("category", category);
 		map.put("keyword", keyword);
+		map.put("loginMember", loginMember.getNick());
 
 		List<HelpVo> voList = helpService.selectHelp(map, pageVo);
 
@@ -61,10 +61,9 @@ public class HelpController {
 	
 	//블랭크에게 문의하기 목록 조회
 	@GetMapping("inquiryList")
-	public String help(HttpServletRequest req, HttpSession session, String p) {
+	public String help(HttpSession session, String category, String keyword, String p) {
 		
-		String category = req.getParameter("category");
-		String keyword = req.getParameter("keyword");
+		MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 
 		if (p == null) {
 			p = "1";
@@ -79,9 +78,13 @@ public class HelpController {
 		Map<String, String> map = new HashMap<>();
 		map.put("category", category);
 		map.put("keyword", keyword);
-
+		map.put("loginMember", loginMember.getNick());
+		
 		List<HelpVo> voList = helpService.selectInquiry(map, pageVo);
 
+		System.out.println(voList);
+		System.out.println(loginMember);
+		
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
 		session.setAttribute("pageVo", pageVo);

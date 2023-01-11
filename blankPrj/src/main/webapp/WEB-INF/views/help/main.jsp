@@ -67,18 +67,19 @@
     
                 <c:forEach items="${voList}" var="vo">
                 
-                    <c:if test="${vo.secretYn eq 'N'}">
-	                    <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
-	                </c:if>
-	                
-	               	<c:if test="${vo.secretYn == null}">
-	                    <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
-	                </c:if>
-                    
-                    <c:if test="${vo.secretYn eq 'Y'}">
+					<c:if test="${vo.secretYn eq 'N'}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
+					</c:if>
+					<c:if test="${vo.secretYn == null}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
+					</c:if>
+    				<c:if test="${vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
 	                	<div>Q. ${vo.title} &nbsp; <img src="/blank/resources/images/help/secret.png" width="11" height="13"></div>
 	                </c:if>
-                    
+					<c:if test="${vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
+	                	<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">Q. ${vo.title}</a></div>
+	                </c:if>
+
                     <div>${vo.memberNo}</div>
                     <div>${vo.writeDate}</div>
     

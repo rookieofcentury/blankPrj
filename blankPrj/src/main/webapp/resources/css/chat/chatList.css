@@ -2,3 +2,121 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
+header{
+    border: 1px solid rgb(200, 200, 200);
+    width: 420px;
+    height: 50px;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 6%;
+    border-radius: 20px 20px 0px 0px;
+    background-color: rgb(239, 239, 239);
+}
+
+header div{
+    line-height: 40px;
+    margin-left: 13%;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(66, 66, 66);
+}
+
+main{
+    width: 420px;
+    height: 590px;
+    margin-left: 40%;
+    margin-right: 40%;
+    border: 1px solid rgb(200, 200, 200);
+    border-top: none;
+    overflow:auto;
+}
+
+#title{
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 3px;
+    color: rgb(66, 66, 66);
+}
+
+main::-webkit-scrollbar {
+    width: 6px;  /* 스크롤바의 너비 */
+}
+
+main::-webkit-scrollbar-thumb {
+    height: 5%; /* 스크롤바의 길이 */
+    background: rgb(176, 176, 176); /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+main::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+a {
+    text-decoration-line: none;
+    color: rgb(66, 66, 66);
+}
+
+#blank-logo{
+    width: 90px;
+    height: 85px;
+    /* border: 1px solid rgb(200, 200, 200); */
+    background-color: rgb(246, 246, 246);
+    margin-left: 40%;
+    border-radius: 50px;
+    margin-top: 15px;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.blank-logo{
+    width: 70px;
+    height: 65px;
+    margin: 10%;
+}
+
+.chat-list{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr 0.7fr;
+    margin-top: 15px;
+}
+
+.chat-list div{
+    border: none;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    text-align: center;
+    color: rgb(66, 66, 66);
+    padding: 13px;
+    font-size: 14px;
+}
+
+footer{
+    border: 1px solid rgb(200, 200, 200);
+    background-color: rgb(239, 239, 239);
+    border-top: none;
+    width: 420px;
+    height: 50px;
+    margin-left: 40%;
+    padding-top: 12px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.dong{
+    width: 40px;
+    height: 40px;
+    margin-left: 47%;
+    border-radius: 100%;
+    border: 1px solid rgb(200, 200, 200);
+    background-color: rgb(205, 205, 205);
+}
+
+.nemo{
+    width: 18px;
+    height: 18px;
+    margin: 10px;
+    border-radius: 2px;
+    border: 1px solid rgb(229, 229, 229);
+    cursor: pointer;
+}

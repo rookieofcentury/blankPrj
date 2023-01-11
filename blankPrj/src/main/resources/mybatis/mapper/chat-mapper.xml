@@ -38,7 +38,7 @@
 	
 	<!-- 채팅 목록 조회 -->
 	<select id="selectList" resultType="ChatMessageVo">
-			SELECT M.NICK AS SEND_NO, CONTENT, WRITE_DATE
+			SELECT CM.SEND_NO AS NO, M.NICK AS SEND_NO, CONTENT, SUBSTR(CM.WRITE_DATE, 1, 8) AS WRITE_DATE
 			FROM CHAT_MESSAGE CM
             JOIN MEMBER M
             ON CM.SEND_NO = M.NO

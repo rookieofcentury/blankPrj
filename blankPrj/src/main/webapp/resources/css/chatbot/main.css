@@ -144,8 +144,6 @@ a {
 
 #result{
     display: grid;
-    float: right;
-    justify-items: right;
 }
 
 .user-talk{
@@ -155,15 +153,14 @@ a {
     border-radius: 15px;
     display:inline-block;
     max-width:290px;
-    text-align: left;
     margin-right: 5px;
     margin-top: 5px;
     padding: 5px;
 }
 
 .user-talk-btn{
-    float: right;
     margin-right: 20px;
+    text-align: right;
 }
 
 .admin-answer-btn{
@@ -177,7 +174,7 @@ a {
 }
 
 .chat-answer{
-    border: 1px solid rgb(200, 200, 200);;
+    border: 1px solid rgb(200, 200, 200);
     border-radius: 15px;
     display:inline-block;
     max-width:290px;
