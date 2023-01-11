@@ -274,5 +274,13 @@ public class AdminDaoImpl implements AdminDao{
 	public List<Map<String, String>> selectStats(SqlSessionTemplate sst) {
 		return sst.selectList("adminMapper.selectStats");
 	}
+
+	//닉네임 중복 조회
+	@Override
+	public int checkNick(SqlSessionTemplate sst, String nick) {
+		return sst.selectOne("adminMapper.checkNick", nick);
+	}
+	
+	
 	
 }

@@ -120,6 +120,16 @@ public class AdminController {
 		return "redirect:member";
 	}
 
+	//회원 닉네임 중복 확인
+	@GetMapping("checkNick")
+	@ResponseBody
+	public int checkNick(String nick) {
+		
+		int result = adminService.checkNick(nick);
+		
+		return result;
+	}
+	
 	// 프로젝트 관리 목록(화면)
 	@GetMapping("project")
 	public String projectList(HttpServletRequest req, HttpSession session, String p) {
@@ -633,7 +643,7 @@ public class AdminController {
 	
 	// 통계 (화면)
 	@GetMapping("stats")
-	public String stats(HttpServletRequest req, HttpSession session, String p) {
+	public String stats(HttpSession session, String p) {
 		
 		if (p == null) {
 			p = "1";
@@ -641,12 +651,15 @@ public class AdminController {
 
 		int quitCount = adminService.quitCount();
 		int currentPage = Integer.parseInt(p);
-		int boardLimit = 5;
+		int boardLimit = 10;
 		int pageLimit = 5;
 		PageVo pageVo = Pagination.getPageVo(quitCount, currentPage, pageLimit, boardLimit);
 
 		List<MemberVo> voList = adminService.selectQuitList(pageVo);
 
+		System.out.println("!!!!여기 확인하셈!!!!!" + voList);
+		System.out.println("!!!!여기 확인하셈!!!!!" + pageVo);
+		
 		session.setAttribute("voList", voList);
 		session.setAttribute("quitCount", quitCount);
 		session.setAttribute("pageVo", pageVo);

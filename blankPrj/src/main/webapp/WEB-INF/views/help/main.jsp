@@ -20,19 +20,6 @@
     
                 <div class="title">무엇을 도와 드릴까요?</div>
     
-                <form action="" method="get">
-                
-                    <div class="search">
-                    
-                        <div><input type="text" name="keyword"></div>
-                        <div>
-                            <input type="image" src="/blank/resources/images/admin/search.png" alt="search.png">
-                        </div>
-                        
-                    </div>
-                    
-                </form>
-    
             </div>
     
             <div class="help-middle">

@@ -254,6 +254,12 @@ public class AdminServiceImpl implements AdminService{
 		return admindao.selectStats(sst);
 	}
 
+	//닉네임 중복 조회
+	@Override
+	public int checkNick(String nick) {
+		return admindao.checkNick(sst, nick);
+	}
+
 
 
 

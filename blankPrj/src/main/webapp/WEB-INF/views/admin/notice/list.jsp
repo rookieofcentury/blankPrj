@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +57,18 @@
                 
         		<c:forEach items="${voList}" var="vo">
 	                <div>${vo.no}</div>
-	                <div>${vo.title}</div>
-	                <div>${vo.content}</div>
+                    <c:if test="${fn:length(vo.title) ge 25}">
+						<div>${fn:substring(vo.title, 0, 25)}...</div>
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 25}">
+						<div>${vo.title}</div>
+					</c:if>
+                    <c:if test="${fn:length(vo.content) ge 25}">
+						<div>${fn:substring(vo.content, 0, 25)}...</div>
+					</c:if>
+					<c:if test="${fn:length(vo.content) lt 25}">
+                        <div>${vo.content}</div>
+					</c:if>
 	                <div>${vo.adminNo}</div>
 	                <div>${vo.writeDate}</div>
 	                <div><a href="/blank/admin/noticeDetail?no=${vo.no}&deleteYn=${vo.deleteYn}" name="no"><img src="/blank/resources/images/admin/edit.png"  class="edit-img"></a></div>
