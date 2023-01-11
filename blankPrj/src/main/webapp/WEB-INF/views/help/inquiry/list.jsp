@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,9 +57,39 @@
 				<div class="inquiry-title">작성날짜</div>
    
     			<c:forEach items="${voList}" var="vo">
-    				
+				
                 	<div>${vo.no}</div>
-					<c:if test="${vo.secretYn eq 'N'}">
+
+                    <c:if test="${fn:length(vo.title) ge 23 && vo.secretYn eq 'N'}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.title, 0, 23)}...</a></div>	
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 23 && vo.secretYn eq 'N'}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					</c:if>
+
+                    <c:if test="${fn:length(vo.title) ge 23 && vo.secretYn == null}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.title, 0, 23)}...</a></div>	
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 23 && vo.secretYn == null}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					</c:if>
+
+                    <c:if test="${fn:length(vo.title) ge 23 && vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.title, 0, 23)}...</a></div>	
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 23 && vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					</c:if>
+
+                    <c:if test="${fn:length(vo.title) ge 23 && vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.title, 0, 23)}...</a></div>	
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 23 && vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					</c:if>
+
+
+					<!-- <c:if test="${vo.secretYn eq 'N'}">
 						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
 					</c:if>
 					<c:if test="${vo.secretYn == null}">
@@ -69,16 +100,34 @@
 	                </c:if>
 					<c:if test="${vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
 	                	<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
-	                </c:if>
+	                </c:if> -->
+
+
 	                <c:if test="${vo.secretYn eq 'Y'}">
 	                	<div>작성자와 관리자만 확인할 수 있습니다. &nbsp;<img src="/blank/resources/images/help/secret.png" width="11" height="13"></div>
 	                </c:if>
-	                <c:if test="${vo.secretYn eq 'N'}">
+
+                    <c:if test="${fn:length(vo.title) ge 26 && vo.secretYn eq 'N'}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.content, 0, 26)}...</a></div>	
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 26 && vo.secretYn eq 'N'}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.content}</a></div>
+					</c:if>
+					<c:if test="${fn:length(vo.title) ge 26 && vo.secretYn == null}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.content, 0, 26)}...</a></div>	
+					</c:if>
+					<c:if test="${fn:length(vo.title) lt 26 && vo.secretYn == null}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.content}</a></div>
+					</c:if>
+
+
+	                <!-- <c:if test="${vo.secretYn eq 'N'}">
 	                	<div>${vo.content}</div>
 	                </c:if>
 	                <c:if test="${vo.secretYn == null}">
 	                	<div>${vo.content}</div>
-	                </c:if>
+	                </c:if> -->
+
 	                <div>${vo.memberNo}</div>
 	                <c:if test="${vo.status eq 'N'}">
 	                	<div id="waiting">답변 대기</div>

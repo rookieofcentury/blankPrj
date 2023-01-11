@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +57,18 @@
             		
             		<c:forEach items="${voList}" var="vo">
 	           			<div>${vo.no}</div>
-	                    <div>${vo.title}</div>
-	                    <div>${vo.content}</div>
+                        <c:if test="${fn:length(vo.title) ge 23}">
+                            <div>${fn:substring(vo.title, 0, 23)}...</div>
+                        </c:if>
+                        <c:if test="${fn:length(vo.title) lt 23}">
+                            <div>${vo.title}</div>
+                        </c:if>
+                        <c:if test="${fn:length(vo.content) ge 30}">
+                            <div>${fn:substring(vo.content, 0, 30)}...</div>
+                        </c:if>
+                        <c:if test="${fn:length(vo.content) lt 30}">
+                            <div>${vo.content}</div>
+                        </c:if>
 	                    <div>${vo.memberNo}</div>
 	                    <div>${vo.writeDate}</div>
 	                    <c:if test="${vo.status eq 'Y'}">

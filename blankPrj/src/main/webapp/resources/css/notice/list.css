@@ -52,7 +52,7 @@ main{
 .search{
     display: flex;
     margin-bottom: 15px;
-    margin-left: 35%;
+    margin-left: 37%;
     margin-right: 35%;
 }
 
@@ -83,7 +83,7 @@ main{
 #page-area{
     height: 40px;
     margin-left: 45%;
-    margin-right: 45%;
+    margin-right: 40%;
     margin-top: 25px;
     border-bottom: none;
 }

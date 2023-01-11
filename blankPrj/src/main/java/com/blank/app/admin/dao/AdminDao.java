@@ -98,5 +98,7 @@ public interface AdminDao {
 
 	public List<Map<String, String>> selectStats(SqlSessionTemplate sst);
 
+	public int checkNick(SqlSessionTemplate sst, String nick);
+
 	
 }

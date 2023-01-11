@@ -85,7 +85,7 @@
 		FROM MEMBER
 		WHERE STATUS = 'Y'
 		<if test=" keyword != null and keyword != '' ">
-			WHERE ${category} LIKE '%${keyword}%'
+			AND WHERE ${category} LIKE '%${keyword}%'
 		</if>
 		ORDER BY NO DESC
 	</select>
@@ -111,7 +111,7 @@
 	
 	<!-- 프로젝트 목록 조회 -->
 	<select id="selectProjectList" resultType="ProjectVo">
-		SELECT P.NO, M.NICK AS CREATOR, CONCAT(SUBSTR(P.TITLE, 1, 28),'...') AS TITLE, C.NAME AS CATEGORY, TO_CHAR(P.PRICE,'fm999,999,999,999') AS PRICE, TO_CHAR(P.START_DATE, 'YYYY-MM-DD') AS START_DATE, TO_CHAR(P.END_DATE, 'YYYY-MM-DD') AS END_DATE, P.STATUS
+		SELECT P.NO, M.NICK AS CREATOR, P.TITLE, C.NAME AS CATEGORY, TO_CHAR(P.PRICE,'fm999,999,999,999') AS PRICE, TO_CHAR(P.START_DATE, 'YYYY-MM-DD') AS START_DATE, TO_CHAR(P.END_DATE, 'YYYY-MM-DD') AS END_DATE, P.STATUS
 		FROM PROJECT P
 		LEFT JOIN MEMBER M ON P.CREATOR = M.NO
 		JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
@@ -184,7 +184,7 @@
 	
 	<!-- FAQ 목록 조회 -->
 	<select id="selectFaqList" resultType="FaqVo">
-		SELECT F.NO, F.TITLE, C.NAME AS CATEGORY, CONCAT(SUBSTR(CONTENT, 1, 28),'...') AS CONTENT, A.ID AS ADMIN_NO, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, F.DELETE_YN
+		SELECT F.NO, F.TITLE, C.NAME AS CATEGORY, CONTENT, A.ID AS ADMIN_NO, SUBSTR(WRITE_DATE, 1, 8) AS WRITE_DATE, F.DELETE_YN
 		FROM FAQ F
 		LEFT JOIN ADMIN A ON F.ADMIN_NO = A.NO
 		JOIN FAQ_CATEGORY C ON C.NO = F.CATEGORY
@@ -360,6 +360,10 @@
         ON M.QUIT_NO = Q.NO
         WHERE STATUS = 'N'
         GROUP BY Q.CONTENT
+	</select>
+	
+	<select id="checkNick" resultType="int">
+   		SELECT COUNT(*) FROM MEMBER WHERE NICK = #{nick}
 	</select>
 	
 </mapper>

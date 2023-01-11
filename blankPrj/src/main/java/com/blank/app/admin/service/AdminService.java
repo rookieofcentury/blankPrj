@@ -98,5 +98,7 @@ public interface AdminService {
 
 	public List<Map<String, String>> selectStats();
 
+	public int checkNick(String nick);
+
 
 }
