@@ -53,16 +53,15 @@
                     <div><input type="submit" value="로그인" class="input login-info"></div>
                 </div>
                 <div class="container-main-area right">
-                    <div><a href="/blank/member/findId">아이디를 찾기</a><a href="/blank/member/findPwd">비밀번호 찾기</a><a href="/blank/member/join">회원가입하기</a></div>
+                    <div><a href="/blank/member/findId">아이디를 찾기 |</a><a href="/blank/member/findPwd">비밀번호 찾기 |</a><a href="/blank/member/join">회원가입하기</a></div>
                 </div>
                 <div class="container-main-area flex">
                     <div class="hr-left"><hr></div>
                     <div class="another-login">다른 방법으로 로그인</div>
                     <div class="hr-right"><hr></div>
                 </div>
-                <div class="flex">
-                    <div><a>카카오로 로그인</a></div>
-                    <div><a href="${url}">네이버로 로그인</a></div>
+                <div class="width100">
+                    <div><a href="${url}"><img class="naver-box" src="/blank/resources/images/member/naver_btn.png"></a></div>
                 </div>
             </form>
         </div>

@@ -77,5 +77,7 @@ public interface MemberDao {
 
 	public int updateDefault(SqlSessionTemplate sst, String no);
 
+	public String selectPrjCntByNo(SqlSessionTemplate sst, String mNo);
+
 
 }

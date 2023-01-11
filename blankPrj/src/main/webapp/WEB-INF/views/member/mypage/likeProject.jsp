@@ -38,7 +38,7 @@
 									<div class="search-icon"><input type="image" src="/blank/resources/images/admin/search.png" alt="search.png" ></div>
 								</div>
 								<div style="margin-left: 10px;">
-									<a href="/blank/help/inquiryWrite" id="wrtie-btn"><button type='button' class="wrtie-btn" style="height: 100%; width: 60px;">글쓰기</button></a>
+									<a href="/blank/help/inquiryWrite" id="wrtie-btn"></a>
 								</div>
 								
 							</div>
@@ -51,39 +51,22 @@
 					<div>
 						<span class="number">1004개</span>
 					</div>
+					
+					
 					<div class="focus-project-list">
-
-
-						<c:if test="${fn:length(likePrjVoList) != 0}">
-								<c:forEach items="${likePrjVoList}" var="list" >
-									<div class="focus-project-item">
-										<div class="image-box"><img src="/blank/resources/upload/project/${prjVo.changeName}" alt="item-pic"></div>
-										<div>
-											<span>${list.category}ㅣ${list.creator}</span>
-											<span>418 % 달성</span>
-										</div>
-										<div>${list.title}</div>
+					<c:if test="${fn:length(likePrjVoList) != 0}">
+							<c:forEach items="${likePrjVoList}" var="list" end="7">
+								<div class="focus-project-item">
+									<div class="image-box"><img class="like-img" src="/blank/resources/upload/project/${list.changeName}" alt="item-pic"></div>
+									<div>
+										<span>${list.category}ㅣ${list.creator}</span>
+										<span>418 % 달성</span>
 									</div>
-								</c:forEach>
+									<div>${list.title}</div>
+								</div>
+							</c:forEach>
 						</c:if>	
 
-
-
-
-
-
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						
-						
-				
-						
 					</div>
 					<div>1 2 3 4</div>
 				</div>

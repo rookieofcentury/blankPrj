@@ -47,7 +47,9 @@
 .change-btn{
     width: 90px;
     height: 35px;
-    border: 1px solid var(--gray);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    background-color: #fff;
     cursor: pointer;
 }
 .member-info-input{
@@ -111,4 +113,8 @@ input[type=text], input[type=password]{
     height: 35px;
     padding: 5px 0px 5px 10px;
     color:rgb(88, 87, 87); 
+}
+#profile-delete{
+    color: red;
+    border-color: red;
 }

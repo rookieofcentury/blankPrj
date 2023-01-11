@@ -197,6 +197,11 @@ public class MemberDaoImpl implements MemberDao {
 	public int updateDefault(SqlSessionTemplate sst, String no) {
 		return sst.update("memberMapper.updateDefault", no);
 	}
+
+	@Override
+	public String selectPrjCntByNo(SqlSessionTemplate sst, String mNo) {
+		return sst.selectOne("memberMapper.selectPrjCntByNo", mNo);
+	}
 	
 	
 	

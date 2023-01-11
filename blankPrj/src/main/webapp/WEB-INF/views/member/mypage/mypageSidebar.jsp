@@ -26,7 +26,7 @@
                             <div>
                                 <div><img src="/blank/resources/images/member/project.png"></div>
                                 <div>후원한프로젝트</div>
-                                <div>1004개</div>
+                                <div>${loginMember.cntPrj}개</div>
                             </div>
                         </div>
                 </div>
@@ -35,12 +35,9 @@
                     <div><a href="/blank/member/mypage/payAddr">결 제 수 단/배 송 지</a></div>
                     <div><a href="/blank/member/mypage/payProject">후 원 프 로 젝 트</a></div>
                     <div><a href="/blank/member/mypage/likeProject">관 심 프 로 젝 트</a></div>
-                    <div><a href="/blank/member/mypage/myGoods">굿 즈 구 매 내 역</a></div>
                     <div><a href="/blank/member/mypage/reportQ">신 고/문 의 내 역</a></div>
                     <div><a href="/blank/member/mypage/likePeople">팔 로 잉/팔 로 워</a></div>
                     <div><a href="/blank/member/mypage/evant">이 벤 트/출 석 체 크</a></div>
-                    <div><a href="/blank/member/mypage/alarm">알 람 내 역 및 설 정 </a></div>
-                    <div><a href="/blank/member/mypage/message">프 로 젝 트 메 세 지 </a></div>
                 </div>
                 
             </div>

@@ -26,6 +26,7 @@
     margin: 0;
     padding: 0;
     position: relative;
+    font-size: 20px;
 }
 #nav > ul > li{
     text-align: center;

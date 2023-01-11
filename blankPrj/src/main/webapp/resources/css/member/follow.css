@@ -26,6 +26,7 @@
     display: flex;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 #nav > ul > li{
     text-align: center;
@@ -34,6 +35,7 @@
     text-align: center;
     margin: 20px;
     cursor: pointer; 
+    font-size: 20px;
 }
 .line {
     display: block;
@@ -43,6 +45,7 @@
     background-color: #8ca8e9a9;
     box-shadow: 0 0px 6px 1px var(--main-color);
     transition: .6s ease-out;
+    bottom: 0;
   }
 
   #contents, .line {
@@ -76,6 +79,7 @@
   }
   
   .profile-container > div:nth-child(1) > img{
+    padding-top: 10px;
     width: 100px;
     height: 100px;
   }
