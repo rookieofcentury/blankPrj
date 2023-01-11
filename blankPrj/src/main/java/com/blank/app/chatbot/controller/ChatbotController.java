@@ -44,7 +44,6 @@ public class ChatbotController {
 		//보내는 사람 메세지 조회
 		List<ChatMessageVo> msgList = chatbotService.selectMsgList(map);
 		
-		
 		session.setAttribute("voList", voList);
 		model.addAttribute("voList", voList);
 		model.addAttribute("no", no);

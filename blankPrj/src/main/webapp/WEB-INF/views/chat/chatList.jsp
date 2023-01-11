@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,24 +11,47 @@
 <link rel="shortcut icon" href="/blank/resources/images/blank.ico">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 </head>
+
 <body>
 
-	<body>
+    <header>
+        <div> 블랭크 고객센터 </div>
+    </header>
 
-		<header>
-			<div> 블랭크 고객센터 </div>
-		</header>
-	
-		<div class="chat-list">
+	<main> 
+
+            <div id="blank-logo"><img src="/blank/resources/images/blank.png" class="blank-logo"></div>
+            <div class="chat-list">
 			<c:forEach items="${voList}" var="vo">
 				<div>${vo.sendNo}</div>
-				<div>${vo.content}</div>
+                <c:if test="${fn:length(vo.content) ge 8}">
+                    <div>${fn:substring(vo.content, 0, 8)}...</div>
+                </c:if>
+                <c:if test="${fn:length(vo.content) lt 8}">
+                    <div>${vo.content}</div>
+                </c:if>
 				<div>${vo.writeDate}</div>
-				<div><a href="/blank/chatbot/main?no=${vo.sendNo}" name="no">입장</a></div>
-			</c:forEach>		
-		</div>
+				<div><a href="/blank/chatbot/main?no=${vo.no}" name="no">입장</a></div>
+			</c:forEach>
+			</div>
+
+    </main>
 	
-		
-	</body>
+    <footer>
+        <div class="dong">
+            <div class="nemo" onclick="goBack();"></div>
+        </div>
+    </footer>
+
+	
+</body>
+
+<script type="text/javascript">
+	            	
+    function goBack(){
+        window.history.back();
+    }
+
+</script>
 
 </html>

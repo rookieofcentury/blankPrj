@@ -58,14 +58,17 @@
     			<c:forEach items="${voList}" var="vo">
     				
                 	<div>${vo.no}</div>
-    				<c:if test="${vo.secretYn eq 'Y'}">
+					<c:if test="${vo.secretYn eq 'N'}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					</c:if>
+					<c:if test="${vo.secretYn == null}">
+						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					</c:if>
+    				<c:if test="${vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
 	                	<div>${vo.title}</div>
 	                </c:if>
-	                <c:if test="${vo.secretYn eq 'N'}">
-		                <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
-	                </c:if>
-	                <c:if test="${vo.secretYn == null}">
-		                <div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+					<c:if test="${vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
+	                	<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
 	                </c:if>
 	                <c:if test="${vo.secretYn eq 'Y'}">
 	                	<div>작성자와 관리자만 확인할 수 있습니다. &nbsp;<img src="/blank/resources/images/help/secret.png" width="11" height="13"></div>
@@ -112,4 +115,5 @@
 <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 
 </body>
+
 </html>

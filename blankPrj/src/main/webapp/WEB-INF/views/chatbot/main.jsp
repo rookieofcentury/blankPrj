@@ -159,9 +159,9 @@
         const result = document.querySelector("#result");
 
         if(sendNo == '${loginMember.no}'){
-            $(result).append("<div class='user-talk-btn'><span class='user-talk'>" + content + "</span><div>");
+            $(result).append("<div class='user-talk-btn'><span class='user-talk'>" + content + "</span><div>");  
         }else{
-            $(result).append("<div class='admin-answer-btn'><span class='chat-answer'>" + content + "</span><div>");  
+                $(result).append("<div class='admin-counsel'><span class='chat-answer'>" + content + "</span><div>");
         };
 
         };

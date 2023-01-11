@@ -31,7 +31,7 @@ public class ChatController {
 		List<ChatMessageVo> voList = chatService.selectList();
 		
 		session.setAttribute("voList", voList);
-		
+		System.out.println(voList);
 		return "chat/chatList";
 	}
 	
@@ -63,15 +63,6 @@ public class ChatController {
 		System.out.println(map);
 		
 		return result;
-	}
-	
-	@PostMapping("chatList")
-	@ResponseBody
-	public String chatList(ChatMessageVo chatMessageVo) {
-		
-		
-		
-		return"";
 	}
 	
 }
