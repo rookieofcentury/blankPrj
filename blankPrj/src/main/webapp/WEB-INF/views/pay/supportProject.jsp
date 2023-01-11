@@ -16,28 +16,40 @@
         <div class="pay-container grid">
             <form action="/blank/pay" method="post" >
                 <div class="grid project-content border">
-                    <div class="prj-img-box"><img src="/blank/resources/upload/project/${prjVo.changeName}"></div>
+                    <div class="prj-img-box"><img src="/blank/resources/upload/project/${prjVo.changeName}" class="prj-img"></div>
                     <div class="project-info-detail">
                         <input type="hidden" name="pNo" value="${prjVo.no}">
                         <div>${prjVo.category}</div>
                         <div>${prjVo.title}</div>
                         <div class="project-info-number">
-                            <div><strong>${prjVo.price}</strong>|</div>
-                            <div>퍼센트|</div> 
-                            <div class="red">남은기간 : ${prjVo.calDate}</div>
+                            <div><strong>목표 금액 : ${prjVo.price}</strong></div>
+                            <div>퍼센트 : ${prjVo.percent}</div> 
+                            <div class="red">남은기간 : ${prjVo.calDate}일</div>
+                           
                         </div>
                     </div>
                 </div>
                 <div class="pay-content grid">
                     <div class="project-pay-content"> 
                         <div>후원 정보</div>
-                        <div class="user-info">
+                        <div class="set-info">
                             <div>
                                 <input type="hidden" name="setNo" value="${setVo.setNo}">
-                                <span>${setVo.setName}</span>
-                                <span>${setVo.setQuantity}</span>
-                                <span>${setVo.setPrice}</span>
-                                <span>${setVo.option}</span>
+                                <div>${setVo.setName}</div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div>수량</div>
+                                    <div>${setVo.setQuantity}</div>
+                                </div>
+                                <div>
+                                    <div>가격</div>
+                                    <div>${setVo.setPrice}</div>
+                                </div>
+                                <div>
+                                    <div>옵션</div>
+                                    <div>${setVo.option}</div>
+                                </div>
                             </div>
                         </div>
                         <div>후원자 정보</div>
@@ -69,11 +81,15 @@
                         </div>
                     </div>
                     <div id="project-pay-check">
-                        <div class="final-pay-check border">
-                            <div>최종결제금액</div>
-                            <div><input type="text" name="price" value="${setVo.setPrice}" readonly></div>
-                            <div>최종결제일자</div>
-                            <div><input type="text" name="payDate" value="${prjVo.endDate}" readonly></div>
+                        <div class="final-pay-check">
+                            <div>
+                                <div>최종결제금액</div>
+                                <div><input type="text" name="price" class="none" value="${setVo.setPrice}" ></div>
+                            </div>
+                            <div>
+                                <div>최종결제일자</div>
+                                <div><input type="text" name="payDate" class="none" value="${prjVo.payDate}"></div>
+                            </div>
 
                         </div>
                         <div class="border">

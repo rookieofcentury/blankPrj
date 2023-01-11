@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.blank.app.admin.service.AdminService;
 import com.blank.app.admin.vo.HelpVo;
+import com.blank.app.goods.vo.PaymentVo;
 import com.blank.app.member.naver.NaverLoginBO;
 import com.blank.app.member.service.MailSendService;
 import com.blank.app.member.service.MemberService;
@@ -279,13 +280,14 @@ public class MemberController {
 	public String mypagePayProject(HttpSession session, Model model) {
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		
-		//프로젝트 결제내역에서 가져오자
-		String mNo = loginMember.getNo();
-		
 		if(loginMember == null) {
 			model.addAttribute("msg", "로그인 후 이용가능합니다.");
 			return "home";
 		}
+		
+		//프로젝트 결제내역에서 가져오자
+		String mNo = loginMember.getNo();
+		
 		
 		List<PayListVo> voList = service.selectPayListByNo(mNo);
 		
@@ -312,7 +314,6 @@ public class MemberController {
 		List<ProjectVo> voList = service.selectLikePrjByNo(mNo);
 		
 		model.addAttribute("likePrjVoList", voList);
-	
 		
 		
 		return "member/mypage/likeProject";
@@ -686,6 +687,7 @@ public class MemberController {
 			File target = new File(path + changeName + ext) ;
 			
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			
 			//로그인한 사람 
 			String no = loginMember.getNo();
 			String profileName = changeName + ext;
@@ -754,17 +756,28 @@ public class MemberController {
 			//response중 Member에 관한거 가져오기  nickname값 파싱
 			String nickname = (String)response_obj.get("nickname");
 			String email = (String)response_obj.get("email");
+			String phone = (String)response_obj.get("mobile");
+			
+			String profile = (String)response_obj.get("profile_image");
+		
 			
 			MemberVo vo = new MemberVo();
 			vo.setNick(nickname);
-			System.out.println(nickname);
+			vo.setEmail(email);
+			vo.setPhone(phone);
+			vo.setProfile(profile);
+			System.out.println(response_obj.toJSONString());
+			
+		
 			
 			//4.파싱 닉네임 세션으로 저장
-			session.setAttribute("sessionId",nickname); //세션 생성
+			session.setAttribute("naver", true);
+			session.setAttribute("loginMember",vo); //세션 생성
 			
+			//프로필을 저장해서 넘긴다.
 			model.addAttribute("result", apiResult);
 		     
-			return "member/naver/callback";
+			return "member/mypage/editProfile";
 		}
 
 		
@@ -814,6 +827,24 @@ public class MemberController {
 			
 			
 		}
+		
+		//굿즈구매내역 보여주기
+		@GetMapping("member/mypage/myGoods")
+		public String showMyGoods(HttpSession session, Model model) {
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			
+			if(loginMember == null) {
+				model.addAttribute("msg", "로그인 후 이용가능합니다.");
+				return "home";
+			}
+			
+			String consumer = loginMember.getNo();
+			
+			//List<PaymentVo> paymentVo = service.selectGoodsPament(consumer);
+			
+			return "";
+		}
+		
 		
 		
 		

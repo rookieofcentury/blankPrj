@@ -12,8 +12,8 @@ function horizontal(e){
 
   line.style.left = e.currentTarget.offsetLeft+"px";
   line.style.width = e.currentTarget.offsetWidth+"px";
-  line.style.top = 
-  e.currentTarget.offsetTop + e.currentTarget.offsetHeight+"px";
+  //line.style.top = 
+  //e.currentTarget.offsetTop + e.currentTarget.offsetHeight+"px";
 
 }
 
@@ -28,6 +28,6 @@ links.forEach((link, index) => {
 
 line.style.width = `${firstList.offsetWidth}px`;
 line.style.left = `${firstList.offsetLeft}px`;
-line.style.top = `${firstList.offsetTop + firstList.offsetHeight}px`;
+//line.style.top = `${firstList.offsetTop + firstList.offsetHeight}px`;
 
 

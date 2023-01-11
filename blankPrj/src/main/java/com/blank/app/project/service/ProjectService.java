@@ -73,4 +73,6 @@ public interface ProjectService {
 
 	int selectSum(int p);
 
+	void minusCnt(String setNo);
+
 }

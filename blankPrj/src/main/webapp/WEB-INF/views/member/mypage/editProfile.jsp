@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>개인정보수정</title>
 <link rel="stylesheet" href="/blank/resources/css/member/editProfile.css">
-<link rel="shortcut icon" href="/blank/resources/images/member/blank.ico">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -21,7 +21,12 @@
 						<div><h2>회원 정보 수정</h2></div>
 						<div class="member-profile">
 							<div>프로필 사진</div>
-							<div><img id="View" src="/blank/resources/upload/member/${loginMember.profile}" alt="프로필 사진" /></div>
+							<c:if test="${not empty naver}">
+								<div><img id="View" src="${loginMember.profile}" alt="프로필 사진2222" /></div>
+							</c:if>
+							<c:if test="${empty naver}">
+								<div><img id="View" src="/blank/resources/upload/member/${loginMember.profile}" alt="프로필 사진" /></div>
+							</c:if>
 							<div>
 								<form action="/blank/member/mypage/plus-profile" name="profile" id="profile-form" method="post" enctype="multipart/form-data">
 									<!-- <label for="input-profile" class="filebox"> 업로드 </label> -->
