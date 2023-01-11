@@ -29,10 +29,13 @@ public class ProjectVo {
 	private String status;
 	private String deleteYn;
 	private int percent;
+	private String fundingSum;
+	private String fundingQuantity;
 	private String calDate; // 남은기간 계산 
 	private String payDate;
 	private String changeName;
 	private MultipartFile prjfile;
+	private List<ItemVo> items;
 	
 	public boolean isEmpty() {
 		if(prjfile == null){return true;}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,7 +93,9 @@
                     <div>프로젝트의 내용을 쉽게 파악하고 좋은 인상을 받을 수 있도록 이미지로 등록해 주세요.</div>
                 </div>
                 <div class="img-upload">
-                    <img id="img-view" src="/blank/resources/upload/project/${prjInfo.changeName}" alt="플젝 사진" />
+                    <c:if test="${not empty prjInfo.changeName}">
+                        <img id="img-view" src="/blank/resources/upload/project/${prjInfo.changeName}" alt="플젝 사진" />
+                    </c:if>
                     <input type="file" name="prjfile" id="input-prjfile" value='<c:out value="${prjInfo.changeName}"/> '>
                 </div>
             </div>
@@ -118,12 +121,12 @@
                                 <div class="start-day">
                                     <p>시작일</p>
                                     <!-- <div class="calendar-img"><img src="./calendar2-date.svg"></div> -->
-                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.startDate}"/>'>
+                                    <input name="startDate" type="date" autocomplete="off" readonly="readonly" value='${fn:substring(prjInfo.startDate,0,10)}'>
                                 </div>
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select name="time" id="time-option">
-                                        <option value="${tt.no}">==시작시간 선택==</option>
+                                        <option>==시작시간 선택==</option>
                                          <c:forEach items="${time}" var="tt">
                                         <option value="${tt.no}">${tt.time}시</option>
 										</c:forEach> 
@@ -139,7 +142,8 @@
                             <div class="date-end">
                                 <div class="end-day">
                                     <p>종료일</p>
-                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='<c:out value="${prjInfo.endDate}"/>'>
+                                    <!-- <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='<c:out value="${prjInfo.endDate}"/>'> -->
+                                    <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='${fn:substring(prjInfo.endDate,0,10)}'>
                                 </div>
                                 <div class="date-calculate">
                                     <div class="calculate-notice">
@@ -163,7 +167,7 @@
                 </div>
                 <div class="plan-write">
                     <div>
-                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" value='<c:out value="${prjInfo.deliveryDate}"/>'></div>
+                        <div><input name="deliveryDate" type="date" autocomplete="off" readonly="readonly" value='${fn:substring(prjInfo.deliveryDate,0,10)}'></div>
                     </div>
                 </div>
             </div>
@@ -398,7 +402,7 @@
                                 <div class="set-insert">
                                     <div class="info-quantity">수량 설정</div>
                                     <div class="text-price">
-                                        <div><input type="number" name="setQuantity"></div>
+                                        <div><input type="number" placeholder="수량을 입력해 주세요."  name="setQuantity"></div>
                                         <div>개</div>
                                     </div>
                                 </div>
@@ -408,7 +412,7 @@
                                         <div>배송되는 선물은 배송비를 포함해주세요.</div>
                                     </div>
                                     <div class="text-quantity">
-                                        <div><input type="number" name="setPrice"></div>
+                                        <div><input type="number" placeholder="금액을 입력해 주세요." name="setPrice"></div>
                                         <div>원</div>
                                     </div>
                                 </div>
@@ -589,17 +593,6 @@
            $( "input[name='deliveryDate']" ).datepicker(config);
        });
 
-    //    $(document).ready(function() {
-    //        CKEDITOR.replace('[editor4]');
-    //    });
-       
-    //    CKEDITOR.replace('editor4', {height: 500});
-       /* $(function () {
-           CKEDITOR.replace('contents', {
-               filebrowserUploadUrl : '${pageContext.request.contextPath}/adm/fileupload.do'
-           });
-       }); 
-        */
        const editor = new toastui.Editor({
             el: document.querySelector('.story-editor'),
             previewStyle: 'vertical',
@@ -608,13 +601,7 @@
             initialValue: '안녕하세요. 블랭크입니다.',
             language : 'ko'
         });
-        // seeHtml = function(){
-		// 	alert(editor.getHTML());
-		// }
-		// seeMd = function(){
-		// 	alert(editor.getMarkdown());
-		// }
-
+       
        //온 서브밋을 위한 변수 선언;
        let titleCheckReturn = false;
        let priceCheckReturn = false;
@@ -680,12 +667,13 @@
    // });
 
        //펀딩일수 계산
-       $("input[name='endDay']").on("focusout", function() {
+       $("input[name='endDate']").on("focusout", function() {
+            console.log("ddd");
     	   //console.log($("input[name='startDay']").val());
            //var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
            //var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
-           var date1 = $("input[name='startDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
-           var date2 = $("input[name='endDay']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+           var date1 = $("input[name='startDate']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+           var date2 = $("input[name='endDate']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
 
            var today = new Date();
            var year = today.getFullYear();
@@ -1007,28 +995,22 @@
 
         //온서브밋
        function checkAll(){
-    	   console.log("성공?!");
-       if(!titleCheckReturn){ alert('제목이 입력되지 않았습니다'); return false;}
-       if(!priceCheckReturn){ alert('목표금액이 입력되지 않았습니다.'); return false;}
-       if(!urlCheckReturn){ alert('url이 입력되지 않았습니다'); return false;}
-       if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
-       
-    //    if(!nameCheckReturn){ alert('이름이 입력되지 않았습니다'); return false;}
-       if(!infoCheckReturn){ alert('소개가 입력되지 않았습니다.'); return false;}
-       if(!bankCheckReturn){ alert('은행명이 입력되지 않았습니다'); return false;}
-       if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
-       if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
-    //    if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
-    //    if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
+            if(!titleCheckReturn){ alert('제목이 입력되지 않았습니다'); return false;}
+            if(!priceCheckReturn){ alert('목표금액이 입력되지 않았습니다.'); return false;}
+            if(!urlCheckReturn){ alert('url이 입력되지 않았습니다'); return false;}
+            if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
+            
+            //    if(!nameCheckReturn){ alert('이름이 입력되지 않았습니다'); return false;}
+            if(!infoCheckReturn){ alert('소개가 입력되지 않았습니다.'); return false;}
+            if(!bankCheckReturn){ alert('은행명이 입력되지 않았습니다'); return false;}
+            if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
+            if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
+            //    if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
+            //    if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
 
-        return true;
+            return true;
        }
 
-       /*심사요청 href*/
-    //     function requestBtn(){
-    //        location.href = "/blank/project/post/save";
-    //    } 
-       
        let map = new Map([]);
        /*아이템 추가*/
        $('input[name=itemSave]').click(function(){
@@ -1049,7 +1031,6 @@
             $(".preview-set").append(list);
             $('input[name=itemName]').val("");
             $('textarea[name=addOption]').val("");
-            //console.log(map);
         });
 
         /* select option에 집어넣기 (item) */   
@@ -1078,6 +1059,8 @@
         var i = 0;
         $('.myitemList').change(function(){
             var opt = $('.myitemList option:selected').val();
+
+            $(".myitemOption").empty();
 
             map.forEach(function(value, key) {
                 // console.log('key : ' + key);
@@ -1108,6 +1091,7 @@
             list += '</button>' + '</div>' + '</div>' ;
             //'<ol type="1">' + '<li class="selected-opt">' + option + '</li>' + '</ol>' + '</li>';
             $(".selected").append(list);
+
         });
 
     /* 플러스 마이너스 버튼 누르면 값 바뀌게 */
@@ -1175,9 +1159,10 @@
 		}
     });
 
+    /*사진 미리보기*/
     $(function() {
         $("#input-prjfile").on('change', function(){
-        readURL(this);
+            readURL(this);
         });
     });
     function readURL(input) {

@@ -75,4 +75,10 @@ public interface ProjectDao {
 
 	int selectSum(SqlSessionTemplate sst, int p);
 
+	int minusCnt(SqlSessionTemplate sst, String setNo);
+
+	int selectCalDate(SqlSessionTemplate sst, int p);
+
+	int selectFundingQuantity(SqlSessionTemplate sst, int p);
+
 }

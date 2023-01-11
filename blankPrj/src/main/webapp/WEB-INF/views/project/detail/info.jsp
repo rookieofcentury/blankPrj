@@ -38,16 +38,17 @@
 				<div class="introduction-sub">
 					<div class="sub-status">
 						<div class="status-price">
-							<div class="price-total"><strong>23,270,500</strong>원</div>
+							<div class="price-total"><strong><fmt:formatNumber value="${prj.fundingSum}" pattern="#,###"/></strong>원</div>
 							<div class="price-fundingrate">${prj.percent}%</div>
 						</div>
 						<div class="status-period">
-							<div><strong>18</strong>일</div>
+							<div><strong>${prj.calDate}</strong>일</div>
 							<div>남음</div>
 						</div>
 						<div class="status-supporter">
-							<div>후원자 </div>
-							<div><strong>88</strong></div>
+							<div>후원자</div>
+							<div> </div>
+							<div><strong>${prj.fundingQuantity}</strong></div>
 							<div>명</div>
 						</div>
 					</div>
@@ -109,25 +110,25 @@
 					<c:forEach items="${set}" var="item">
 						
 					<div class="reward-card">
-					<input type="radio" id="${item.setNo}" value="${item.setNo}" name="range">
-					<label for="${item.setNo}">
+						<input type="radio" id="${item.setNo}" value="${item.setNo}" name="range">
+						<label for="${item.setNo}">
 
-						<div class="card-option">
-                            <div class="option-title">
-                                <div class="title-price">${item.setPrice}원</div>
-                                <div class="title-name">${item.setName}</div>
-                            </div>
-                            <ul>
-								<li>${item.option}</li>
-								<!-- <li>고급가죽케이스</li>
-								<li>안경닦이</li>
-								<li>미니드라이브</li> -->
-                            </ul>
-                            <div class="option-quantity">제한수량 ${item.setQuantity}개</div>
-                            <div class="option-sell">총 60개 펀딩완료</div>
-                        </div>
-						
-					</label>
+							<div class="card-option">
+								<div class="option-title">
+									<div class="title-price"><fmt:formatNumber value="${item.setPrice}" pattern="#,###"/>원</div>
+									<div class="title-name">${item.setName}</div>
+								</div>
+								<ul>
+									<li>${item.option}</li>
+									<!-- <li>고급가죽케이스</li>
+									<li>안경닦이</li>
+									<li>미니드라이브</li> -->
+								</ul>
+								<div class="option-quantity">제한수량 ${item.setQuantity}개</div>
+								<div class="option-sell">총 ${item.setQuantity}개 펀딩완료</div>
+							</div>
+							
+						</label>
 					
 					</div>
 					</c:forEach>
@@ -219,7 +220,11 @@
 
 		/*팔로우 확인*/
 		$(document).ready(function() {
-			if('${loginMember.no}'){
+			let temp = true;
+			if('${loginMember.no}'==''){
+				temp = false;
+			}
+			if(temp){
 				console.log('로그인멤버 you');
 				$.ajax({
 					type: "",
@@ -242,14 +247,13 @@
 		});
 
 		/*팔로우*/
-		var str1 = $('.name-follow').text('팔로잉');
-		var str2 = '팔로잉'
-		console.log(str1);
-		console.log(str2);
 		$('.name-follow').on('click',function(){
 			if(!'${loginMember.no}'){
 				alert('로그인 후 이용해 주세요')
 			}else{
+			var str1 = $('.name-follow').text();
+			console.log(str1);
+			var str2 = '팔로잉';
             if(str1 === str2){
 				console.log("팔로잉 취소");
 				$.ajax({
@@ -257,7 +261,7 @@
 					url  : "/blank/member/deleteMember",
 					type : "POST",
 					data : {
-						"creator" : '${prj.mno}'
+						"likeMemberNo" : '${prj.mno}'
 					},
 					success : function(x){
 					if(x == 1){
@@ -275,7 +279,7 @@
 					url  : "/blank/member/insertLikeMember",
 					type : "POST",
 					data : {
-						"creator" : '${prj.mno}'
+						"likeMemberNo" : '${prj.mno}'
 					},
 					success : function(x){
 					if(x == 1){
@@ -294,29 +298,23 @@
 		var amount = '${ prj.price }'
 		var wantPrice = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		
-		/* 옵션 선택효과*/
-		// var chkList = document.querySelectorAll("input[name=range]:checked");
-		// chkList.forEach(function (ch) {
-			// 	console.log(ch.value);
-			// });
-		// $('input:radio[name=range]').is(':checked') == false{
-		// 	var rangeVal = $('input:radio[name=range]:checked').val();
-		// 	console.log(rangeVal);
-		// 	$('.reward-card').css("border-width", "5px");
-		// 	$('.reward-card').css("border-color", "#567ace");
-		// };
-
 		$(document).ready(function() {
-			var chkList = $("input[name=range]:checked");
-			console.log(chkList);
-			if(chkList == true){
-				alert("cic")
-				$('chkList').parent().css("border-width", "5px");
-				$('chkList').parent().css("border-color", "#567ace");
-			}
+			 
+			 let checkSet = $('input:radio[name=range]');
+			//  let ch = $('input:radio[name=range]').is(':checked') == false;
+			//  checkSet.click(function(){
+			// 	console.log(checkSet);
+			// 	 $(this).parent().css("border-width", "5px");
+			// 	 $(this).parent().css("border-color", "#567ace");
+			// 		checkSet.prop("checked", false);
+				
+			//  });
+
+		// 	$('input:radio').on('click',function)
+		// 	// if(chkList){
 		});
 
-		/* 후원 클릭 */
+		/* 후원하기 */
 		$('.buttons-funding').click(function(){
 			if($('input:radio[name=range]').is(':checked') == false){
 				alert("리워드를 선택해 주세요!");

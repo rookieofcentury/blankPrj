@@ -53,15 +53,37 @@ public class ProjectController {
 	@GetMapping
 	public String project(Model model, @RequestParam(name="p") int p ) {
 		
+		//프로젝트 정보
 		ProjectVo prjVo = service.selectProject(p);
+		//프로젝트의 아이템들의 정보
 		List<ItemVo> itemVo = service.selectSet(p);
 		
 		int fundingSum = service.selectSum(p);
 		int goal = Integer.parseInt(prjVo.getPrice());
 		
-		int division = Math.floorDiv(fundingSum,goal);
-		int percent = division * 100;
+		String fundingPrice = String.valueOf(fundingSum);
+		prjVo.setFundingSum(fundingPrice);
+		
+		//달성률
+		int division = Math.floorMod(fundingSum,goal);
+//		int division = Math.floorMod(300,1000);
+//		System.out.println(division);
+		
+//		int percent = division * 100;
+		int percent = division / 10;
+//		System.out.println(percent);
+		
 		prjVo.setPercent(percent);
+		
+		//남은 기간
+		int calDate = service.selectCalDate(p);
+		String calDateCnt = String.valueOf(calDate);
+		prjVo.setCalDate(calDateCnt);
+		
+		//후원자
+		int fundingQuantity = service.selectFundingQuantity(p);
+		String quantityCnt = String.valueOf(fundingQuantity);
+		prjVo.setFundingQuantity(quantityCnt);
 		
 		model.addAttribute("prj", prjVo);
 		model.addAttribute("set", itemVo);
@@ -131,11 +153,12 @@ public class ProjectController {
 		String nick = loginMember.getNo();
 		vo.setMNo(nick);
 		vo.setLikeMemberNo(creator);
-		System.out.println("창작자 번호 : " + creator);
+//		System.out.println("창작자 번호 : " + creator);
 		
 		int result = service.followCheck(vo);
+		System.out.println(result);
 
-		if(result != 0) {
+		if(result == 1) {
 			return "1";
 		}
 		return "0";
@@ -368,7 +391,7 @@ public class ProjectController {
 		
 		//JsonObject jsonObj = JsonParser.parseString(timeVo).getAsJsonObject();
 		/*Gson gson = new Gson(); String timeVo = gson.toJson(starttimeVo);*/
-		 
+		System.out.println("time" + starttimeVo);
 		model.addAttribute("category", category);
 		model.addAttribute("time", starttimeVo);
 		model.addAttribute("prjInfo", prjInfo);

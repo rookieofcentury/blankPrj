@@ -285,7 +285,15 @@ div[class*=-write] p:not(.calculate-notice>p, .story-notice p){
 } 
 .category-select select{
 	width: 362px;
-	}
+}
+#img-view{
+    margin-bottom: 10px;
+    width: 300px;
+    height: 300px;
+}
+/* input[name=prjfile]{
+    padding-left: 70px;
+} */
 select:not(.ui-datepicker-month, .ui-datepicker-year){
     height: 30px;
     margin-top: 20px;
@@ -451,6 +459,7 @@ input[name='deliveryDate']{
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    width: 380px !important;
 }
 .story-write p{
     color: red;
@@ -467,7 +476,7 @@ input[name='deliveryDate']{
     margin-top: 10px;
 }
 .story-editor{
-    width: 80%;
+    width: 70%;
     --padding: 0 15% 0 15%;
 }
 .header-menubar{
@@ -604,7 +613,7 @@ input[id*="itemPopup"]:checked + label + div{
     width: 100px;
     height: 35px;
     text-align: center;
-    padding-top: 6px;
+    padding-top: 8px;
     margin-right: 20px;
     font-size: 14px;
 }
@@ -1268,11 +1277,6 @@ ul{
     margin-top: 0px;
     --padding-right: 45px;
     --padding-left: 60px;
-}
-.story-editor{
-    /* border : 1px solid; */
-    width : 50%;
-    margin : 0 auto;
 }
 #prj-content {
     display: none;

@@ -16,13 +16,8 @@
         <div class="navi-menu">
             <div class="content-editor">
                 <div class="editor-logo">
-                    <img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href=''">
+                    <img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'">
                     <div><h1>프로젝트 기획</h1></div>
-                </div>
-                <div class="editor-buttons">
-                    <div class="buttons-storage">임시저장</div>
-                    <div class="buttons-request">심사요청</div>
-                    <div class="buttons-goout"><img src="/blank/resources/images/project/icon_goout.png"></div>
                 </div>
             </div>
             <!-- <div class="content-menu">
@@ -81,7 +76,7 @@
             </ul>
         </div>
         <div class="content-buttons">
-            <button type="button" class="buttons-back">
+            <button type="button" class="buttons-back" onclick="location.href='/blank'">
                 <i> < </i>
                 이전
             </button>
@@ -106,7 +101,6 @@
 				
                 if(count != checked){
                     $(".ckAll").prop("checked", false);
-
                 } else {
                     $(".ckAll").prop("checked", true); 
                 }

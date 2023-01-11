@@ -47,7 +47,7 @@
  	</select>
  
 	<select id="selectTimeList" resultType="TimeVo">
-		SELECT *
+		SELECT NO, TIME
 		FROM START_TIME
 	</select>
 	
@@ -327,6 +327,18 @@
 	
 	<select id="selectSum" resultType="int">
 		 SELECT SUM(PRICE) FROM PAY_LIST WHERE P_NO = #{p}
+	</select>
+	
+	<update id="minusCnt">
+        UPDATE SET_ITEM SET SET_QUANTITY = SET_QUANTITY - 1 WHERE SET_NO = #{setNo};
+	</update> 
+	
+	<select id="selectCalDate" resultType="int">
+      SELECT END_DATE-(TRUNC(SYSDATE)) AS CAL_DATE FROM PROJECT WHERE NO = #{p} 
+	</select>
+	
+	<select id="selectFundingQuantity" resultType="int">
+      SELECT COUNT(*) FROM PAY_LIST WHERE P_NO = #{p}
 	</select>
 	
 </mapper>

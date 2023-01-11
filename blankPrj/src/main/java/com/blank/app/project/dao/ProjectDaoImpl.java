@@ -197,4 +197,19 @@ public class ProjectDaoImpl implements ProjectDao{
 		return sst.selectOne("projectMapper.selectSum", p);
 	}
 
+	@Override
+	public int minusCnt(SqlSessionTemplate sst, String setNo) {
+		return sst.update("projectMapper.minusCnt", setNo);
+	}
+
+	@Override
+	public int selectCalDate(SqlSessionTemplate sst, int p) {
+		return sst.selectOne("projectMapper.selectCalDate", p);
+	}
+
+	@Override
+	public int selectFundingQuantity(SqlSessionTemplate sst, int p) {
+		return sst.selectOne("projectMapper.selectFundingQuantity", p);
+	}
+
 }
