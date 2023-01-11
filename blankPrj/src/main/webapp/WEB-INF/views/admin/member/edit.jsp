@@ -51,7 +51,7 @@
 	                        name="nick"
 	                    />
 	                </div>
-	                <div><button class="check-btn">중복확인</button></div>
+	                <div><button class="check-btn" onclick="nickCheck()">중복확인</button></div>
 	                
 	                <div class="edit-title">성별</div>
 	                <div name="gender">${selectMember.gender}</div>
@@ -140,4 +140,42 @@
 	</div>
 
 </body>
+
+<script>
+
+//닉네임 중복확인 에이잭스 
+// function nickCheck(){
+  
+//   let nickVal = $('input[name=nick]').val();
+  
+//   const nickjung = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/; // 한글 숫자 영어 2-10
+
+//   if(!nickjung.test(nickVal)) {
+//       alert('닉네임은 2-10 글자 한글 숫자 영어로 이루어져있어야합니다.')
+      
+//   }else{
+//       $.ajax({
+//       url : "/blank/member/doubleCheckByNick",
+//       type : "post",
+//       data : {
+//           "nick" : nickVal
+//       },
+//       success : function(result){
+
+//           if(result == 0){
+//               $('#nick-result').text('사용가능한 닉네임 입니다.');
+
+//           }else{
+//               $('#nick-result').text('중복된 닉네임 입니다.');   
+//           }
+//       },
+//       error : function(){
+//           alert('에이잭스 에러!!!!!!!!!');
+//       }
+//     })  
+//    }
+//   }
+
+</script>
+
 </html>
