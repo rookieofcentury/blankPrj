@@ -21,6 +21,10 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
+<!-- alert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
 <!-- 날짜위젯 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -126,7 +130,7 @@
                                 <div class="start-time">
                                     <p>시작시간</p>
                                     <select name="time" id="time-option">
-                                        <option>==시작시간 선택==</option>
+                                        <option value="${tt.no}">==시작시간 선택==</option>
                                          <c:forEach items="${time}" var="tt">
                                         <option value="${tt.no}">${tt.time}시</option>
 										</c:forEach> 
@@ -641,7 +645,14 @@
            priceCheckReturn = false;
            var x = $(this).val();
            if (x < 500000) {
-               alert('50만원 이상의 금액을 입력해 주세요')
+            // Swal.fire('50만원 이상의 금액을 입력해 주세요', '화끈하시네요~!', 'success');
+            Swal.fire({
+                title: '안내 메시지',
+                text: "50만원 이상의 금액을 입력해 주세요",
+                icon: 'error',
+                confirmButtonColor: '#567ACE'
+            });
+            // swal("50만원 이상의 금액을 입력해 주세요");
            }else{
                priceCheckReturn = true;
            }
@@ -681,16 +692,30 @@
            var day = ('0' + today.getDate()).slice(-2);
            var dateString = year + '-' + month  + '-' + day;
 
-           if (!$("input[name='startDay']").val()) {
-               alert("시작일을 입력해 주세요");
+           if (!$("input[name='startDate']").val()) {
+               Swal.fire({
+                    title: '안내 메시지',
+                    text: "시작일을 입력해 주세요",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
            }
            if (date2 > date1){ 
                //console.log($("input[name='startDay']").val().length);
-               alert("시작일이 종료일보다 늦어요ㅠ"); 
+               Swal.fire({
+                    title: '안내 메시지',
+                    text: "시작일이 종료일보다 늦어요",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                }); 
            }
            if(date1 < dateString){
-               //console.log(date1);
-               alert("오늘 날짜 이후로 선택해 주세요"); 
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "오늘 날짜 이후로 선택해 주세요",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                }); 
                }
        });
 
@@ -725,7 +750,7 @@
                    }
                },
                error : function(){
-                   alert('에이잭스 에러!!!!!!!!!');
+                   console.log('에이잭스 에러!!!!!!!!!');
                }
            }); //ajax    
        };
@@ -734,7 +759,12 @@
        $("input[name='url']").on("focusout", function() {
            var content = $(this).val();
            if (content.length < 3) {
-               alert("3자 이상 입력해주세요.");
+               Swal.fire({
+                    title: '안내 메시지',
+                    text: "3자 이상 입력해주세요",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
            }
        });
        //유효성 체크(url)
@@ -764,7 +794,12 @@
                content.match(replaceKorean)
                $(this).val($(this).val().replace(replaceKorean, ""));
                if (content.length > 100) {
-                   alert("최대 100글자까지 입력 가능합니다.");
+                    Swal.fire({
+                        title: '안내 메시지',
+                        text: "최대 100글자까지 입력 가능합니다",
+                        icon: 'error',
+                        confirmButtonColor: '#567ACE'
+                    });
                    $(this).val(content.substring(0, 100));
                    $('.summary-text + p').text("0글자 남음");
                }
@@ -824,7 +859,12 @@
             $('.creator-write > p').text(40 - content.length + "글자 남음"); 
             document.querySelector(".creator-write > p").style.color = "red";
             if (content.length > 40) {
-                alert("최대 40글자까지 입력 가능합니다.");
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "최대 40글자까지 입력 가능합니다",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
                 $(this).val(content.substring(0, 40));
                 $('.creator-write > p').text("0글자 남음");
             }else{
@@ -854,7 +894,12 @@
             if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
                 bankCheckReturn = true;
             }else{
-                alert("한글만 입력 가능합니다. 다시 입력해주세요.");
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "한글만 입력 가능합니다! 다시 입력해주세요~",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
                 bankCheckReturn = false;
             }
         });
@@ -864,7 +909,12 @@
         $('input[name="account"]').keyup(function(e) {
             var content = $(this).val();
             if(!checkNumber.test(content)){
-                alert("숫자만 입력 가능합니다. 다시 입력해주세요.");
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "숫자만 입력 가능합니다! 다시 입력해주세요~",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
                 accountCheckReturn = false;
             }
             accountCheckReturn = true;
@@ -880,7 +930,12 @@
             if( checkKorean.test(content) && !checkNumber.test(content) && !checkEnglish.test(content) && !checkEmoji.test(content) ) {
                 depositorCheckReturn = true;
             }else{
-                alert("한글만 입력 가능합니다. 다시 입력해주세요.");
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "한글만 입력 가능합니다! 다시 입력해주세요~",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
                 depositorCheckReturn = false;
             }
         });
@@ -970,7 +1025,7 @@
             formData.append("story", editor.getHTML());
             // formData.append("prjfile" , fileData);
             
-            alert("update");
+            // alert("update");
 
             $.ajax({
                 url  : "/blank/project/savePrj",
@@ -984,7 +1039,12 @@
             // dataType: "json",
 	    	    success : function(x){
 	    		   if(x == 1){
-    		        alert('임시저장 되었습니다.')
+                    Swal.fire({
+                        title: '안내 메시지',
+                        text: "임시저장 되었습니다~",
+                        icon: 'error',
+                        confirmButtonColor: '#567ACE'
+                    });
 	    	   		}
 	    	    },
 	    	    error : function(x){
@@ -995,7 +1055,15 @@
 
         //온서브밋
        function checkAll(){
-            if(!titleCheckReturn){ alert('제목이 입력되지 않았습니다'); return false;}
+            if(!titleCheckReturn){ 
+                Swal.fire({
+                        title: '안내 메시지',
+                        text: "제목이 입력되지 않았습니다",
+                        icon: 'error',
+                        confirmButtonColor: '#567ACE'
+                    });
+                return false;
+            }
             if(!priceCheckReturn){ alert('목표금액이 입력되지 않았습니다.'); return false;}
             if(!urlCheckReturn){ alert('url이 입력되지 않았습니다'); return false;}
             if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
