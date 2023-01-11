@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +52,26 @@
 						<span class="number">1004개</span>
 					</div>
 					<div class="focus-project-list">
+
+
+						<c:if test="${fn:length(likePrjVoList) != 0}">
+								<c:forEach items="${likePrjVoList}" var="list" >
+									<div class="focus-project-item">
+										<div class="image-box"><img src="/blank/resources/upload/project/${prjVo.changeName}" alt="item-pic"></div>
+										<div>
+											<span>${list.category}ㅣ${list.creator}</span>
+											<span>418 % 달성</span>
+										</div>
+										<div>${list.title}</div>
+									</div>
+								</c:forEach>
+						</c:if>	
+
+
+
+
+
+
 						<div class="focus-project-item">
 							<div class="image-box"><img src="" alt="item-pic"></div>
 							<div>
@@ -58,62 +80,10 @@
 							</div>
 							<div>저는한줄프로젝트입니다</div>
 						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
-						<div class="focus-project-item">
-							<div class="image-box"><img src="" alt="item-pic"></div>
-							<div>
-								<span>카테고리ㅣ창작자명</span>
-								<span>418 % 달성</span>
-							</div>
-							<div>저는한줄프로젝트입니다</div>
-						</div>
+						
+						
+				
+						
 					</div>
 					<div>1 2 3 4</div>
 				</div>

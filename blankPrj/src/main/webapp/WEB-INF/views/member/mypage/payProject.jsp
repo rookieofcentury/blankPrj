@@ -28,22 +28,22 @@
 				<div id="contents">
 					<div id="contents__list">
 						<div id="contents__item" class="content-first">
-							<c:forEach items="${addrVoList}" var="list" varStatus="status">
-								<div class="project-info">
-	
-									<div><img src="/blank/resources/upload/project/${list.changeName}"></div>
-									<div>
-										<div>${list.payDate}</div>
-										<div>프로젝트명</div>
-										<div>후원내역</div>
+							<c:if test="${fn:length(payList) != 0}">
+								<c:forEach items="${payList}" var="list" varStatus="status" end="4">
+									<div class="project-info">
+		
+										<div><img class = "prj-img" src="/blank/resources/upload/project/${list.changeName}"></div>
+										<div>
+											<div>${list.payDate}</div>
+											<div>${list.title}</div>
+										</div>
+										<div>
+											<div>결제금액 : ${list.price}</div>
+											<div>결제예정일 : ${list.payDate}</div>
+										</div>
 									</div>
-									<div>
-										<div>17,800원 결제예정</div>
-										<div>결제예정일</div>
-									</div>
-								</div>
-                            </c:forEach>
-							
+								</c:forEach>
+							</c:if>	
 						</div>
 						<div id="contents__item" class="content-second">
 							<div class="project-info">
@@ -109,5 +109,6 @@
 
 </body>
 <script src="/blank/resources/js/member/payProject.js"></script>
+
 
 </html>
