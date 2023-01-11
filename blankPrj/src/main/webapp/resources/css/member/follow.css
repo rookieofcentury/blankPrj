@@ -92,12 +92,15 @@
   justify-content: space-between;
   justify-content: end;
   padding: 10px;
+  align-items: center;
+  gap: 10px;
 }
- input[type=button]{
+ button[type=button]{
   width: 50px;
   height: 35px;
   background-color: #fff;
-  border: 1px solid var(--main-color);
+  border: 1px solid red;
+  color: red;
  }
  .follow-flex > div:nth-child(1) {
   margin: 10px;
