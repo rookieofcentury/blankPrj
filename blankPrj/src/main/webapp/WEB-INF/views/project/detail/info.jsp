@@ -71,7 +71,7 @@
 					<div class="sub-buttons">
 						<div class="buttons-like">
                             <div class="like-icon"><i class="bi bi-heart"></i></div>
-                            <div class="like-count">110</div>
+                            <div class="like-count">찜~</div>
                         </div>
 						<button class="buttons-funding">프로젝트 후원하기</button>
 					</div>
@@ -188,7 +188,8 @@
 					if(x == 1){
 						alert('찜하기 완~')
 						//location.reload();
-						$('i').eq(0).attr('class','bi-heart-fill');
+						// $('i').eq(0).attr('class','bi-heart-fill');
+						$('i').attr('class','bi-heart-fill');
 						i++;
 					}
 				},error : function(x){

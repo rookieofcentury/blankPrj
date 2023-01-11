@@ -98,7 +98,7 @@
                 </div>
                 <div class="img-upload">
                     <c:if test="${not empty prjInfo.changeName}">
-                        <img id="img-view" src="/blank/resources/upload/project/${prjInfo.changeName}" alt="플젝 사진" />
+                        <img id="img-view" src="/blank/resources/upload/project/'${prjInfo.changeName}'" alt="플젝 사진" />
                     </c:if>
                     <input type="file" name="prjfile" id="input-prjfile" value='<c:out value="${prjInfo.changeName}"/> '>
                 </div>
@@ -1042,7 +1042,7 @@
                     Swal.fire({
                         title: '안내 메시지',
                         text: "임시저장 되었습니다~",
-                        icon: 'error',
+                        icon: 'success',
                         confirmButtonColor: '#567ACE'
                     });
 	    	   		}
@@ -1250,7 +1250,12 @@
     }
 
     $('.buttons-request').click(function(){
-        alert('심사요청 완료!')
+        Swal.fire({
+            title: '안내 메시지',
+            text: "심사요청 완료",
+            icon: 'success',
+            confirmButtonColor: '#567ACE'
+        });
     });
 
     jQuery.browser = {};

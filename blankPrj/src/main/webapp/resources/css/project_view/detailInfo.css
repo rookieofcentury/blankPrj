@@ -123,7 +123,7 @@
     font-size: 15px;
     align-items: center;
     -webkit-box-pack: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 52px;
     height: 52px;
     background: rgb(255, 255, 255);
@@ -131,7 +131,8 @@
     border-radius: 10px;
 }
 .like-icon{
-    margin-bottom: 0    ;
+    margin-bottom: 0 !important;
+    margin-top: 3px !important;
 }
 .bi-heart, .bi-heart-fill{
     --font-size: 30px;

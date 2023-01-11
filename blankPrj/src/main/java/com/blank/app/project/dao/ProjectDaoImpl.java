@@ -231,4 +231,19 @@ public class ProjectDaoImpl implements ProjectDao{
 		
 	}
 		
+	// 랜덤 리스트
+		public List<ProjectVo> mainRandomList(SqlSessionTemplate sst) {
+			return sst.selectList("projectMapper.mainRandomList");
+	}
+
+	// 인기 리스트
+	public List<ProjectVo> mainPopularPrjList(SqlSessionTemplate sst) {
+		return sst.selectList("projectMapper.mainPopularPrjList");
+	}
+
+	// 신규 리스트
+	public List<ProjectVo> mainNewPrjList(SqlSessionTemplate sst) {
+		return sst.selectList("projectMapper.mainNewPrjList");
+	}
+		
 }

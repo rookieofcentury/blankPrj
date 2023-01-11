@@ -58,9 +58,10 @@
         	,URL
         	,STATUS
         	,SUMMARY
+        	,CHANGE_NAME
 		FROM PROJECT 
 		WHERE CREATOR = #{vo.creator}
-        AND STATUS = #{statusWriting}
+        AND STATUS = '작성중'
         AND DELETE_YN = 'N'
 	</select>
 	
@@ -247,6 +248,7 @@
         	,URL
         	,STATUS
         	,SUMMARY
+        	,CHANGE_NAME
 		FROM PROJECT 
 		WHERE CREATOR = #{creator}
         AND STATUS = '심사중'
@@ -268,6 +270,7 @@
         	,URL
         	,STATUS
         	,SUMMARY
+        	,CHANGE_NAME
 		FROM PROJECT 
 		WHERE CREATOR = #{creator}
         AND STATUS = '승인됨'
@@ -278,7 +281,7 @@
 		SELECT COUNT(STATUS)
 		FROM PROJECT 
 		WHERE CREATOR = #{creator}
-        AND STATUS = '승인됨'
+        AND STATUS = '진행중'
         AND DELETE_YN = 'N'
 	</select>
 	
@@ -289,9 +292,10 @@
         	,URL
         	,STATUS
         	,SUMMARY
+        	,CHANGE_NAME
 		FROM PROJECT 
 		WHERE CREATOR = #{creator}
-        AND STATUS = '승인됨'
+        AND STATUS = '진행중'
         AND DELETE_YN = 'N'
 	</select>
 
@@ -392,4 +396,77 @@
 				ORDER BY P.PRICE
 			</if>
 	</select>
+	
+	<select id="mainRandomList" resultType="ProjectVo">
+		SELECT * FROM (
+		SELECT 
+	        P.NO
+	        ,P.TITLE
+	        ,P.PRICE
+	        ,P.START_DATE
+	        ,P.END_DATE
+	        ,P.TIME
+	        ,P.URL
+	        ,P.STORY
+	        ,M.NO MNO
+	        ,M.NICK CREATOR
+	        ,P.SUMMARY
+	        ,C.NAME AS CATEGORY
+	        ,P.CHANGE_NAME
+			FROM PROJECT P
+			INNER JOIN MEMBER M ON P.CREATOR = M.NO
+			INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
+			WHERE P.DELETE_YN = 'N'
+		ORDER BY DBMS_RANDOM.RANDOM())
+		<![CDATA[WHERE ROWNUM <= 8]]>
+	</select>
+	
+	<select id="mainPopularPrjList" resultType="ProjectVo">
+    	SELECT * FROM
+       	(SELECT 
+	        P.NO
+	        ,P.TITLE
+	        ,P.PRICE
+	        ,P.START_DATE
+	        ,P.END_DATE
+	        ,P.TIME
+	        ,P.URL
+	        ,P.STORY
+	        ,M.NO MNO
+	        ,M.NICK CREATOR
+	        ,P.SUMMARY
+	        ,C.NAME AS CATEGORY
+            ,P.CHANGE_NAME
+            ,L.COUNT AS "LIKE"
+			FROM PROJECT P
+			INNER JOIN MEMBER M ON P.CREATOR = M.NO
+			INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
+            LEFT OUTER JOIN (SELECT PRJ_NO, COUNT(*) AS COUNT FROM LIKE_PROJECT GROUP BY PRJ_NO) L ON L.PRJ_NO = P.NO 
+			WHERE P.DELETE_YN = 'N'
+            ORDER BY L.COUNT DESC NULLS LAST)
+            <![CDATA[WHERE ROWNUM <= 5]]>
+	</select>
+	
+	<select id="mainNewPrjList" resultType="ProjectVo">
+		SELECT 
+	        P.NO
+	        ,P.TITLE
+	        ,P.PRICE
+	        ,P.START_DATE
+	        ,P.END_DATE
+	        ,P.TIME
+	        ,P.URL
+	        ,P.STORY
+	        ,M.NO MNO
+	        ,M.NICK CREATOR
+	        ,P.SUMMARY
+	        ,C.NAME AS CATEGORY
+            ,P.CHANGE_NAME
+			FROM PROJECT P
+			INNER JOIN MEMBER M ON P.CREATOR = M.NO
+			INNER JOIN PRJ_CATEGORY C ON P.CATEGORY = C.NO
+			WHERE P.DELETE_YN = 'N'
+            ORDER BY P.START_DATE DESC
+	</select>
+	
 </mapper>

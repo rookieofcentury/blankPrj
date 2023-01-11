@@ -71,10 +71,10 @@ pageEncoding="UTF-8"%>
                 var summary = '${ myPrj.summary }';
 
                 list += '<div class="list-box">';
-                list += '<div class="prj-img">'+'<img src="/blank/resources/images/blank.png" alt="프로젝트 썸네일"/>'+'</div>';
+                list += '<div class="prj-img">'+'<img src="/blank/resources/upload/project/${myPrj.changeName}" alt="프로젝트 썸네일"/>'+'</div>';
                 list += '<div class="prj-info">'+'<div class="prj-content">';
                 list += '<div class="content-info">'+'<div>'+title2+'</div>'+'<div>'+summary+'</div>'+'</div>';
-                list += '<div>' + '<div class="management-button">' + '<a href="/blank/project/?p=' + no + '">관리</a>'
+                list += '<div>' + '<div class="management-button">' + '<a href="/blank/project?p=' + no + '">관리</a>'
                     +'</div>'+'<div class="delete-button">' + '<input type="hidden" id="s_name" value="${ myPrj.no }" name="hiddenNo" />' + '삭제' + '</div>' + '</div>';  
                 list += '</div>'+'</div>'+'</div>';
 

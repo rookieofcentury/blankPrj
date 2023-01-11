@@ -222,4 +222,19 @@ public class ProjectServiceImpl implements ProjectService{
 	public List<ProjectVo> searchPrjList(Map<String, String> map, PageVo pageVo) {
 		return dao.searchPrjList(sst, map, pageVo);
 	}
+	
+//	// 랜덤 리스트
+//		public List<ProjectVo> mainRandomList() {
+//			return dao.mainRandomList(sst);
+//	}
+//
+//	// 인기 리스트
+//	public List<ProjectVo> mainPopularPrjList() {
+//		return dao.mainPopularPrjList(sst);
+//	}
+//
+//	// 신규 리스트
+//	public List<ProjectVo> mainNewPrjList() {
+//		return dao.mainNewPrjList(sst);
+//	}
 }
