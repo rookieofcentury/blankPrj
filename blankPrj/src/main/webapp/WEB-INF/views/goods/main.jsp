@@ -20,10 +20,9 @@
         <div id="banner">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                  <div data-hash="slide1" class="swiper-slide">Slide 1</div>
-                  <div data-hash="slide2" class="swiper-slide">Slide 2</div>
-                  <div data-hash="slide3" class="swiper-slide">Slide 3</div>
-                  <div data-hash="slide4" class="swiper-slide">Slide 4</div>
+                  <div data-hash="slide1" class="swiper-slide"><img src="/blank/resources/images/banner/banner5.png"></div>
+                  <div data-hash="slide2" class="swiper-slide"><img src="/blank/resources/images/banner/banner6.png"></div>
+                  <div data-hash="slide3" class="swiper-slide"><img src="/blank/resources/images/banner/banner7.png"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -31,17 +30,58 @@
             </div>
         </div>
         <div class="content first-area">
-            <div>
-
+            <div class="first-first">
+                <div class="bold">공지 사항</div>
+                <div class="notice-content">
+                    <span>22.12.09</span>
+                    <span class="notice-detail">블랭크 오픈 기념 굿즈 증정 이벤트</span>
+                </div>
+                <div class="notice-content">
+                    <span>22.12.31</span>
+                    <span class="notice-detail">행복한 연말 맞이 기획전 개장!</span>
+                </div>
+                <div class="notice-content">
+                    <span>23.01.04</span>
+                    <span class="notice-detail">결제 시스템 점검 안내</span>
+                </div>
+                <div class="notice-content">
+                    <span>23.01.12</span>
+                    <span class="notice-detail">빵빵키링 재입고 안내</span>
+                </div>
             </div>
-            <div>
-
+            <div class="first-second">
+                <div class="bold">검색 도우미</div>
+                <div class="search-cate">
+                    <div>카테고리</div>
+                    <a class="cate" href="/blank/goods/search?category=1">리빙/가전</a>
+                    <a class="cate" href="/blank/goods/search?category=2">패션잡화</a>
+                    <a class="cate" href="/blank/goods/search?category=3">문구류</a>
+                    <a class="cate" href="/blank/goods/search?category=4">오피스</a>
+                    <a class="cate" href="/blank/goods/search?category=5">디지털</a>
+                </div>
+                <div class="search-cate">
+                    <div>추천 키워드</div>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=엽서">엽서</a>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=코딩">코딩</a>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=심원용">심원용</a>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=다이어리">다이어리</a>
+                </div>
+                <div class="search-cate">
+                    <div>인기 아이템</div>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=사랑이 가득해 키링">사랑이 가득해 키링</a>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=모코코 키링">모코코 키링</a>
+                </div>
+                <div class="search-cate">
+                    <div>오늘의 아이템</div>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=가죽 장패드">가죽 장패드</a>
+                    <a class="cate" href="/blank/goods/search?goodsKeyword=코딩 능력">코딩 능력</a>
+                </div>
             </div>
             <div class="first-third">
                 <div>
                     <form action="/blank/goods/search" method="get">
 						<div class="flex search-box">
-							<input type="text" class="input-hidden" name="goodsKeyword" placeholder="검색어를 입력해 주세요.">
+							<input type="text" class="input-hidden" name="goodsKeyword" placeholder="굿즈 검색어를 입력해 주세요.">
 							<button class="material-symbols-outlined">search</button>
 						</div>
 					</form>

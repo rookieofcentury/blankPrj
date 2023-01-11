@@ -20,10 +20,9 @@
         <div id="banner">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                  <div data-hash="slide1" class="swiper-slide"><img src="/blank/resources/images/banner/banner4.png" alt=""></div>
-                  <div data-hash="slide2" class="swiper-slide">Slide 2</div>
-                  <div data-hash="slide3" class="swiper-slide">Slide 3</div>
-                  <div data-hash="slide4" class="swiper-slide">Slide 4</div>
+                  <div data-hash="slide1" class="swiper-slide"><img src="/blank/resources/images/banner/banner1.png"></div>
+                  <div data-hash="slide2" class="swiper-slide"><img src="/blank/resources/images/banner/banner2.png"></div>
+                  <div data-hash="slide3" class="swiper-slide"><img src="/blank/resources/images/banner/banner4.png" onclick="getAtt();"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -253,6 +252,10 @@
         });
         swiper.autoplay.start();
     });
+
+    function getAtt() {
+        $('#attendance-btn').click();
+    }
 </script>
 </body>
 </html>

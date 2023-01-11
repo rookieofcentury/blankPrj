@@ -241,3 +241,21 @@ a {
 .menu-item i {
 	color: #8F8F8F;
 }
+
+/* 로그인 이후 버튼 */
+.afterLogin {
+	padding: 20px;
+	height: 40px;
+	border: 1px solid #D9D9D9;
+	border-radius: 10px;
+	cursor: pointer;
+	color: #343434;
+}
+.logout-btn span {
+	color: #343434;
+}
+.prj-area {
+	padding-top: 20px;
+	display: flex;
+	gap: 10px;
+}

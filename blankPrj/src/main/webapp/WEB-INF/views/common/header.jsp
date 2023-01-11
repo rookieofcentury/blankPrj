@@ -17,16 +17,20 @@
 	<div id="header-container">
 
 		<div class="header-home-container">
-			<div class="box"></div>
+			<div class="box prj-area">
+				<c:if test="${loginMember != NULL}">
+					<div class="projectUp afterLogin flex" onclick="location.href='/blank/project/agree'">프로젝트 올리기</div>
+					<div class="projectUp afterLogin flex" onclick="location.href='/blank/project/created'">내 프로젝트</div>
+				</c:if>
+			</div>
 			<div class="box">
 				<img class="logo-img" src="/blank/resources/images/blank.png" onclick="location.href='/blank'">
 			</div>
 			<div class="member-area">
 				<c:if test="${loginMember != NULL}">
 					<div class="mypage-area">
-						<div onclick="location.href='/blank/project/agree'">프로젝트 올리기</div>
-						<div id="mypage-btn" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
-						<div onclick="location.href='/blank/member/logout'">로그아웃</div>
+						<div class="mypage-btn afterLogin flex" onclick="location.href='/blank/member/mypage/editprofile'">마이페이지</div>
+						<div class="logout-btn afterLogin flex" onclick="location.href='/blank/member/logout'"><span class="material-symbols-outlined">logout</span></div>
 					</div>
 				</c:if>
 				<c:if test="${loginMember == NULL}">
