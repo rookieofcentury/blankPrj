@@ -193,6 +193,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectList("payMapper.selectPayListByNo", mNo);
 	}
 
+	@Override
+	public int updateDefault(SqlSessionTemplate sst, String no) {
+		return sst.update("memberMapper.updateDefault", no);
+	}
+	
+	
 	
 	
 	

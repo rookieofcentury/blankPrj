@@ -823,9 +823,31 @@ public class MemberController {
 				return 0+"";
 			}
 			
+		}
+		
+		//프로필사진삭제 ^^...
+		@ResponseBody
+		@PostMapping("member/deleteProfile")
+		public String updateDefault(HttpSession session, Model model){
 			
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
+			if(loginMember == null) {
+				model.addAttribute("msg", "로그인 후 이용가능합니다.");
+				return "home";
+			}
+			String no = loginMember.getNo();
 			
+			int result = service.updateDefault(no);
+			loginMember.setProfile("default.png");
+			
+			//프로필 다시 디폴트로 바꼬준다.
+			if(result == 1) {
+				session.setAttribute("loginMember", loginMember);
+				return result+"";
+			}
+			
+			return result+"";
 		}
 		
 		//굿즈구매내역 보여주기

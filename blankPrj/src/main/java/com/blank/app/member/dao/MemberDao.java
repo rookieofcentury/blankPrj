@@ -75,5 +75,7 @@ public interface MemberDao {
 
 	public List<PayListVo> selectPayListByNo(SqlSessionTemplate sst, String mNo);
 
+	public int updateDefault(SqlSessionTemplate sst, String no);
+
 
 }

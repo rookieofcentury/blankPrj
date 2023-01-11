@@ -34,8 +34,7 @@
 		
 										<div><img class = "prj-img" src="/blank/resources/upload/project/${list.changeName}"></div>
 										<div>
-											<div>${list.payDate}</div>
-											<div>${list.title}</div>
+											<div><a href="/blank/project?p=${list.no}">${list.title}</a></div>
 										</div>
 										<div>
 											<div>결제금액 : ${list.price}</div>

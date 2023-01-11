@@ -56,19 +56,28 @@ public class PayController {
 			}
 		
 			//화면에 보여줄 때 프로젝트랑 세트 번호 가져와야한다 ~ 
-			ProjectVo prjvo = payService.selectPrjByNo(pNo);
+			ProjectVo prjVo = payService.selectPrjByNo(pNo);
 
 			ItemVo setVo = payService.selectSetByNo(setNo);
 			
-//			//퍼센트 정보 가져오자 
-//			int p = Integer.parseInt(pNo);
-//			int fundingSum = prjService.selectSum(p);
-//			int goal = Integer.parseInt(Prjvo.getPrice());
-//			
-//			int division = Math.floorDiv(fundingSum,goal);
+			// 퍼센트 - 애림님 
+			int p = Integer.parseInt(pNo);
+			int fundingSum =prjService.selectSum(p);
+			int goal = Integer.parseInt(prjVo.getPrice());
+			
+			String fundingPrice = String.valueOf(fundingSum);
+			prjVo.setFundingSum(fundingPrice);
+			
+			//달성률
+			int division = Math.floorMod(fundingSum,goal);
+//			int division = Math.floorMod(300,1000);
+//			System.out.println(division);
+			
 //			int percent = division * 100;
-//			
-//			Prjvo.setPercent(percent);
+			int percent = division / 10;
+//			System.out.println(percent);
+			
+			prjVo.setPercent(percent);
 			
 			//후원자 정보도 가져와야함!
 			String mNo = loginMember.getNo();
@@ -81,7 +90,7 @@ public class PayController {
 			System.out.println(setVo);
 	
 			
-			model.addAttribute("prjVo", prjvo);
+			model.addAttribute("prjVo", prjVo);
 			model.addAttribute("setVo", setVo);
 			model.addAttribute("addrVoList", loginAddrVoList);
 			model.addAttribute("payVoList", loginPayVoList);
@@ -112,8 +121,9 @@ public class PayController {
 			int result = payService.insertPayList(vo);
 			
 			if(result == 1) {
+				
 				//성공했을 때 세트 수량 -1 
-				//prjService.minusCnt(vo.getSetNo());
+				int result2 = prjService.minusCnt(vo.getSetNo());
 				
 				return "redirect:/member/mypage/payProject";
 			}else {

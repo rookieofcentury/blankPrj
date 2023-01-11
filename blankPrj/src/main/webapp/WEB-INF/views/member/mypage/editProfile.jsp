@@ -31,7 +31,7 @@
 								<form action="/blank/member/mypage/plus-profile" name="profile" id="profile-form" method="post" enctype="multipart/form-data">
 									<!-- <label for="input-profile" class="filebox"> 업로드 </label> -->
 									<input type="file" name="profile" id="input-profile">
-									<button type ="button" class="change-btn">삭제</button>
+									<button type ="button" id="profile-delete" class="change-btn">삭제</button>
 									<input type="submit" id="profile-submit" value="저장" class="change-btn">
 									
 								</form>
@@ -217,7 +217,7 @@ function updatePhone(){
 //비밀번호 업데이트
 //비밀번호 입력하여 로그인된 비밀번호와 같으면 아래 인풋 나오게 
 
-//키업하면 비밀번호 타입으로 바뀌게 바Rㅝ얗망ㄴ다
+//키업하면 비밀번호 타입으로 바뀌게 바꿔야한다.
 
 $('input[name=pwd]').keyup(function(){
 	$('input[name=pwd]').prop("type", "password");
@@ -333,7 +333,32 @@ $('#pwd1-ajax').click(function(){
 
 // })
 
+//프로필 삭제 기능
+$('#profile-delete').click(function(){
 
+	$.ajax({
+			url : "/blank/member/deleteProfile",
+			type : "post",
+			success : function(result){
+
+				if(result == 1){
+
+				alert('프로필 삭제했습니다.');
+					document.location.reload();
+
+				}
+				else{
+					alert('프로필 업데이트 실패')
+				}
+			
+			},
+		
+			error : function(){
+			alert('에이잭스 에러!!!!!!!!!');
+			}
+		}) //ajax   
+
+})
 
 
 // 프로필 미리보기 기능 

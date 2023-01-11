@@ -228,4 +228,11 @@
 		WHERE NO = {addrNo}
 	
 	</select>
+	
+	<update id="updateDefault">
+		UPDATE MEMBER
+		SET PROFILE = 'default.png'
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>

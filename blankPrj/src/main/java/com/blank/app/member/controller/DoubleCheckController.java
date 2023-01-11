@@ -44,7 +44,7 @@ public class DoubleCheckController {
 	public String doubleCheckbyPhone(String phone) {
 		
 		System.out.println(phone);
-		int result = service.doubleCheckByNick(phone);
+		int result = service.doubleCheckByPhone(phone);
 		
 		return result+"";
 	}
