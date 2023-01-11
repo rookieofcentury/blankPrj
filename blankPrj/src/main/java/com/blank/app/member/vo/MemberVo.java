@@ -24,7 +24,7 @@ public class MemberVo {
 	private String quitNo;
 	private String quitVar;
 	private String info;
-	//private String cntPrj; 사이드바에 필요할 수도 있어서 
+	private String cntPrj; //사이드바에 필요할 수도 있어서 
 	
 	private String profile; 
 	

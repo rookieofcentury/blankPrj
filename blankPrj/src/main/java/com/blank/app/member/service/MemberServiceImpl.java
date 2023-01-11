@@ -267,5 +267,10 @@ public class MemberServiceImpl implements MemberService{
 		return dao.updateDefault(sst, no);
 	}
 
+	@Override
+	public String selectPrjCnt(String mNo) {
+		return dao.selectPrjCntByNo(sst,mNo);
+	}
+
 
 }

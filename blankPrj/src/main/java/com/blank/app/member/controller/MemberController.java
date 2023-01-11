@@ -86,8 +86,12 @@ public class MemberController {
 			log.warn("로그인 실패입니다.");
 			return "member/login";
 		}
+		String mNo = loginMember.getNo();
 		
-	
+		String payPrjCnt = service.selectPrjCnt(mNo);
+		
+		loginMember.setCntPrj(payPrjCnt);
+		
 		session.setAttribute("loginMember", loginMember);
 		
 		Cookie c = new Cookie("saveId", loginMember.getEmail());
@@ -164,6 +168,13 @@ public class MemberController {
 	//로그인 화면 
 	@GetMapping("member/login")
 	public String login(Model model, HttpSession session) {
+		
+		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		
+		if(loginMember != null) {
+			model.addAttribute("msg", "이미 로그인을 하신 상태입니다.");
+			return "home";
+		}
 		
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);

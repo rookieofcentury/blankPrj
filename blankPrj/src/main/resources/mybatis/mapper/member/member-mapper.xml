@@ -32,8 +32,9 @@
   
   <!-- 로그인  -->
   <select id="selectOneMember" resultType="MemberVo"> 
-  	SELECT * 
-  	FROM MEMBER
+  	SELECT NO, EMAIL, PWD1, PHONE, NICK, GENDER, PROFILE, TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') AS ENROLLDATE,
+	STATUS, ALARM, POINT, ACCOUNT, BANK, DEPOSITOR, QUIT_VAR, QUIT_NO, INFO
+	FROM MEMBER
   	WHERE EMAIL = #{email}
   	AND STATUS = 'Y'
   </select>
@@ -111,7 +112,7 @@
 	<select id="selectHelpListByNo" resultType="HelpVo">
 		SELECT  H.NO, H.TITLE, M.NICK AS MEMBER_NO, 
 				H.STATUS, TO_CHAR(H.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE,
-				H.SECRET_YN, H.PASSWORD
+				H.SECRET_YN
 		
 		FROM HELP H
 		JOIN MEMBER M
@@ -124,7 +125,7 @@
 	<select id="selectLikePrjByNo" resultType="ProjectVo">
 	
 		SELECT  P.NO AS NO, 
-        SUBSTR(P.TITLE,1,15) AS TITLE , M.NICK AS CREATOR, 
+        SUBSTR(P.TITLE,1,20) AS TITLE , M.NICK AS CREATOR, 
 		P.STATUS AS STATUS, C.NAME as CATEGORY, P.CHANGE_NAME 
 
 		FROM PROJECT P
@@ -235,4 +236,9 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<select id="selectPrjCntByNo" resultType="String">
+		SELECT COUNT(P_NO) 
+		FROM PAY_LIST
+		WHERE M_NO = #{mNo}
+	</select>
 </mapper>

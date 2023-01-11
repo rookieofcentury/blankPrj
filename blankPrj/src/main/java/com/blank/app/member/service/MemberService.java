@@ -76,6 +76,8 @@ public interface MemberService {
 
 	public int updateDefault(String no);
 
+	public String selectPrjCnt(String mNo);
+
 
 
 
