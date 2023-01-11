@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.blank.app.admin.common.PageVo;
+import com.blank.app.admin.common.Pagination;
 import com.blank.app.common.file.FileUploader;
 import com.blank.app.member.vo.LikeMemberVo;
 import com.blank.app.member.vo.MemberVo;
@@ -65,14 +67,18 @@ public class ProjectController {
 		prjVo.setFundingSum(fundingPrice);
 		
 		//달성률
-//		int division = Math.floorMod(fundingSum,goal);
-		int division = Math.floorDiv(fundingSum,goal);
-//		int division = Math.floorMod(300,1000);
-//		System.out.println(division);
+//		int division1 = Math.floorMod(fundingSum,goal);
+		int division1 = Math.floorMod(300,1000);
+		int division = Math.floorDiv(300,1000);
 		
-		int percent = division * 100;
-//		int percent = division / 10;
-//		System.out.println(percent);
+//		int division = Math.floorMod(300,1000);
+		System.out.println("1" + division1);
+		System.out.println(division);
+		
+		int percent1 = division * 100;
+		int percent = division / 10;
+		System.out.println(percent1);
+		System.out.println(percent);
 		
 		prjVo.setPercent(percent);
 		
@@ -477,4 +483,36 @@ public class ProjectController {
 	public String pay(String no) {
 		return "1";
 	}
+	
+	// 검색
+		@GetMapping("search")
+		public String searchPrj(String keyword, String category, String p, String standard, Model model) {
+			
+			if(p == null) {
+				p = "1";
+			}
+			
+			Map<String, String> map = new HashMap<>();
+			map.put("category", category);
+			map.put("keyword", keyword);
+			map.put("standard", standard);
+			
+			int listCount = service.searchListCount(map);
+			int currentPage = Integer.parseInt(p);
+			int boardLimit = 12;
+			int pageLimit = 5;
+			PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+			
+			List<ProjectVo> list = service.searchPrjList(map, pageVo);
+			
+			model.addAttribute("listCount", listCount);
+			model.addAttribute("pageVo", pageVo);
+			model.addAttribute("ProjectList", list);
+			model.addAttribute("category", category);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("standard", standard);
+			
+			return "project/search";
+			
+		}
 }
