@@ -31,7 +31,7 @@
                     <div>${vo.content}</div>
                 </c:if>
 				<div>${vo.writeDate}</div>
-				<div><a href="/blank/chatbot/main?no=${vo.no}" name="no">입장</a></div>
+				<div><a href="/blank/chatbot/main?no=${vo.no}" name="no" class="chat-in-btn">입장</a></div>
 			</c:forEach>
 			</div>
 

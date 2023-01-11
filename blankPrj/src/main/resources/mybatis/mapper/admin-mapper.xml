@@ -27,7 +27,7 @@
 		ON A.NO = N.ADMIN_NO
 		WHERE N.DELETE_YN = 'N'
 		<if test=" keyword != null and keyword != '' ">
-			WHERE ${category} LIKE '%${keyword}%'
+			AND ${category} LIKE '%${keyword}%'
 		</if>
 		ORDER BY NO DESC
 	</select>
@@ -85,7 +85,7 @@
 		FROM MEMBER
 		WHERE STATUS = 'Y'
 		<if test=" keyword != null and keyword != '' ">
-			AND WHERE ${category} LIKE '%${keyword}%'
+			AND ${category} LIKE '%${keyword}%'
 		</if>
 		ORDER BY NO DESC
 	</select>

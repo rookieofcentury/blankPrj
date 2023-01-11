@@ -16,7 +16,7 @@ header{
 
 header div{
     line-height: 40px;
-    margin-left: 13%;
+    margin-left: 5%;
     margin-top: 5px;
     font-size: 16px;
     font-weight: bold;
@@ -79,7 +79,7 @@ a {
 
 .chat-list{
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr 0.7fr;
+    grid-template-columns: 1.2fr 1.5fr 1fr 0.7fr;
     margin-top: 15px;
 }
 
@@ -119,4 +119,8 @@ footer{
     border-radius: 2px;
     border: 1px solid rgb(229, 229, 229);
     cursor: pointer;
+}
+
+.chat-in-btn:hover{
+    color: rgba(86, 122, 206, 1);
 }

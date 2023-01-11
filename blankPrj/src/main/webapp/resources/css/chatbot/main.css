@@ -11,11 +11,16 @@ header{
 
 header div{
     line-height: 40px;
-    margin-left: 13%;
+    margin-left: 5%;
     margin-top: 5px;
     font-size: 16px;
     font-weight: bold;
     color: rgb(66, 66, 66);
+}
+
+header div a{
+    cursor: pointer;
+    font-weight: bold;
 }
 
 main{
