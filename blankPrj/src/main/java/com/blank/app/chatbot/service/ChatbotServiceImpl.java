@@ -1,11 +1,13 @@
 package com.blank.app.chatbot.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.blank.app.chatMessage.vo.ChatMessageVo;
 import com.blank.app.chatbot.dao.ChatbotDao;
 import com.blank.app.chatbot.vo.ChatbotVo;
 
@@ -26,6 +28,11 @@ public class ChatbotServiceImpl implements ChatbotService{
 	@Override
 	public String selectAnswer(ChatbotVo chatbotVo) {
 		return chatbotDao.selectAnswer(sst, chatbotVo);
+	}
+
+	@Override
+	public List<ChatMessageVo> selectMsgList(Map<String, String> map) {
+		return chatbotDao.selectMsgList(sst, map);
 	}
 
 }

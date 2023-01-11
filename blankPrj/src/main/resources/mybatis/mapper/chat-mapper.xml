@@ -38,9 +38,17 @@
 	
 	<!-- 채팅 목록 조회 -->
 	<select id="selectList" resultType="ChatMessageVo">
-			SELECT SEND_NO, CONTENT
-			FROM CHAT_MESSAGE
-			ORDER BY NO DESC
+			SELECT M.NICK AS SEND_NO, CONTENT, WRITE_DATE
+			FROM CHAT_MESSAGE CM
+            JOIN MEMBER M
+            ON CM.SEND_NO = M.NO
+            WHERE(SEND_NO, WRITE_DATE)
+            IN(
+                SELECT SEND_NO, MAX(WRITE_DATE) AS WRITE_DATE
+                FROM CHAT_MESSAGE
+                GROUP BY SEND_NO
+                )
+			ORDER BY WRITE_DATE DESC
 	</select>
 	
 </mapper>
