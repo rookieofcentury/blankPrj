@@ -75,7 +75,7 @@ public interface ProjectService {
 
 	int selectSum(int p);
 
-  int minusCnt(String setNo);
+	int minusCnt(String setNo);
 
 	int selectCalDate(int p);
 
@@ -85,4 +85,9 @@ public interface ProjectService {
 
 	List<ProjectVo> searchPrjList(Map<String, String> map, PageVo pageVo);
   
+	List<ProjectVo> mainPopularPrjList();
+
+	List<ProjectVo> mainNewPrjList();
+
+	List<ProjectVo> mainRandomList();
 }
