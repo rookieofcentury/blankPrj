@@ -176,7 +176,7 @@
 								</div>
 								<div class="card-in margin-down">
 										<div>
-											<div class="margin-down">카드 비밀번호</div>
+											<div class="margin-down">카드 비밀번호(시작 2자리)</div>
 											<div><input type="text" name="cardPwd" class="card-input"></div>
 										</div>
 										<div>

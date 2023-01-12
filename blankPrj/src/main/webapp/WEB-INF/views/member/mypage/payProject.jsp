@@ -45,30 +45,21 @@
 							</c:if>	
 						</div>
 						<div id="contents__item" class="content-second">
-							<div class="project-info">
-								<div>프로젝트사진</div>
-								<div>
-									<div>후원일</div>
-									<div>프로젝트명</div>
-									<div>후원내역</div>
-								</div>
-								<div>
-									<div>17,800원 결제예정</div>
-									<div>결제예정일</div>
-								</div>
-							</div>
-							<div class="project-info">
-								<div>프로젝트사진</div>
-								<div>
-									<div>후원일</div>
-									<div>프로젝트명</div>
-									<div>후원내역</div>
-								</div>
-								<div>
-									<div>17,800원 결제예정</div>
-									<div>결제예정일</div>
-								</div>
-							</div>
+							<c:if test="${fn:length(payList) != 0}">
+								<c:forEach items="${payList}" var="list" varStatus="status" begin="5" end="8">
+									<div class="project-info">
+		
+										<div><img class = "prj-img" src="/blank/resources/upload/project/${list.changeName}"></div>
+										<div>
+											<div><a href="/blank/project?p=${list.no}">${list.title}</a></div>
+										</div>
+										<div>
+											<div>결제 된 금액 : ${list.price}</div>
+											<div>결제일시 : ${list.reserveDate}</div>
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>	
 						</div>
 						<div id="contents__item" class="content-third">
 							<div class="project-info">

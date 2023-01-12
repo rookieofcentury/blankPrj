@@ -303,6 +303,7 @@ public class MemberController {
 		List<PayListVo> voList = service.selectPayListByNo(mNo);
 		
 		System.out.println(voList);
+		
 		model.addAttribute("payList",voList);
 		
 		return "member/mypage/payProject";
@@ -656,7 +657,7 @@ public class MemberController {
 		}
 		
 		
-		//팔로잉 기능 --에이잭스 쓰시나 물어봐야함 
+		//팔로잉 기능
 		@ResponseBody
 		@PostMapping("member/deleteMember")
 		public String deleteLikeMemberByNo(HttpSession session, String likeMemberNo) {
@@ -788,7 +789,7 @@ public class MemberController {
 			//프로필을 저장해서 넘긴다.
 			model.addAttribute("result", apiResult);
 		     
-			return "member/mypage/editProfile";
+			return "redirect:/";
 		}
 
 		
