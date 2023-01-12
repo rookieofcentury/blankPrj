@@ -87,4 +87,10 @@ public interface ProjectDao {
 
 	List<ProjectVo> searchPrjList(SqlSessionTemplate sst, Map<String, String> map, PageVo pageVo);
 
+	List<ProjectVo> mainNewPrjList(SqlSessionTemplate sst);
+
+	List<ProjectVo> mainPopularPrjList(SqlSessionTemplate sst);
+
+	List<ProjectVo> mainRandomList(SqlSessionTemplate sst);
+
 }
