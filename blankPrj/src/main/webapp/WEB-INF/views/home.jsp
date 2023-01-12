@@ -38,7 +38,7 @@
                 </div>
                 <div class="focus-project-list">
                     <c:forEach items="${randomList}" var="item">
-                        <div class="focus-project-item">
+                        <div class="focus-project-item" onclick="location.href='/blank/project?p=${item.no}'">
                             <div class="image-box"><img src="/blank/resources/upload/project/${item.changeName}"></div>
                             <div>
                                 <span>${item.category}ㅣ${item.creator}</span>
@@ -67,7 +67,7 @@
                 <div class="popular-project">
                     <c:forEach items="${popularList}" var="item">
                         <c:set var="i" value="${i+1}"/>
-                        <div class="popular-project-item">
+                        <div class="popular-project-item" onclick="location.href='/blank/project?p=${item.no}'">
                             <div class="image-box"><img src="/blank/resources/upload/project/${item.changeName}" alt="item-pic"></div>
                             <div>${i}</div>
                             <div class="popular-project-item-subtitle">
@@ -84,7 +84,7 @@
             <div class="blank-title">신규 프로젝트</div>
             <div class="new-project-list">
                 <c:forEach items="${newList}" var="item" varStatus="index" begin="0" end="4" step="1">
-                    <div class="new-project-item">
+                    <div class="new-project-item" onclick="location.href='/blank/project?p=${item.no}'">
                         <div class="image-box"><img src="/blank/resources/upload/project/${item.changeName}" alt="item-pic"></div>
                         <div>
                             <span>${item.category}ㅣ${item.creator}</span>

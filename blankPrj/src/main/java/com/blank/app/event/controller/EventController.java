@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.blank.app.event.service.EventService;
 import com.blank.app.member.vo.MemberVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequestMapping("/attendance")
 @Controller
 public class EventController {
@@ -90,8 +93,10 @@ public class EventController {
 		}
 		
 		int result = es.attendance(no, i);
+		log.info(vo.getNick() + " 출석 완료! " + i + "일째 근속으로 " + point + " 포인트 적립");
 
 		if(result == 0) {
+			log.warn(vo.getNick() + " 출석 실패, 에러를 확인해 주세요");
 			return "fail";
 		}
 

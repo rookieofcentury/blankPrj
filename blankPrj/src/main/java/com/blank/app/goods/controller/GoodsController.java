@@ -399,8 +399,6 @@ public class GoodsController {
 	@PostMapping("/review/write")
 	public String reviewWrite(ReviewVo vo, HttpServletRequest req) throws IllegalStateException, IOException {
 		
-		System.out.println(vo);
-		
 		if(vo.getReviewFile() != null) {
 			boolean isEmpty = vo.getReviewFile().isEmpty();			
 		}

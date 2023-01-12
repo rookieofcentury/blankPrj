@@ -122,7 +122,6 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 결제 내역 찾기
 	public PaymentVo selectPaymentVoByNo(SqlSessionTemplate sst, PaymentVo pay) {
-		System.out.println("dao : " + pay);
 		return sst.selectOne("goodsMapper.selectPaymentVoByNo", pay);
 	}
 
