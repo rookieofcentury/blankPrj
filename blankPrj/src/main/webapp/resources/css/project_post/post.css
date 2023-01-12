@@ -419,7 +419,7 @@ input[name='deliveryDate'], input[name='startDate']{
     cursor: pointer;
 }
 input[name='endDate']{
-    width: 68%;
+    width: 80%;
     height: 28px;
     margin-top: 0;
     border: 1px solid #567ace;
@@ -439,7 +439,8 @@ input[name='deliveryDate']{
     font-size: 12px !important;
 }
 .calculate-notice>p {
-    margin : 3px 0 3px 2px;
+    /* margin : 3px 0 3px 2px; */
+    margin: 0 !important;
     font-size: 12px !important;
 }
 .content-stroy{

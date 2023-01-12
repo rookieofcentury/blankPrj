@@ -111,7 +111,7 @@
        /* 삭제 ajax */
         function clickDelete() { 
        	 	$('#popup_layer').css('display', 'none');
-            
+            console.log($('#s_name').val());
             $.ajax({
                 url : "/blank/project/created/delete",
                 method : "GET",   
@@ -120,7 +120,12 @@
                 },
                 success : function(x){
                     if(x == 1){
-                   	alert('삭제완료 되었습니다.')
+                        Swal.fire({
+                        title: '안내 메시지',
+                        text: "삭제완료 되었습니다",
+                        icon: 'success',
+                        confirmButtonColor: '#567ACE'
+                    });
                     window.location.href = "/blank/project/created";
                     } 
             },

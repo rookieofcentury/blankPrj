@@ -98,7 +98,7 @@
                 </div>
                 <div class="img-upload">
                     <c:if test="${not empty prjInfo.changeName}">
-                        <img id="img-view" src="/blank/resources/upload/project/'${prjInfo.changeName}'" alt="플젝 사진" />
+                        <img id="img-view" src="/blank/resources/upload/project/${prjInfo.changeName}" alt="플젝 사진" />
                     </c:if>
                     <input type="file" name="prjfile" id="input-prjfile" value='<c:out value="${prjInfo.changeName}"/> '>
                 </div>
@@ -462,7 +462,7 @@
                     <div>창작자님의 이력과 간단한 소개를 써주세요.</div>
                 </div>
                 <div class="creator-write">
-                    <div><input type="text" placeholder="내용 입력" name="info" value='<c:out value="${memberInfo.info}"/>'></div>
+                    <div><input type="text" placeholder="내용 입력" name="info"></div>
                     <p>40글자 남음</p>
                 </div>
             </div>
@@ -709,14 +709,16 @@
                     confirmButtonColor: '#567ACE'
                 }); 
            }
-           if(date1 < dateString){
-                Swal.fire({
-                    title: '안내 메시지',
-                    text: "오늘 날짜 이후로 선택해 주세요",
-                    icon: 'error',
-                    confirmButtonColor: '#567ACE'
-                }); 
-               }
+               if(date1 < dateString){
+                console.log(date1);
+                console.log(dateString);
+                    Swal.fire({
+                        title: '안내 메시지',
+                        text: "오늘 날짜 이후로 선택해 주세요",
+                        icon: 'error',
+                        confirmButtonColor: '#567ACE'
+                    }); 
+                   }
        });
 
        //url 중복검사
@@ -1075,7 +1077,12 @@
             if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
             //    if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
             //    if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
-
+            Swal.fire({
+            title: '안내 메시지',
+            text: "심사요청 완료",
+            icon: 'success',
+            confirmButtonColor: '#567ACE'
+        });
             return true;
        }
 
@@ -1187,7 +1194,7 @@
     /*세트 append*/
     $('input[name=save]').click(function(){
         if(!$('input[name=setName]').val().trim() == '' && !$('input[name=setPrice]').val().trim() == '' && !$('input[name=setQuantity]').val().trim() == ''){
-            $(".mySet").empty();
+            $(".selected").empty();
             var list = '';
             list += '<li class="set-list">' + '<button type="button">' + '<div class="set-buttons">' + '<strong>' + $('input[name=setPrice]').val() + '원' + '</strong>' 
             list += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' +
@@ -1249,14 +1256,14 @@
         }
     }
 
-    $('.buttons-request').click(function(){
-        Swal.fire({
-            title: '안내 메시지',
-            text: "심사요청 완료",
-            icon: 'success',
-            confirmButtonColor: '#567ACE'
-        });
-    });
+    // $('.buttons-request').click(function(){
+    //     Swal.fire({
+    //         title: '안내 메시지',
+    //         text: "심사요청 완료",
+    //         icon: 'success',
+    //         confirmButtonColor: '#567ACE'
+    //     });
+    // });
 
     jQuery.browser = {};
 		(function () {

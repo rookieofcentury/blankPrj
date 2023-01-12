@@ -125,7 +125,7 @@
 									<li>미니드라이브</li> -->
 								</ul>
 								<div class="option-quantity">제한수량 ${item.setQuantity}개</div>
-								<div class="option-sell">총 ${item.setQuantity}개 펀딩완료</div>
+								<!-- <div class="option-sell">총 ${prj.fundingSum}개 펀딩완료</div> -->
 							</div>
 							
 						</label>
