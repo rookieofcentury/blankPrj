@@ -47,6 +47,38 @@ main{
     margin-left: 20px;
 }
 
+.faq-contents div:nth-child(1) img{
+    width: 68px;
+    height: 75px;
+    margin: 10px;
+}
+
+.faq-contents div:nth-child(1),
+.faq-contents div:nth-child(2),
+.faq-contents div:nth-child(3),
+.faq-contents div:nth-child(4){
+    padding-top: 10px;
+}
+
+.faq-contents div:nth-child(2) img{
+    width: 93px;
+    height: 65px;
+    margin: 10px;
+    margin-left: 13px
+}
+
+.faq-contents div:nth-child(3) img{
+    width: 90px;
+    height: 60px;
+    margin: 20px;
+}
+
+.faq-contents div:nth-child(4) img{
+    width: 70px;
+    height: 70px;
+    margin: 15px;
+}
+
 .help-middle{
     height: 260px;
 }

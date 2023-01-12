@@ -21,7 +21,7 @@
         <main>
     
             <div class="notice-list">
-    
+				
     			<c:forEach items="${voList}" var="vo">
     			
 	    			<c:if test="${vo.fixeYn == 'Y'}">

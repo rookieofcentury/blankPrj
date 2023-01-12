@@ -75,10 +75,10 @@
 					</c:if>
 
                     <c:if test="${fn:length(vo.title) ge 23 && vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
-						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${fn:substring(vo.title, 0, 23)}...</a></div>	
+						<div><a name="no">${fn:substring(vo.title, 0, 23)}...</a></div>	
 					</c:if>
 					<c:if test="${fn:length(vo.title) lt 23 && vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
-						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
+						<div><a name="no">${vo.title}</a></div>
 					</c:if>
 
                     <c:if test="${fn:length(vo.title) ge 23 && vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
@@ -87,20 +87,6 @@
 					<c:if test="${fn:length(vo.title) lt 23 && vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
 						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
 					</c:if>
-
-
-					<!-- <c:if test="${vo.secretYn eq 'N'}">
-						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
-					</c:if>
-					<c:if test="${vo.secretYn == null}">
-						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
-					</c:if>
-    				<c:if test="${vo.secretYn eq 'Y' && loginMember.nick != vo.memberNo}">
-	                	<div>${vo.title}</div>
-	                </c:if>
-					<c:if test="${vo.secretYn eq 'Y' && loginMember.nick == vo.memberNo}">
-	                	<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.title}</a></div>
-	                </c:if> -->
 
 
 	                <c:if test="${vo.secretYn eq 'Y'}">
@@ -120,13 +106,6 @@
 						<div><a href="/blank/help/inquiryDetail?no=${vo.no}" name="no">${vo.content}</a></div>
 					</c:if>
 
-
-	                <!-- <c:if test="${vo.secretYn eq 'N'}">
-	                	<div>${vo.content}</div>
-	                </c:if>
-	                <c:if test="${vo.secretYn == null}">
-	                	<div>${vo.content}</div>
-	                </c:if> -->
 
 	                <div>${vo.memberNo}</div>
 	                <c:if test="${vo.status eq 'N'}">
