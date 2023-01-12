@@ -51,7 +51,6 @@
 			MEMBER_NO,
 			TITLE,
 			CONTENT,
-			PASSWORD,
 			SECRET_YN,
 			WRITE_DATE
 		)
@@ -61,7 +60,6 @@
 			#{memberNo},
 			#{title},
 			#{content},
-			#{password},
 			#{secretYn},
 			SYSDATE
 		)

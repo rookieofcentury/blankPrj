@@ -49,9 +49,6 @@
                 <div>핸드폰 번호</div>
                 <div>이메일</div>
                 <div>포인트</div>
-                <div>은행명</div>
-                <div>계좌번호</div>
-                <div>예금주명</div>
                 <div>계정상태</div>
                 <div>수정</div>
 
@@ -61,9 +58,6 @@
 	                <div>${vo.phone}</div>
 	                <div>${vo.email}</div>
 	                <div>${vo.point}</div>
-	                <div>${vo.bank}</div>
-	                <div>${vo.account}</div>
-	                <div>${vo.depositor}</div>
 	                <div>${vo.status}</div>
 	                <div><a href="/blank/admin/memberEdit?no=${vo.no}&status=${vo.status}" name="no"><img src="/blank/resources/images/admin/edit.png" class="edit-img"></a></div>
 				</c:forEach>

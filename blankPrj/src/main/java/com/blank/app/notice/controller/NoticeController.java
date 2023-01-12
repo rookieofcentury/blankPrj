@@ -1,4 +1,4 @@
-package com.blank.app.notice;
+package com.blank.app.notice.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,13 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.blank.app.admin.common.PageVo;
 import com.blank.app.admin.common.Pagination;
 import com.blank.app.admin.vo.NoticeVo;
-import com.blank.app.member.vo.MemberVo;
 import com.blank.app.notice.service.NoticeService;
 
 @Controller
@@ -27,7 +27,7 @@ public class NoticeController {
 	
 	//[회원] 공지사항 목록 조회
 	@GetMapping("list")
-	public String list(HttpServletRequest req, HttpSession session, String p) {
+	public String list(Model model, HttpServletRequest req, HttpSession session, String p) {
 
 		String category = req.getParameter("category");
 		String keyword = req.getParameter("keyword");
@@ -48,10 +48,13 @@ public class NoticeController {
 
 		List<NoticeVo> voList = noticeService.selectList(map, pageVo);
 
+		System.out.println(voList);
+		
+		model.addAttribute("voList", voList);
 		session.setAttribute("voList", voList);
 		session.setAttribute("listCount", listCount);
 		session.setAttribute("pageVo", pageVo);
-
+		
 		return "notice/list";
 	}
 	

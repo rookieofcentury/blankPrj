@@ -61,6 +61,10 @@ main .stats-board-header{
     /* border: 1px solid red; */
 }
 
+#stats-title-style{
+    border-top: none;
+}
+
 .stats-list{
     width: 1580px;
     height: 350px;
@@ -68,7 +72,7 @@ main .stats-board-header{
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 1fr 3fr 3fr;
-    grid-template-rows: repeat(5, 54px);
+    /* grid-template-rows: repeat(5, 40px); */
     align-content: center;
     text-align: center;
     margin: 0 auto;
@@ -79,7 +83,7 @@ main .stats-board-header{
 }
 
 .stats-list div{
-    border-bottom: 1px solid var(--line-gray);
+    border-top: 1px solid var(--line-gray);
 }
 
 .stats-list .stats-list-top{
@@ -92,9 +96,9 @@ main .stats-board-header{
 #page-area{
     width: 150px;
     height: 60px;
-    margin-left: 50%;
+    margin-left: 70%;
 	grid-column: span 3;
-    border-bottom: none;
+    border-top: none;
 }
 
 #page-area a{

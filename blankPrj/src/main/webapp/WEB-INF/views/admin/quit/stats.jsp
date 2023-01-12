@@ -35,10 +35,10 @@
         
                     <div class="stats-list-top">전체 답변 <a id="quitCount">${quitCount}</a> 건</div>
         
-                    <div>번호</div>
-                    <div>작성자</div>
-                    <div>탈퇴 사유</div>
-                    <div>탈퇴 의견</div>
+                    <div id="stats-title-style">번호</div>
+                    <div id="stats-title-style">작성자</div>
+                    <div id="stats-title-style">탈퇴 사유</div>
+                    <div id="stats-title-style">탈퇴 의견</div>
             		
             		<c:forEach items="${voList}" var="vo">
 	           			<div>${vo.no}</div>

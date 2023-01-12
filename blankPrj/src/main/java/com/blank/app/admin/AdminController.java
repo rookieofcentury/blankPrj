@@ -651,7 +651,7 @@ public class AdminController {
 
 		int quitCount = adminService.quitCount();
 		int currentPage = Integer.parseInt(p);
-		int boardLimit = 10;
+		int boardLimit = 5;
 		int pageLimit = 5;
 		PageVo pageVo = Pagination.getPageVo(quitCount, currentPage, pageLimit, boardLimit);
 

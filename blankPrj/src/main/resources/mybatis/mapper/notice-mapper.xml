@@ -13,13 +13,13 @@
 
 	<!-- 공지사항 목록 조회 -->
 	<select id="selectList" resultType="NoticeVo">
-			SELECT NO, TITLE, TO_CHAR(WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE, DELETE_YN, FIXE_YN
-			FROM NOTICE
-			WHERE DELETE_YN = 'N'
-			<if test=" keyword != null and keyword != '' ">
-				AND TITLE LIKE '%${keyword}%'
-			</if>
-			ORDER BY NO DESC
+		SELECT NO, TITLE, TO_CHAR(WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE, DELETE_YN, FIXE_YN
+		FROM NOTICE
+		WHERE DELETE_YN = 'N'
+		<if test=" keyword != null and keyword != '' ">
+			AND TITLE LIKE '%${keyword}%'
+		</if>
+		ORDER BY FIXE_YN DESC, WRITE_DATE DESC
 	</select>
 
 	<!-- 공지사항 상세조회 -->

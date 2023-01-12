@@ -28,20 +28,28 @@
     
                 <div class="faq-contents">
                     <div>
+                        <a>회원</a>
+                        <br>
                     	<a href="/blank/help/faqList?category=1" name="category">
-                    	<img src="">회원</a>
+                    	<img src="/blank/resources/images/help/member.png" class="icon"></a>
                     </div>
                     <div>
+                        <a>결제</a>
+                        <br>
 	                    <a href="/blank/help/faqList?category=2" name="category">
-	                    <img src="">결제</a>
+	                    <img src="/blank/resources/images/help/pay.png" class="icon"></a>
                     </div>
                     <div>
+                        <a>배송</a>
+                        <br>
 	                    <a href="/blank/help/faqList?category=3" name="category">
-	                    <img src="">배송</a>
+	                    <img src="/blank/resources/images/help/truck.png" class="icon"></a>
                     </div>
                     <div>
+                        <a>기타</a>
+                        <br>
 	                    <a href="/blank/help/faqList?category=4" name="category">
-	                    <img src="">기타</a>
+	                    <img src="/blank/resources/images/help/question.png" class="icon"></a>
                     </div>
                 </div>
     

@@ -266,7 +266,7 @@ public class AdminDaoImpl implements AdminDao{
 		int limit = pageVo.getBoardLimit();
 		RowBounds rb = new RowBounds(offset, limit);
 		
-		return sst.selectList("adminMapper.selectQuit", rb);
+		return sst.selectList("adminMapper.selectQuit", null, rb);
 	}
 
 	//통계 데이터 조회
