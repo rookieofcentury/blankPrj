@@ -23,7 +23,7 @@
                         <div>${prjVo.title}</div>
                         <div class="project-info-number">
                             <div><strong>목표 금액 : ${prjVo.price}</strong></div>
-                            <div>퍼센트 : ${prjVo.percent}</div> 
+                            <div>퍼센트 : ${prjVo.percent}%</div> 
                             <div class="red">남은기간 : ${prjVo.calDate}일</div>
                            
                         </div>

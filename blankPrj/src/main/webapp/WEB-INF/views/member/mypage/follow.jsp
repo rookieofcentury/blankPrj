@@ -70,7 +70,6 @@
 
 
 		let buttonVal = $('button[name=no]').val();
-		alert(buttonVal)
 		$.ajax({
 				url : "/blank/member/deleteMember",
 				type : "post",
