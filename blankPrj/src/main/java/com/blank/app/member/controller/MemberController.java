@@ -154,7 +154,7 @@ public class MemberController {
 		
 		session.invalidate();
 		
-		model.addAttribute("msg", "회원 탈퇴 되었습니다. 다음에 다시 뵙기를...");
+		model.addAttribute("msg", "우리 다음에 또 만나용~!");
 		
 		return "home";
 	}

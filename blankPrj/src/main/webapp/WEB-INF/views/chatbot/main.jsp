@@ -18,14 +18,14 @@
 
 	<main> 
 
-            <c:forEach items="${msgList}" var="msg">
+<%--             <c:forEach items="${msgList}" var="msg">
                 <c:if test="${msg.sendNo == loginMember.no}">
                     <div class='user-talk-btn'><span class='user-talk'> ${msg.content}</span><div>
                 </c:if>
                 <c:if test="${msg.sendNo != loginMember.no}">
                     <div class='admin-answer-btn'><span class='chat-answer'> ${msg.content}</span><div>
                 </c:if>
-            </c:forEach>
+            </c:forEach> --%>
 
 
             <div id="blank-logo"><img src="/blank/resources/images/blank.png" class="blank-logo"></div>

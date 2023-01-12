@@ -208,7 +208,7 @@
 		)
 		VALUES
 		(
-			SEQ_NOTICE_NO.NEXTVAL,
+			SEQ_FAQ_NO.NEXTVAL,
 			#{adminNo},
 			#{title},
 			#{category},

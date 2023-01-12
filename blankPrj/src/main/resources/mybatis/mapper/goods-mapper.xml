@@ -356,10 +356,7 @@
         ON M.NO = R.WRITER
         LEFT OUTER JOIN (SELECT NO, COUNT(*) AS COUNT FROM GOODS_REVIEW_HEART GROUP BY NO) H ON R.NO = H.NO
         LEFT OUTER JOIN GOODS_REVIEW_ATTACHMENT A ON A.REVIEW = R.NO
-		WHERE GOODS = #{no}
-		<if test=" mno != null and mno != '' ">
-		AND M.NO = #{mno}
-		</if>		
+		WHERE GOODS = #{no}		
 		<if test=" standard != null and standard == 'popular' ">
 		ORDER BY COUNT DESC NULLS LAST
 		</if>
