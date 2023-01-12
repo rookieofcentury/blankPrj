@@ -44,7 +44,7 @@
             <div class="result-ment">검색 결과 총 <span>${listCount}</span> 개의 프로젝트가 있습니다.</div>
             <div class="search-result-area">
                 <c:forEach items="${ProjectList}" var="item">
-                    <div class="result-item">
+                    <div class="result-item" onclick="location.href='/blank/project?p=${item.no}'">
                         <div class="result-img"><img src="/blank/resources/upload/project/${item.changeName}"></div>
                         <div class="result-category">
                             <div>${item.category}</div>
