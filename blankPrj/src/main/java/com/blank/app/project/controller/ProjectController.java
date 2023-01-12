@@ -472,7 +472,7 @@ public class ProjectController {
 			}
 		}
 		//model.addAttribute("msg", "심사요청 완료!");
-		return "redirect:/project/created/";
+		return "redirect:/project/created/examination";
 	}
 	
 	/*결제*/

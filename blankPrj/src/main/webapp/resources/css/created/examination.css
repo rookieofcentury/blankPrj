@@ -83,7 +83,10 @@
     border-radius: 4px;
     cursor: pointer;
     max-width: 172px;
-
+}
+.prj-img img{
+    width: 200px;
+    height: 200px;
 }
 .prj-info{
     display: flex;
@@ -101,7 +104,7 @@
     width: 100%;
 }
 .prj-content>div:first-child{
-    padding-right: 52px;
+    padding: 0 52px 0 20px;
     overflow: hidden;
     display: flex;
     width: 100%;

@@ -227,6 +227,7 @@
         	,URL
         	,STATUS
         	,SUMMARY
+        	,CHANGE_NAME
 		FROM PROJECT 
 		WHERE CREATOR = #{creator}
         AND STATUS = '작성중'
@@ -252,7 +253,6 @@
 		FROM PROJECT 
 		WHERE CREATOR = #{creator}
         AND STATUS = '심사중'
-        AND DELETE_YN = 'N'
 	</select>
 	
 	<select id="confirmCnt" resultType="int">
