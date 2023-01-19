@@ -57,7 +57,6 @@ pageEncoding="UTF-8"%>
     var list = '';
     $(document).ready(function() { 
         var alertMsg = '${msg}';
-        console.log(alertMsg);
         if(alertMsg != '') {
             list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(2)').text() + '인 프로젝트가 없습니다.' + '</h3>' + '</div>' + '</div>';
             $(".list-content").append(list);
@@ -107,7 +106,6 @@ pageEncoding="UTF-8"%>
         
     /* 모달창 */
     $(document).on('click','.delete-button',function(){
-       	console.log($('#s_name').val());
        	$('#popup_layer').css('display', 'block');
     });
     function closePop() { 

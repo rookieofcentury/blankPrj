@@ -298,6 +298,50 @@
         AND STATUS = '진행중'
         AND DELETE_YN = 'N'
 	</select>
+	
+	<select id="returnedCnt" resultType="int">
+		SELECT COUNT(STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '반려됨'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectreturned" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+        	,CHANGE_NAME
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '반려됨'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="endCnt" resultType="int">
+		SELECT COUNT(STATUS)
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '종료'
+        AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectend" resultType="ProjectVo">
+		SELECT  
+        	NO
+        	,TITLE
+        	,URL
+        	,STATUS
+        	,SUMMARY
+        	,CHANGE_NAME
+		FROM PROJECT 
+		WHERE CREATOR = #{creator}
+        AND STATUS = '종료'
+        AND DELETE_YN = 'N'
+	</select>
 
 	<!-- follow check	 -->
 	<select id="followCheck" resultType="int">

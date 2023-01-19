@@ -120,9 +120,6 @@
 								</div>
 								<ul>
 									<li>${item.option}</li>
-									<!-- <li>고급가죽케이스</li>
-									<li>안경닦이</li>
-									<li>미니드라이브</li> -->
 								</ul>
 								<div class="option-quantity">제한수량 ${item.setQuantity}개</div>
 								<!-- <div class="option-sell">총 ${prj.fundingSum}개 펀딩완료</div> -->
@@ -162,8 +159,7 @@
 						i++;
 					}
 				},error : function(x){
-					console.log("받아온 리절트"+x);
-					alert('내가 찜한 프로젝트 에러!!!!!!!!!');
+					console.log('내가 찜한 프로젝트 에러!!!!!!!!!');
 				} 
 				})
 			}
@@ -176,7 +172,6 @@
 				alert('로그인 후 이용해 주세요')
 			}else{
             if(i==0){
-				console.log("로그인 ㅇㅋ, 찜하기 눌럿어");
 				$.ajax({
 					type: "",
 					url  : "/blank/project/likePlusPrj",
@@ -197,7 +192,6 @@
 				} 
 				})
             }else if(i==1){
-				console.log("로그인 ㅇㅋ, 찜하기 끌거야");
 				$.ajax({
 					type: "",
 					url  : "/blank/project/likeMinusPrj",
@@ -253,10 +247,8 @@
 				alert('로그인 후 이용해 주세요')
 			}else{
 			var str1 = $('.name-follow').text();
-			console.log(str1);
 			var str2 = '팔로잉';
             if(str1 === str2){
-				console.log("팔로잉 취소");
 				$.ajax({
 					type: "",
 					url  : "/blank/member/deleteMember",
@@ -274,7 +266,6 @@
 				} 
 				})
             }else{
-				console.log("팔로잉 ++");
 				$.ajax({
 					type: "",
 					url  : "/blank/member/insertLikeMember",
@@ -300,19 +291,7 @@
 		var wantPrice = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		
 		$(document).ready(function() {
-			 
-			 let checkSet = $('input:radio[name=range]');
-			//  let ch = $('input:radio[name=range]').is(':checked') == false;
-			//  checkSet.click(function(){
-			// 	console.log(checkSet);
-			// 	 $(this).parent().css("border-width", "5px");
-			// 	 $(this).parent().css("border-color", "#567ace");
-			// 		checkSet.prop("checked", false);
-				
-			//  });
-
-		// 	$('input:radio').on('click',function)
-		// 	// if(chkList){
+		 	let checkSet = $('input:radio[name=range]');
 		});
 
 		/* 후원하기 */

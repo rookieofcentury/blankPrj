@@ -60,23 +60,19 @@ public class ProjectController {
 		//프로젝트의 아이템들의 정보
 		List<ItemVo> itemVo = service.selectSet(p);
 		
-		int fundingSum = service.selectSum(p);
-		int goal = Integer.parseInt(prjVo.getPrice());
+		double fundingSum = service.selectSum(p);
+		double goal = Integer.parseInt(prjVo.getPrice());
 		
 		String fundingPrice = String.valueOf(fundingSum);
 		prjVo.setFundingSum(fundingPrice);
 		
 		//달성률
-		int division = Math.floorMod(fundingSum,goal);
-//		int division = Math.floorDiv(300,1000);
+//		int division = Math.floorMod(fundingSum,goal);
+//		int percent = division / 10000;
 		
-//		int division = Math.floorMod(300,1000);
-		System.out.println(division);
-		
-		int percent1 = division * 100;
-		int percent = division / 10000;
-		System.out.println(percent1);
-		System.out.println(percent);
+		double division =  fundingSum /  goal * 100;
+		long cal = Math.round(division);
+		int percent = Long.valueOf(cal).intValue();
 		
 		prjVo.setPercent(percent);
 		
@@ -101,14 +97,12 @@ public class ProjectController {
 	@ResponseBody
 	public String mylikePrj(HttpSession session, String pno, LikeProjectVo vo){
 		
-		System.out.println("받아온 플젝넘버 : " + pno);
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		vo.setMNo(nick);
 		vo.setPrjNo(pno);
 		
 		int likeVo = service.selectMyLikePrj(vo);
-		System.out.println(likeVo);
 		if(likeVo != 1) {
 			return "0";
 		}
@@ -158,10 +152,8 @@ public class ProjectController {
 		String nick = loginMember.getNo();
 		vo.setMNo(nick);
 		vo.setLikeMemberNo(creator);
-//		System.out.println("창작자 번호 : " + creator);
 		
 		int result = service.followCheck(vo);
-		System.out.println(result);
 
 		if(result == 1) {
 			return "1";
@@ -198,8 +190,6 @@ public class ProjectController {
 		
 		int result = service.insertPrj(map);
 		
-		//원래 해당 난수의 프로젝트가 있는지 체크해줘야함 ^.^..
-		//result == 1이면 select 다시 해와서 모델에 담아주고 콘솔에 찎어야 보인다..
 		if(result == 1) {
 			model.addAttribute("prjNo", random);
 		}
@@ -217,22 +207,6 @@ public class ProjectController {
 		return "project/post/defaultInfo";
 	}
 	
-	@PostMapping("post/defaultInfo")
-	public String postDefaultInfo(HttpSession session, ProjectVo vo, String postPrj){
-		session.setAttribute("postDefault", vo);
-		
-		switch (postPrj) {
-		case "약관정보":
-			return "project/post/agree";
-		case "기본정보":
-			return "project/post/defaultInfo";
-		case "옵션설계":
-			return "project/post/optionSet";
-		case "창작자정보":
-			return "project/post/creatorInfo";
-		}
-		return postPrj;
-	}
 	
 	@GetMapping("post/optionSet")
 	public String postOptionSet() {
@@ -249,6 +223,7 @@ public class ProjectController {
 		return "project/post/creatorInfo";
 	}
 	
+	/*내가 만든 프로젝트 (작성중)*/
 	@GetMapping("created")
 	public String writing(HttpSession session, ProjectVo vo, Model model) {
 		
@@ -264,38 +239,11 @@ public class ProjectController {
 			List<ProjectVo> myPrj = service.selectMyPrj(vo);
 			model.addAttribute("resultcnt", resultcnt);
 			session.setAttribute("myPrj", myPrj);
-			//System.out.println(myPrj);
 		}
-		return "project/created/status";
+		return "project/created/writing";
 	}
 	
-//	@GetMapping("created/writing")
-//	@ResponseBody
-//	public String writing(String statusWriting, HttpSession session, ProjectVo vo, Model model) {	
-//		
-//		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
-//		String nick = loginMember.getNo();
-//		vo.setCreator(nick);
-//		
-//		//ProjectVo statusAll = service.selectStatusAll(vo);
-//		//List<ProjectVo> statusAll = service.selectStatusAll(vo);
-//		//model.addAttribute("statusAll", statusAll);
-//		
-//		HashMap<String,Object> map = new HashMap<String,Object>();
-//		map.put("vo", vo);
-//		map.put("statusWriting", statusWriting);
-//		int resultcnt = service.writingCnt(map);
-//		
-//		if(resultcnt == 0) {
-//			return 0+"";
-//		}else {
-//			List<ProjectVo> myPrj = service.selectMyPrj(map);
-//			session.setAttribute("myPrj", myPrj);
-//		}
-//		String result = (String.valueOf(resultcnt));
-//		return result;
-//	}
-	
+	/*내가 만든 프로젝트 (심사중)*/
 	@GetMapping("created/examination")
 	public String examination(HttpSession session, ProjectVo vo, Model model) {	
 		
@@ -315,6 +263,7 @@ public class ProjectController {
 		return "project/created/examination";
 	}
 	
+	/*내가 만든 프로젝트 (승인됨)*/
 	@GetMapping("created/confirm")
 	public String confirm(HttpSession session, ProjectVo vo, Model model) {	
 		
@@ -334,6 +283,7 @@ public class ProjectController {
 		return "project/created/confirm";
 	}
 	
+	/*내가 만든 프로젝트 (진행중)*/
 	@GetMapping("created/proceed")
 	public String proceed(HttpSession session, ProjectVo vo, Model model) {	
 		
@@ -351,6 +301,46 @@ public class ProjectController {
 			session.setAttribute("myPrj", myPrj);
 		}
 		return "project/created/proceed";
+	}
+	
+	/*내가 만든 프로젝트 (반려됨)*/
+	@GetMapping("created/return")
+	public String returned(HttpSession session, ProjectVo vo, Model model) {	
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		int resultcnt = service.returnedCnt(vo);
+		
+		if(resultcnt == 0) {
+			model.addAttribute("msg", "반려된 프로젝트가 없습니다!");
+		}else {
+			List<ProjectVo> myPrj = service.selectreturned(vo);
+			model.addAttribute("resultcnt", resultcnt);
+			session.setAttribute("myPrj", myPrj);
+		}
+		return "project/created/return";
+	}
+	
+	/*내가 만든 프로젝트 (종료)*/
+	@GetMapping("created/end")
+	public String end(HttpSession session, ProjectVo vo, Model model) {	
+		
+		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
+		String nick = loginMember.getNo();
+		vo.setCreator(nick);
+		
+		int resultcnt = service.endCnt(vo);
+		
+		if(resultcnt == 0) {
+			model.addAttribute("msg", "종료된 프로젝트가 없습니다!");
+		}else {
+			List<ProjectVo> myPrj = service.selectend(vo);
+			model.addAttribute("resultcnt", resultcnt);
+			session.setAttribute("myPrj", myPrj);
+		}
+		return "project/created/end";
 	}
 	
 	//프로젝트 삭제
@@ -378,8 +368,6 @@ public class ProjectController {
 		List<HashMap<String, String>> category = service.selectCategory(map);
 		List<TimeVo> starttimeVo = service.selectStartime(timevo);
 		
-		log.warn("pno : " + p);
-		
 		HashMap<String,Object> prjMap = new HashMap<String,Object>();
 		prjMap.put("prjVo", prjVo);
 		prjMap.put("p", p);
@@ -392,11 +380,7 @@ public class ProjectController {
 		
 		ProjectVo prjInfo = service.selectPrjInfo(prjMap);
 		MemberVo memberInfo = service.selectMemberInfo(MemberVo);
-//		ItemVo itemInfo = service.selectItemInfo(itemVo);
 		
-		//JsonObject jsonObj = JsonParser.parseString(timeVo).getAsJsonObject();
-		/*Gson gson = new Gson(); String timeVo = gson.toJson(starttimeVo);*/
-		System.out.println("time" + starttimeVo);
 		model.addAttribute("category", category);
 		model.addAttribute("time", starttimeVo);
 		model.addAttribute("prjInfo", prjInfo);
@@ -408,18 +392,12 @@ public class ProjectController {
 	/* 임시저장 */
 	@PostMapping(value = "savePrj", produces = "application/json; charset=utf8")
 	@ResponseBody
-//	public String savePrj(@RequestParam Map<String,String> map,HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
-		public String savePrj(ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
-		System.out.println(prjVo);
-		System.out.println(MemberVo);
-		System.out.println(itemVo);
+	public String savePrj(ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
 		
-//		System.out.println(map);
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		prjVo.setCreator(nick);
 		prjVo.setNo(itemVo.getPrjNo());
-		System.out.println(prjVo);
 		MemberVo.setNo(nick);
 		
 		//파일 저장
@@ -430,14 +408,11 @@ public class ProjectController {
 		prjVo.setChangeName(changeName);
 		
 		//file, form 먼저 보내기
-		System.out.println("보냇음");
 		int setResult = service.updateSet(itemVo);
 		if(setResult < 10) {
-			System.out.println("보냇음22");
 			int prjResult = service.updatePrj(prjVo);
 			
 			if(prjResult < 10) {
-				System.out.println("보냇음33");
 				int creatorResult = service.updateCreator(MemberVo);
 			}
 		}
@@ -448,7 +423,6 @@ public class ProjectController {
 	@PostMapping("post")
 	public String prjPost(Model model, ProjectVo prjVo, MemberVo MemberVo, ItemVo itemVo, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException {
 		
-		System.out.println("심사요청");
 		MemberVo loginMember =(MemberVo)session.getAttribute("loginMember");
 		String nick = loginMember.getNo();
 		prjVo.setCreator(nick);
@@ -471,7 +445,6 @@ public class ProjectController {
 				int creatorResult = service.updateCreator(MemberVo);
 			}
 		}
-		//model.addAttribute("msg", "심사요청 완료!");
 		return "redirect:/project/created/examination";
 	}
 	
@@ -483,34 +456,34 @@ public class ProjectController {
 	}
 	
 	// 검색
-		@GetMapping("search")
-		public String searchPrj(String keyword, String category, String p, String standard, Model model) {
-			
-			if(p == null) {
-				p = "1";
-			}
-			
-			Map<String, String> map = new HashMap<>();
-			map.put("category", category);
-			map.put("keyword", keyword);
-			map.put("standard", standard);
-			
-			int listCount = service.searchListCount(map);
-			int currentPage = Integer.parseInt(p);
-			int boardLimit = 12;
-			int pageLimit = 5;
-			PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
-			
-			List<ProjectVo> list = service.searchPrjList(map, pageVo);
-			
-			model.addAttribute("listCount", listCount);
-			model.addAttribute("pageVo", pageVo);
-			model.addAttribute("ProjectList", list);
-			model.addAttribute("category", category);
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("standard", standard);
-			
-			return "project/search";
-			
+	@GetMapping("search")
+	public String searchPrj(String keyword, String category, String p, String standard, Model model) {
+		
+		if(p == null) {
+			p = "1";
 		}
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+		map.put("standard", standard);
+		
+		int listCount = service.searchListCount(map);
+		int currentPage = Integer.parseInt(p);
+		int boardLimit = 12;
+		int pageLimit = 5;
+		PageVo pageVo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+		
+		List<ProjectVo> list = service.searchPrjList(map, pageVo);
+		
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("pageVo", pageVo);
+		model.addAttribute("ProjectList", list);
+		model.addAttribute("category", category);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("standard", standard);
+		
+		return "project/search";
+		
+	}
 }

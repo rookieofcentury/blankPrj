@@ -33,31 +33,14 @@ pageEncoding="UTF-8"%>
         </div>
     </div>
 
-    <div id="popup_layer">
-        <div class="popup_box">
-            <div class="popup_cont">
-				<img class="logo-img" src="/blank/resources/images/blank.png">
-                <p>
-                    프로젝트를 삭제하시겠습니까?<br>
-                    프로젝트를 삭제하시면,<br>
-                    작성했던 모든 내용이 삭제됩니다.
-                </p>
-            </div>
-            <div class="popup_btn">
-                <a href="javascript:closePop();">취소</a>
-                <a id="chk_today" class="delete-prj" onclick="clickDelete()">확인</a> 
-            </div>
-        </div>
-    </div>
-    
     <%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 
     <script>
 
     var list = '';
     $(document).ready(function() { 
+        
         var alertMsg = '${msg}';
-        console.log(alertMsg);
         if(alertMsg != '') {
             list +=	'<div class="myprj-status">' + '<h3>' + $('.taps > div:nth-child(5)').text() + '인 프로젝트가 없습니다.' + '</h3>' + '</div>' + '</div>';
             $(".list-content").append(list);
@@ -81,39 +64,17 @@ pageEncoding="UTF-8"%>
                 </c:forEach>
                 $(".list-content").append(list);
             }
+            $('.delete-button').click(function(){
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "진행중인 프로젝트는 삭제할 수 없습니다~",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                });
+            });
         }); 
 
-       /* 삭제 ajax */
-        function clickDelete() { 
-       	 	$('#popup_layer').css('display', 'none');
             
-            $.ajax({
-                url : "/blank/project/created/delete",
-                method : "GET",   
-                data :   {
-                    "no" : $('#s_name').val()
-                },
-                success : function(x){
-                    if(x == 1){
-                   	alert('삭제완료 되었습니다.')
-                    window.location.href = "/blank/project/created";
-                    } 
-            },
-                error : function(){
-                    console.log("삭제 통신에러");
-                }
-            });  
-        };
-        
-    /* 모달창 */
-    $(document).on('click','.delete-button',function(){
-       	console.log($('#s_name').val());
-       	$('#popup_layer').css('display', 'block');
-    });
-    function closePop() { 
-    	$('#popup_layer').css('display', 'none');
-    }
-
     </script>
 
 </body>

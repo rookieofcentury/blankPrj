@@ -29,12 +29,6 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-<!-- 
-<script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script>
-<script src = "${path}/ckeditor/ckeditor.js"></script> 
-<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
-<script type="text/javascript" src="blank/ckeditor/ckeditor.js"></script> -->
-
 <body>
 <form action="/blank/project/post" method="post" id="postPrj" enctype="multipart/form-data" onsubmit="return checkAll();">
 <div class="navi-menu">
@@ -124,7 +118,6 @@
                             <div class="date-start">
                                 <div class="start-day">
                                     <p>시작일</p>
-                                    <!-- <div class="calendar-img"><img src="./calendar2-date.svg"></div> -->
                                     <input name="startDate" type="date" autocomplete="off" readonly="readonly" value='${fn:substring(prjInfo.startDate,0,10)}'>
                                 </div>
                                 <div class="start-time">
@@ -138,7 +131,7 @@
                                 </div>
                             </div>
                             <div class="date-period">
-                                <p>펀딩기간</p>
+                                <!-- <p>펀딩기간</p> -->
                                 <p></p>
                             </div>
                         </li>
@@ -146,7 +139,6 @@
                             <div class="date-end">
                                 <div class="end-day">
                                     <p>종료일</p>
-                                    <!-- <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='<c:out value="${prjInfo.endDate}"/>'> -->
                                     <input name="endDate" type="date" autocomplete="off" readonly="readonly"  value='${fn:substring(prjInfo.endDate,0,10)}'>
                                 </div>
                                 <div class="date-calculate">
@@ -193,7 +185,6 @@
                 </div>
                 <div class="summary-write">
                     <div class="summary-text">
-                        <!-- <input type="text" placeholder="내용 입력" name="summery"> -->
                         <textarea placeholder="내용 입력" name="summary" value='<c:out value="${prjInfo.summary}"/>'></textarea>
                     </div>
                     <p>100글자 남음</p>
@@ -221,7 +212,6 @@
                     </div>
                 </div>
                 <div class="story-editor">
-                    <!-- <textarea id="editor4" name="editor4"></textarea> -->
                     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
                     <textarea name="story" id="prj-content" required></textarea>
                 </div>
@@ -234,10 +224,7 @@
     <!-- 컨텐츠 2 -->
 	<div class="mp-main2 main">
         <div class="main2-header">
-            <!-- <c:if test = "1>2">  </c:if>-->
-            <!-- <div><h2>아직 완성된 세트가 없어요ㅜㅅㅜ</h2></div> -->
             <div><h2>↓ 세트를 구성할 아이템을 추가해 주세요 ↓</h2></div>
-            <!-- <div>아이템 추가</div> -->
         </div>
         <!-- 아이템 추가 모달창 -->
         <div id="label-center">
@@ -280,7 +267,7 @@
                                             </div>
                                             <div class="item-option">
                                                 <input placeholder="아이템을 입력해 주세요" name="itemName">
-                                                <span>10글자 남음</span>
+                                                <!-- <span>10글자 남음</span> -->
                                             </div>
                                         </div>
                                         <div class="post-set">
@@ -614,7 +601,6 @@
 
        //글자수 체크(제목)
        $('input[name="title"]').keyup(function(e) {
-        //console.log($('.start-time option:selected').val());
            titleCheckReturn = false;
            var content = $(this).val();
            $('.title-write > p').text(40 - content.length + "글자 남음"); 
@@ -657,32 +643,9 @@
                priceCheckReturn = true;
            }
        });
-       //목표금액 콤마 
-       // $('input[name="price"]').filter(".comma").on("keyup", function(){
-       //     $(this).val($(this).val().replace(/[^0-9]/g, "").toLocaleString());
-       // });
-   //     $(document).ready(function(){
-   //         $("input[name='price']").bind('keyup keydown',function(){
-   //             inputNumberFormat(this);
-   //         });
-           
-//        //입력한 문자열 전달
-//        function inputNumberFormat(obj) {
-//            obj.value = comma(uncomma(obj.value));
-//        }
-//        //콤마찍기
-//        function comma(str) {
-//            str = String(str);
-//        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-   //     }
-   // });
 
        //펀딩일수 계산
        $("input[name='endDate']").on("focusout", function() {
-            console.log("ddd");
-    	   //console.log($("input[name='startDay']").val());
-           //var date1 = new Date($("input[name='startDay']").datepicker("getDate"));
-           //var date2 = new Date($("input[name='endDay']").datepicker("getDate"));
            var date1 = $("input[name='startDate']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
            var date2 = $("input[name='endDate']").datepicker({ dateFormat: 'dd-mm-yy' }).val();
 
@@ -691,7 +654,7 @@
            var month = ('0' + (today.getMonth() + 1)).slice(-2);
            var day = ('0' + today.getDate()).slice(-2);
            var dateString = year + '-' + month  + '-' + day;
-
+        
            if (!$("input[name='startDate']").val()) {
                Swal.fire({
                     title: '안내 메시지',
@@ -701,7 +664,6 @@
                 });
            }
            if (date2 > date1){ 
-               //console.log($("input[name='startDay']").val().length);
                Swal.fire({
                     title: '안내 메시지',
                     text: "시작일이 종료일보다 늦어요",
@@ -709,53 +671,16 @@
                     confirmButtonColor: '#567ACE'
                 }); 
            }
-               if(date1 < dateString){
-                console.log(date1);
-                console.log(dateString);
-                    Swal.fire({
-                        title: '안내 메시지',
-                        text: "오늘 날짜 이후로 선택해 주세요",
-                        icon: 'error',
-                        confirmButtonColor: '#567ACE'
-                    }); 
-                   }
+            if (date1 < dateString){
+                Swal.fire({
+                    title: '안내 메시지',
+                    text: "오늘 날짜 이후로 선택해 주세요",
+                    icon: 'error',
+                    confirmButtonColor: '#567ACE'
+                }); 
+            }
        });
 
-       //url 중복검사
-       function emailDoubleCheck(){
-
-           $.ajax({
-               url : "/blank/member/doubleCheckByEmail",
-               type : "post",
-               data : {
-                   "email" : emailVal
-               },
-               success : function(result){
-
-                   if(result ==0){
-                       
-                       $('#email-result').text('사용가능한 이메일 입니다.');
-                       $('#email-result').addClass('green');
-                       $('#email-result').removeClass('red');
-
-                       $('#email-check').addClass('green'); // 성공하면 중복체크 초록으로 바꾸세용~
-                       $('#email-check').removeClass('ace');
-                       $('#email-check').removeClass('red');
-                       emailCheckReturn = true;
-
-                   }else{
-                       
-                       $('#email-result').text('중복된 이메일 입니다.');   
-                       $('#email-check').addClass('red');
-                       $('#email-check').removeClass('ace');
-                       $('#email-check').removeClass('green');
-                   }
-               },
-               error : function(){
-                   console.log('에이잭스 에러!!!!!!!!!');
-               }
-           }); //ajax    
-       };
        
        //글자수 체크(url)
        $("input[name='url']").on("focusout", function() {
@@ -777,7 +702,7 @@
        $('input[name="url"]').keyup(function(e) {
            urlCheckReturn = false;
            var content = $(this).val();
-           if( checkEnglish.test(content) && !checkKorean.test(content) && !checkEmoji.test(content) ) {
+           if(checkEnglish.test(content) && !checkKorean.test(content) && !checkEmoji.test(content) ) {
                urlCheckReturn = true;
            }
        }).on("keyup", function() {
@@ -838,15 +763,12 @@
                 $('.title-length').text("0글자 남음");
             }
         });
-        //유효성 체크(이름)
-        //var replaceEmoji =  /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
-        //var replaceEmoji = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
         var replaceKorean =   /[ㄱ-ㅎㅏ-ㅣ]/gi;
         
         $("input[name='name']").on("focusout", function() {
         var x = $(this).val();
             if (x.length > 0) {
-                if (/*x.match(replaceEmoji) || */  x.match(replaceKorean)) {
+                if (x.match(replaceKorean)) {
                 }
                 $(this).val(x);
             }
@@ -948,7 +870,6 @@
                 if ( $(this).prop('checked') ) {
                     $('.policy-agree').text("동의 완료"); 
                     $('.policy-agree').addClass("agree");
-                    console.log('dddd');
                 } else {
                     $('.policy-agree').removeClass("agree");
                     $('.policy-agree').text("확인하기"); 
@@ -959,7 +880,6 @@
        
        /*옵션 없음, 추가*/
        $("#option-add").click(function(){
-            //$(".textbox").toggleClass("block");
             $(".textbox").show();
         });
         $("#option-none").click(function(){
@@ -967,47 +887,7 @@
         });
 
        //임시저장
-        // document.querySelector('#storage').addEventListener('click',function(){
-        //     const prj = document.querySelector('#postPrj');
-        //     var formData = new FormData(prj);
-
-        //     console.log(prj);
-
-        //     let string = location.href.split('=');
-        //     let query = string[1];
-
-        //     var option = $('.selected-item').text();
-
-        //     const f = $('input[name="prjfile"]')[0];
-        //     const fileData = f.files[0];
-
-        //     var title = $('input[name="title"]').val();
-
-        //     formData.append("wiwiwiwi", title);
-        //     formData.append("prjNo", query);
-        //     formData.append("story", editor.getHTML());
-        //     formData.append("option", option);
-        //     // formData.append("prjfile" , fileData);
-
-        //     const httpRequest = new XMLHttpRequest();
-        //     httpRequest.onreadystatechange = () => {
-        //         if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        //             if (httpRequest.status === 200) {
-        //                 const x = httpRequest.response;
-        //                 if(x == 1){
-        //                     alert('임시저장 되었습니다.')
-        //                 }
-        //             }
-        //         }
-        //     };
-        //     httpRequest.open('post', '/blank/project/savePrj');
-        //     httpRequest.responseType = "json";
-        //     httpRequest.send(formData);
-        // });
-
         $('.buttons-storage').click(function() {
-            // var content = editor.getHTML();
-            // $('#prj-content').val(content);
             var option = $('.selected-item').text();
 
             var price2 = $('input[name="price"]').val();
@@ -1015,30 +895,21 @@
             let string = location.href.split('=');
             let query = string[1];
             
-            // const f = $('input[name="prjfile"]')[0];
-            // const fileData = f.files[0];
-
             var form = $('#postPrj')[0];
             var formData = new FormData(form);
 
-            // formData.append("title", title2);
             formData.append("option", option);
             formData.append("prjNo", query);
             formData.append("story", editor.getHTML());
-            // formData.append("prjfile" , fileData);
             
-            // alert("update");
-
             $.ajax({
                 url  : "/blank/project/savePrj",
                 type : "POST",
                 data : formData,
                 cache: false,
-                // contentType : "application/x-www-form-urlencoded",
                 contentType : false,
                 processData: false , 
                 enctype : "multipart/form-data",
-            // dataType: "json",
 	    	    success : function(x){
 	    		   if(x == 1){
                     Swal.fire({
@@ -1070,13 +941,10 @@
             if(!urlCheckReturn){ alert('url이 입력되지 않았습니다'); return false;}
             if(!summaryCheckReturn){ alert('요약이 입력되지 않았습니다.'); return false;}
             
-            //    if(!nameCheckReturn){ alert('이름이 입력되지 않았습니다'); return false;}
             if(!infoCheckReturn){ alert('소개가 입력되지 않았습니다.'); return false;}
             if(!bankCheckReturn){ alert('은행명이 입력되지 않았습니다'); return false;}
             if(!accountCheckReturn){ alert('계좌번호가 입력되지 않았습니다.'); return false;}
             if(!depositorCheckReturn){ alert('예금주가 입력되지 않았습니다.') ;return false;}
-            //    if(!checkGender){alert('전화번호가 입력되지 않았습니다.') ;return false; }
-            //    if(!checkPA){ alert('이메일이 입력되지 않았습니다.'); return false; }
             Swal.fire({
             title: '안내 메시지',
             text: "심사요청 완료",
@@ -1091,7 +959,6 @@
        $('input[name=itemSave]').click(function(){
            var itemName = $('input[name=itemName]').val();
            var optionName = $('textarea[name=addOption]').val();
-           //console.log($('words').length());   
            
             var list = '';
             list +=  '<ul class="set-box">' + '<li class="item-list">' + '<button type="button" class="itemBox">'
@@ -1110,7 +977,6 @@
 
         /* select option에 집어넣기 (item) */   
         $('input[name=apply]').click(function(){
-        // $(document).on('click',$('input[name=apply]'),function(){
             if($(".item-name").text()){
                 $('input[id*="itemPopup"]+ label + div').css("display", "none");
 
@@ -1118,10 +984,8 @@
                 allItem.forEach(element => {
                 const itemName = element.querySelector('.item-name').innerHTML;
                 const itemOption = element.querySelector('.itemOption').innerHTML;
-                //console.log(itemOption);
 
                 var list = '';
-                //list += '<option>' + '== 아 이 템 선 택 == ' + '</option>';
                 list += '<option value=' +  itemName +  '>' + itemName + '</option>';
                 $(".myitemList").append(list);
                 $('input[name=itemName]').val("");
@@ -1173,7 +1037,6 @@
 
     /* 플러스 마이너스 버튼 누르면 값 바뀌게 */
     $('.quantity-box > button:first-child').click(function() {
-            console.log('으으');
             var nextCntInput = $(this).next();
             nextCntInput.val(String(parseInt(nextCntInput.val()) - 1));
             if(nextCntInput.val() <= 0) {
@@ -1182,7 +1045,6 @@
             }
         })
     $('.quantity-box > button:last-child').click(function() {
-        console.log('55');
         var prevCntInput = $(this).prev();
         prevCntInput.val(String(parseInt(prevCntInput.val()) + 1));
         if(prevCntInput.val() <= 0) {
@@ -1194,19 +1056,19 @@
     /*세트 append*/
     $('input[name=save]').click(function(){
         if(!$('input[name=setName]').val().trim() == '' && !$('input[name=setPrice]').val().trim() == '' && !$('input[name=setQuantity]').val().trim() == ''){
-            $(".selected").empty();
             var list = '';
             list += '<li class="set-list">' + '<button type="button">' + '<div class="set-buttons">' + '<strong>' + $('input[name=setPrice]').val() + '원' + '</strong>' 
-            list += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' +
-                                                '</svg>' + '</div>' + '<p class="set-name">' + $('input[name=setName]').val() + '</p>';
-            list += '<ul class="set-item">' + '<li>' + $('.selected-item').text() + '</li>' + '</ul>'
-            list += '<div class="set-quantity">' + '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">' + '<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>'+ '</svg>';
-            list += '<div>' + '제한 수량' + '</div>' + '<div>' + $('input[name=setQuantity]').val() + '</div>' + '<div>' + '개' + '</div>' + '</div>' + '</button>'
-            list += '<button type="button">' + '</button>' + '</li>';
-            $(".mySet").append(list);
-            $('input[name=setName]').val("");
-            $('input[name=setQuantity]').val("");
-            $('input[name=setPrice]').val("");
+                list += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">' + '<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>' +
+                    '</svg>' + '</div>' + '<p class="set-name">' + $('input[name=setName]').val() + '</p>';
+                    list += '<ul class="set-item">' + '<li>' + $('.selected-item').text() + '</li>' + '</ul>'
+                    list += '<div class="set-quantity">' + '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">' + '<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>'+ '</svg>';
+                        list += '<div>' + '제한 수량' + '</div>' + '<div>' + $('input[name=setQuantity]').val() + '</div>' + '<div>' + '개' + '</div>' + '</div>' + '</button>'
+                        list += '<button type="button">' + '</button>' + '</li>';
+                        $(".mySet").append(list);
+                        $('input[name=setName]').val("");
+                        $('input[name=setQuantity]').val("");
+                        $('input[name=setPrice]').val("");
+                        $(".selected").empty();
             }else{
                 alert("모든 항목을 입력해 주세요");
             }
@@ -1255,16 +1117,7 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-
-    // $('.buttons-request').click(function(){
-    //     Swal.fire({
-    //         title: '안내 메시지',
-    //         text: "심사요청 완료",
-    //         icon: 'success',
-    //         confirmButtonColor: '#567ACE'
-    //     });
-    // });
-
+    
     jQuery.browser = {};
 		(function () {
 		    jQuery.browser.msie = false;

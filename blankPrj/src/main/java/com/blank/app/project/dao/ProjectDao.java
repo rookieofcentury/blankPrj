@@ -59,6 +59,14 @@ public interface ProjectDao {
 
 	List<ProjectVo> selectproceed(SqlSessionTemplate sst, ProjectVo vo);
 
+	int returnedCnt(SqlSessionTemplate sst, ProjectVo vo);
+
+	List<ProjectVo> selectreturned(SqlSessionTemplate sst, ProjectVo vo);
+
+	int endCnt(SqlSessionTemplate sst, ProjectVo vo);
+
+	List<ProjectVo> selectend(SqlSessionTemplate sst, ProjectVo vo);
+	
 	int updateSet(SqlSessionTemplate sst, HashMap<String, Object> map);
 
 	int followCheck(SqlSessionTemplate sst, LikeMemberVo vo);
@@ -92,5 +100,7 @@ public interface ProjectDao {
 	List<ProjectVo> mainPopularPrjList(SqlSessionTemplate sst);
 
 	List<ProjectVo> mainRandomList(SqlSessionTemplate sst);
+
+	
 
 }

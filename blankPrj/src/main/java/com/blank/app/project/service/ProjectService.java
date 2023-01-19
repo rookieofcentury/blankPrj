@@ -57,6 +57,14 @@ public interface ProjectService {
 
 	List<ProjectVo> selectproceed(ProjectVo vo);
 
+	int returnedCnt(ProjectVo vo);
+	
+	List<ProjectVo> selectreturned(ProjectVo vo);
+
+	int endCnt(ProjectVo vo);
+	
+	List<ProjectVo> selectend(ProjectVo vo);
+	
 	int updateSet(HashMap<String, Object> map);
 
 	int followCheck(LikeMemberVo vo);
@@ -90,4 +98,8 @@ public interface ProjectService {
 	List<ProjectVo> mainNewPrjList();
 
 	List<ProjectVo> mainRandomList();
+
+	
+
+	
 }

@@ -144,6 +144,26 @@ public class ProjectDaoImpl implements ProjectDao{
 	}
 
 	@Override
+	public int returnedCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.returnedCnt", vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectreturned(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectList("projectMapper.selectreturned", vo);
+	}
+
+	@Override
+	public int endCnt(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectOne("projectMapper.endCnt", vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectend(SqlSessionTemplate sst, ProjectVo vo) {
+		return sst.selectList("projectMapper.selectend", vo);
+	}
+	
+	@Override
 	public int updateSet(SqlSessionTemplate sst, HashMap<String, Object> map) {
 		int result = sst.update("projectMapper.updateSet", map);
 		log.warn("dao updateSet" + result);
@@ -179,7 +199,6 @@ public class ProjectDaoImpl implements ProjectDao{
 	@Override
 	public List<ItemVo> selectSet(SqlSessionTemplate sst, int p) {
 		List<ItemVo> list = sst.selectList("projectMapper.selectSet", p);
-		System.out.println(list);
 		return list;
 	}
 
@@ -245,5 +264,7 @@ public class ProjectDaoImpl implements ProjectDao{
 	public List<ProjectVo> mainNewPrjList(SqlSessionTemplate sst) {
 		return sst.selectList("projectMapper.mainNewPrjList");
 	}
+
+	
 		
 }

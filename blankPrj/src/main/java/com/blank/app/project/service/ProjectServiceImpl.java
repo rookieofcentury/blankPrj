@@ -153,6 +153,26 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
+	public int returnedCnt(ProjectVo vo) {
+		return dao.returnedCnt(sst, vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectreturned(ProjectVo vo) {
+		return dao.selectreturned(sst, vo);
+	}
+
+	@Override
+	public int endCnt(ProjectVo vo) {
+		return dao.endCnt(sst, vo);
+	}
+
+	@Override
+	public List<ProjectVo> selectend(ProjectVo vo) {
+		return dao.selectend(sst, vo);
+	}
+	
+	@Override
 	public int updateSet(HashMap<String, Object> map) {
 		return dao.updateSet(sst, map);
 	}
@@ -237,4 +257,6 @@ public class ProjectServiceImpl implements ProjectService{
 	public List<ProjectVo> mainNewPrjList() {
 		return dao.mainNewPrjList(sst);
 	}
+
+	
 }
